@@ -23,9 +23,9 @@ export default function CoverSection() {
         {/* Main headline */}
         <Reveal delay={0.15}>
           <h1 className="mb-6 text-4xl font-bold tracking-tight text-text md:text-5xl lg:text-6xl">
-            Building Trust Through
+            Elevate Wellbeing,
             <br />
-            <span className="text-primary">Thoughtful Design</span>
+            <span className="text-primary">Empower Growth</span>
           </h1>
         </Reveal>
 

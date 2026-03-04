@@ -1,5 +1,4 @@
 import { type ReactNode } from 'react'
-import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 interface ButtonProps {
@@ -64,9 +63,9 @@ export default function Button({
   if (href) {
     return (
       <motion.div {...motionProps} className="inline-flex">
-        <Link to={href} className={classes}>
+        <a href={href} className={classes}>
           {children}
-        </Link>
+        </a>
       </motion.div>
     )
   }

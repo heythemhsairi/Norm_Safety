@@ -1,19 +1,18 @@
-import { useState, useEffect, useCallback } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { usePresentation } from '../../context/PresentationContext'
 
 interface NavItem {
   label: string
-  path: string
+  sectionId: string
 }
 
 const navItems: NavItem[] = [
-  { label: 'Strategy', path: '/strategy' },
-  { label: 'Identity', path: '/identity' },
-  { label: 'Logo', path: '/logo' },
-  { label: 'Voice', path: '/voice' },
-  { label: 'Deliverables', path: '/deliverables' },
-  { label: 'Context', path: '/context' },
+  { label: 'Strategy', sectionId: 'positioning' },
+  { label: 'Identity', sectionId: 'identity' },
+  { label: 'Logo', sectionId: 'logo' },
+  { label: 'Context', sectionId: 'context' },
+  { label: 'Deliverables', sectionId: 'deliverables' },
 ]
 
 const sidebarVariants = {
@@ -42,20 +41,45 @@ const itemVariants = {
 }
 
 export default function Header() {
-  const location = useLocation()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
+  const observerRef = useRef<IntersectionObserver | null>(null)
+  const { togglePresent } = usePresentation()
 
+  // Track scroll for header background
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close mobile menu on route change
+  // IntersectionObserver for active section tracking
   useEffect(() => {
-    setMobileOpen(false)
-  }, [location.pathname])
+    const sectionIds = [
+      'cover', 'essence', 'positioning', 'audience', 'identity',
+      'typography', 'logo', 'clearspace', 'symbol', 'context',
+      'deliverables', 'next-steps', 'footer',
+    ]
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id)
+          }
+        }
+      },
+      { rootMargin: '-20% 0px -60% 0px', threshold: 0 },
+    )
+
+    for (const id of sectionIds) {
+      const el = document.getElementById(id)
+      if (el) observerRef.current.observe(el)
+    }
+
+    return () => observerRef.current?.disconnect()
+  }, [])
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -69,9 +93,22 @@ export default function Header() {
     }
   }, [mobileOpen])
 
+  const scrollTo = useCallback((sectionId: string) => {
+    const el = document.getElementById(sectionId)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' })
+      setMobileOpen(false)
+    }
+  }, [])
+
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setMobileOpen(false)
+  }, [])
+
   const isActive = useCallback(
-    (path: string) => location.pathname === path,
-    [location.pathname],
+    (sectionId: string) => activeSection === sectionId,
+    [activeSection],
   )
 
   return (
@@ -84,8 +121,9 @@ export default function Header() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:px-8">
         {/* Logo */}
-        <Link
-          to="/"
+        <button
+          type="button"
+          onClick={scrollToTop}
           className="relative z-10 flex shrink-0 items-center gap-2"
           aria-label="Wejden Spire - Home"
         >
@@ -94,34 +132,36 @@ export default function Header() {
             alt="Wejden Spire"
             className="h-8 w-auto"
           />
-        </Link>
+        </button>
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
           {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
+            <button
+              key={item.sectionId}
+              type="button"
+              onClick={() => scrollTo(item.sectionId)}
               className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                isActive(item.path)
+                isActive(item.sectionId)
                   ? 'text-primary'
                   : 'text-text-muted hover:text-text'
               }`}
             >
               {item.label}
-              {isActive(item.path) && (
+              {isActive(item.sectionId) && (
                 <motion.span
                   layoutId="nav-underline"
                   className="absolute right-3 bottom-0 left-3 h-0.5 rounded-full bg-primary"
                   transition={{ type: 'spring', stiffness: 500, damping: 35 }}
                 />
               )}
-            </Link>
+            </button>
           ))}
 
           {/* Present Button */}
-          <Link
-            to="/present"
+          <button
+            type="button"
+            onClick={togglePresent}
             className="ml-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-1.5 text-sm font-medium text-white shadow-sm transition-all duration-200 hover:bg-primary/90 hover:shadow-md active:scale-[0.97]"
           >
             <svg
@@ -138,7 +178,7 @@ export default function Header() {
               />
             </svg>
             Present
-          </Link>
+          </button>
         </nav>
 
         {/* Mobile Hamburger */}
@@ -181,7 +221,6 @@ export default function Header() {
       <AnimatePresence>
         {mobileOpen && (
           <>
-            {/* Overlay */}
             <motion.div
               key="overlay"
               variants={overlayVariants}
@@ -193,8 +232,6 @@ export default function Header() {
               onClick={() => setMobileOpen(false)}
               aria-hidden="true"
             />
-
-            {/* Drawer Panel */}
             <motion.nav
               key="drawer"
               variants={sidebarVariants}
@@ -204,7 +241,6 @@ export default function Header() {
               className="fixed top-0 right-0 z-50 flex h-dvh w-72 flex-col bg-white/95 backdrop-blur-xl shadow-xl lg:hidden"
               aria-label="Mobile navigation"
             >
-              {/* Drawer Header */}
               <div className="flex h-16 items-center justify-end px-5">
                 <button
                   type="button"
@@ -227,46 +263,45 @@ export default function Header() {
                   </svg>
                 </button>
               </div>
-
-              {/* Drawer Nav Items */}
               <div className="flex flex-1 flex-col gap-1 overflow-y-auto px-4 pb-6">
                 {navItems.map((item, i) => (
                   <motion.div
-                    key={item.path}
+                    key={item.sectionId}
                     custom={i}
                     variants={itemVariants}
                     initial="closed"
                     animate="open"
                   >
-                    <Link
-                      to={item.path}
-                      className={`flex items-center rounded-lg px-4 py-3 text-base font-medium transition-colors duration-150 ${
-                        isActive(item.path)
+                    <button
+                      type="button"
+                      onClick={() => scrollTo(item.sectionId)}
+                      className={`flex w-full items-center rounded-lg px-4 py-3 text-base font-medium transition-colors duration-150 ${
+                        isActive(item.sectionId)
                           ? 'bg-primary/5 text-primary'
                           : 'text-text-muted hover:bg-neutral/40 hover:text-text'
                       }`}
                     >
                       {item.label}
-                      {isActive(item.path) && (
+                      {isActive(item.sectionId) && (
                         <span className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" />
                       )}
-                    </Link>
+                    </button>
                   </motion.div>
                 ))}
-
-                {/* Divider */}
                 <div className="my-3 h-px bg-border" />
-
-                {/* Present Button (mobile) */}
                 <motion.div
                   custom={navItems.length}
                   variants={itemVariants}
                   initial="closed"
                   animate="open"
                 >
-                  <Link
-                    to="/present"
-                    className="flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-base font-medium text-white shadow-sm transition-all duration-200 hover:bg-primary/90 active:scale-[0.97]"
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileOpen(false)
+                      togglePresent()
+                    }}
+                    className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-base font-medium text-white shadow-sm transition-all duration-200 hover:bg-primary/90 active:scale-[0.97]"
                   >
                     <svg
                       className="h-4 w-4"
@@ -282,7 +317,7 @@ export default function Header() {
                       />
                     </svg>
                     Present
-                  </Link>
+                  </button>
                 </motion.div>
               </div>
             </motion.nav>

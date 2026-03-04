@@ -60,6 +60,33 @@ body {
   html { scroll-behavior: auto; }
 }
 
+/* ── Slide system ── */
+.slide {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* ── Presentation mode ── */
+.present-container {
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.present-container .slide {
+  scroll-snap-align: start;
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+/* ── Text gradient ── */
 .text-gradient {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-blue) 100%);
   -webkit-background-clip: text;
@@ -70,6 +97,7 @@ body {
   -webkit-box-decoration-break: clone;
 }
 
+/* ── Gradient line ── */
 .gradient-line {
   height: 2px;
   background: linear-gradient(90deg, var(--color-primary), var(--color-blue), var(--color-primary));
@@ -90,7 +118,10 @@ body {
   }
 }
 
+/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--color-neutral); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
+
+.present-container::-webkit-scrollbar { width: 0; }

@@ -27,9 +27,6 @@ export default function PresentationOverlay() {
     }
   }, [isPresentMode])
 
-  // Not on a main site route
-  if (currentIndex === -1) return null
-
   return (
     <>
       {/* ── Section progress bar (presentation mode, replaces scroll bar) ── */}
@@ -62,7 +59,7 @@ export default function PresentationOverlay() {
       >
         {sections.map((section, i) => (
           <button
-            key={section.path}
+            key={section.id}
             onClick={() => goTo(i)}
             aria-label={`Go to ${section.label}`}
             className="group relative flex items-center justify-center p-1"
@@ -94,7 +91,7 @@ export default function PresentationOverlay() {
       <div className="fixed bottom-5 left-1/2 z-40 flex -translate-x-1/2 items-center gap-1.5 lg:hidden">
         {sections.map((section, i) => (
           <button
-            key={section.path}
+            key={section.id}
             onClick={() => goTo(i)}
             aria-label={`Go to ${section.label}`}
             className="p-1"

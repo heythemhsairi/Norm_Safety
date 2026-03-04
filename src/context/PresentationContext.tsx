@@ -6,18 +6,24 @@ import {
   useCallback,
   useRef,
   type ReactNode,
+  type RefObject,
 } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
 
 /* ── Section map ── */
 const SECTIONS = [
-  { path: '/', label: 'Cover' },
-  { path: '/strategy', label: 'Strategy' },
-  { path: '/identity', label: 'Identity' },
-  { path: '/logo', label: 'Logo' },
-  { path: '/voice', label: 'Voice' },
-  { path: '/deliverables', label: 'Deliverables' },
-  { path: '/context', label: 'Context' },
+  { id: 'cover', label: 'Cover' },
+  { id: 'essence', label: 'Essence' },
+  { id: 'positioning', label: 'Positioning' },
+  { id: 'audience', label: 'Audience' },
+  { id: 'identity', label: 'Identity' },
+  { id: 'typography', label: 'Typography' },
+  { id: 'logo', label: 'Logo' },
+  { id: 'clearspace', label: 'Clear Space' },
+  { id: 'symbol', label: 'Symbol' },
+  { id: 'context', label: 'Context' },
+  { id: 'deliverables', label: 'Deliverables' },
+  { id: 'next-steps', label: 'Next Steps' },
+  { id: 'footer', label: 'Footer' },
 ] as const
 
 type Section = (typeof SECTIONS)[number]
@@ -28,6 +34,7 @@ interface PresentationValue {
   currentIndex: number
   total: number
   sections: readonly Section[]
+  containerRef: RefObject<HTMLDivElement | null>
   goNext: () => void
   goPrev: () => void
   goTo: (i: number) => void
@@ -44,33 +51,46 @@ export function usePresentation() {
 
 /* ── Provider ── */
 export function PresentationProvider({ children }: { children: ReactNode }) {
-  const navigate = useNavigate()
-  const { pathname } = useLocation()
   const [isPresentMode, setIsPresentMode] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
   const touchRef = useRef<{ x: number; y: number; t: number } | null>(null)
 
-  const currentIndex = SECTIONS.findIndex((s) => s.path === pathname)
-  const isMainSite = currentIndex !== -1
-
-  // Prevent browser scroll restoration
+  /* ── Track active section via IntersectionObserver ── */
   useEffect(() => {
-    window.history.scrollRestoration = 'manual'
-  }, [])
+    const root = isPresentMode ? containerRef.current : null
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const idx = SECTIONS.findIndex((s) => s.id === entry.target.id)
+            if (idx !== -1) setCurrentIndex(idx)
+          }
+        }
+      },
+      { root, rootMargin: '-30% 0px -50% 0px', threshold: 0 },
+    )
 
-  // Scroll to top on route change
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
+    const timer = setTimeout(() => {
+      for (const section of SECTIONS) {
+        const el = document.getElementById(section.id)
+        if (el) observer.observe(el)
+      }
+    }, 100)
+
+    return () => {
+      clearTimeout(timer)
+      observer.disconnect()
+    }
+  }, [isPresentMode])
 
   /* ── Navigation ── */
-  const goTo = useCallback(
-    (i: number) => {
-      if (i >= 0 && i < SECTIONS.length) {
-        navigate(SECTIONS[i].path)
-      }
-    },
-    [navigate],
-  )
+  const goTo = useCallback((i: number) => {
+    if (i >= 0 && i < SECTIONS.length) {
+      const el = document.getElementById(SECTIONS[i].id)
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [])
 
   const goNext = useCallback(() => {
     if (currentIndex < SECTIONS.length - 1) goTo(currentIndex + 1)
@@ -104,8 +124,6 @@ export function PresentationProvider({ children }: { children: ReactNode }) {
 
   /* ── Keyboard ── */
   useEffect(() => {
-    if (!isMainSite) return
-
     function onKey(e: KeyboardEvent) {
       const target = e.target as HTMLElement
       if (
@@ -122,7 +140,7 @@ export function PresentationProvider({ children }: { children: ReactNode }) {
         return
       }
 
-      // Arrow Right / Left → always navigate between sections
+      // Arrow Right / Left → navigate between sections (always)
       if (e.key === 'ArrowRight') {
         e.preventDefault()
         goNext()
@@ -146,6 +164,16 @@ export function PresentationProvider({ children }: { children: ReactNode }) {
           goPrev()
           return
         }
+        if (e.key === 'Home') {
+          e.preventDefault()
+          goTo(0)
+          return
+        }
+        if (e.key === 'End') {
+          e.preventDefault()
+          goTo(SECTIONS.length - 1)
+          return
+        }
         if (e.key === 'Escape') {
           togglePresent()
           return
@@ -155,12 +183,10 @@ export function PresentationProvider({ children }: { children: ReactNode }) {
 
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [isMainSite, isPresentMode, goNext, goPrev, togglePresent])
+  }, [isPresentMode, goNext, goPrev, goTo, togglePresent])
 
   /* ── Touch / swipe ── */
   useEffect(() => {
-    if (!isMainSite) return
-
     function onTouchStart(e: TouchEvent) {
       const t = e.touches[0]
       touchRef.current = { x: t.clientX, y: t.clientY, t: Date.now() }
@@ -174,9 +200,8 @@ export function PresentationProvider({ children }: { children: ReactNode }) {
       const elapsed = Date.now() - touchRef.current.t
       touchRef.current = null
 
-      // Horizontal swipe: fast, long enough, more horizontal than vertical
-      if (elapsed < 400 && Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-        if (dx < 0) goNext()
+      if (elapsed < 400 && Math.abs(dy) > 60 && Math.abs(dy) > Math.abs(dx) * 1.5) {
+        if (dy < 0) goNext()
         else goPrev()
       }
     }
@@ -187,20 +212,7 @@ export function PresentationProvider({ children }: { children: ReactNode }) {
       window.removeEventListener('touchstart', onTouchStart)
       window.removeEventListener('touchend', onTouchEnd)
     }
-  }, [isMainSite, goNext, goPrev])
-
-  /* ── Scroll lock in presentation mode ── */
-  useEffect(() => {
-    if (isPresentMode) {
-      document.body.style.overflow = 'hidden'
-      window.scrollTo(0, 0)
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isPresentMode])
+  }, [goNext, goPrev])
 
   return (
     <PresentationCtx.Provider
@@ -209,6 +221,7 @@ export function PresentationProvider({ children }: { children: ReactNode }) {
         currentIndex,
         total: SECTIONS.length,
         sections: SECTIONS,
+        containerRef,
         goNext,
         goPrev,
         goTo,

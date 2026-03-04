@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import Header from './Header'
-import Footer from './Footer'
 import { usePresentation } from '../../context/PresentationContext'
 import PresentationOverlay from '../ui/PresentationOverlay'
 
@@ -30,10 +29,17 @@ function ScrollProgress() {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const { isPresentMode } = usePresentation()
+  const { isPresentMode, containerRef } = usePresentation()
 
   return (
-    <div className="relative flex min-h-dvh flex-col bg-bg">
+    <div
+      ref={containerRef}
+      className={`relative bg-bg ${
+        isPresentMode
+          ? 'present-container'
+          : 'flex min-h-dvh flex-col'
+      }`}
+    >
       {/* Scroll Progress Bar — hidden in presentation mode */}
       {!isPresentMode && <ScrollProgress />}
 
@@ -41,12 +47,9 @@ export default function Layout({ children }: LayoutProps) {
       {!isPresentMode && <Header />}
 
       {/* Main Content */}
-      <main className={`flex-1 ${isPresentMode ? '' : 'pt-16'}`}>
+      <main className={isPresentMode ? '' : 'flex-1 pt-16'}>
         {children}
       </main>
-
-      {/* Footer — hidden in presentation mode */}
-      {!isPresentMode && <Footer />}
 
       {/* Presentation overlay (dots, hints, controls) */}
       <PresentationOverlay />

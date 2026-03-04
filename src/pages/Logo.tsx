@@ -64,7 +64,7 @@ const lockups = [
   {
     label: 'Vertical',
     description: 'Stacked vertical layout for documents, presentations, and tall spaces.',
-    src: '/assets/wejden-spire-logo.svg',
+    src: '/assets/wejden-spire-logo-vertical.svg',
     alt: 'Wejden Spire — vertical logo',
   },
   {

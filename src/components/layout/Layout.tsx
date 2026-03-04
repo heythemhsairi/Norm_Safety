@@ -2,6 +2,8 @@ import type { ReactNode } from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import Header from './Header'
 import Footer from './Footer'
+import { usePresentation } from '../../context/PresentationContext'
+import PresentationOverlay from '../ui/PresentationOverlay'
 
 interface LayoutProps {
   children: ReactNode
@@ -28,19 +30,26 @@ function ScrollProgress() {
 }
 
 export default function Layout({ children }: LayoutProps) {
+  const { isPresentMode } = usePresentation()
+
   return (
     <div className="relative flex min-h-dvh flex-col bg-bg">
-      {/* Scroll Progress Bar — sits above everything */}
-      <ScrollProgress />
+      {/* Scroll Progress Bar — hidden in presentation mode */}
+      {!isPresentMode && <ScrollProgress />}
 
-      {/* Fixed Header */}
-      <Header />
+      {/* Fixed Header — hidden in presentation mode */}
+      {!isPresentMode && <Header />}
 
-      {/* Main Content — padded to clear fixed header */}
-      <main className="flex-1 pt-16">{children}</main>
+      {/* Main Content */}
+      <main className={`flex-1 ${isPresentMode ? '' : 'pt-16'}`}>
+        {children}
+      </main>
 
-      {/* Footer */}
-      <Footer />
+      {/* Footer — hidden in presentation mode */}
+      {!isPresentMode && <Footer />}
+
+      {/* Presentation overlay (dots, hints, controls) */}
+      <PresentationOverlay />
     </div>
   )
 }

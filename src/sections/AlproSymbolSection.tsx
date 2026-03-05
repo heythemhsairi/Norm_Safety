@@ -17,7 +17,7 @@ export default function AlproSymbolSection() {
         </Reveal>
         <Reveal delay={0.1}>
           <h2 className="mb-12 text-3xl font-bold tracking-tight text-text md:text-4xl lg:text-5xl">
-            Alpro — Symbol Meaning
+            Additional Proposition 1 — Symbol Meaning
           </h2>
         </Reveal>
         <div className="grid items-center gap-12 md:grid-cols-2">

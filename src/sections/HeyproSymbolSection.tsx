@@ -1,9 +1,9 @@
 import Reveal from '../components/motion/Reveal'
 
 const meanings = [
-  { label: 'The Pulse', desc: 'The heartbeat line captures vitality and real-time awareness — technology that keeps a finger on the pulse of progress.', color: 'bg-primary' },
-  { label: 'The Circle', desc: 'A continuous ring represents completeness and protection — an all-encompassing ecosystem built around the user.', color: 'bg-blue' },
-  { label: 'The Rhythm', desc: 'Dynamic peaks and valleys reflect adaptability and responsiveness — a platform that moves with the pace of business.', color: 'bg-purple' },
+  { label: 'Growth & Elevation', desc: 'The rising "W" line symbolizes progress and personal development — a continuous journey toward higher achievement.', color: 'bg-primary' },
+  { label: 'The Spire', desc: 'The upward movement reflects the idea of a spire — reaching higher levels of wellbeing and mental clarity.', color: 'bg-blue' },
+  { label: 'The Circle', desc: 'A continuous ring represents completeness and protection — an all-encompassing ecosystem centered on the user.', color: 'bg-purple' },
 ]
 
 export default function HeyproSymbolSection() {
@@ -17,7 +17,7 @@ export default function HeyproSymbolSection() {
         </Reveal>
         <Reveal delay={0.1}>
           <h2 className="mb-12 text-3xl font-bold tracking-tight text-text md:text-4xl lg:text-5xl">
-            HeyPro — Symbol Meaning
+            Additional Proposition 2 — Symbol Meaning
           </h2>
         </Reveal>
         <div className="grid items-center gap-12 md:grid-cols-2">

@@ -1,9 +1,9 @@
 import Reveal from '../components/motion/Reveal'
 
 const meanings = [
-  { label: 'The Spire', desc: 'The rising "و" (W) ascends upward like a spire — symbolizing growth, elevation, and the drive to reach new heights.', color: 'bg-primary' },
+  { label: 'The Ascent', desc: 'The rising form represents ambition and forward motion — a brand that climbs toward excellence in every project.', color: 'bg-primary' },
   { label: 'The Flow', desc: 'Organic curves convey creativity and adaptability — fluid thinking that shapes tailored solutions for each client.', color: 'bg-blue' },
-  { label: 'The Anchor', desc: 'The grounded base symbolizes reliability and professional integrity — a partner you can count on.', color: 'bg-purple' },
+  { label: 'The Spire', desc: 'The upward peak evokes the idea of a spire — symbolizing growth, elevation, and the pursuit of higher impact.', color: 'bg-purple' },
 ]
 
 export default function AlproSymbolSection() {

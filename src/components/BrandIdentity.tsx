@@ -95,7 +95,7 @@ export default function BrandIdentity() {
       {/* ═══════════ NAV ═══════════ */}
       <nav className="bi-nav" ref={navRef}>
         <a href="#" className="bi-nav-logo">
-          <img src={LOGO.horizontal} alt="NormSafety" />
+          <img src={LOGO.vertical} alt="NormSafety" />
         </a>
         <ul className="bi-nav-links">
           <li><a href="#essence">Essence</a></li>
@@ -119,11 +119,11 @@ export default function BrandIdentity() {
       {/* ═══════════ HERO / COVER ═══════════ */}
       <section className="bi-hero">
         <div className="hero-inner">
-          <img src={LOGO.icon} alt="NormSafety Mark" className="hero-icon" />
+          <img src={LOGO.vertical} alt="NormSafety" className="hero-vertical-logo" />
           <h1 className="hero-title">
-            <span className="accent">NormSafety</span>
+            <span className="accent">Prevention</span>
             <br />
-            Brand Identity System
+            Intelligence System
           </h1>
           <p className="hero-subtitle">
             The visual and verbal operating system behind NormSafety — the enterprise AI platform transforming workplace safety, compliance, and prevention into measurable operational performance.
@@ -273,12 +273,12 @@ export default function BrandIdentity() {
             </p>
           </div>
 
-          {/* Primary Logo */}
+          {/* Primary Logo — Vertical Stacked */}
           <div className="reveal" style={{ marginTop: 64 }}>
-            <div className="logo-card" style={{ aspectRatio: '21/9', padding: 64 }}>
-              <img src={LOGO.horizontal} alt="NormSafety — Primary Logo" style={{ maxHeight: 110, width: 'auto' }} />
+            <div className="logo-card" style={{ aspectRatio: '16/10', padding: 80 }}>
+              <img src={LOGO.vertical} alt="NormSafety — Primary Vertical Lockup" style={{ maxHeight: 280, width: 'auto' }} />
             </div>
-            <div className="logo-card-label" style={{ marginTop: 16 }}>Primary Horizontal Lockup</div>
+            <div className="logo-card-label" style={{ marginTop: 16 }}>Primary Vertical Lockup — Master</div>
           </div>
 
           {/* Symbol meaning */}
@@ -315,20 +315,20 @@ export default function BrandIdentity() {
           <h3 className="reveal" style={{ fontSize: 22, fontWeight: 700, marginTop: 96, color: 'var(--midnight)' }}>Logo Variations</h3>
           <div className="logo-variations-grid stagger" style={{ marginTop: 32 }}>
             <div>
-              <div className="logo-card" style={{ aspectRatio: '16/9', padding: 48 }}>
+              <div className="logo-card" style={{ aspectRatio: '16/10', padding: 56 }}>
+                <img src={LOGO.vertical} alt="Vertical Stacked — Primary" style={{ maxHeight: 180, width: 'auto' }} />
+              </div>
+              <div className="logo-card-label">Vertical Stacked · Primary</div>
+            </div>
+            <div>
+              <div className="logo-card" style={{ aspectRatio: '16/10', padding: 48 }}>
                 <img src={LOGO.horizontal} alt="Horizontal" style={{ maxHeight: 64, width: 'auto' }} />
               </div>
-              <div className="logo-card-label">Horizontal</div>
+              <div className="logo-card-label">Horizontal · Secondary</div>
             </div>
             <div>
-              <div className="logo-card" style={{ aspectRatio: '16/9', padding: 48 }}>
-                <img src={LOGO.vertical} alt="Vertical Stacked" style={{ maxHeight: 120, width: 'auto' }} />
-              </div>
-              <div className="logo-card-label">Vertical Stacked</div>
-            </div>
-            <div>
-              <div className="logo-card" style={{ aspectRatio: '16/9', padding: 48 }}>
-                <img src={LOGO.icon} alt="Icon" style={{ maxHeight: 72, width: 'auto' }} />
+              <div className="logo-card" style={{ aspectRatio: '16/10', padding: 48 }}>
+                <img src={LOGO.icon} alt="Icon" style={{ maxHeight: 96, width: 'auto' }} />
               </div>
               <div className="logo-card-label">Icon / Symbol</div>
             </div>
@@ -338,26 +338,26 @@ export default function BrandIdentity() {
           <h3 className="reveal" style={{ fontSize: 22, fontWeight: 700, marginTop: 96, color: 'var(--midnight)' }}>Logo on Backgrounds</h3>
           <div className="logo-bg-grid stagger" style={{ marginTop: 32 }}>
             <div>
-              <div className="logo-card" style={{ background: '#FFFFFF', aspectRatio: '16/9', padding: 48 }}>
-                <img src={LOGO.horizontal} alt="On White" style={{ maxHeight: 56, width: 'auto' }} />
+              <div className="logo-card" style={{ background: '#FFFFFF', aspectRatio: '16/10', padding: 56 }}>
+                <img src={LOGO.vertical} alt="On White" style={{ maxHeight: 160, width: 'auto' }} />
               </div>
               <div className="logo-card-label" style={{ marginTop: 10 }}>Fog White · #FFFFFF</div>
             </div>
             <div>
-              <div className="logo-card" style={{ background: '#F8FAFC', aspectRatio: '16/9', padding: 48 }}>
-                <img src={LOGO.horizontal} alt="On Fog" style={{ maxHeight: 56, width: 'auto' }} />
+              <div className="logo-card" style={{ background: '#F8FAFC', aspectRatio: '16/10', padding: 56 }}>
+                <img src={LOGO.vertical} alt="On Fog" style={{ maxHeight: 160, width: 'auto' }} />
               </div>
               <div className="logo-card-label" style={{ marginTop: 10 }}>Neutral Fog · #F8FAFC</div>
             </div>
             <div>
-              <div className="logo-card" style={{ background: '#14B8A6', border: 'none', aspectRatio: '16/9', padding: 48 }}>
-                <img src={LOGO.horizontal} alt="On Teal" style={{ maxHeight: 56, width: 'auto', filter: 'brightness(0) invert(1)' }} />
+              <div className="logo-card" style={{ background: '#14B8A6', border: 'none', aspectRatio: '16/10', padding: 56 }}>
+                <img src={LOGO.vertical} alt="On Teal" style={{ maxHeight: 160, width: 'auto', filter: 'brightness(0) invert(1)' }} />
               </div>
               <div className="logo-card-label" style={{ marginTop: 10 }}>Signal Teal · #14B8A6</div>
             </div>
             <div>
-              <div className="logo-card logo-card--dark" style={{ aspectRatio: '16/9', padding: 48 }}>
-                <img src={LOGO.horizontal} alt="On Midnight" style={{ maxHeight: 56, width: 'auto', filter: 'brightness(0) invert(1)' }} />
+              <div className="logo-card logo-card--dark" style={{ aspectRatio: '16/10', padding: 56 }}>
+                <img src={LOGO.vertical} alt="On Midnight" style={{ maxHeight: 160, width: 'auto', filter: 'brightness(0) invert(1)' }} />
               </div>
               <div className="logo-card-label" style={{ marginTop: 10 }}>Core Midnight · #0B1535</div>
             </div>
@@ -824,7 +824,7 @@ export default function BrandIdentity() {
       <section className="bi-closing">
         <div className="bi-container">
           <div className="closing-logo reveal">
-            <img src={LOGO.icon} alt="NormSafety" />
+            <img src={LOGO.vertical} alt="NormSafety" />
           </div>
           <h2 className="bi-closing-title reveal">
             <span className="accent">Prévenir. Piloter.</span>

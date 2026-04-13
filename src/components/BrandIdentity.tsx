@@ -285,30 +285,30 @@ export default function BrandIdentity() {
             <div className="proposition-card">
               <div className="proposition-number">Strategic Route 02</div>
               <div className="proposition-visual">
-                <img src="/assets/norm/icon-proposition-2.svg" alt="The Continuous Loop" />
+                <img src="/assets/norm/icon-proposition-2.svg" alt="The Abstract Pulse" />
               </div>
-              <h4 className="proposition-title">The Continuous Loop</h4>
+              <h4 className="proposition-title">The Abstract Pulse</h4>
               <p className="proposition-desc">
-                A fluid and intelligent abstract route built around continuity, cyclical prevention, and perpetual optimization. This concept explored the idea of safety as a continuous enterprise rhythm — detect, analyze, act, and continuously improve.
+                A signal-led route built around fluid intelligence, adaptive movement, and invisible anticipation. This concept translated AI intuition into a living visual language — prevention as a responsive, proactive pulse that senses risk before it surfaces.
               </p>
               <div className="proposition-note">
                 <span className="proposition-note-label">Selection Insight</span>
-                A strong cyclical metaphor, though the final Core Matrix delivered clearer brand ownership and stronger enterprise architecture.
+                A highly memorable signal concept, though the final Core Matrix better supports governance, modularity, and scalable SaaS storytelling.
               </div>
             </div>
 
             <div className="proposition-card">
               <div className="proposition-number">Strategic Route 03</div>
               <div className="proposition-visual proposition-visual--emphasized">
-                <img src="/assets/norm/icon-proposition-3.svg" alt="The Abstract Pulse" />
+                <img src="/assets/norm/icon-proposition-3.svg" alt="The Continuous Loop" />
               </div>
-              <h4 className="proposition-title">The Abstract Pulse</h4>
+              <h4 className="proposition-title">The Continuous Loop</h4>
               <p className="proposition-desc">
-                A more expressive and signal-led route centered on invisible intelligence, live alerts, and predictive motion. This direction translated AI intuition into a dynamic visual language, emphasizing responsiveness and proactive insight.
+                A connected and modular route built around continuity, workflow logic, and an endless optimization cycle. This direction explored safety as an interlinked enterprise rhythm — detect, analyze, act, and continuously improve, without ever breaking the chain.
               </p>
               <div className="proposition-note">
                 <span className="proposition-note-label">Selection Insight</span>
-                A highly memorable signal concept, though the final Core Matrix better supports governance, modularity, and scalable SaaS storytelling.
+                A strong cyclical metaphor, though the final Core Matrix delivered clearer brand ownership and stronger enterprise architecture.
               </div>
             </div>
           </div>

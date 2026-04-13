@@ -1,45 +1,69 @@
-/** Wejden Spire — Design Tokens */
+/** NormSafety — Design Tokens
+ *  Enterprise AI SaaS — Workplace Safety & Prevention Intelligence
+ *  Tagline: Prévenir. Piloter. Performer.
+ */
 
 export const colors = {
-  primary:      '#4BAA83', // Brand Green
-  primaryHover: '#3E8F70', // Hover / Active Green
-  blue:         '#6F8FB8', // Calm Blue (Secondary)
-  purple:       '#8A7CC8', // Soft Purple (Accent)
-  soft:         '#B7C7DD', // Light Accent Blue
-  bg:           '#F6F5F3', // Background
-  neutral:      '#E7E3DD', // Soft Neutral
-  text:         '#24322C', // Text
+  // Primary
+  midnight:     '#0B1535', // Core Midnight — trust, governance, executive authority
+  midnight2:    '#142043', // Midnight elevated surface
+  teal:         '#14B8A6', // Signal Teal — AI intelligence, live signal, action
+  tealDark:     '#0D9488',
+  tealLight:    '#E6FBF8',
+  lime:         '#B8FF2C', // AI Lime — premium accent, use sparingly
+  limeSoft:     '#F1FFCE',
+
+  // Secondary
+  compliance:   '#1D4ED8', // Compliance Blue
+  complianceLight: '#EAF0FE',
+  slate:        '#64748B', // Slate Steel — muted enterprise neutral
+  mint:         '#34D399', // Health Mint — positive state
+  amber:        '#F59E0B', // Risk Amber — warning state
+  coral:        '#EF4444', // Critical Coral — critical risk
+
+  // Neutral
+  fog:          '#F8FAFC', // Fog White — background
+  ink:          '#111827', // Deep Text
+
+  // System
+  bg:           '#F8FAFC',
+  bgAlt:        '#F1F5F9',
   white:        '#FFFFFF',
-  // Derived
-  primaryLight: '#E8F5EF',
-  blueLight:    '#E8EDF4',
-  purpleLight:  '#EDEBF5',
-  textMuted:    '#6B7280',
-  border:       '#E7E3DD',
+  text:         '#111827',
+  textMuted:    '#64748B',
+  textLight:    '#94A3B8',
+  border:       '#E2E8F0',
+  borderStrong: '#CBD5E1',
 } as const
 
 export const gradients = {
-  greenBlue:    'linear-gradient(135deg, #4BAA83 0%, #6F8FB8 100%)',
-  bluePurple:   'linear-gradient(135deg, #6F8FB8 0%, #8A7CC8 100%)',
-  greenPurple:  'linear-gradient(135deg, #4BAA83 0%, #8A7CC8 100%)',
-  subtle:       'linear-gradient(180deg, #F6F5F3 0%, #FFFFFF 100%)',
+  // Signature NormSafety gradient — midnight → teal
+  signature:    'linear-gradient(135deg, #0B1535 0%, #14B8A6 100%)',
+  aiSignal:     'linear-gradient(135deg, #14B8A6 0%, #B8FF2C 100%)',
+  compliance:   'linear-gradient(135deg, #0B1535 0%, #1D4ED8 100%)',
+  riskHeat:     'linear-gradient(135deg, #34D399 0%, #F59E0B 50%, #EF4444 100%)',
+  subtle:       'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)',
 } as const
 
 export const typography = {
-  fontEn: "'Manrope', sans-serif",
+  fontEn:   "'Sora', system-ui, -apple-system, sans-serif",
+  fontAr:   "'IBM Plex Sans Arabic', 'Meral Sans', sans-serif",
+  fontArHero: "'Meral Sans', 'IBM Plex Sans Arabic', sans-serif",
+  fontMono: "'JetBrains Mono', ui-monospace, monospace",
   weights: { light: 300, regular: 400, medium: 500, semi: 600, bold: 700, extra: 800 },
   scale: {
-    xs:   '0.75rem',   // 12px
-    sm:   '0.875rem',  // 14px
-    base: '1rem',      // 16px
-    lg:   '1.125rem',  // 18px
-    xl:   '1.25rem',   // 20px
-    '2xl': '1.5rem',   // 24px
-    '3xl': '1.875rem', // 30px
-    '4xl': '2.25rem',  // 36px
-    '5xl': '3rem',     // 48px
-    '6xl': '3.75rem',  // 60px
-    '7xl': '4.5rem',   // 72px
+    xs:   '0.75rem',
+    sm:   '0.875rem',
+    base: '1rem',
+    lg:   '1.125rem',
+    xl:   '1.25rem',
+    '2xl': '1.5rem',
+    '3xl': '1.875rem',
+    '4xl': '2.25rem',
+    '5xl': '3rem',
+    '6xl': '3.75rem',
+    '7xl': '4.5rem',
+    '8xl': '6rem',
   },
 } as const
 
@@ -65,11 +89,12 @@ export const radii = {
 } as const
 
 export const shadows = {
-  sm:   '0 1px 2px 0 rgba(0,0,0,0.05)',
-  md:   '0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04)',
-  lg:   '0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.03)',
-  xl:   '0 20px 25px -5px rgba(0,0,0,0.08), 0 10px 10px -5px rgba(0,0,0,0.02)',
-  glow: '0 0 40px rgba(75,170,131,0.15)',
+  sm:   '0 1px 2px 0 rgba(11,21,53,0.05)',
+  md:   '0 4px 6px -1px rgba(11,21,53,0.08), 0 2px 4px -1px rgba(11,21,53,0.04)',
+  lg:   '0 10px 15px -3px rgba(11,21,53,0.10), 0 4px 6px -2px rgba(11,21,53,0.04)',
+  xl:   '0 20px 25px -5px rgba(11,21,53,0.10), 0 10px 10px -5px rgba(11,21,53,0.03)',
+  glow: '0 0 48px rgba(20,184,166,0.25)',
+  aiGlow: '0 0 60px rgba(184,255,44,0.35)',
 } as const
 
 export const motion = {

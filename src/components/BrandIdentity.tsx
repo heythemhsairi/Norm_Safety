@@ -247,24 +247,24 @@ export default function BrandIdentity() {
             </div>
             <div className="reveal-right">
               <h3 style={{ fontSize: 'clamp(22px, 2.6vw, 32px)', fontWeight: 700, letterSpacing: '-.02em', color: 'var(--midnight)', marginBottom: 24 }}>
-                The symbol is the signal.
+                The symbol is the architecture of intelligence.
               </h3>
               <div className="symbol-meanings stagger">
                 <div className="meaning-item">
-                  <div className="meaning-label"><span className="meaning-dot" style={{ background: '#0B1535' }}></span>The Shield</div>
-                  <div className="meaning-desc">A precise, contained form — the language of protection, governance, and enterprise trust.</div>
+                  <div className="meaning-label"><span className="meaning-dot" style={{ background: '#0B1535' }}></span>The Core</div>
+                  <div className="meaning-desc">At the center, the N represents the intelligence engine of NormSafety — the decision layer where prevention, compliance, and operational performance converge.</div>
                 </div>
                 <div className="meaning-item">
-                  <div className="meaning-label"><span className="meaning-dot" style={{ background: '#14B8A6' }}></span>The Signal</div>
-                  <div className="meaning-desc">Live AI pulse — prevention that listens continuously, never reactively.</div>
+                  <div className="meaning-label"><span className="meaning-dot" style={{ background: '#14B8A6' }}></span>The Pillars</div>
+                  <div className="meaning-desc">The four outer anchors embody the platform's core pillars: detect, analyze, act, and optimize — a complete prevention cycle built for enterprise workflows.</div>
                 </div>
                 <div className="meaning-item">
-                  <div className="meaning-label"><span className="meaning-dot" style={{ background: '#B8FF2C' }}></span>The Spark</div>
-                  <div className="meaning-desc">Intelligence in motion — the premium accent reserved for moments of insight.</div>
+                  <div className="meaning-label"><span className="meaning-dot" style={{ background: '#B8FF2C' }}></span>The Framework</div>
+                  <div className="meaning-desc">The surrounding structure expresses governance, compliance boundaries, and system discipline — reinforcing the platform's enterprise-grade reliability.</div>
                 </div>
                 <div className="meaning-item">
-                  <div className="meaning-label"><span className="meaning-dot" style={{ background: '#0D9488' }}></span>The System</div>
-                  <div className="meaning-desc">Modular, scalable, governed — a mark engineered for an enterprise OS.</div>
+                  <div className="meaning-label"><span className="meaning-dot" style={{ background: '#0D9488' }}></span>The Balance</div>
+                  <div className="meaning-desc">Perfect symmetry and mathematical alignment communicate trust, control, and precision — reflecting the clarity and rigor expected from an AI-powered safety system.</div>
                 </div>
               </div>
             </div>

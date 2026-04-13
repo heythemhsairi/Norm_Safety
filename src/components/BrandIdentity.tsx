@@ -275,8 +275,8 @@ export default function BrandIdentity() {
 
           {/* Primary Logo — Vertical Stacked */}
           <div className="reveal" style={{ marginTop: 64 }}>
-            <div className="logo-card" style={{ aspectRatio: '16/10', padding: 80 }}>
-              <img src={LOGO.vertical} alt="NormSafety — Primary Vertical Lockup" style={{ maxHeight: 280, width: 'auto' }} />
+            <div className="logo-card" style={{ aspectRatio: '16/10', padding: 72 }}>
+              <img src={LOGO.vertical} alt="NormSafety — Primary Vertical Lockup" style={{ maxHeight: 210, width: 'auto' }} />
             </div>
             <div className="logo-card-label" style={{ marginTop: 16 }}>Primary Vertical Lockup — Master</div>
           </div>
@@ -316,7 +316,7 @@ export default function BrandIdentity() {
           <div className="logo-variations-grid stagger" style={{ marginTop: 32 }}>
             <div>
               <div className="logo-card" style={{ aspectRatio: '16/10', padding: 56 }}>
-                <img src={LOGO.vertical} alt="Vertical Stacked — Primary" style={{ maxHeight: 180, width: 'auto' }} />
+                <img src={LOGO.vertical} alt="Vertical Stacked — Primary" style={{ maxHeight: 140, width: 'auto' }} />
               </div>
               <div className="logo-card-label">Vertical Stacked · Primary</div>
             </div>
@@ -339,25 +339,25 @@ export default function BrandIdentity() {
           <div className="logo-bg-grid stagger" style={{ marginTop: 32 }}>
             <div>
               <div className="logo-card" style={{ background: '#FFFFFF', aspectRatio: '16/10', padding: 56 }}>
-                <img src={LOGO.vertical} alt="On White" style={{ maxHeight: 160, width: 'auto' }} />
+                <img src={LOGO.vertical} alt="On White" style={{ maxHeight: 124, width: 'auto' }} />
               </div>
               <div className="logo-card-label" style={{ marginTop: 10 }}>Fog White · #FFFFFF</div>
             </div>
             <div>
               <div className="logo-card" style={{ background: '#F8FAFC', aspectRatio: '16/10', padding: 56 }}>
-                <img src={LOGO.vertical} alt="On Fog" style={{ maxHeight: 160, width: 'auto' }} />
+                <img src={LOGO.vertical} alt="On Fog" style={{ maxHeight: 124, width: 'auto' }} />
               </div>
               <div className="logo-card-label" style={{ marginTop: 10 }}>Neutral Fog · #F8FAFC</div>
             </div>
             <div>
               <div className="logo-card" style={{ background: '#14B8A6', border: 'none', aspectRatio: '16/10', padding: 56 }}>
-                <img src={LOGO.vertical} alt="On Teal" style={{ maxHeight: 160, width: 'auto', filter: 'brightness(0) invert(1)' }} />
+                <img src={LOGO.vertical} alt="On Teal" style={{ maxHeight: 124, width: 'auto', filter: 'brightness(0) invert(1)' }} />
               </div>
               <div className="logo-card-label" style={{ marginTop: 10 }}>Signal Teal · #14B8A6</div>
             </div>
             <div>
               <div className="logo-card logo-card--dark" style={{ aspectRatio: '16/10', padding: 56 }}>
-                <img src={LOGO.vertical} alt="On Midnight" style={{ maxHeight: 160, width: 'auto', filter: 'brightness(0) invert(1)' }} />
+                <img src={LOGO.vertical} alt="On Midnight" style={{ maxHeight: 124, width: 'auto', filter: 'brightness(0) invert(1)' }} />
               </div>
               <div className="logo-card-label" style={{ marginTop: 10 }}>Core Midnight · #0B1535</div>
             </div>

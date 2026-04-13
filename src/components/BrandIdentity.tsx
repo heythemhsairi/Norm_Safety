@@ -119,7 +119,6 @@ export default function BrandIdentity() {
       {/* ═══════════ HERO / COVER ═══════════ */}
       <section className="bi-hero">
         <div className="hero-inner">
-          <img src={LOGO.vertical} alt="NormSafety" className="hero-vertical-logo" />
           <h1 className="hero-title">
             <span className="accent">Prevention</span>
             <br />

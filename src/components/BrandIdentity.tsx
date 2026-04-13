@@ -270,8 +270,51 @@ export default function BrandIdentity() {
             </div>
           </div>
 
+          {/* Alternative Icon Propositions */}
+          <div className="reveal" style={{ marginTop: 120 }}>
+            <div className="section-label">Alternative Routes</div>
+            <h3 style={{ fontSize: 'clamp(26px, 3.2vw, 40px)', fontWeight: 700, letterSpacing: '-.025em', lineHeight: 1.1, color: 'var(--midnight)', maxWidth: 780 }}>
+              Alternative Icon Propositions
+            </h3>
+            <p style={{ fontSize: 'clamp(16px, 1.8vw, 19px)', color: 'var(--text-muted)', lineHeight: 1.65, marginTop: 18, maxWidth: 680 }}>
+              Two additional abstract directions explored to challenge the master route and validate the final brand symbol choice.
+            </p>
+          </div>
+
+          <div className="proposition-grid stagger" style={{ marginTop: 48 }}>
+            <div className="proposition-card">
+              <div className="proposition-number">Proposition 02</div>
+              <div className="proposition-visual">
+                <img src="/assets/norm/icon-proposition-2.svg" alt="The Continuous Loop" />
+              </div>
+              <h4 className="proposition-title">The Continuous Loop</h4>
+              <p className="proposition-desc">
+                A fluid abstract route built around continuity, process flow, and perpetual optimization. This direction explored the idea of prevention as an endless operational cycle — detect, analyze, act, and improve.
+              </p>
+              <div className="proposition-note">
+                <span className="proposition-note-label">Why not selected</span>
+                Elegant and strategic, but less immediate in brand ownership than the final Core Matrix symbol.
+              </div>
+            </div>
+
+            <div className="proposition-card">
+              <div className="proposition-number">Proposition 03</div>
+              <div className="proposition-visual">
+                <img src="/assets/norm/icon-proposition-3.svg" alt="The Abstract Pulse" />
+              </div>
+              <h4 className="proposition-title">The Abstract Pulse</h4>
+              <p className="proposition-desc">
+                A more expressive and signal-driven route focused on invisible intelligence, live alerts, and predictive motion. This proposition emphasized AI intuition and the emotional side of prevention.
+              </p>
+              <div className="proposition-note">
+                <span className="proposition-note-label">Why not selected</span>
+                Highly dynamic and memorable, but less structured for enterprise governance storytelling.
+              </div>
+            </div>
+          </div>
+
           {/* Logo Variations */}
-          <h3 className="reveal" style={{ fontSize: 22, fontWeight: 700, marginTop: 96, color: 'var(--midnight)' }}>Logo Variations</h3>
+          <h3 className="reveal" style={{ fontSize: 22, fontWeight: 700, marginTop: 120, color: 'var(--midnight)' }}>Logo Variations</h3>
           <div className="logo-variations-grid stagger" style={{ marginTop: 32 }}>
             <div>
               <div className="logo-card" style={{ aspectRatio: '16/10', padding: 56 }}>

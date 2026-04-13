@@ -276,42 +276,46 @@ export default function BrandIdentity() {
             <h3 style={{ fontSize: 'clamp(26px, 3.2vw, 40px)', fontWeight: 700, letterSpacing: '-.025em', lineHeight: 1.1, color: 'var(--midnight)', maxWidth: 780 }}>
               Alternative Icon Propositions
             </h3>
-            <p style={{ fontSize: 'clamp(16px, 1.8vw, 19px)', color: 'var(--text-muted)', lineHeight: 1.65, marginTop: 18, maxWidth: 680 }}>
-              Two additional abstract directions explored to challenge the master route and validate the final brand symbol choice.
+            <p style={{ fontSize: 'clamp(16px, 1.8vw, 19px)', color: 'var(--text-muted)', lineHeight: 1.65, marginTop: 18, maxWidth: 720 }}>
+              Two additional abstract explorations developed to challenge the final route and validate the strongest masterbrand direction.
             </p>
           </div>
 
           <div className="proposition-grid stagger" style={{ marginTop: 48 }}>
             <div className="proposition-card">
-              <div className="proposition-number">Proposition 02</div>
+              <div className="proposition-number">Strategic Route 02</div>
               <div className="proposition-visual">
                 <img src="/assets/norm/icon-proposition-2.svg" alt="The Continuous Loop" />
               </div>
               <h4 className="proposition-title">The Continuous Loop</h4>
               <p className="proposition-desc">
-                A fluid abstract route built around continuity, process flow, and perpetual optimization. This direction explored the idea of prevention as an endless operational cycle — detect, analyze, act, and improve.
+                A fluid and intelligent abstract route built around continuity, cyclical prevention, and perpetual optimization. This concept explored the idea of safety as a continuous enterprise rhythm — detect, analyze, act, and continuously improve.
               </p>
               <div className="proposition-note">
-                <span className="proposition-note-label">Why not selected</span>
-                Elegant and strategic, but less immediate in brand ownership than the final Core Matrix symbol.
+                <span className="proposition-note-label">Selection Insight</span>
+                A strong cyclical metaphor, though the final Core Matrix delivered clearer brand ownership and stronger enterprise architecture.
               </div>
             </div>
 
             <div className="proposition-card">
-              <div className="proposition-number">Proposition 03</div>
-              <div className="proposition-visual">
+              <div className="proposition-number">Strategic Route 03</div>
+              <div className="proposition-visual proposition-visual--emphasized">
                 <img src="/assets/norm/icon-proposition-3.svg" alt="The Abstract Pulse" />
               </div>
               <h4 className="proposition-title">The Abstract Pulse</h4>
               <p className="proposition-desc">
-                A more expressive and signal-driven route focused on invisible intelligence, live alerts, and predictive motion. This proposition emphasized AI intuition and the emotional side of prevention.
+                A more expressive and signal-led route centered on invisible intelligence, live alerts, and predictive motion. This direction translated AI intuition into a dynamic visual language, emphasizing responsiveness and proactive insight.
               </p>
               <div className="proposition-note">
-                <span className="proposition-note-label">Why not selected</span>
-                Highly dynamic and memorable, but less structured for enterprise governance storytelling.
+                <span className="proposition-note-label">Selection Insight</span>
+                A highly memorable signal concept, though the final Core Matrix better supports governance, modularity, and scalable SaaS storytelling.
               </div>
             </div>
           </div>
+
+          <p className="proposition-closing reveal">
+            These explorations ultimately reinforced the Core Matrix as the strongest balance between ownership, governance, and long-term scalability.
+          </p>
 
           {/* Logo Variations */}
           <h3 className="reveal" style={{ fontSize: 22, fontWeight: 700, marginTop: 120, color: 'var(--midnight)' }}>Logo Variations</h3>

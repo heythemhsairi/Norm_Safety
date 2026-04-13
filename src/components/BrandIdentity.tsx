@@ -1,6 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import html2canvas from 'html2canvas'
-import { jsPDF } from 'jspdf'
 
 /* ──────────────────────────────────────────────────────────────
    NormSafety — Brand Identity System
@@ -43,37 +41,8 @@ function MockupPlaceholder({ label }: { label: string }) {
   )
 }
 
-async function exportPDF() {
-  const root = document.getElementById('root')
-  if (!root) return
-  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.stagger').forEach((el) => el.classList.add('visible'))
-
-  const W = 1920
-  const H = 1080
-  const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [W, H] })
-  const sections = root.querySelectorAll<HTMLElement>('section, footer')
-  let first = true
-  for (const section of sections) {
-    if (!first) pdf.addPage([W, H], 'landscape')
-    first = false
-    const canvas = await html2canvas(section, { width: section.scrollWidth, scale: 2, useCORS: true, backgroundColor: null, logging: false })
-    const imgData = canvas.toDataURL('image/jpeg', 0.92)
-    const ratio = canvas.width / canvas.height
-    let pw = W, ph = W / ratio
-    if (ph > H) { ph = H; pw = H * ratio }
-    pdf.addImage(imgData, 'JPEG', (W - pw) / 2, (H - ph) / 2, pw, ph)
-  }
-  pdf.save('NormSafety-Brand-Identity.pdf')
-}
-
 export default function BrandIdentity() {
   const navRef = useRef<HTMLElement>(null)
-  const [exporting, setExporting] = useState(false)
-
-  const handleExport = async () => {
-    setExporting(true)
-    try { await exportPDF() } finally { setExporting(false) }
-  }
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -105,15 +74,6 @@ export default function BrandIdentity() {
           <li><a href="#typography">Typography</a></li>
           <li><a href="#applications">Applications</a></li>
         </ul>
-        <button className="pdf-download-btn" onClick={handleExport} disabled={exporting} title="Download PDF">
-          {exporting ? <span className="pdf-spinner" /> : (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-          )}
-        </button>
       </nav>
 
       {/* ═══════════ HERO / COVER ═══════════ */}
@@ -303,7 +263,7 @@ export default function BrandIdentity() {
                   <div className="meaning-desc">Intelligence in motion — the premium accent reserved for moments of insight.</div>
                 </div>
                 <div className="meaning-item">
-                  <div className="meaning-label"><span className="meaning-dot" style={{ background: '#1D4ED8' }}></span>The System</div>
+                  <div className="meaning-label"><span className="meaning-dot" style={{ background: '#0D9488' }}></span>The System</div>
                   <div className="meaning-desc">Modular, scalable, governed — a mark engineered for an enterprise OS.</div>
                 </div>
               </div>
@@ -419,18 +379,6 @@ export default function BrandIdentity() {
             </div>
           </div>
 
-          {/* Secondary */}
-          <div className="reveal" style={{ marginTop: 72 }}>
-            <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '.14em', textTransform: 'uppercase' }}>Secondary — UI &amp; State</h3>
-          </div>
-          <div className="color-grid-sm stagger" style={{ marginTop: 20 }}>
-            <div className="color-chip"><div className="color-chip-sw" style={{ background: '#1D4ED8' }}></div><div className="color-chip-info"><div className="color-chip-name">Compliance Blue</div><div className="color-chip-hex">#1D4ED8</div></div></div>
-            <div className="color-chip"><div className="color-chip-sw" style={{ background: '#64748B' }}></div><div className="color-chip-info"><div className="color-chip-name">Slate Steel</div><div className="color-chip-hex">#64748B</div></div></div>
-            <div className="color-chip"><div className="color-chip-sw" style={{ background: '#34D399' }}></div><div className="color-chip-info"><div className="color-chip-name">Health Mint</div><div className="color-chip-hex">#34D399</div></div></div>
-            <div className="color-chip"><div className="color-chip-sw" style={{ background: '#F59E0B' }}></div><div className="color-chip-info"><div className="color-chip-name">Risk Amber</div><div className="color-chip-hex">#F59E0B</div></div></div>
-            <div className="color-chip"><div className="color-chip-sw" style={{ background: '#EF4444' }}></div><div className="color-chip-info"><div className="color-chip-name">Critical Coral</div><div className="color-chip-hex">#EF4444</div></div></div>
-          </div>
-
           {/* Neutral */}
           <div className="reveal" style={{ marginTop: 72 }}>
             <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '.14em', textTransform: 'uppercase' }}>Neutral</h3>
@@ -451,12 +399,12 @@ export default function BrandIdentity() {
           <div className="reveal" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
             <div style={{ height: 140, borderRadius: 16, background: 'linear-gradient(135deg, #0B1535, #14B8A6)' }}></div>
             <div style={{ height: 140, borderRadius: 16, background: 'linear-gradient(135deg, #14B8A6, #B8FF2C)' }}></div>
-            <div style={{ height: 140, borderRadius: 16, background: 'linear-gradient(135deg, #34D399, #F59E0B 50%, #EF4444)' }}></div>
+            <div style={{ height: 140, borderRadius: 16, background: 'linear-gradient(135deg, #0B1535, #B8FF2C)' }}></div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginTop: 10 }}>
             <div style={{ textAlign: 'center', fontSize: 11, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase' }}>Signature</div>
             <div style={{ textAlign: 'center', fontSize: 11, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase' }}>AI Signal</div>
-            <div style={{ textAlign: 'center', fontSize: 11, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase' }}>Risk Heatmap</div>
+            <div style={{ textAlign: 'center', fontSize: 11, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase' }}>Governance</div>
           </div>
         </div>
       </section>
@@ -561,14 +509,14 @@ export default function BrandIdentity() {
               <div className="feature-desc">Grid-native cards, composable KPIs, and editorial whitespace. Built to scale across product and presentation.</div>
             </div>
             <div className="feature-card">
-              <div className="feature-icon feature-icon--blue">
+              <div className="feature-icon feature-icon--teal">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18" /><path d="M7 14l4-4 4 4 5-7" /></svg>
               </div>
               <div className="feature-title">Predictive Data Viz</div>
               <div className="feature-desc">Clean lines, risk heatmaps, signal pulses. Charts that executives trust and operators can act on.</div>
             </div>
             <div className="feature-card">
-              <div className="feature-icon feature-icon--midnight">
+              <div className="feature-icon feature-icon--lime">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L3 7v6c0 5 4 9 9 9s9-4 9-9V7z" /><path d="M9 12l2 2 4-4" /></svg>
               </div>
               <div className="feature-title">Governance Surfaces</div>
@@ -673,7 +621,7 @@ export default function BrandIdentity() {
               <div className="voice-dont">{'\u2717'} "Our amazing new tool supercharges safety!"</div>
             </div>
             <div className="voice-card">
-              <div className="voice-attr" style={{ color: 'var(--compliance)' }}>Visionary</div>
+              <div className="voice-attr" style={{ color: 'var(--midnight)' }}>Visionary</div>
               <div className="voice-example">Frame the shift — from reactive HSE to predictive intelligence.</div>
               <div className="voice-do">{'\u2713'} "The next decade of safety is predictive, not reactive."</div>
               <div className="voice-dont">{'\u2717'} "Revolutionary disruption of the safety industry."</div>
@@ -702,12 +650,12 @@ export default function BrandIdentity() {
               <span className="msg-label" style={{ color: 'var(--teal-dark)' }}>Primary</span>
               <span style={{ fontSize: 18, fontWeight: 700, color: 'var(--midnight)' }}>"Prévenir. Piloter. Performer."</span>
             </div>
-            <div className="msg-bar" style={{ background: 'var(--compliance-light)' }}>
-              <span className="msg-label" style={{ color: 'var(--compliance)' }}>Executive</span>
-              <span style={{ fontSize: 16, fontWeight: 500, color: 'var(--midnight)' }}>"Centralize SST data. Anticipate risk. Elevate operational performance."</span>
+            <div className="msg-bar" style={{ background: 'var(--midnight)' }}>
+              <span className="msg-label" style={{ color: 'var(--lime)' }}>Executive</span>
+              <span style={{ fontSize: 16, fontWeight: 500, color: '#fff' }}>"Centralize SST data. Anticipate risk. Elevate operational performance."</span>
             </div>
-            <div className="msg-bar" style={{ background: '#E9ECF7' }}>
-              <span className="msg-label" style={{ color: 'var(--midnight)' }}>HSE / SST</span>
+            <div className="msg-bar" style={{ background: 'var(--teal-light)' }}>
+              <span className="msg-label" style={{ color: 'var(--teal-dark)' }}>HSE / SST</span>
               <span style={{ fontSize: 16, fontWeight: 500, color: 'var(--midnight)' }}>"AI-powered prevention intelligence — built for CAPA, audits, and ISO 45001."</span>
             </div>
             <div className="msg-bar" style={{ background: 'var(--bg)', border: '1px solid var(--border)' }}>
@@ -802,14 +750,14 @@ export default function BrandIdentity() {
               <div className="feature-desc">Finalize logo system, clear-space rules, and master file delivery.</div>
             </div>
             <div className="feature-card">
-              <div className="feature-icon feature-icon--blue">
+              <div className="feature-icon feature-icon--teal">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 9h6v6H9z" /></svg>
               </div>
               <div className="feature-title">02 · Product UI System</div>
               <div className="feature-desc">Extend the brand into the NormSafety application — tokens, components, dashboards.</div>
             </div>
             <div className="feature-card">
-              <div className="feature-icon feature-icon--midnight">
+              <div className="feature-icon feature-icon--lime">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h20v14H2z" /><path d="M8 21h8M12 17v4" /></svg>
               </div>
               <div className="feature-title">03 · Go-to-Market Kit</div>

@@ -28,13 +28,29 @@ function Lightbox() {
   )
 }
 
-function MockupPlaceholder({ label }: { label: string }) {
+function MockupSingle({ src, label }: { src: string; label: string }) {
   return (
     <div className="mockup-card">
-      <div className="mockup-img-wrap" onClick={() => window.dispatchEvent(new CustomEvent('lightbox', { detail: LOGO.horizontal }))}>
-        <div className="mockup-placeholder">
-          <img src={LOGO.icon} alt={label} />
-        </div>
+      <div className="mockup-img-wrap" onClick={() => window.dispatchEvent(new CustomEvent('lightbox', { detail: src }))}>
+        <img src={src} alt={label} className="mockup-img" />
+      </div>
+      <div className="mockup-label">{label}</div>
+    </div>
+  )
+}
+
+function MockupHover({ srcA, srcB, label }: { srcA: string; srcB: string; label: string }) {
+  const [hovering, setHovering] = useState(false)
+  return (
+    <div className="mockup-card mockup-card--interactive">
+      <div
+        className="mockup-img-wrap"
+        onMouseEnter={() => setHovering(true)}
+        onMouseLeave={() => setHovering(false)}
+        onClick={() => window.dispatchEvent(new CustomEvent('lightbox', { detail: hovering ? srcB : srcA }))}
+      >
+        <img src={srcA} alt={label} className="mockup-img mockup-img--default" />
+        <img src={srcB} alt={label} className="mockup-img mockup-img--hover" />
       </div>
       <div className="mockup-label">{label}</div>
     </div>
@@ -781,14 +797,15 @@ export default function BrandIdentity() {
             <h2 className="section-title">The identity in the real world.</h2>
           </div>
           <div className="mockup-gallery stagger">
-            <MockupPlaceholder label="Executive Dashboard" />
-            <MockupPlaceholder label="Compliance Workflow" />
-            <MockupPlaceholder label="Tablet Factory Analytics" />
-            <MockupPlaceholder label="CAPA Board" />
-            <MockupPlaceholder label="Booth Rollup" />
-            <MockupPlaceholder label="LinkedIn Banner" />
-            <MockupPlaceholder label="Business Card" />
-            <MockupPlaceholder label="Mobile App Icon" />
+            <MockupHover
+              srcA="/assets/mockups/normsafety-keychain-a.png"
+              srcB="/assets/mockups/normsafety-keychain-b.png"
+              label="Strap Keychain · Hover"
+            />
+            <MockupSingle
+              src="/assets/mockups/normsafety-stamp.png"
+              label="Wooden Stamp"
+            />
           </div>
         </div>
       </section>

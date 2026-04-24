@@ -806,6 +806,11 @@ export default function BrandIdentity() {
               src="/assets/mockups/normsafety-stamp.png"
               label="Wooden Stamp"
             />
+            <MockupHover
+              srcA="/assets/mockups/normsafety-flyer-a.png"
+              srcB="/assets/mockups/normsafety-flyer-b.png"
+              label="A4 Flyer · Hover"
+            />
           </div>
         </div>
       </section>

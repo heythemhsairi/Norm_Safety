@@ -793,46 +793,6 @@ export default function BrandIdentity() {
         </div>
       </section>
 
-      {/* ═══════════ DELIVERABLES ═══════════ */}
-      <section className="bi-section text-section">
-        <div className="bi-container">
-          <div className="reveal">
-            <div className="section-label">Deliverables</div>
-            <h2 className="section-title">The complete identity.</h2>
-          </div>
-
-          <div className="deliv-grid stagger">
-            {[
-              'Primary horizontal logo',
-              'Vertical stacked lockup',
-              'Icon / master symbol',
-              'Monochrome black &amp; white',
-              'Dark-mode reversed variants',
-              'Full favicon set',
-              'Primary + secondary color system',
-              'Signature gradient library',
-              'Sora + IBM Plex Sans Arabic setup',
-              'Meral Sans editorial accent',
-              'Iconography grid (24px)',
-              'Dashboard / KPI card system',
-              'Risk heatmap palette',
-              'Executive report template',
-              'Mobile app icon variants',
-              'LinkedIn / social banner kit',
-              'Business cards &amp; letterhead',
-              'Trade-show rollup templates',
-              'Pitch deck master layouts',
-              'Bilingual (EN / AR) ready',
-            ].map((item) => (
-              <div className="deliv-row" key={item}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                <span dangerouslySetInnerHTML={{ __html: item }} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ═══════════ NEXT STEPS ═══════════ */}
       <section className="bi-section text-section--alt">
         <div className="bi-container">

@@ -41,8 +41,78 @@ function MockupPlaceholder({ label }: { label: string }) {
   )
 }
 
+function AnimatedNumber({ value, decimals = 0, pad = 0, suffix = '', duration = 1600 }: {
+  value: number; decimals?: number; pad?: number; suffix?: string; duration?: number
+}) {
+  const [display, setDisplay] = useState(0)
+  const ref = useRef<HTMLSpanElement>(null)
+  const started = useRef(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true
+          const start = performance.now()
+          const step = (now: number) => {
+            const t = Math.min((now - start) / duration, 1)
+            const eased = 1 - Math.pow(1 - t, 3)
+            setDisplay(value * eased)
+            if (t < 1) requestAnimationFrame(step)
+            else setDisplay(value)
+          }
+          requestAnimationFrame(step)
+        }
+      })
+    }, { threshold: 0.3 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [value, duration])
+  let text = decimals > 0 ? display.toFixed(decimals) : Math.round(display).toString()
+  if (pad) {
+    const [i, d] = text.split('.')
+    text = i.padStart(pad, '0') + (d ? '.' + d : '')
+  }
+  return <span ref={ref}>{text}{suffix}</span>
+}
+
+function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const onMove = (e: React.MouseEvent) => {
+    const el = ref.current
+    if (!el) return
+    const r = el.getBoundingClientRect()
+    const x = (e.clientX - r.left) / r.width - 0.5
+    const y = (e.clientY - r.top) / r.height - 0.5
+    el.style.transform = `perspective(900px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateY(-4px)`
+  }
+  const onLeave = () => {
+    const el = ref.current
+    if (el) el.style.transform = ''
+  }
+  return (
+    <div ref={ref} className={className} onMouseMove={onMove} onMouseLeave={onLeave}>
+      {children}
+    </div>
+  )
+}
+
+const NAV_IDS = ['essence', 'positioning', 'logo', 'colors', 'typography', 'applications']
+
 export default function BrandIdentity() {
   const navRef = useRef<HTMLElement>(null)
+  const progressRef = useRef<HTMLDivElement>(null)
+  const [activeSection, setActiveSection] = useState<string>('essence')
+  const [showTop, setShowTop] = useState(false)
+  const [copiedHex, setCopiedHex] = useState<string | null>(null)
+
+  const copyHex = (hex: string) => {
+    navigator.clipboard?.writeText(hex).then(() => {
+      setCopiedHex(hex)
+      setTimeout(() => setCopiedHex((c) => (c === hex ? null : c)), 1400)
+    }).catch(() => {})
+  }
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -52,14 +122,41 @@ export default function BrandIdentity() {
     const els = document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.stagger')
     els.forEach((el) => obs.observe(el))
     const fallback = setTimeout(() => els.forEach((el) => el.classList.add('visible')), 3000)
-    const handleScroll = () => navRef.current?.classList.toggle('scrolled', window.scrollY > 60)
+
+    const spy = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => { if (entry.isIntersecting) setActiveSection(entry.target.id) }),
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+    )
+    NAV_IDS.forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) spy.observe(el)
+    })
+
+    const handleScroll = () => {
+      const doc = document.documentElement
+      const scrolled = doc.scrollTop
+      const pct = (scrolled / Math.max(doc.scrollHeight - doc.clientHeight, 1)) * 100
+      if (progressRef.current) progressRef.current.style.width = pct + '%'
+      setShowTop(scrolled > 800)
+      navRef.current?.classList.toggle('scrolled', scrolled > 60)
+    }
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => { obs.disconnect(); clearTimeout(fallback); window.removeEventListener('scroll', handleScroll) }
+    handleScroll()
+
+    return () => {
+      obs.disconnect(); spy.disconnect(); clearTimeout(fallback)
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
     <>
       <Lightbox />
+
+      {/* Scroll progress bar */}
+      <div className="scroll-progress"><div className="scroll-progress-bar" ref={progressRef} /></div>
 
       {/* ═══════════ NAV ═══════════ */}
       <nav className="bi-nav" ref={navRef}>
@@ -67,29 +164,51 @@ export default function BrandIdentity() {
           <img src={LOGO.vertical} alt="NormSafety" />
         </a>
         <ul className="bi-nav-links">
-          <li><a href="#essence">Essence</a></li>
-          <li><a href="#positioning">Positioning</a></li>
-          <li><a href="#logo">Logo</a></li>
-          <li><a href="#colors">Colors</a></li>
-          <li><a href="#typography">Typography</a></li>
-          <li><a href="#applications">Applications</a></li>
+          {[
+            ['essence', 'Essence'],
+            ['positioning', 'Positioning'],
+            ['logo', 'Logo'],
+            ['colors', 'Colors'],
+            ['typography', 'Typography'],
+            ['applications', 'Applications'],
+          ].map(([id, label]) => (
+            <li key={id}>
+              <a href={`#${id}`} className={activeSection === id ? 'active' : ''}>{label}</a>
+            </li>
+          ))}
         </ul>
       </nav>
 
+      {/* Back to top */}
+      <button
+        className={'back-to-top' + (showTop ? ' visible' : '')}
+        onClick={scrollToTop}
+        aria-label="Back to top"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="18 15 12 9 6 15" /></svg>
+      </button>
+
+      {/* Copied toast */}
+      <div className={'copy-toast' + (copiedHex ? ' visible' : '')}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+        <span>Copied <strong>{copiedHex}</strong></span>
+      </div>
+
       {/* ═══════════ HERO / COVER ═══════════ */}
-      <section className="bi-hero">
+      <section className="bi-hero bi-hero--gradient">
         <div className="hero-inner">
+          <img src={LOGO.vertical} alt="NormSafety" className="hero-vertical-logo" />
           <h1 className="hero-title">
             <span className="accent">Prevention</span>
             <br />
             Intelligence System
           </h1>
           <p className="hero-subtitle">
-            The visual and verbal operating system behind NormSafety — the enterprise AI platform transforming workplace safety, compliance, and prevention into measurable operational performance.
+            The visual and verbal system of NormSafety — enterprise AI for workplace safety, compliance, and prevention.
           </p>
           <span className="hero-tag">
             <span className="dot" />
-            Masterbrand System · 2026
+            Brand Identity Guidelines · 2026
           </span>
         </div>
         <div className="hero-scroll">
@@ -98,23 +217,41 @@ export default function BrandIdentity() {
         </div>
       </section>
 
+      {/* ═══════════ BRAND STATS BAND ═══════════ */}
+      <section className="brand-stats-band">
+        <div className="bi-container">
+          <div className="brand-stats-row stagger">
+            <div className="brand-stat">
+              <div className="brand-stat-value"><AnimatedNumber value={1} pad={2} /></div>
+              <div className="brand-stat-label">Master Identity</div>
+            </div>
+            <div className="brand-stat">
+              <div className="brand-stat-value"><AnimatedNumber value={8} pad={2} duration={1400} /></div>
+              <div className="brand-stat-label">Brand Colors</div>
+            </div>
+            <div className="brand-stat">
+              <div className="brand-stat-value"><AnimatedNumber value={2} pad={2} duration={1200} /></div>
+              <div className="brand-stat-label">Typefaces</div>
+            </div>
+            <div className="brand-stat">
+              <div className="brand-stat-value">EN · AR</div>
+              <div className="brand-stat-label">Bilingual System</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══════════ ESSENCE ═══════════ */}
       <section className="bi-section text-section" id="essence">
         <div className="bi-container">
           <div className="text-block reveal">
-            <div className="section-label">Brand Essence</div>
+            <div className="section-label">Essence</div>
             <h2 className="section-title">Prevention, engineered as intelligence.</h2>
             <p>
-              NormSafety is an AI-powered enterprise platform that transforms workplace safety, compliance, and prevention into measurable operational performance. We build the connective intelligence layer between people, risk, and executive decision-making.
-            </p>
-            <p>
-              The brand stands for intelligent prevention, executive trust, predictive systems, and safer organizational performance — delivered with the clarity and discipline expected of a global enterprise SaaS company.
+              The connective intelligence layer between people, risk, and executive decision-making — delivered with enterprise-grade clarity and discipline.
             </p>
           </div>
           <div className="quote-block reveal">Prévenir. Piloter. Performer.</div>
-          <p className="reveal" style={{ fontSize: 14, color: 'var(--text-muted)', marginTop: 16, fontWeight: 500, letterSpacing: '.04em' }}>
-            AI-Powered Prevention Intelligence
-          </p>
         </div>
       </section>
 
@@ -126,19 +263,13 @@ export default function BrandIdentity() {
           <div className="bi-split">
             <div className="reveal-left">
               <div className="section-label">Vision</div>
-              <h2 className="section-title">A world where safety is predictive, not reactive.</h2>
-              <p style={{ fontSize: 'clamp(16px, 1.6vw, 18px)', color: 'var(--text-muted)', lineHeight: 1.8, marginTop: 24 }}>
-                We envision every enterprise operating from a unified prevention intelligence — where HSE, compliance, and operational performance converge into one executive decision surface.
-              </p>
+              <h2 className="section-title">Safety that is predictive, not reactive.</h2>
             </div>
             <div className="reveal-right">
               <div className="section-label">Mission</div>
               <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 700, lineHeight: 1.2, letterSpacing: '-.02em', color: 'var(--midnight)' }}>
                 Centralize SST data. Anticipate risk. Automate compliance. Elevate performance.
               </h2>
-              <p style={{ fontSize: 'clamp(16px, 1.6vw, 18px)', color: 'var(--text-muted)', lineHeight: 1.8, marginTop: 24 }}>
-                NormSafety helps organizations centralize SST data, anticipate risks, automate compliance workflows, and elevate prevention culture through AI-powered analytics, predictive alerts, and executive dashboards.
-              </p>
             </div>
           </div>
 
@@ -146,17 +277,13 @@ export default function BrandIdentity() {
           <div className="reveal" style={{ marginTop: 96 }}>
             <div className="section-label">Market Context</div>
             <h3 style={{ fontSize: 'clamp(22px, 2.6vw, 30px)', fontWeight: 700, letterSpacing: '-.02em', color: 'var(--midnight)' }}>Built for the enterprise HSE category.</h3>
-            <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginTop: 12, maxWidth: 640 }}>
-              NormSafety operates alongside — and ahead of — the most trusted enterprise HSE and compliance platforms worldwide. Our benchmark is the global leaders. Our advantage is AI-native prevention intelligence.
-            </p>
           </div>
-          <div className="comp-strip stagger">
-            <div className="comp-cell">Cority</div>
-            <div className="comp-cell">EcoOnline</div>
-            <div className="comp-cell">VelocityEHS</div>
-            <div className="comp-cell">Enablon</div>
-            <div className="comp-cell">Quentic</div>
-            <div className="comp-cell">Intelex</div>
+          <div className="comp-strip reveal">
+            <div className="comp-strip-track">
+              {['Cority','EcoOnline','VelocityEHS','Enablon','Quentic','Intelex','Cority','EcoOnline','VelocityEHS','Enablon','Quentic','Intelex'].map((b, i) => (
+                <div className="comp-cell" key={i}>{b}</div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -165,20 +292,17 @@ export default function BrandIdentity() {
       <section className="bi-section text-section" id="audience">
         <div className="bi-container">
           <div className="reveal">
-            <div className="section-label">Who We Serve</div>
+            <div className="section-label">Audience</div>
             <h2 className="section-title">Built for decision-makers across the enterprise stack.</h2>
-            <p className="section-subtitle">
-              NormSafety speaks the language of executives, operators, and regulators — unifying them on a single prevention intelligence layer.
-            </p>
           </div>
 
           <div className="audience-grid stagger" style={{ marginTop: 64 }}>
-            <div className="audience-card"><div className="audience-role">Executive</div><div className="audience-name">CEO & C-Suite</div><div className="audience-desc">Operational performance, ESG signals, enterprise risk posture.</div></div>
-            <div className="audience-card"><div className="audience-role">HSE / SST</div><div className="audience-name">HSE &amp; Safety Directors</div><div className="audience-desc">Incident intelligence, CAPA, audit-ready compliance.</div></div>
-            <div className="audience-card"><div className="audience-role">People</div><div className="audience-name">HR &amp; Culture Leaders</div><div className="audience-desc">Prevention culture, training engagement, workforce safety KPIs.</div></div>
-            <div className="audience-card"><div className="audience-role">Compliance</div><div className="audience-name">Compliance &amp; Legal</div><div className="audience-desc">ISO 45001, regulatory workflows, documented chain of action.</div></div>
-            <div className="audience-card"><div className="audience-role">ESG</div><div className="audience-name">ESG &amp; Sustainability</div><div className="audience-desc">Non-financial reporting, social performance metrics.</div></div>
-            <div className="audience-card"><div className="audience-role">Quality</div><div className="audience-name">CAPA &amp; Quality Managers</div><div className="audience-desc">Root-cause analysis, corrective actions, continuous improvement.</div></div>
+            <div className="audience-card"><div className="audience-role">Executive</div><div className="audience-name">CEO & C-Suite</div></div>
+            <div className="audience-card"><div className="audience-role">HSE / SST</div><div className="audience-name">Safety Directors</div></div>
+            <div className="audience-card"><div className="audience-role">People</div><div className="audience-name">HR &amp; Culture</div></div>
+            <div className="audience-card"><div className="audience-role">Compliance</div><div className="audience-name">Compliance &amp; Legal</div></div>
+            <div className="audience-card"><div className="audience-role">ESG</div><div className="audience-name">ESG &amp; Sustainability</div></div>
+            <div className="audience-card"><div className="audience-role">Quality</div><div className="audience-name">CAPA &amp; Quality</div></div>
           </div>
 
           <div className="reveal" style={{ marginTop: 96 }}>
@@ -193,29 +317,28 @@ export default function BrandIdentity() {
           {/* KPI dashboard preview */}
           <div className="reveal" style={{ marginTop: 96 }}>
             <div className="section-label">Executive Signal</div>
-            <h3 style={{ fontSize: 'clamp(22px, 2.6vw, 30px)', fontWeight: 700, letterSpacing: '-.02em', color: 'var(--midnight)' }}>The metrics that move boardrooms.</h3>
           </div>
           <div className="kpi-grid stagger">
-            <div className="kpi-card">
+            <TiltCard className="kpi-card">
               <div className="kpi-label">Prevention Index</div>
-              <div className="kpi-value">94.2</div>
+              <div className="kpi-value"><AnimatedNumber value={94.2} decimals={1} /></div>
               <div className="kpi-delta kpi-delta--up">▲ +6.4 QoQ</div>
-            </div>
-            <div className="kpi-card">
+            </TiltCard>
+            <TiltCard className="kpi-card">
               <div className="kpi-label">Open Incidents</div>
-              <div className="kpi-value">18</div>
+              <div className="kpi-value"><AnimatedNumber value={18} /></div>
               <div className="kpi-delta kpi-delta--down">▼ −32%</div>
-            </div>
-            <div className="kpi-card">
+            </TiltCard>
+            <TiltCard className="kpi-card">
               <div className="kpi-label">CAPA Closure</div>
-              <div className="kpi-value">87%</div>
+              <div className="kpi-value"><AnimatedNumber value={87} suffix="%" /></div>
               <div className="kpi-delta kpi-delta--up">▲ +12 pts</div>
-            </div>
-            <div className="kpi-card">
+            </TiltCard>
+            <TiltCard className="kpi-card">
               <div className="kpi-label">Compliance Score</div>
-              <div className="kpi-value">99.1%</div>
+              <div className="kpi-value"><AnimatedNumber value={99.1} decimals={1} suffix="%" /></div>
               <div className="kpi-delta kpi-delta--neutral">— ISO 45001</div>
-            </div>
+            </TiltCard>
           </div>
         </div>
       </section>
@@ -225,19 +348,16 @@ export default function BrandIdentity() {
         <div className="bi-container">
 
           <div className="reveal">
-            <div className="section-label">Logo System</div>
+            <div className="section-label">Logo</div>
             <h2 className="section-title">The master mark.</h2>
-            <p className="section-subtitle">
-              A precision symbol engineered to signal AI intelligence, enterprise governance, and protection — at any scale, across every surface.
-            </p>
           </div>
 
           {/* Primary Logo — Vertical Stacked */}
           <div className="reveal" style={{ marginTop: 64 }}>
-            <div className="logo-card" style={{ aspectRatio: '16/10', padding: 72 }}>
-              <img src={LOGO.vertical} alt="NormSafety — Primary Vertical Lockup" style={{ maxHeight: 210, width: 'auto' }} />
+            <div className="logo-card" style={{ aspectRatio: '16/10', padding: 72, background: 'linear-gradient(135deg, #0B1535, #14B8A6)', border: 'none' }}>
+              <img src={LOGO.vertical} alt="NormSafety — Primary Vertical Lockup" style={{ maxHeight: 210, width: 'auto', filter: 'brightness(0) invert(1)' }} />
             </div>
-            <div className="logo-card-label" style={{ marginTop: 16 }}>Primary Vertical Lockup — Master</div>
+            <div className="logo-card-label" style={{ marginTop: 16 }}>Primary Vertical Lockup — Signature Gradient · Logo in Fog White #F8FAFC</div>
           </div>
 
           {/* Symbol meaning */}
@@ -247,75 +367,28 @@ export default function BrandIdentity() {
             </div>
             <div className="reveal-right">
               <h3 style={{ fontSize: 'clamp(22px, 2.6vw, 32px)', fontWeight: 700, letterSpacing: '-.02em', color: 'var(--midnight)', marginBottom: 24 }}>
-                The symbol is the architecture of intelligence.
+                The architecture of intelligence.
               </h3>
               <div className="symbol-meanings stagger">
                 <div className="meaning-item">
                   <div className="meaning-label"><span className="meaning-dot" style={{ background: '#0B1535' }}></span>The Core</div>
-                  <div className="meaning-desc">At the center, the N represents the intelligence engine of NormSafety — the decision layer where prevention, compliance, and operational performance converge.</div>
+                  <div className="meaning-desc">The N — intelligence engine where prevention, compliance, and performance converge.</div>
                 </div>
                 <div className="meaning-item">
                   <div className="meaning-label"><span className="meaning-dot" style={{ background: '#14B8A6' }}></span>The Pillars</div>
-                  <div className="meaning-desc">The four outer anchors embody the platform's core pillars: detect, analyze, act, and optimize — a complete prevention cycle built for enterprise workflows.</div>
+                  <div className="meaning-desc">Detect, analyze, act, optimize — the four anchors of the prevention cycle.</div>
                 </div>
                 <div className="meaning-item">
                   <div className="meaning-label"><span className="meaning-dot" style={{ background: '#B8FF2C' }}></span>The Framework</div>
-                  <div className="meaning-desc">The surrounding structure expresses governance, compliance boundaries, and system discipline — reinforcing the platform's enterprise-grade reliability.</div>
+                  <div className="meaning-desc">Governance, compliance boundaries, and enterprise discipline.</div>
                 </div>
                 <div className="meaning-item">
                   <div className="meaning-label"><span className="meaning-dot" style={{ background: '#0D9488' }}></span>The Balance</div>
-                  <div className="meaning-desc">Perfect symmetry and mathematical alignment communicate trust, control, and precision — reflecting the clarity and rigor expected from an AI-powered safety system.</div>
+                  <div className="meaning-desc">Symmetry and precision — the signature of trust and control.</div>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Alternative Icon Propositions */}
-          <div className="reveal" style={{ marginTop: 120 }}>
-            <div className="section-label">Alternative Routes</div>
-            <h3 style={{ fontSize: 'clamp(26px, 3.2vw, 40px)', fontWeight: 700, letterSpacing: '-.025em', lineHeight: 1.1, color: 'var(--midnight)', maxWidth: 780 }}>
-              Alternative Icon Propositions
-            </h3>
-            <p style={{ fontSize: 'clamp(16px, 1.8vw, 19px)', color: 'var(--text-muted)', lineHeight: 1.65, marginTop: 18, maxWidth: 720 }}>
-              Two additional abstract explorations developed to challenge the final route and validate the strongest masterbrand direction.
-            </p>
-          </div>
-
-          <div className="proposition-grid stagger" style={{ marginTop: 48 }}>
-            <div className="proposition-card">
-              <div className="proposition-number">Strategic Route 02</div>
-              <div className="proposition-visual">
-                <img src="/assets/norm/icon-proposition-2.svg" alt="The Abstract Pulse" />
-              </div>
-              <h4 className="proposition-title">The Abstract Pulse</h4>
-              <p className="proposition-desc">
-                A signal-led route built around fluid intelligence, adaptive movement, and invisible anticipation. This concept translated AI intuition into a living visual language — prevention as a responsive, proactive pulse that senses risk before it surfaces.
-              </p>
-              <div className="proposition-note">
-                <span className="proposition-note-label">Selection Insight</span>
-                A highly memorable signal concept, though the final Core Matrix better supports governance, modularity, and scalable SaaS storytelling.
-              </div>
-            </div>
-
-            <div className="proposition-card">
-              <div className="proposition-number">Strategic Route 03</div>
-              <div className="proposition-visual proposition-visual--emphasized">
-                <img src="/assets/norm/icon-proposition-3.svg" alt="The Continuous Loop" />
-              </div>
-              <h4 className="proposition-title">The Continuous Loop</h4>
-              <p className="proposition-desc">
-                A connected and modular route built around continuity, workflow logic, and an endless optimization cycle. This direction explored safety as an interlinked enterprise rhythm — detect, analyze, act, and continuously improve, without ever breaking the chain.
-              </p>
-              <div className="proposition-note">
-                <span className="proposition-note-label">Selection Insight</span>
-                A strong cyclical metaphor, though the final Core Matrix delivered clearer brand ownership and stronger enterprise architecture.
-              </div>
-            </div>
-          </div>
-
-          <p className="proposition-closing reveal">
-            These explorations ultimately reinforced the Core Matrix as the strongest balance between ownership, governance, and long-term scalability.
-          </p>
 
           {/* Logo Variations */}
           <h3 className="reveal" style={{ fontSize: 22, fontWeight: 700, marginTop: 120, color: 'var(--midnight)' }}>Logo Variations</h3>
@@ -356,10 +429,10 @@ export default function BrandIdentity() {
               <div className="logo-card-label" style={{ marginTop: 10 }}>Neutral Fog · #F8FAFC</div>
             </div>
             <div>
-              <div className="logo-card" style={{ background: '#14B8A6', border: 'none', aspectRatio: '16/10', padding: 56 }}>
-                <img src={LOGO.vertical} alt="On Teal" style={{ maxHeight: 124, width: 'auto', filter: 'brightness(0) invert(1)' }} />
+              <div className="logo-card" style={{ background: 'linear-gradient(135deg, #0B1535, #14B8A6)', border: 'none', aspectRatio: '16/10', padding: 56 }}>
+                <img src={LOGO.vertical} alt="On Signature Gradient" style={{ maxHeight: 124, width: 'auto', filter: 'brightness(0) invert(1)' }} />
               </div>
-              <div className="logo-card-label" style={{ marginTop: 10 }}>Signal Teal · #14B8A6</div>
+              <div className="logo-card-label" style={{ marginTop: 10 }}>Signature Gradient · Logo in Fog White #F8FAFC</div>
             </div>
             <div>
               <div className="logo-card logo-card--dark" style={{ aspectRatio: '16/10', padding: 56 }}>
@@ -370,10 +443,7 @@ export default function BrandIdentity() {
           </div>
 
           {/* Clear space */}
-          <h3 className="reveal" style={{ fontSize: 22, fontWeight: 700, marginTop: 96, color: 'var(--midnight)' }}>Clear Space &amp; Scaling Rules</h3>
-          <p className="reveal" style={{ fontSize: 15, color: 'var(--text-muted)', marginTop: 12, maxWidth: 640, lineHeight: 1.7 }}>
-            The mark must breathe. Reserve a minimum clear space equal to the height of the icon on every side. Never rotate, recolor, or distort the lockup.
-          </p>
+          <h3 className="reveal" style={{ fontSize: 22, fontWeight: 700, marginTop: 96, color: 'var(--midnight)' }}>Clear Space &amp; Scaling</h3>
           <div style={{ display: 'flex', gap: 32, marginTop: 32, flexWrap: 'wrap' }} className="reveal">
             <div className="check check--ok"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>Respect clear space</div>
             <div className="check check--ok"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>Min digital: 24px</div>
@@ -388,11 +458,8 @@ export default function BrandIdentity() {
       <section className="bi-section text-section" id="colors">
         <div className="bi-container">
           <div className="reveal">
-            <div className="section-label">Color System</div>
-            <h2 className="section-title">A palette engineered for trust and signal.</h2>
-            <p className="section-subtitle">
-              Three primary tones define the NormSafety executive identity. Five secondary tones drive UI states, risk heatmaps, and compliance workflows.
-            </p>
+            <div className="section-label">Color</div>
+            <h2 className="section-title">A palette for trust and signal.</h2>
           </div>
 
           {/* Primary */}
@@ -400,45 +467,52 @@ export default function BrandIdentity() {
             <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '.14em', textTransform: 'uppercase' }}>Primary</h3>
           </div>
           <div className="color-grid stagger">
-            <div className="color-card">
+            <button type="button" className="color-card" onClick={() => copyHex('#0B1535')}>
               <div className="color-swatch" style={{ background: '#0B1535' }}><span className="color-swatch-hex">#0B1535</span></div>
               <div className="color-info">
                 <div className="color-name">Core Midnight</div>
                 <div className="color-hex">#0B1535</div>
                 <div className="color-role">Executive trust, governance, enterprise authority. Our primary surface.</div>
               </div>
-            </div>
-            <div className="color-card">
+            </button>
+            <button type="button" className="color-card" onClick={() => copyHex('#14B8A6')}>
               <div className="color-swatch" style={{ background: '#14B8A6' }}><span className="color-swatch-hex">#14B8A6</span></div>
               <div className="color-info">
                 <div className="color-name">Signal Teal</div>
                 <div className="color-hex">#14B8A6</div>
                 <div className="color-role">AI intelligence, live signal, action. The connective tissue of the brand.</div>
               </div>
-            </div>
-            <div className="color-card">
+            </button>
+            <button type="button" className="color-card" onClick={() => copyHex('#B8FF2C')}>
               <div className="color-swatch" style={{ background: '#B8FF2C' }}><span className="color-swatch-hex color-swatch-hex--dark">#B8FF2C</span></div>
               <div className="color-info">
                 <div className="color-name">AI Lime</div>
                 <div className="color-hex">#B8FF2C</div>
                 <div className="color-role">Premium signal accent. Used sparingly — only for moments of AI insight.</div>
               </div>
-            </div>
+            </button>
           </div>
 
           {/* Secondary — UI & State */}
           <div className="reveal" style={{ marginTop: 72 }}>
             <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '.14em', textTransform: 'uppercase' }}>Secondary — UI &amp; State</h3>
-            <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.65, marginTop: 10, maxWidth: 620 }}>
-              Functional accents reserved for UI states, compliance workflows, risk heatmaps, and dashboard KPIs. Never used for brand surfaces.
-            </p>
           </div>
           <div className="color-grid-sm stagger" style={{ marginTop: 20 }}>
-            <div className="color-chip"><div className="color-chip-sw" style={{ background: '#1D4ED8' }}></div><div className="color-chip-info"><div className="color-chip-name">Compliance Blue</div><div className="color-chip-hex">#1D4ED8</div></div></div>
-            <div className="color-chip"><div className="color-chip-sw" style={{ background: '#64748B' }}></div><div className="color-chip-info"><div className="color-chip-name">Slate Steel</div><div className="color-chip-hex">#64748B</div></div></div>
-            <div className="color-chip"><div className="color-chip-sw" style={{ background: '#34D399' }}></div><div className="color-chip-info"><div className="color-chip-name">Health Mint</div><div className="color-chip-hex">#34D399</div></div></div>
-            <div className="color-chip"><div className="color-chip-sw" style={{ background: '#F59E0B' }}></div><div className="color-chip-info"><div className="color-chip-name">Risk Amber</div><div className="color-chip-hex">#F59E0B</div></div></div>
-            <div className="color-chip"><div className="color-chip-sw" style={{ background: '#EF4444' }}></div><div className="color-chip-info"><div className="color-chip-name">Critical Coral</div><div className="color-chip-hex">#EF4444</div></div></div>
+            {[
+              { hex: '#1D4ED8', name: 'Compliance Blue' },
+              { hex: '#64748B', name: 'Slate Steel' },
+              { hex: '#34D399', name: 'Health Mint' },
+              { hex: '#F59E0B', name: 'Risk Amber' },
+              { hex: '#EF4444', name: 'Critical Coral' },
+            ].map((c) => (
+              <button key={c.hex} type="button" className="color-chip" onClick={() => copyHex(c.hex)}>
+                <div className="color-chip-sw" style={{ background: c.hex }}></div>
+                <div className="color-chip-info">
+                  <div className="color-chip-name">{c.name}</div>
+                  <div className="color-chip-hex">{c.hex}</div>
+                </div>
+              </button>
+            ))}
           </div>
 
           {/* Neutral */}
@@ -446,17 +520,20 @@ export default function BrandIdentity() {
             <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '.14em', textTransform: 'uppercase' }}>Neutral</h3>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16, marginTop: 20 }} className="stagger">
-            <div className="color-chip"><div className="color-chip-sw" style={{ background: '#F8FAFC', borderBottom: '1px solid var(--border)' }}></div><div className="color-chip-info"><div className="color-chip-name">Fog White</div><div className="color-chip-hex">#F8FAFC</div></div></div>
-            <div className="color-chip"><div className="color-chip-sw" style={{ background: '#111827' }}></div><div className="color-chip-info"><div className="color-chip-name">Deep Text</div><div className="color-chip-hex">#111827</div></div></div>
+            <button type="button" className="color-chip" onClick={() => copyHex('#F8FAFC')}>
+              <div className="color-chip-sw" style={{ background: '#F8FAFC', borderBottom: '1px solid var(--border)' }}></div>
+              <div className="color-chip-info"><div className="color-chip-name">Fog White</div><div className="color-chip-hex">#F8FAFC</div></div>
+            </button>
+            <button type="button" className="color-chip" onClick={() => copyHex('#111827')}>
+              <div className="color-chip-sw" style={{ background: '#111827' }}></div>
+              <div className="color-chip-info"><div className="color-chip-name">Deep Text</div><div className="color-chip-hex">#111827</div></div>
+            </button>
           </div>
 
           {/* Signature gradient */}
           <div className="reveal" style={{ marginTop: 96 }}>
             <div className="section-label">Signature Gradient</div>
             <h3 style={{ fontSize: 'clamp(22px, 2.6vw, 30px)', fontWeight: 700, letterSpacing: '-.02em', color: 'var(--midnight)' }}>Midnight to Signal.</h3>
-            <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginTop: 12, maxWidth: 560 }}>
-              The NormSafety signature gradient flows from enterprise governance (Midnight) into AI intelligence (Signal Teal). Used for hero surfaces, data visualizations, and premium moments only.
-            </p>
           </div>
           <div className="reveal" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
             <div style={{ height: 140, borderRadius: 16, background: 'linear-gradient(135deg, #0B1535, #14B8A6)' }}></div>
@@ -476,10 +553,7 @@ export default function BrandIdentity() {
         <div className="bi-container">
           <div className="reveal">
             <div className="section-label">Typography</div>
-            <h2 className="section-title">Bilingual by design. Enterprise by discipline.</h2>
-            <p className="section-subtitle">
-              A dual-script system: <strong>Sora</strong> for Latin, <strong>IBM Plex Sans Arabic</strong> for Arabic — with <strong>Meral Sans</strong> as a premium editorial accent for hero Arabic moments.
-            </p>
+            <h2 className="section-title">Bilingual by design.</h2>
           </div>
 
           {/* Sora specimen */}
@@ -511,17 +585,6 @@ export default function BrandIdentity() {
             </div>
           </div>
 
-          {/* Meral Sans accent */}
-          <div className="type-specimen reveal" style={{ marginTop: 32 }}>
-            <div className="type-name">Meral Sans — Premium Arabic Editorial Accent</div>
-            <div className="type-alphabet" style={{ fontFamily: "'Meral Sans', sans-serif", direction: 'rtl' as const }}>
-              الوقاية الذكية
-            </div>
-            <div style={{ fontSize: 14, color: 'var(--text-muted)', marginTop: 8, fontStyle: 'italic' }}>
-              Reserved for hero Arabic titles and cover treatments only.
-            </div>
-          </div>
-
           {/* Type scale */}
           <div className="type-scale reveal" style={{ marginTop: 64 }}>
             <div className="type-scale-row">
@@ -546,7 +609,7 @@ export default function BrandIdentity() {
             </div>
             <div className="type-scale-row">
               <div className="type-scale-label">Caption</div>
-              <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-light)', letterSpacing: '.14em', textTransform: 'uppercase' }}>NormSafety · Brand System · 2026</div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-light)', letterSpacing: '.14em', textTransform: 'uppercase' }}>NormSafety · Brand Guidelines · 2026</div>
             </div>
           </div>
         </div>
@@ -558,41 +621,35 @@ export default function BrandIdentity() {
           <div className="reveal">
             <div className="section-label">Visual Language</div>
             <h2 className="section-title">Modular. Structural. Signal-driven.</h2>
-            <p className="section-subtitle">
-              The NormSafety visual system is built like the product itself — modular cards, precise grids, live data accents, and an AI signal layer.
-            </p>
           </div>
           <div className="feature-grid stagger">
-            <div className="feature-card">
+            <TiltCard className="feature-card">
               <div className="feature-icon feature-icon--teal">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5" /><rect x="14" y="3" width="7" height="5" rx="1.5" /><rect x="14" y="12" width="7" height="9" rx="1.5" /><rect x="3" y="16" width="7" height="5" rx="1.5" /></svg>
               </div>
               <div className="feature-title">Modular Dashboards</div>
-              <div className="feature-desc">Grid-native cards, composable KPIs, and editorial whitespace. Built to scale across product and presentation.</div>
-            </div>
-            <div className="feature-card">
+              <div className="feature-desc">Grid-native cards. Composable KPIs.</div>
+            </TiltCard>
+            <TiltCard className="feature-card">
               <div className="feature-icon feature-icon--blue">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18" /><path d="M7 14l4-4 4 4 5-7" /></svg>
               </div>
               <div className="feature-title">Predictive Data Viz</div>
-              <div className="feature-desc">Clean lines, risk heatmaps, signal pulses. Charts that executives trust and operators can act on.</div>
-            </div>
-            <div className="feature-card">
+              <div className="feature-desc">Risk heatmaps and signal pulses.</div>
+            </TiltCard>
+            <TiltCard className="feature-card">
               <div className="feature-icon feature-icon--midnight">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L3 7v6c0 5 4 9 9 9s9-4 9-9V7z" /><path d="M9 12l2 2 4-4" /></svg>
               </div>
               <div className="feature-title">Governance Surfaces</div>
-              <div className="feature-desc">Dark mode-first executive views. Signal-over-decoration. Authority made legible.</div>
-            </div>
+              <div className="feature-desc">Dark-mode-first executive views.</div>
+            </TiltCard>
           </div>
 
           {/* Iconography */}
           <div className="reveal" style={{ marginTop: 96 }}>
             <div className="section-label">Iconography</div>
-            <h3 style={{ fontSize: 'clamp(22px, 2.6vw, 32px)', fontWeight: 700, letterSpacing: '-.02em', color: 'var(--midnight)' }}>A precise icon system for every surface.</h3>
-            <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginTop: 12, maxWidth: 620 }}>
-              1.5px stroke. Round caps. Built on a 24px grid. Every icon is engineered for dashboards, executive reports, mobile apps, and enterprise slide decks.
-            </p>
+            <h3 style={{ fontSize: 'clamp(22px, 2.6vw, 32px)', fontWeight: 700, letterSpacing: '-.02em', color: 'var(--midnight)' }}>1.5px stroke. 24px grid.</h3>
           </div>
           <div className="icon-grid stagger" style={{ marginTop: 40 }}>
             <div className="icon-card">
@@ -651,16 +708,16 @@ export default function BrandIdentity() {
       <section className="bi-section text-section--alt">
         <div className="bi-container">
           <div className="reveal">
-            <div className="section-label">Design Principles</div>
-            <h2 className="section-title">Clarity over cleverness. Signal over decoration.</h2>
+            <div className="section-label">Principles</div>
+            <h2 className="section-title">Clarity over cleverness.</h2>
           </div>
           <div className="bi-principles stagger">
-            <div className="bi-principle"><div className="principle-num">01</div><div><div className="principle-title">Executive Clarity</div><div className="principle-desc">Every pixel earns its place. No ornament. No marketing fluff. Built for decision-makers who need answers in seconds.</div></div></div>
-            <div className="bi-principle"><div className="principle-num">02</div><div><div className="principle-title">8-Point Grid</div><div className="principle-desc">All spacing and sizing on an 8px rhythm. Enterprise-grade consistency across every surface.</div></div></div>
-            <div className="bi-principle"><div className="principle-num">03</div><div><div className="principle-title">AI Signal Discipline</div><div className="principle-desc">AI Lime is reserved. Signal Teal is active. Midnight governs. Every accent means something.</div></div></div>
-            <div className="bi-principle"><div className="principle-num">04</div><div><div className="principle-title">WCAG 2.1 AA Native</div><div className="principle-desc">Accessible color contrast, 44px touch targets, 2px focus rings. Built for global enterprise deployment.</div></div></div>
-            <div className="bi-principle"><div className="principle-num">05</div><div><div className="principle-title">Bilingual Parity</div><div className="principle-desc">English and Arabic treated as first-class citizens. Mirrored layouts, balanced type weights, culturally-aware spacing.</div></div></div>
-            <div className="bi-principle"><div className="principle-num">06</div><div><div className="principle-title">Dark-Mode First</div><div className="principle-desc">Executive dashboards live in dark surfaces. Light mode is an adaptation, not the default.</div></div></div>
+            <div className="bi-principle"><div className="principle-num">01</div><div><div className="principle-title">Executive Clarity</div><div className="principle-desc">Every pixel earns its place.</div></div></div>
+            <div className="bi-principle"><div className="principle-num">02</div><div><div className="principle-title">8-Point Grid</div><div className="principle-desc">All spacing on an 8px rhythm.</div></div></div>
+            <div className="bi-principle"><div className="principle-num">03</div><div><div className="principle-title">Signal Discipline</div><div className="principle-desc">AI Lime reserved. Teal active. Midnight governs.</div></div></div>
+            <div className="bi-principle"><div className="principle-num">04</div><div><div className="principle-title">WCAG 2.1 AA</div><div className="principle-desc">Accessible contrast. 44px targets. 2px focus rings.</div></div></div>
+            <div className="bi-principle"><div className="principle-num">05</div><div><div className="principle-title">Bilingual Parity</div><div className="principle-desc">English and Arabic as first-class citizens.</div></div></div>
+            <div className="bi-principle"><div className="principle-num">06</div><div><div className="principle-title">Dark-Mode First</div><div className="principle-desc">Executive views live in dark surfaces.</div></div></div>
           </div>
         </div>
       </section>
@@ -669,34 +726,27 @@ export default function BrandIdentity() {
       <section className="bi-section text-section" id="voice">
         <div className="bi-container">
           <div className="reveal">
-            <div className="section-label">Brand Voice</div>
+            <div className="section-label">Voice</div>
             <h2 className="section-title">Executive. Visionary. Strategic.</h2>
-            <p className="section-subtitle">
-              NormSafety speaks like a trusted advisor to the C-suite — measured, informed, and always anchored in evidence.
-            </p>
           </div>
           <div className="voice-grid stagger">
             <div className="voice-card">
               <div className="voice-attr" style={{ color: 'var(--teal)' }}>Executive</div>
-              <div className="voice-example">Board-ready language. No jargon. Every claim is a number.</div>
               <div className="voice-do">{'\u2713'} "CAPA closure improved 32% after AI triage deployment."</div>
               <div className="voice-dont">{'\u2717'} "Our amazing new tool supercharges safety!"</div>
             </div>
             <div className="voice-card">
               <div className="voice-attr" style={{ color: 'var(--compliance)' }}>Visionary</div>
-              <div className="voice-example">Frame the shift — from reactive HSE to predictive intelligence.</div>
               <div className="voice-do">{'\u2713'} "The next decade of safety is predictive, not reactive."</div>
               <div className="voice-dont">{'\u2717'} "Revolutionary disruption of the safety industry."</div>
             </div>
             <div className="voice-card">
               <div className="voice-attr" style={{ color: 'var(--midnight)' }}>Strategic</div>
-              <div className="voice-example">Speak to operational outcomes, not features.</div>
               <div className="voice-do">{'\u2713'} "Centralize SST data. Anticipate risk. Elevate performance."</div>
               <div className="voice-dont">{'\u2717'} "Our platform has dozens of advanced features."</div>
             </div>
             <div className="voice-card">
               <div className="voice-attr" style={{ color: 'var(--teal-dark)' }}>Trustworthy</div>
-              <div className="voice-example">Evidence over enthusiasm. Always.</div>
               <div className="voice-do">{'\u2713'} "ISO 45001 aligned. SOC 2 Type II. Enterprise-grade governance."</div>
               <div className="voice-dont">{'\u2717'} "Trust us — it's the best tool out there."</div>
             </div>
@@ -705,7 +755,6 @@ export default function BrandIdentity() {
           {/* Messaging bars */}
           <div className="reveal" style={{ marginTop: 96 }}>
             <div className="section-label">Key Messages</div>
-            <h3 style={{ fontSize: 'clamp(22px, 2.6vw, 32px)', fontWeight: 700, letterSpacing: '-.02em', color: 'var(--midnight)' }}>Anchors by audience.</h3>
           </div>
           <div style={{ marginTop: 40, display: 'grid', gap: 14 }} className="stagger">
             <div className="msg-bar" style={{ background: 'var(--teal-light)' }}>
@@ -733,10 +782,7 @@ export default function BrandIdentity() {
         <div className="bi-container">
           <div className="reveal">
             <div className="section-label">Applications</div>
-            <h2 className="section-title">The brand in the real world.</h2>
-            <p className="section-subtitle">
-              Enterprise dashboards, executive reports, factory-floor tablets, compliance workflows, trade-show rollups, LinkedIn banners, business cards, and mobile app icons — one unified system.
-            </p>
+            <h2 className="section-title">The identity in the real world.</h2>
           </div>
           <div className="mockup-gallery stagger">
             <MockupPlaceholder label="Executive Dashboard" />
@@ -756,8 +802,7 @@ export default function BrandIdentity() {
         <div className="bi-container">
           <div className="reveal">
             <div className="section-label">Deliverables</div>
-            <h2 className="section-title">Everything in the NormSafety masterbrand system.</h2>
-            <p className="section-subtitle">A complete, enterprise-ready identity — built for global sales, pilots, tenders, and investor rooms.</p>
+            <h2 className="section-title">The complete identity.</h2>
           </div>
 
           <div className="deliv-grid stagger">
@@ -796,35 +841,32 @@ export default function BrandIdentity() {
       <section className="bi-section text-section--alt">
         <div className="bi-container">
           <div className="reveal">
-            <div className="section-label">Next Steps</div>
-            <h2 className="section-title">From identity to enterprise deployment.</h2>
-            <p className="section-subtitle">
-              The NormSafety brand system is ready for investor meetings, client demos, government tenders, corporate pilots, ISO / ESG proposals, and international trade shows.
-            </p>
+            <div className="section-label">Rollout</div>
+            <h2 className="section-title">Enterprise rollout.</h2>
           </div>
 
           <div className="feature-grid stagger" style={{ marginTop: 64 }}>
-            <div className="feature-card">
+            <TiltCard className="feature-card">
               <div className="feature-icon feature-icon--teal">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20M2 12h20" /></svg>
               </div>
-              <div className="feature-title">01 · Masterbrand Lock</div>
-              <div className="feature-desc">Finalize logo system, clear-space rules, and master file delivery.</div>
-            </div>
-            <div className="feature-card">
+              <div className="feature-title">01 · Masterbrand</div>
+              <div className="feature-desc">Logo system, clear-space rules, master files.</div>
+            </TiltCard>
+            <TiltCard className="feature-card">
               <div className="feature-icon feature-icon--blue">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 9h6v6H9z" /></svg>
               </div>
-              <div className="feature-title">02 · Product UI System</div>
-              <div className="feature-desc">Extend the brand into the NormSafety application — tokens, components, dashboards.</div>
-            </div>
-            <div className="feature-card">
+              <div className="feature-title">02 · Product UI</div>
+              <div className="feature-desc">Tokens, components, dashboards.</div>
+            </TiltCard>
+            <TiltCard className="feature-card">
               <div className="feature-icon feature-icon--midnight">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h20v14H2z" /><path d="M8 21h8M12 17v4" /></svg>
               </div>
-              <div className="feature-title">03 · Go-to-Market Kit</div>
-              <div className="feature-desc">Pitch deck, sales collateral, pilot proposals, ISO / tender templates, investor deck.</div>
-            </div>
+              <div className="feature-title">03 · Go-to-Market</div>
+              <div className="feature-desc">Decks, collateral, tender templates.</div>
+            </TiltCard>
           </div>
         </div>
       </section>
@@ -840,7 +882,7 @@ export default function BrandIdentity() {
             <br />
             Performer.
           </h2>
-          <p className="closing-sub reveal">NormSafety · AI-Powered Prevention Intelligence · 2026</p>
+          <p className="closing-sub reveal">NormSafety · Prevention Intelligence · 2026</p>
         </div>
       </section>
 
@@ -859,7 +901,7 @@ export default function BrandIdentity() {
               <span>areencubs@gmail.com</span>
             </div>
           </div>
-          <div className="footer-bottom">NormSafety Brand Identity System · 2026 · Confidential</div>
+          <div className="footer-bottom">NormSafety Brand Identity Guidelines · 2026 · Confidential</div>
         </div>
       </footer>
     </>

@@ -201,7 +201,7 @@ export default function BrandIdentity() {
           <h1 className="hero-title">
             <span className="accent">Prevention</span>
             <br />
-            Intelligence System
+            <span className="hero-title-nowrap">Intelligence System</span>
           </h1>
           <p className="hero-subtitle">
             The visual and verbal system of NormSafety — enterprise AI for workplace safety, compliance, and prevention.

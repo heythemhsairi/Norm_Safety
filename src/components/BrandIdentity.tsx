@@ -361,31 +361,27 @@ export default function BrandIdentity() {
           </div>
 
           {/* Symbol meaning */}
-          <div className="bi-split" style={{ marginTop: 96 }}>
-            <div className="split-visual split-visual--logo reveal-left">
+          <div className="symbol-architecture reveal" style={{ marginTop: 96 }}>
+            <h3 className="symbol-architecture-title">The architecture of intelligence.</h3>
+            <div className="split-visual split-visual--logo symbol-architecture-visual">
               <img src={LOGO.icon} alt="NormSafety Icon" />
             </div>
-            <div className="reveal-right">
-              <h3 style={{ fontSize: 'clamp(22px, 2.6vw, 32px)', fontWeight: 700, letterSpacing: '-.02em', color: 'var(--midnight)', marginBottom: 24 }}>
-                The architecture of intelligence.
-              </h3>
-              <div className="symbol-meanings stagger">
-                <div className="meaning-item">
-                  <div className="meaning-label"><span className="meaning-dot" style={{ background: '#0B1535' }}></span>The Core</div>
-                  <div className="meaning-desc">The N — intelligence engine where prevention, compliance, and performance converge.</div>
-                </div>
-                <div className="meaning-item">
-                  <div className="meaning-label"><span className="meaning-dot" style={{ background: '#14B8A6' }}></span>The Pillars</div>
-                  <div className="meaning-desc">Detect, analyze, act, optimize — the four anchors of the prevention cycle.</div>
-                </div>
-                <div className="meaning-item">
-                  <div className="meaning-label"><span className="meaning-dot" style={{ background: '#B8FF2C' }}></span>The Framework</div>
-                  <div className="meaning-desc">Governance, compliance boundaries, and enterprise discipline.</div>
-                </div>
-                <div className="meaning-item">
-                  <div className="meaning-label"><span className="meaning-dot" style={{ background: '#0D9488' }}></span>The Balance</div>
-                  <div className="meaning-desc">Symmetry and precision — the signature of trust and control.</div>
-                </div>
+            <div className="symbol-meanings stagger">
+              <div className="meaning-item">
+                <div className="meaning-label"><span className="meaning-dot" style={{ background: '#0B1535' }}></span>The Core</div>
+                <div className="meaning-desc">The N — intelligence engine where prevention, compliance, and performance converge.</div>
+              </div>
+              <div className="meaning-item">
+                <div className="meaning-label"><span className="meaning-dot" style={{ background: '#14B8A6' }}></span>The Pillars</div>
+                <div className="meaning-desc">Detect, analyze, act, optimize — the four anchors of the prevention cycle.</div>
+              </div>
+              <div className="meaning-item">
+                <div className="meaning-label"><span className="meaning-dot" style={{ background: '#B8FF2C' }}></span>The Framework</div>
+                <div className="meaning-desc">Governance, compliance boundaries, and enterprise discipline.</div>
+              </div>
+              <div className="meaning-item">
+                <div className="meaning-label"><span className="meaning-dot" style={{ background: '#0D9488' }}></span>The Balance</div>
+                <div className="meaning-desc">Symmetry and precision — the signature of trust and control.</div>
               </div>
             </div>
           </div>

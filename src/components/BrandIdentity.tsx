@@ -798,18 +798,23 @@ export default function BrandIdentity() {
           </div>
           <div className="mockup-gallery stagger">
             <MockupHover
+              srcA="/assets/mockups/normsafety-flyer-a.png"
+              srcB="/assets/mockups/normsafety-flyer-b.png"
+              label="A4 Poster"
+            />
+            <MockupHover
+              srcA="/assets/mockups/normsafety-businesscard-a.png"
+              srcB="/assets/mockups/normsafety-businesscard-b.png"
+              label="Business Card"
+            />
+            <MockupHover
               srcA="/assets/mockups/normsafety-keychain-a.png"
               srcB="/assets/mockups/normsafety-keychain-b.png"
-              label="Strap Keychain · Hover"
+              label="Strap Keychain"
             />
             <MockupSingle
               src="/assets/mockups/normsafety-stamp.png"
               label="Wooden Stamp"
-            />
-            <MockupHover
-              srcA="/assets/mockups/normsafety-flyer-a.png"
-              srcB="/assets/mockups/normsafety-flyer-b.png"
-              label="A4 Flyer · Hover"
             />
           </div>
         </div>

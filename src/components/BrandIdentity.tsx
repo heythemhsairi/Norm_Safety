@@ -808,6 +808,16 @@ export default function BrandIdentity() {
               label="Business Card"
             />
             <MockupHover
+              srcA="/assets/mockups/normsafety-signboard-a.png"
+              srcB="/assets/mockups/normsafety-signboard-b.png"
+              label="Signboard"
+            />
+            <MockupHover
+              srcA="/assets/mockups/normsafety-sticker-a.png"
+              srcB="/assets/mockups/normsafety-sticker-b.png"
+              label="Sticker"
+            />
+            <MockupHover
               srcA="/assets/mockups/normsafety-keychain-a.png"
               srcB="/assets/mockups/normsafety-keychain-b.png"
               label="Strap Keychain"

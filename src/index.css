@@ -311,10 +311,8 @@ a { color: inherit; text-decoration: none; }
 
 /* Mockup Gallery */
 .mockup-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 64px; }
-.mockup-gallery > :nth-child(1) { grid-column: span 2; }
+.mockup-gallery > :nth-child(1),
 .mockup-gallery > :nth-child(2) { grid-column: span 2; }
-.mockup-gallery > :nth-child(3) { grid-column: 2 / span 1; }
-.mockup-gallery > :nth-child(4) { grid-column: 3 / span 1; }
 .mockup-card { position: relative; }
 .mockup-img-wrap {
   position: relative;
@@ -504,8 +502,7 @@ button.color-chip { padding: 0; border: 1px solid var(--border); width: 100%; di
   .stats-row, .kpi-grid { grid-template-columns: repeat(2, 1fr); }
   .color-grid, .feature-grid, .logo-grid, .logo-variations-grid, .logo-bg-grid, .symbol-meanings, .voice-grid, .audience-grid, .deliv-grid { grid-template-columns: 1fr; }
   .mockup-gallery { grid-template-columns: repeat(2, 1fr); }
-  .mockup-gallery > :nth-child(1), .mockup-gallery > :nth-child(2),
-  .mockup-gallery > :nth-child(3), .mockup-gallery > :nth-child(4) { grid-column: auto; }
+  .mockup-gallery > * { grid-column: auto; }
   .icon-grid { grid-template-columns: repeat(4, 1fr); }
   .color-grid-sm { grid-template-columns: repeat(2, 1fr); }
   .comp-strip { grid-template-columns: repeat(3, 1fr); }

@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>NormSafety — LinkedIn Carousel · 3 slides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary-deep:#082C78;
+    --primary-mid:#19539D;
+    --accent-cyan:#5EE7FF;
+    --accent-soft:#A8C4F5;
+    --white:#FFFFFF;
+    --glass-fill:rgba(255,255,255,.06);
+    --glass-stroke:rgba(255,255,255,.20);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#0a0f1f;font-family:'Inter',sans-serif;color:#fff}
+  body{display:flex;flex-direction:column;align-items:center;gap:48px;padding:48px 24px}
+
+  .toolbar{
+    position:sticky;top:16px;z-index:50;
+    display:flex;gap:12px;align-items:center;
+    background:rgba(15,22,45,.85);backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.1);border-radius:16px;
+    padding:12px 18px;font-size:13px;
+  }
+  .toolbar button{
+    background:#5EE7FF;color:#082C78;border:0;border-radius:8px;
+    padding:8px 14px;font-weight:600;cursor:pointer;font-family:inherit;
+  }
+  .toolbar button.secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2)}
+  .toolbar span{color:#A8C4F5;font-size:12px}
+
+  /* slide canvas */
+  .slide{
+    position:relative;
+    width:1080px;height:1350px;
+    border-radius:8px;overflow:hidden;
+    background:
+      radial-gradient(120% 80% at 100% 0%, rgba(94,231,255,.18) 0%, rgba(94,231,255,0) 55%),
+      radial-gradient(80% 60% at 0% 100%, rgba(25,83,157,.55) 0%, rgba(25,83,157,0) 60%),
+      linear-gradient(135deg, #19539D 0%, #0E3F8C 45%, #082C78 100%);
+    color:#fff;font-family:'Inter',sans-serif;
+    box-shadow:0 30px 80px rgba(0,0,0,.5);
+    isolation:isolate;
+  }
+  .slide::before{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size:24px 24px;opacity:.5;
+    mask-image:radial-gradient(ellipse at center, #000 30%, transparent 80%);
+    pointer-events:none;z-index:0;
+  }
+  .slide > *{position:relative;z-index:1}
+
+  /* top bar */
+  .topbar{
+    position:absolute;top:64px;left:64px;right:64px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:14px;letter-spacing:.18em;text-transform:uppercase;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-weight:600;color:#fff}
+  .logo-mark{width:22px;height:22px}
+  .counter{font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,.55);letter-spacing:.1em;font-size:12px}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    color:var(--accent-cyan);font-weight:500;font-size:12px;
+    letter-spacing:.22em;text-transform:uppercase;
+  }
+  .eyebrow::before{content:"";width:24px;height:1px;background:var(--accent-cyan)}
+  .divider{width:64px;height:2px;background:var(--accent-cyan);border-radius:2px}
+
+  .next-arrow{
+    position:absolute;bottom:64px;right:64px;
+    width:48px;height:48px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.25);
+    display:grid;place-items:center;color:var(--accent-cyan);
+  }
+
+  .glass{
+    background:var(--glass-fill);
+    border:1px solid var(--glass-stroke);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border-radius:24px;
+  }
+
+  /* ============ SLIDE 1 — HOOK + PROBLEM ============ */
+  .s1-content{position:absolute;left:64px;right:64px;top:200px}
+  .s1-title{
+    font-family:'Sora',sans-serif;font-weight:600;
+    font-size:62px;line-height:1.08;letter-spacing:-.02em;
+    margin-top:32px;max-width:920px;
+  }
+  .s1-title em{font-style:normal;color:var(--accent-cyan)}
+  .s1-divider{margin:36px 0 32px}
+  .s1-leadin{
+    font-family:'Inter',sans-serif;font-weight:500;
+    font-size:20px;color:var(--accent-soft);margin-bottom:32px;
+  }
+  .s1-bullets{
+    width:952px;border-radius:24px;
+    overflow:hidden;
+  }
+  .s1-row{
+    display:flex;align-items:center;gap:24px;
+    padding:28px 32px;
+    border-bottom:1px solid rgba(255,255,255,.10);
+  }
+  .s1-row:last-child{border-bottom:0}
+  .s1-row-icon{
+    width:48px;height:48px;border-radius:12px;
+    background:rgba(94,231,255,.10);border:1px solid rgba(94,231,255,.35);
+    display:grid;place-items:center;color:var(--accent-cyan);flex-shrink:0;
+  }
+  .s1-row-text{
+    font-family:'Sora',sans-serif;font-weight:500;font-size:22px;color:#fff;
+  }
+  .s1-row-num{
+    margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:rgba(255,255,255,.4);letter-spacing:.18em;
+  }
+
+  .s1-bg-nodes{
+    position:absolute;right:60px;bottom:140px;
+    width:320px;height:240px;opacity:.35;
+  }
+
+  /* ============ SLIDE 2 — SOLUTION ============ */
+  .s2-left{position:absolute;left:64px;top:200px;width:440px}
+  .s2-title{
+    font-family:'Sora',sans-serif;font-weight:600;
+    font-size:46px;line-height:1.08;letter-spacing:-.015em;
+    margin-top:28px;
+  }
+  .s2-title em{font-style:normal;color:var(--accent-cyan)}
+  .s2-divider{margin:32px 0}
+  .s2-body{font-size:17px;color:var(--accent-soft);line-height:1.55;margin-bottom:48px}
+
+  .s2-target-label{
+    font-family:'Inter',sans-serif;font-weight:500;
+    font-size:11px;color:var(--accent-soft);letter-spacing:.22em;text-transform:uppercase;
+    margin-bottom:18px;display:flex;align-items:center;gap:10px;
+  }
+  .s2-target-label::before{content:"";width:24px;height:1px;background:var(--accent-soft)}
+  .s2-pills{display:flex;flex-direction:column;gap:12px}
+  .s2-pill{
+    display:flex;align-items:center;gap:14px;
+    background:var(--glass-fill);border:1px solid var(--glass-stroke);
+    backdrop-filter:blur(8px);
+    border-radius:14px;padding:16px 20px;
+    font-family:'Inter',sans-serif;font-weight:600;font-size:15px;
+  }
+  .s2-pill svg{color:var(--accent-cyan);flex-shrink:0}
+
+  .s2-dashboard{
+    position:absolute;right:64px;top:200px;
+    width:512px;height:950px;
+    padding:32px;
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .s2-dash-head{display:flex;justify-content:space-between;align-items:center}
+  .s2-dash-title{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:11px;
+    color:rgba(255,255,255,.55);letter-spacing:.22em;text-transform:uppercase;
+  }
+  .s2-dots{display:flex;gap:6px}
+  .s2-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2)}
+
+  .s2-tile{
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;padding:24px;
+  }
+  .s2-tile-label{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.22em;text-transform:uppercase;font-weight:600}
+  .s2-kpi-value{font-family:'Sora',sans-serif;font-weight:600;font-size:64px;color:#fff;margin-top:8px;line-height:1}
+  .s2-kpi-value em{font-style:normal;font-size:30px;color:var(--accent-cyan);margin-left:8px}
+  .s2-kpi-trend{font-size:12px;color:var(--accent-cyan);margin-top:14px;display:flex;align-items:center;gap:8px}
+
+  .s2-bars{display:flex;align-items:flex-end;gap:14px;height:130px;margin-top:14px}
+  .s2-bars > div{flex:1;border-radius:6px 6px 0 0;background:rgba(168,196,245,.25)}
+  .s2-bars > div.active{background:linear-gradient(180deg,#5EE7FF 0%,#19539D 100%)}
+
+  .s2-line{height:90px;margin-top:14px}
+
+  .s2-flow-line{
+    position:absolute;
+    top:540px;left:464px;width:120px;height:1px;
+    background:repeating-linear-gradient(90deg,var(--accent-cyan) 0 6px,transparent 6px 12px);
+    opacity:.5;
+  }
+
+  /* ============ SLIDE 3 — VALUE + CTA ============ */
+  .s3-head{position:absolute;left:64px;right:64px;top:180px}
+  .s3-title{
+    font-family:'Sora',sans-serif;font-weight:600;
+    font-size:48px;line-height:1.1;letter-spacing:-.015em;
+    margin-top:28px;
+  }
+  .s3-title em{font-style:normal;color:var(--accent-cyan)}
+  .s3-divider{margin-top:32px}
+
+  .s3-pillars-wrap{position:absolute;left:64px;right:64px;top:480px}
+  .s3-pillars-label{
+    font-family:'Inter',sans-serif;font-weight:500;
+    font-size:13px;color:var(--accent-soft);letter-spacing:.22em;text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  .s3-pillars{
+    display:grid;grid-template-columns:1fr 1fr;gap:16px;
+  }
+  .s3-pillar{
+    background:var(--glass-fill);border:1px solid var(--glass-stroke);
+    backdrop-filter:blur(8px);
+    border-radius:16px;padding:20px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    height:96px;
+  }
+  .s3-pillar-num{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:var(--accent-cyan);letter-spacing:.18em;
+  }
+  .s3-pillar-label{
+    font-family:'Sora',sans-serif;font-weight:500;font-size:20px;color:#fff;line-height:1.15;
+  }
+  .s3-pillar-icon{
+    width:40px;height:40px;border-radius:10px;
+    background:rgba(94,231,255,.12);border:1px solid rgba(94,231,255,.3);
+    display:grid;place-items:center;color:var(--accent-cyan);flex-shrink:0;
+  }
+
+  /* CTA */
+  .s3-cta{
+    position:absolute;left:64px;right:64px;top:780px;
+    padding:36px;
+    border:1px solid rgba(94,231,255,.4);
+    border-radius:24px;
+    background:linear-gradient(135deg, rgba(94,231,255,.08) 0%, rgba(255,255,255,.04) 100%);
+    backdrop-filter:blur(8px);
+  }
+  .s3-cta-row{
+    display:flex;align-items:center;gap:18px;
+    font-family:'Sora',sans-serif;font-weight:500;font-size:22px;
+  }
+  .s3-cta-row + .s3-cta-row{margin-top:14px}
+  .s3-cta-row svg{color:var(--accent-cyan);flex-shrink:0}
+
+  .s3-cta-bottom{
+    display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+    margin-top:32px;
+  }
+  .s3-btn{
+    background:var(--accent-cyan);color:var(--primary-deep);
+    border-radius:14px;padding:20px 36px;
+    font-family:'Inter',sans-serif;font-weight:600;font-size:18px;
+    display:inline-flex;align-items:center;gap:14px;
+    box-shadow:0 10px 40px rgba(94,231,255,.3);
+  }
+  .s3-qr{
+    width:96px;height:96px;background:#fff;border-radius:10px;
+    padding:6px;display:grid;place-items:center;
+    color:#082C78;
+  }
+
+  .s3-footer{position:absolute;left:64px;right:64px;bottom:60px}
+  .s3-foot-divider{width:48px;height:2px;background:var(--accent-cyan);margin-bottom:18px}
+  .s3-footer-row{
+    display:flex;gap:24px;font-size:13px;color:var(--accent-soft);
+    flex-wrap:wrap;
+  }
+  .s3-footer-row span{display:inline-flex;align-items:center;gap:8px}
+  .s3-footer-row svg{color:var(--accent-cyan);width:14px;height:14px}
+
+  @media print{
+    @page{size:1080px 1350px;margin:0}
+    html,body{background:#fff}
+    body{padding:0;gap:0}
+    .toolbar{display:none}
+    .slide{box-shadow:none;border-radius:0;page-break-after:always;break-after:page}
+    .slide:last-child{page-break-after:auto}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span>NormSafety · 3-Slide Carousel · 1080×1350</span>
+  <button onclick="window.print()">Export PDF</button>
+  <button class="secondary" onclick="document.body.classList.toggle('zoom')">Toggle zoom</button>
+</div>
+
+<!-- ════════════════════════ SLIDE 1 — HOOK + PROBLEM ════════════════════════ -->
+<div class="slide" id="s1">
+
+  <!-- decorative network nodes bottom-right -->
+  <svg class="s1-bg-nodes" viewBox="0 0 320 240" fill="none">
+    <g stroke="rgba(94,231,255,.6)" stroke-width="1">
+      <line x1="40" y1="60" x2="140" y2="100"/>
+      <line x1="140" y1="100" x2="240" y2="60"/>
+      <line x1="140" y1="100" x2="200" y2="180"/>
+      <line x1="240" y1="60" x2="280" y2="140"/>
+      <line x1="40" y1="60" x2="80" y2="180"/>
+      <line x1="80" y1="180" x2="200" y2="180"/>
+    </g>
+    <g fill="#5EE7FF">
+      <circle cx="40" cy="60" r="4"/>
+      <circle cx="140" cy="100" r="6"/>
+      <circle cx="240" cy="60" r="4"/>
+      <circle cx="280" cy="140" r="3"/>
+      <circle cx="200" cy="180" r="5"/>
+      <circle cx="80" cy="180" r="3"/>
+    </g>
+  </svg>
+
+  <div class="topbar">
+    <div class="logo">
+      <span class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M11 1L20 5v6c0 5-4 9-9 10C2 20 2 16 2 11V5l9-4z" stroke="#5EE7FF" stroke-width="1.5" fill="rgba(94,231,255,.1)"/>
+          <path d="M7 11l3 3 5-6" stroke="#5EE7FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      NormSafety
+    </div>
+    <div class="counter">01 / 03</div>
+  </div>
+
+  <div class="s1-content">
+    <span class="eyebrow">Le constat</span>
+    <h1 class="s1-title">
+      Et si votre SST<br/>devenait un vrai<br/>levier de <em>performance</em> ?
+    </h1>
+    <div class="divider s1-divider"></div>
+    <p class="s1-leadin">Une SST encore trop fragmentée :</p>
+
+    <div class="s1-bullets glass">
+      <div class="s1-row">
+        <div class="s1-row-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="6" cy="6" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="8" cy="18" r="2"/><circle cx="17" cy="17" r="2"/><circle cx="12" cy="11" r="2"/>
+          </svg>
+        </div>
+        <span class="s1-row-text">Données dispersées</span>
+        <span class="s1-row-num">01</span>
+      </div>
+      <div class="s1-row">
+        <div class="s1-row-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+        </div>
+        <span class="s1-row-text">Actions isolées</span>
+        <span class="s1-row-num">02</span>
+      </div>
+      <div class="s1-row">
+        <div class="s1-row-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M2 12c2-4 6-7 10-7s8 3 10 7c-2 4-6 7-10 7s-8-3-10-7z"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="21" x2="21" y2="3"/>
+          </svg>
+        </div>
+        <span class="s1-row-text">Manque de visibilité</span>
+        <span class="s1-row-num">03</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="next-arrow">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</div>
+
+<!-- ════════════════════════ SLIDE 2 — SOLUTION ════════════════════════ -->
+<div class="slide" id="s2">
+  <div class="topbar">
+    <div class="logo">
+      <span class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M11 1L20 5v6c0 5-4 9-9 10C2 20 2 16 2 11V5l9-4z" stroke="#5EE7FF" stroke-width="1.5" fill="rgba(94,231,255,.1)"/>
+          <path d="M7 11l3 3 5-6" stroke="#5EE7FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      NormSafety
+    </div>
+    <div class="counter">02 / 03</div>
+  </div>
+
+  <div class="s2-left">
+    <span class="eyebrow">La réponse</span>
+    <h2 class="s2-title">Une approche<br/><em>centralisée</em><br/>et intelligente.</h2>
+    <div class="divider s2-divider"></div>
+    <p class="s2-body">NormSafety transforme vos données en outils de pilotage exploitables — décisions rapides, conformité maîtrisée.</p>
+
+    <div class="s2-target-label">Pensé pour</div>
+    <div class="s2-pills">
+      <div class="s2-pill">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2L21 5v6c0 5-4 9-9 10-5-1-9-5-9-10V5l9-3z" stroke-linejoin="round"/>
+          <path d="M8 12l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        QHSE / HSE
+      </div>
+      <div class="s2-pill">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/>
+          <path d="M3 19c0-3 3-5.5 6-5.5S15 16 15 19"/>
+          <path d="M15 18c1-2 3-3.5 5-3.5s4 1.5 4 3.5"/>
+        </svg>
+        Ressources Humaines
+      </div>
+      <div class="s2-pill">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M8 3v8c0 3 2 5 4 5s4-2 4-5V3"/><path d="M8 3h2M14 3h2"/><path d="M12 16v3M12 21v0"/><circle cx="12" cy="20" r="1.5"/>
+        </svg>
+        Médecins du travail
+      </div>
+    </div>
+  </div>
+
+  <div class="s2-flow-line"></div>
+
+  <div class="glass s2-dashboard">
+    <div class="s2-dash-head">
+      <span class="s2-dash-title">Dashboard SST</span>
+      <div class="s2-dots"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="s2-tile">
+      <div class="s2-tile-label">Conformité globale</div>
+      <div class="s2-kpi-value">94<em>%</em></div>
+      <div class="s2-kpi-trend">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 19l7-7 4 4 7-7M16 9h5v5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        +12 % vs trimestre précédent
+      </div>
+    </div>
+
+    <div class="s2-tile">
+      <div class="s2-tile-label">Incidents par site</div>
+      <div class="s2-bars">
+        <div style="height:40%"></div>
+        <div style="height:65%"></div>
+        <div class="active" style="height:90%"></div>
+        <div style="height:55%"></div>
+        <div style="height:30%"></div>
+        <div style="height:48%"></div>
+      </div>
+    </div>
+
+    <div class="s2-tile">
+      <div class="s2-tile-label">Tendance mensuelle</div>
+      <div class="s2-line">
+        <svg viewBox="0 0 460 80" preserveAspectRatio="none" style="width:100%;height:100%">
+          <path d="M0 60 L60 50 L120 55 L180 30 L240 38 L300 18 L360 26 L420 10 L460 16" stroke="#5EE7FF" stroke-width="2" fill="none"/>
+          <path d="M0 60 L60 50 L120 55 L180 30 L240 38 L300 18 L360 26 L420 10 L460 16 L460 80 L0 80 Z" fill="rgba(94,231,255,.12)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="next-arrow">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</div>
+
+<!-- ════════════════════════ SLIDE 3 — VALUE + CTA ════════════════════════ -->
+<div class="slide" id="s3">
+  <div class="topbar">
+    <div class="logo">
+      <span class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M11 1L20 5v6c0 5-4 9-9 10C2 20 2 16 2 11V5l9-4z" stroke="#5EE7FF" stroke-width="1.5" fill="rgba(94,231,255,.1)"/>
+          <path d="M7 11l3 3 5-6" stroke="#5EE7FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      NormSafety
+    </div>
+    <div class="counter">03 / 03</div>
+  </div>
+
+  <div class="s3-head">
+    <span class="eyebrow">La promesse</span>
+    <h2 class="s3-title">Digitaliser, prévenir<br/>et <em>sécuriser</em> la SST.</h2>
+    <div class="divider s3-divider"></div>
+  </div>
+
+  <div class="s3-pillars-wrap">
+    <div class="s3-pillars-label">Un levier de :</div>
+    <div class="s3-pillars">
+      <div class="s3-pillar">
+        <div>
+          <div class="s3-pillar-num">01</div>
+          <div class="s3-pillar-label" style="margin-top:6px">Prévention</div>
+        </div>
+        <div class="s3-pillar-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L21 5v6c0 5-4 9-9 10-5-1-9-5-9-10V5l9-3z" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="s3-pillar">
+        <div>
+          <div class="s3-pillar-num">02</div>
+          <div class="s3-pillar-label" style="margin-top:6px">Conformité</div>
+        </div>
+        <div class="s3-pillar-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12l5 5 9-10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="s3-pillar">
+        <div>
+          <div class="s3-pillar-num">03</div>
+          <div class="s3-pillar-label" style="margin-top:6px">Performance</div>
+        </div>
+        <div class="s3-pillar-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17l6-6 5 5 7-9" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 7h5v5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="s3-pillar">
+        <div>
+          <div class="s3-pillar-num">04</div>
+          <div class="s3-pillar-label" style="margin-top:6px">Décision</div>
+        </div>
+        <div class="s3-pillar-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA card -->
+  <div class="s3-cta">
+    <div class="s3-cta-row">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="6" y="9" width="20" height="18" rx="2"/>
+        <path d="M6 14h20M11 5v6M21 5v6"/>
+        <circle cx="12" cy="20" r="1.5" fill="currentColor"/>
+      </svg>
+      Webinaire — 01 mai 2026 à 18h00
+    </div>
+    <div class="s3-cta-row">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="4" y="7" width="24" height="18" rx="2"/>
+        <path d="M4 10l12 8 12-8"/>
+      </svg>
+      Inscription gratuite
+    </div>
+
+    <div class="s3-cta-bottom">
+      <a class="s3-btn">
+        S'inscrire maintenant
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="s3-qr">
+        <svg width="100%" height="100%" viewBox="0 0 100 100">
+          <rect width="100" height="100" fill="#fff"/>
+          <g fill="#082C78">
+            <rect x="6" y="6" width="20" height="20"/><rect x="10" y="10" width="12" height="12" fill="#fff"/><rect x="14" y="14" width="4" height="4" fill="#082C78"/>
+            <rect x="74" y="6" width="20" height="20"/><rect x="78" y="10" width="12" height="12" fill="#fff"/><rect x="82" y="14" width="4" height="4" fill="#082C78"/>
+            <rect x="6" y="74" width="20" height="20"/><rect x="10" y="78" width="12" height="12" fill="#fff"/><rect x="14" y="82" width="4" height="4" fill="#082C78"/>
+            <rect x="34" y="10" width="4" height="4"/><rect x="42" y="10" width="4" height="4"/><rect x="50" y="10" width="4" height="4"/><rect x="62" y="10" width="4" height="4"/>
+            <rect x="34" y="18" width="4" height="4"/><rect x="46" y="18" width="4" height="4"/><rect x="58" y="18" width="4" height="4"/>
+            <rect x="34" y="26" width="4" height="4"/><rect x="42" y="26" width="4" height="4"/><rect x="54" y="26" width="4" height="4"/><rect x="62" y="26" width="4" height="4"/>
+            <rect x="10" y="34" width="4" height="4"/><rect x="22" y="34" width="4" height="4"/><rect x="34" y="34" width="4" height="4"/><rect x="50" y="34" width="4" height="4"/><rect x="66" y="34" width="4" height="4"/><rect x="82" y="34" width="4" height="4"/>
+            <rect x="14" y="42" width="4" height="4"/><rect x="30" y="42" width="4" height="4"/><rect x="46" y="42" width="4" height="4"/><rect x="58" y="42" width="4" height="4"/><rect x="74" y="42" width="4" height="4"/><rect x="86" y="42" width="4" height="4"/>
+            <rect x="10" y="50" width="4" height="4"/><rect x="26" y="50" width="4" height="4"/><rect x="42" y="50" width="4" height="4"/><rect x="58" y="50" width="4" height="4"/><rect x="74" y="50" width="4" height="4"/>
+            <rect x="22" y="58" width="4" height="4"/><rect x="38" y="58" width="4" height="4"/><rect x="54" y="58" width="4" height="4"/><rect x="70" y="58" width="4" height="4"/><rect x="82" y="58" width="4" height="4"/>
+            <rect x="34" y="66" width="4" height="4"/><rect x="46" y="66" width="4" height="4"/><rect x="62" y="66" width="4" height="4"/><rect x="78" y="66" width="4" height="4"/>
+            <rect x="34" y="74" width="4" height="4"/><rect x="42" y="74" width="4" height="4"/><rect x="58" y="74" width="4" height="4"/><rect x="70" y="74" width="4" height="4"/><rect x="86" y="74" width="4" height="4"/>
+            <rect x="38" y="82" width="4" height="4"/><rect x="50" y="82" width="4" height="4"/><rect x="66" y="82" width="4" height="4"/><rect x="78" y="82" width="4" height="4"/>
+            <rect x="34" y="90" width="4" height="4"/><rect x="46" y="90" width="4" height="4"/><rect x="62" y="90" width="4" height="4"/><rect x="74" y="90" width="4" height="4"/><rect x="86" y="90" width="4" height="4"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="s3-footer">
+    <div class="s3-foot-divider"></div>
+    <div class="s3-footer-row">
+      <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c2 2 3 4 3 6s-1 4-3 6c-2-2-3-4-3-6s1-4 3-6z"/></svg>www.normsafety.com</span>
+      <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="M2 5l6 4 6-4"/></svg>contact@normsafety.com</span>
+      <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4c0-1 1-2 2-2h2l1.5 4-2 1c1 2 3 4 5 5l1-2 4 1.5v2c0 1-1 2-2 2C7 15.5 .5 9 3 4z"/></svg>+216 54 525 267</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  const css = document.createElement('style');
+  css.textContent = `body.zoom .slide{transform:scale(.55);transform-origin:top center;margin-bottom:-600px}`;
+  document.head.appendChild(css);
+</script>
+
+</body>
+</html>

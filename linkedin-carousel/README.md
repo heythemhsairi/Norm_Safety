@@ -1,29 +1,40 @@
 # NormSafety — LinkedIn Carousel (6 slides)
 
-Self-contained, ready-to-publish carousel built to spec:
-- **1080 × 1350 px** (LinkedIn portrait)
-- 6 slides (Cover → Problem → Solution → Target → Value → CTA)
-- Deep blue gradient `#19539D → #082C78`, cyan `#5EE7FF` accents
-- Glassmorphism cards, thin-line icons, 8px grid
-- Fonts: **Sora** (headlines) + **Inter** (body)
+Two outputs, one source of truth:
 
-## How to use
+| File | Use it for |
+|---|---|
+| `NormSafety_LinkedIn_Carousel.pptx` | **Upload to Canva → fully editable** (each text block, card, icon is its own element) |
+| `index.html` | Browser preview / Print-to-PDF for direct LinkedIn document upload |
 
-### Option 1 — Publish directly to LinkedIn (fastest)
+Format: **1080 × 1350 px** portrait • 6 slides • Sora + Inter typography
+
+## Edit in Canva (recommended)
+
+1. Open Canva → **Create a design** → **Import file**
+2. Upload `NormSafety_LinkedIn_Carousel.pptx`
+3. Canva converts each PPTX slide into an editable Canva page. Every text block, glass card, icon, button, and shape is independently selectable.
+4. Edit copy, swap icons (Canva's icon library has thin-line sets that match the brand), tweak colors.
+5. Once satisfied → Share → **Download** as PDF (Print) for LinkedIn document post, or PNG x6 for LinkedIn image carousel.
+
+## Print-to-PDF (no Canva needed)
+
 1. Open `index.html` in **Chrome** or **Edge**.
-2. Click **Export PDF** in the floating toolbar (top of page).
+2. Click **Export PDF** in the floating toolbar.
 3. In the print dialog:
-   - Destination: **Save as PDF**
-   - Layout: **Portrait**
-   - Paper size: **1080 × 1350 px** (custom, already set via `@page`)
-   - Margins: **None**
-   - Background graphics: **ON** ✅
-4. Upload the resulting PDF as a LinkedIn **document post** — it becomes a swipeable carousel.
+   - Destination: **Save as PDF** (NOT "Adobe PDF")
+   - Layout: Portrait • Margins: None • Background graphics: ON ✅
+4. Upload the PDF as a LinkedIn **document post**.
 
-### Option 2 — Edit further in Canva
-1. Open `index.html` in browser.
-2. Right-click each slide → **Save as image** (or screenshot at 100% zoom).
-3. Upload the 6 PNGs to Canva, drop into a 1080×1350 design, edit text/icons over the imported image.
+## Regenerate the PPTX
+
+After editing copy in `build-pptx.mjs`:
+
+```bash
+cd linkedin-carousel
+npm install   # first time only
+npm run build
+```
 
 ## Brand system
 
@@ -33,21 +44,18 @@ Self-contained, ready-to-publish carousel built to spec:
 | Primary mid | `#19539D` |
 | Accent cyan | `#5EE7FF` |
 | Accent soft | `#A8C4F5` |
-| Glass fill | `rgba(255,255,255,.06)` |
-| Glass stroke | `rgba(255,255,255,.20)` |
+| Glass fill | white at 6–8% opacity |
 
-Spacing scale: **8 / 16 / 24 / 32 / 48 / 64 / 96 px**.
+Spacing: **8 / 16 / 24 / 32 / 48 / 64 / 96 px**.
 
-## Editing the source
+## Webinar CTA (slide 6)
 
-All copy is in `index.html`, well-commented per slide:
-- `<!-- ════════ SLIDE 1 ════════ -->` etc.
-- Search for the French text to find any block.
-- Icons are inline SVG — change strokes to `currentColor` and they re-tint with the parent's color.
+- **01 mai 2026 — 18h00** · Webinaire gratuit
+- `www.normsafety.com` · `contact@normsafety.com` · `+216 54 525 267`
+- QR placeholder — generate a real one in Canva (Apps → QR Code) once the registration URL is ready.
 
-## Webinar CTA details (slide 6)
+## Notes for Canva editing
 
-- Date: **01 mai 2026 — 18h00**
-- Format: **Webinaire gratuit**
-- Footer: `www.normsafety.com` · `contact@normsafety.com` · `+216 54 525 267`
-- The QR code is a placeholder pattern — generate a real one (Canva → Apps → QR Code) and paste over it.
+- The PPTX uses **solid deep blue** for backgrounds. In Canva, select the background → swap to a real linear gradient `#19539D → #082C78` for the premium look (PowerPoint shape gradients don't translate cleanly through Canva import, so we kept it solid).
+- Glyphs (`✚ ◈ ◉ 📅 🎯`) on slides 4 and 6 are placeholders — replace with proper line icons from Canva's library (search "shield outline", "stethoscope outline", "calendar outline").
+- Fonts: if Sora/Inter don't auto-apply in Canva, set them via the brand kit before editing.

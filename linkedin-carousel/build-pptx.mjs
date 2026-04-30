@@ -1,14 +1,14 @@
 // NormSafety — LinkedIn Carousel PPTX generator (FR)
-// Output: NormSafety_LinkedIn_Carousel.pptx — upload to Canva to edit each slide.
-// Format: 1080 x 1350 px portrait (LinkedIn carousel).
+// Output: NormSafety_LinkedIn_Carousel.pptx — Canva-friendly, fully editable.
+// Format: 1080 x 1350 px portrait (LinkedIn carousel + Instagram Portrait).
 
 import PptxGenJS from "pptxgenjs";
 
 const pres = new PptxGenJS();
 
-// 1080x1350 px @ 96 DPI = 11.25 x 14.0625 inches
-pres.defineLayout({ name: "LINKEDIN_PORTRAIT", width: 11.25, height: 14.0625 });
-pres.layout = "LINKEDIN_PORTRAIT";
+// 1080x1350 px @ 96 DPI = 11.25 x 14.0625 inches (= Instagram Portrait native size in Canva)
+pres.defineLayout({ name: "INSTA_PORTRAIT", width: 11.25, height: 14.0625 });
+pres.layout = "INSTA_PORTRAIT";
 pres.title = "NormSafety — LinkedIn Carousel";
 pres.company = "NormSafety";
 pres.author = "NormSafety";
@@ -20,37 +20,30 @@ const C = {
   accentCyan:   "5EE7FF",
   accentSoft:   "A8C4F5",
   white:        "FFFFFF",
-  glassFill:    "FFFFFF",   // used with transparency
   textMuted:    "C7D6F5",
-  ink:          "0B1535",
 };
 
-const F = { head: "Sora", body: "Inter", mono: "JetBrains Mono" };
+const F = { head: "Sora", body: "Inter", mono: "Consolas" };
 
-// canvas
 const W = 11.25;
 const H = 14.0625;
 const M = 0.667;          // 64 px margin
 
 // ─────────────────────────────────────────────
-// Reusable elements
+// Reusable elements (Canva-friendly: only rect, ellipse, line, roundRect)
 // ─────────────────────────────────────────────
 function bgGradient(slide) {
-  // base solid deep blue (Canva can swap to true gradient afterward)
   slide.background = { color: C.primaryDeep };
-  // top-left lighter overlay (suggests gradient)
   slide.addShape("rect", {
     x: 0, y: 0, w: W, h: H * 0.55,
     fill: { color: C.primaryMid, transparency: 30 },
     line: { type: "none" },
   });
-  // top-right cyan glow
   slide.addShape("ellipse", {
     x: W - 5, y: -3, w: 8, h: 8,
     fill: { color: C.accentCyan, transparency: 88 },
     line: { type: "none" },
   });
-  // bottom-left primary glow
   slide.addShape("ellipse", {
     x: -3, y: H - 4, w: 8, h: 8,
     fill: { color: C.primaryMid, transparency: 70 },
@@ -59,10 +52,11 @@ function bgGradient(slide) {
 }
 
 function topBar(slide, num) {
-  // logo mark — shield-style triangle as a placeholder
-  slide.addShape("rightTriangle", {
+  // simple square logo mark (Canva-friendly)
+  slide.addShape("roundRect", {
     x: M, y: 0.62, w: 0.22, h: 0.22,
-    fill: { color: C.accentCyan, transparency: 80 },
+    rectRadius: 0.04,
+    fill: { color: C.accentCyan, transparency: 60 },
     line: { color: C.accentCyan, width: 1 },
   });
   slide.addText("NormSafety", {
@@ -78,7 +72,6 @@ function topBar(slide, num) {
 }
 
 function eyebrow(slide, text, x, y, w = 4, align = "left") {
-  // small cyan dash
   if (align === "left") {
     slide.addShape("rect", {
       x, y: y + 0.13, w: 0.25, h: 0.02,
@@ -90,7 +83,6 @@ function eyebrow(slide, text, x, y, w = 4, align = "left") {
       charSpacing: 8, align: "left",
     });
   } else {
-    // centered
     slide.addText(text.toUpperCase(), {
       x, y, w, h: 0.3,
       fontFace: F.body, fontSize: 11, color: C.accentCyan, bold: true,
@@ -122,8 +114,18 @@ function glassCard(slide, x, y, w, h, opts = {}) {
   slide.addShape("roundRect", {
     x, y, w, h,
     rectRadius: opts.radius || 0.22,
-    fill: { color: C.glassFill, transparency: 92 },
+    fill: { color: C.white, transparency: 92 },
     line: { color: C.white, width: 0.75, transparency: 75 },
+  });
+}
+
+// Heading helper — single-color text, then a separate cyan accent word overlay
+function heading(slide, x, y, w, h, parts, fontSize) {
+  // parts: [{ text, accent? }]
+  const fullText = parts.map(p => p.text).join("");
+  slide.addText(fullText, {
+    x, y, w, h,
+    fontFace: F.head, fontSize, color: C.white, bold: true, valign: "top",
   });
 }
 
@@ -135,7 +137,7 @@ function glassCard(slide, x, y, w, h, opts = {}) {
   bgGradient(s);
   topBar(s, "01");
 
-  // decorative node graph top-right
+  // node graph dots (top-right decorative)
   const nodes = [
     [W - 2.4, 1.6], [W - 1.5, 2.1], [W - 0.9, 1.4], [W - 0.6, 2.5], [W - 1.9, 2.8]
   ];
@@ -145,25 +147,24 @@ function glassCard(slide, x, y, w, h, opts = {}) {
       fill: { color: C.accentCyan }, line: { type: "none" },
     });
   });
-  // connecting lines
   s.addShape("line", { x: nodes[0][0], y: nodes[0][1], w: nodes[1][0]-nodes[0][0], h: nodes[1][1]-nodes[0][1], line: { color: C.accentCyan, width: 0.5, transparency: 50 } });
   s.addShape("line", { x: nodes[1][0], y: nodes[1][1], w: nodes[2][0]-nodes[1][0], h: nodes[2][1]-nodes[1][1], line: { color: C.accentCyan, width: 0.5, transparency: 50 } });
   s.addShape("line", { x: nodes[1][0], y: nodes[1][1], w: nodes[3][0]-nodes[1][0], h: nodes[3][1]-nodes[1][1], line: { color: C.accentCyan, width: 0.5, transparency: 50 } });
   s.addShape("line", { x: nodes[0][0], y: nodes[0][1], w: nodes[4][0]-nodes[0][0], h: nodes[4][1]-nodes[0][1], line: { color: C.accentCyan, width: 0.5, transparency: 50 } });
 
-  // content block
   let y = 2.8;
   eyebrow(s, "Plateforme SST", M, y);
   y += 0.6;
 
-  s.addText([
-    { text: "Et si votre SST\ndevenait un vrai\nlevier de ", options: { color: C.white } },
-    { text: "performance", options: { color: C.accentCyan } },
-    { text: " ?", options: { color: C.white } },
-  ], {
+  // single text block (Canva-safe): use white with a separate cyan word overlay
+  s.addText("Et si votre SST\ndevenait un vrai\nlevier de performance ?", {
     x: M, y, w: W - 2*M, h: 4.2,
-    fontFace: F.head, fontSize: 56, bold: true,
-    valign: "top",
+    fontFace: F.head, fontSize: 56, color: C.white, bold: true, valign: "top",
+  });
+  // overlay cyan word "performance"
+  s.addText("performance", {
+    x: M + 1.85, y: y + 2.5, w: 4.5, h: 1.0,
+    fontFace: F.head, fontSize: 56, color: C.accentCyan, bold: true,
   });
 
   y += 4.4;
@@ -190,19 +191,19 @@ function glassCard(slide, x, y, w, h, opts = {}) {
   eyebrow(s, "Le constat", M, y);
   y += 0.55;
 
-  s.addText([
-    { text: "Une SST encore\ntrop ", options: { color: C.white } },
-    { text: "fragmentée", options: { color: C.accentCyan } },
-    { text: ".", options: { color: C.white } },
-  ], {
+  s.addText("Une SST encore\ntrop fragmentée.", {
     x: M, y, w: W - 2*M, h: 2.4,
-    fontFace: F.head, fontSize: 44, bold: true,
+    fontFace: F.head, fontSize: 44, color: C.white, bold: true,
+  });
+  // cyan accent on "fragmentée"
+  s.addText("fragmentée.", {
+    x: M + 1.8, y: y + 0.95, w: 6, h: 0.9,
+    fontFace: F.head, fontSize: 44, color: C.accentCyan, bold: true,
   });
 
   y += 2.5;
   divider(s, M, y);
 
-  // 2x2 grid of cards
   const cards = [
     { num: "01", label: "Données\ndispersées" },
     { num: "02", label: "Actions\nisolées" },
@@ -219,7 +220,7 @@ function glassCard(slide, x, y, w, h, opts = {}) {
     const cx = M + (i % 2) * (cardW + gap);
     const cy = gridY + Math.floor(i / 2) * (cardH + gap);
     glassCard(s, cx, cy, cardW, cardH);
-    // simple icon glyph (square for visual)
+    // simple icon: rounded square
     s.addShape("roundRect", {
       x: cx + 0.35, y: cy + 0.35, w: 0.55, h: 0.55,
       rectRadius: 0.08,
@@ -248,19 +249,21 @@ function glassCard(slide, x, y, w, h, opts = {}) {
   bgGradient(s);
   topBar(s, "03");
 
-  // LEFT column
+  // LEFT
   let y = 2.4;
   eyebrow(s, "La réponse", M, y);
   y += 0.55;
 
-  s.addText([
-    { text: "Une approche\n", options: { color: C.white } },
-    { text: "centralisée\n", options: { color: C.accentCyan } },
-    { text: "et intelligente.", options: { color: C.white } },
-  ], {
+  s.addText("Une approche\ncentralisée\net intelligente.", {
     x: M, y, w: 4.5, h: 3.2,
-    fontFace: F.head, fontSize: 38, bold: true,
+    fontFace: F.head, fontSize: 38, color: C.white, bold: true,
   });
+  // cyan word
+  s.addText("centralisée", {
+    x: M, y: y + 0.85, w: 4.5, h: 0.85,
+    fontFace: F.head, fontSize: 38, color: C.accentCyan, bold: true,
+  });
+
   y += 3.4;
   divider(s, M, y);
   y += 0.4;
@@ -269,20 +272,18 @@ function glassCard(slide, x, y, w, h, opts = {}) {
     fontFace: F.body, fontSize: 16, color: C.accentSoft,
   });
 
-  // RIGHT column — dashboard mock card
+  // RIGHT — dashboard mock
   const dx = W - M - 5.4;
   const dy = 2.4;
   const dw = 5.4;
   const dh = 8.5;
   glassCard(s, dx, dy, dw, dh, { radius: 0.28 });
 
-  // dashboard header
-  s.addText("Dashboard SST", {
+  s.addText("DASHBOARD SST", {
     x: dx + 0.35, y: dy + 0.3, w: 3, h: 0.3,
     fontFace: F.body, fontSize: 9, color: C.white, transparency: 40, charSpacing: 6, bold: true,
   });
-  // dots
-  ["00", "01", "02"].forEach((_, i) => {
+  [0, 1, 2].forEach((i) => {
     s.addShape("ellipse", {
       x: dx + dw - 0.85 + i*0.15, y: dy + 0.42, w: 0.08, h: 0.08,
       fill: { color: C.white, transparency: 70 }, line: { type: "none" },
@@ -301,14 +302,15 @@ function glassCard(slide, x, y, w, h, opts = {}) {
     x: dx + 0.55, y: k1y + 0.2, w: 4, h: 0.25,
     fontFace: F.body, fontSize: 9, color: C.white, transparency: 40, bold: true, charSpacing: 6,
   });
-  s.addText([
-    { text: "94", options: { color: C.white, fontSize: 56 } },
-    { text: "%", options: { color: C.accentCyan, fontSize: 28 } },
-  ], {
-    x: dx + 0.55, y: k1y + 0.5, w: 4, h: 1.0,
-    fontFace: F.head, bold: true,
+  s.addText("94", {
+    x: dx + 0.55, y: k1y + 0.5, w: 2, h: 1.0,
+    fontFace: F.head, fontSize: 56, color: C.white, bold: true,
   });
-  s.addText("↗  +12 % vs trimestre précédent", {
+  s.addText("%", {
+    x: dx + 1.85, y: k1y + 0.75, w: 1, h: 0.6,
+    fontFace: F.head, fontSize: 28, color: C.accentCyan, bold: true,
+  });
+  s.addText("+12 % vs trimestre précédent", {
     x: dx + 0.55, y: k1y + 1.45, w: 4, h: 0.3,
     fontFace: F.body, fontSize: 11, color: C.accentCyan,
   });
@@ -325,7 +327,6 @@ function glassCard(slide, x, y, w, h, opts = {}) {
     x: dx + 0.55, y: k2y + 0.2, w: 4, h: 0.25,
     fontFace: F.body, fontSize: 9, color: C.white, transparency: 40, bold: true, charSpacing: 6,
   });
-  // 6 bars
   const heights = [0.5, 0.85, 1.25, 0.7, 0.4, 0.6];
   const barW = 0.35;
   const barGap = 0.18;
@@ -342,7 +343,7 @@ function glassCard(slide, x, y, w, h, opts = {}) {
     });
   });
 
-  // line chart block
+  // line chart block — replace many small lines with 4 simple segments
   const k3y = k2y + 2.25;
   s.addShape("roundRect", {
     x: dx + 0.35, y: k3y, w: dw - 0.7, h: 1.5,
@@ -350,15 +351,23 @@ function glassCard(slide, x, y, w, h, opts = {}) {
     fill: { color: C.white, transparency: 95 },
     line: { color: C.white, width: 0.5, transparency: 85 },
   });
-  // sparkline as connected lines
-  const points = [
-    [0.0, 0.9], [0.6, 0.7], [1.2, 0.8], [1.8, 0.45], [2.4, 0.55], [3.0, 0.3], [3.6, 0.45], [4.2, 0.2],
+  // simplified: 4 line segments forming an upward sparkline
+  const sparkX = dx + 0.55;
+  const sparkY = k3y + 0.4;
+  const sparkW = dw - 1.1;
+  const sparkH = 0.7;
+  const segs = [
+    [0.00 * sparkW, 0.85 * sparkH],
+    [0.25 * sparkW, 0.55 * sparkH],
+    [0.50 * sparkW, 0.65 * sparkH],
+    [0.75 * sparkW, 0.30 * sparkH],
+    [1.00 * sparkW, 0.10 * sparkH],
   ];
-  for (let i = 0; i < points.length - 1; i++) {
-    const [x1, y1] = points[i];
-    const [x2, y2] = points[i + 1];
+  for (let i = 0; i < segs.length - 1; i++) {
+    const [x1, y1] = segs[i];
+    const [x2, y2] = segs[i + 1];
     s.addShape("line", {
-      x: dx + 0.5 + x1, y: k3y + 0.35 + y1,
+      x: sparkX + x1, y: sparkY + y1,
       w: x2 - x1, h: y2 - y1,
       line: { color: C.accentCyan, width: 1.5 },
     });
@@ -375,30 +384,31 @@ function glassCard(slide, x, y, w, h, opts = {}) {
   bgGradient(s);
   topBar(s, "04");
 
-  // centered head
   let y = 3.0;
   eyebrow(s, "Pour qui", M, y, W - 2*M, "center");
   y += 0.55;
-  s.addText([
-    { text: "Pensé pour les\n", options: { color: C.white } },
-    { text: "acteurs clés", options: { color: C.accentCyan } },
-    { text: ".", options: { color: C.white } },
-  ], {
+
+  s.addText("Pensé pour les\nacteurs clés.", {
     x: M, y, w: W - 2*M, h: 2.4,
-    fontFace: F.head, fontSize: 48, bold: true, align: "center",
+    fontFace: F.head, fontSize: 48, color: C.white, bold: true, align: "center",
   });
+  // cyan accent "acteurs clés"
+  s.addText("acteurs clés.", {
+    x: M, y: y + 1.0, w: W - 2*M, h: 1.0,
+    fontFace: F.head, fontSize: 48, color: C.accentCyan, bold: true, align: "center",
+  });
+
   y += 2.5;
-  // centered divider
   s.addShape("rect", {
     x: W/2 - 0.25, y, w: 0.5, h: 0.04,
     fill: { color: C.accentCyan }, line: { type: "none" },
   });
 
-  // 3 cards horizontal
+  // 3 cards — text labels only (no exotic glyphs)
   const cardsT = [
-    { glyph: "✚", label: "Médecins\ndu travail", sub: "Suivi médical" },
-    { glyph: "◈", label: "QHSE\n/ HSE",        sub: "Conformité & risques" },
-    { glyph: "◉", label: "Ressources\nHumaines", sub: "Pilotage & reporting" },
+    { label: "Médecins\ndu travail", sub: "Suivi médical" },
+    { label: "QHSE\n/ HSE",          sub: "Conformité & risques" },
+    { label: "Ressources\nHumaines", sub: "Pilotage & reporting" },
   ];
   const tcW = (W - 2*M - 0.5) / 3;
   const tcH = 4.2;
@@ -406,22 +416,22 @@ function glassCard(slide, x, y, w, h, opts = {}) {
   cardsT.forEach((c, i) => {
     const cx = M + i * (tcW + 0.25);
     glassCard(s, cx, tcY, tcW, tcH, { radius: 0.25 });
-    // icon ring
+    // icon ring (placeholder — replace in Canva)
     s.addShape("ellipse", {
       x: cx + tcW/2 - 0.65, y: tcY + 0.5, w: 1.3, h: 1.3,
       fill: { color: C.accentCyan, transparency: 88 },
       line: { color: C.accentCyan, width: 1, transparency: 50 },
     });
-    s.addText(c.glyph, {
-      x: cx + tcW/2 - 0.65, y: tcY + 0.6, w: 1.3, h: 1.1,
-      fontFace: F.head, fontSize: 36, color: C.accentCyan, align: "center", valign: "middle", bold: true,
+    // small inner dot for icon placeholder
+    s.addShape("ellipse", {
+      x: cx + tcW/2 - 0.2, y: tcY + 0.95, w: 0.4, h: 0.4,
+      fill: { color: C.accentCyan, transparency: 50 },
+      line: { type: "none" },
     });
-    // label
     s.addText(c.label, {
       x: cx + 0.3, y: tcY + 2.1, w: tcW - 0.6, h: 1.2,
       fontFace: F.head, fontSize: 22, color: C.white, bold: true, align: "center",
     });
-    // sub
     s.addText(c.sub, {
       x: cx + 0.3, y: tcY + 3.4, w: tcW - 0.6, h: 0.4,
       fontFace: F.body, fontSize: 11, color: C.white, transparency: 40, align: "center",
@@ -439,58 +449,51 @@ function glassCard(slide, x, y, w, h, opts = {}) {
   bgGradient(s);
   topBar(s, "05");
 
-  // head centered
   let y = 2.2;
   eyebrow(s, "Notre valeur", M, y, W - 2*M, "center");
   y += 0.55;
-  s.addText([
-    { text: "Bien plus\nqu'un ", options: { color: C.white } },
-    { text: "outil", options: { color: C.accentCyan } },
-    { text: ".", options: { color: C.white } },
-  ], {
+
+  s.addText("Bien plus\nqu'un outil.", {
     x: M, y, w: W - 2*M, h: 2.4,
-    fontFace: F.head, fontSize: 48, bold: true, align: "center",
+    fontFace: F.head, fontSize: 48, color: C.white, bold: true, align: "center",
   });
+  // cyan accent "outil"
+  s.addText("outil.", {
+    x: M, y: y + 1.0, w: W - 2*M, h: 1.0,
+    fontFace: F.head, fontSize: 48, color: C.accentCyan, bold: true, align: "center",
+  });
+
   y += 2.5;
   s.addShape("rect", {
     x: W/2 - 0.25, y, w: 0.5, h: 0.04,
     fill: { color: C.accentCyan }, line: { type: "none" },
   });
 
-  // 4 pillars in 2x2 around a center
+  // 4 pillars
   const pillars = [
     { num: "01", label: "Prévention" },
     { num: "02", label: "Conformité" },
     { num: "03", label: "Performance" },
     { num: "04", label: "Décision" },
   ];
-  const cD = 2.5;       // pillar diameter
+  const cD = 2.5;
   const sysCX = W / 2;
   const sysCY = 9.5;
   const offX = 2.1;
   const offY = 2.1;
   const positions = [
-    [sysCX - offX, sysCY - offY], // tl 01
-    [sysCX + offX, sysCY - offY], // tr 02
-    [sysCX + offX, sysCY + offY], // br 03
-    [sysCX - offX, sysCY + offY], // bl 04
+    [sysCX - offX, sysCY - offY],
+    [sysCX + offX, sysCY - offY],
+    [sysCX + offX, sysCY + offY],
+    [sysCX - offX, sysCY + offY],
   ];
 
-  // dashed connectors (use small line segments)
+  // SIMPLIFIED: just 4 single connector lines (instead of dashed loop)
   positions.forEach(([px, py]) => {
-    const dx = sysCX - px;
-    const dy = sysCY - py;
-    const segs = 8;
-    for (let i = 0; i < segs; i += 2) {
-      const t1 = i / segs;
-      const t2 = (i + 1) / segs;
-      s.addShape("line", {
-        x: px + dx * t1 - cD/2 * 0 + (cD/2) * dx / Math.hypot(dx, dy) ,
-        y: py + dy * t1,
-        w: dx * (t2 - t1), h: dy * (t2 - t1),
-        line: { color: C.accentCyan, width: 0.5, transparency: 60 },
-      });
-    }
+    s.addShape("line", {
+      x: px, y: py, w: sysCX - px, h: sysCY - py,
+      line: { color: C.accentCyan, width: 0.75, transparency: 65 },
+    });
   });
 
   positions.forEach(([px, py], i) => {
@@ -511,22 +514,22 @@ function glassCard(slide, x, y, w, h, opts = {}) {
     });
   });
 
-  // center node
+  // center node — simple circle (no triangle)
   s.addShape("ellipse", {
     x: sysCX - 0.55, y: sysCY - 0.55, w: 1.1, h: 1.1,
     fill: { color: C.accentCyan, transparency: 75 },
     line: { color: C.accentCyan, width: 1.5, transparency: 30 },
   });
-  s.addShape("rightTriangle", {
-    x: sysCX - 0.18, y: sysCY - 0.22, w: 0.36, h: 0.36,
-    fill: { color: C.white }, line: { color: C.white, width: 1 },
+  s.addShape("ellipse", {
+    x: sysCX - 0.18, y: sysCY - 0.18, w: 0.36, h: 0.36,
+    fill: { color: C.white }, line: { type: "none" },
   });
 
   nextArrow(s);
 }
 
 // ─────────────────────────────────────────────
-// SLIDE 6 — CTA / WEBINAR
+// SLIDE 6 — CTA
 // ─────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -537,48 +540,42 @@ function glassCard(slide, x, y, w, h, opts = {}) {
   eyebrow(s, "Événement exclusif", M, y);
   y += 0.55;
 
-  s.addText([
-    { text: "Découvrez NormSafety\nen ", options: { color: C.white } },
-    { text: "action", options: { color: C.accentCyan } },
-    { text: ".", options: { color: C.white } },
-  ], {
+  s.addText("Découvrez NormSafety\nen action.", {
     x: M, y, w: W - 2*M, h: 2.4,
-    fontFace: F.head, fontSize: 48, bold: true,
+    fontFace: F.head, fontSize: 48, color: C.white, bold: true,
   });
+  // cyan accent "action"
+  s.addText("action.", {
+    x: M + 1.4, y: y + 1.0, w: 5, h: 1.0,
+    fontFace: F.head, fontSize: 48, color: C.accentCyan, bold: true,
+  });
+
   y += 2.5;
   divider(s, M, y);
 
-  // glass CTA card
+  // CTA card
   const cy = 5.6;
   const cw = W - 2*M;
   const ch = 5.4;
   glassCard(s, M, cy, cw, ch, { radius: 0.3 });
 
-  // calendar icon + date
+  // date row — simple square icon, no emoji
   s.addShape("roundRect", {
     x: M + 0.5, y: cy + 0.7, w: 0.45, h: 0.45,
     rectRadius: 0.06,
     fill: { color: C.accentCyan, transparency: 75 },
     line: { color: C.accentCyan, width: 1 },
   });
-  s.addText("📅", {
-    x: M + 0.5, y: cy + 0.6, w: 0.45, h: 0.55,
-    fontSize: 18, align: "center",
-  });
   s.addText("01 mai 2026 — 18h00", {
     x: M + 1.15, y: cy + 0.65, w: cw - 1.5, h: 0.55,
     fontFace: F.head, fontSize: 22, color: C.white, bold: true, valign: "middle",
   });
 
-  // target icon + format
+  // format row
   s.addShape("ellipse", {
     x: M + 0.5, y: cy + 1.45, w: 0.45, h: 0.45,
     fill: { color: C.accentCyan, transparency: 75 },
     line: { color: C.accentCyan, width: 1 },
-  });
-  s.addText("🎯", {
-    x: M + 0.5, y: cy + 1.35, w: 0.45, h: 0.55,
-    fontSize: 18, align: "center",
   });
   s.addText("Webinaire gratuit", {
     x: M + 1.15, y: cy + 1.4, w: cw - 1.5, h: 0.55,
@@ -615,12 +612,11 @@ function glassCard(slide, x, y, w, h, opts = {}) {
 
   // footer
   divider(s, M, H - 1.7);
-  s.addText("www.normsafety.com   ·   contact@normsafety.com   ·   +216 54 525 267", {
+  s.addText("www.normsafety.com   |   contact@normsafety.com   |   +216 54 525 267", {
     x: M, y: H - 1.4, w: W - 2*M, h: 0.4,
     fontFace: F.body, fontSize: 12, color: C.accentSoft,
   });
 }
 
-// ── write file ──
 await pres.writeFile({ fileName: "NormSafety_LinkedIn_Carousel.pptx" });
-console.log("✅  NormSafety_LinkedIn_Carousel.pptx generated.");
+console.log("OK  NormSafety_LinkedIn_Carousel.pptx generated.");

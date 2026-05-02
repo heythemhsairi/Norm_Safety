@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Premium Content System Studio — Business Plan</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #111;
+    font-size: 10.5pt;
+    line-height: 1.5;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  h1, h2, h3, h4 { color: #0b0b0b; line-height: 1.2; margin: 0 0 8pt; font-weight: 700; }
+  h1 { font-size: 28pt; letter-spacing: -0.5pt; }
+  h2 { font-size: 16pt; border-bottom: 1.5pt solid #111; padding-bottom: 4pt; margin-top: 0; }
+  h3 { font-size: 12pt; margin-top: 14pt; }
+  h4 { font-size: 10.5pt; margin-top: 10pt; text-transform: uppercase; letter-spacing: 0.6pt; color: #444; }
+  p { margin: 0 0 8pt; }
+  ul, ol { margin: 0 0 10pt; padding-left: 18pt; }
+  li { margin-bottom: 4pt; }
+  strong { color: #000; }
+  em { color: #333; }
+  code { background: #f3f3f3; padding: 1pt 4pt; border-radius: 2pt; font-size: 9.5pt; }
+
+  .accent { color: #b8451a; }
+  .muted { color: #666; }
+
+  .page { page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .no-break { page-break-inside: avoid; break-inside: avoid; }
+
+  table { width: 100%; border-collapse: collapse; margin: 8pt 0 12pt; font-size: 9.5pt; }
+  th, td { border: 0.5pt solid #bbb; padding: 5pt 7pt; vertical-align: top; text-align: left; }
+  th { background: #111; color: #fff; font-weight: 600; }
+  tr:nth-child(even) td { background: #fafafa; }
+  td.center, th.center { text-align: center; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  .cover {
+    height: 257mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    page-break-after: always;
+  }
+  .cover .top { padding-top: 20mm; }
+  .cover .eyebrow { font-size: 10pt; text-transform: uppercase; letter-spacing: 3pt; color: #b8451a; margin-bottom: 14pt; }
+  .cover h1 { font-size: 38pt; line-height: 1.05; margin-bottom: 12pt; }
+  .cover .sub { font-size: 14pt; color: #444; max-width: 150mm; line-height: 1.35; }
+  .cover .meta { font-size: 9.5pt; color: #666; border-top: 1pt solid #ccc; padding-top: 10pt; }
+  .cover .meta strong { color: #111; }
+
+  .callout {
+    background: #fff7f1;
+    border-left: 3pt solid #b8451a;
+    padding: 10pt 14pt;
+    margin: 10pt 0 14pt;
+    font-size: 10pt;
+  }
+  .callout.dark {
+    background: #111;
+    color: #fff;
+    border-left-color: #b8451a;
+  }
+  .callout.dark strong { color: #fff; }
+
+  .quote {
+    border-left: 2pt solid #999;
+    padding: 4pt 0 4pt 12pt;
+    color: #333;
+    font-style: italic;
+    margin: 8pt 0;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; }
+  .card {
+    border: 0.5pt solid #ccc;
+    border-radius: 3pt;
+    padding: 10pt 12pt;
+    background: #fcfcfc;
+  }
+  .card h4 { margin-top: 0; }
+
+  .pill { display: inline-block; padding: 1pt 6pt; border-radius: 8pt; font-size: 8.5pt; font-weight: 600; letter-spacing: 0.3pt; }
+  .pill.green { background: #e6f5ea; color: #14632a; }
+  .pill.red   { background: #fbe9e9; color: #8a1d1d; }
+  .pill.amber { background: #fdf2dc; color: #7a4d00; }
+
+  .scriptbox {
+    background: #f7f7f7;
+    border-left: 2pt solid #555;
+    padding: 8pt 12pt;
+    margin: 6pt 0 10pt;
+    font-size: 9.5pt;
+    white-space: pre-wrap;
+    font-family: "Segoe UI", -apple-system, sans-serif;
+  }
+
+  .footer {
+    position: running(footer);
+    font-size: 8pt;
+    color: #888;
+  }
+  .check::before { content: "\2713  "; color: #14632a; font-weight: 700; }
+  .cross::before { content: "\2717  "; color: #8a1d1d; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- COVER -->
+<!-- ============================================================ -->
+<section class="cover">
+  <div class="top">
+    <div class="eyebrow">Business System · Internal Strategy Doc</div>
+    <h1>Premium Content<br/>System Studio</h1>
+    <p class="sub">A productized retainer business for a 2-partner video&nbsp;&amp;&nbsp;branding studio in Tunisia. Six-month roadmap from zero to <strong>10&nbsp;000+ TND MRR</strong>, anchored by a sharp ICP and high-ticket positioning.</p>
+  </div>
+  <div class="meta">
+    <strong>Target:</strong> 3 000 TND/mo by month 3 · 10 000+ TND/mo by month 6 &nbsp;|&nbsp;
+    <strong>Team:</strong> 2 partners (editing + branding + marketing) &nbsp;|&nbsp;
+    <strong>Market:</strong> Tunisian DTC e-commerce + premium service businesses
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 1 — STRATEGIC FOUNDATION -->
+<!-- ============================================================ -->
+<section class="page">
+  <h2>1 · Strategic foundation</h2>
+
+  <h3>The one assumption everything rests on</h3>
+  <p>This entire system depends on <strong>one strategic call</strong>: who you sell to, and at what ticket. Get this wrong and the offer, acquisition, and delivery all collapse. Get it right and 3 000 TND/mo is the floor, not the ceiling.</p>
+
+  <div class="callout">
+    <strong>The qualifier rule (apply to every prospect):</strong><br/>
+    Their average customer must be worth <strong>≥ 1&nbsp;500 TND</strong> to them. If yes → a 2&nbsp;500 TND/mo retainer is a rounding error on their P&amp;L. If no → you're selling a Rolex to someone who needed a watch, and they will churn at month 2.
+  </div>
+
+  <h3>Why "local Tunisian businesses" mostly fails the qualifier</h3>
+  <p>A neighborhood café, retail shop, or generalist service has a customer LTV of 50–300 TND. They cannot rationally pay a premium retainer — even if they want to, the unit economics break. <strong>Only a slice of "local Tunisia" works: high-LTV service businesses.</strong></p>
+
+  <h3>Refined ICP — two segments, one qualifier</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 22%;">Segment</th>
+        <th style="width: 38%;">Examples</th>
+        <th>Why they pay premium</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pill green">Primary</span><br/><strong>Tunisian DTC e-commerce</strong></td>
+        <td>Cosmetics, skincare, modest fashion, streetwear, supplements, home/lifestyle, specialty F&amp;B. Brands doing 25k+ TND/mo, running Meta ads.</td>
+        <td>They already spend on ads → reallocating budget to creative is easy. Need <em>volume</em> of branded video (UGC, product, ads, organic). LTV = 200–600 TND × repeat.</td>
+      </tr>
+      <tr>
+        <td><span class="pill green">Secondary</span><br/><strong>Premium services</strong></td>
+        <td>Aesthetic / dental / derma clinics, IVF centers, real-estate agencies &amp; promoters, private schools and training centers, boutique hotels, law / accounting / consulting firms.</td>
+        <td>One client is worth 3 000–50 000 TND. Brand image is a moat. Already buying marketing — just badly.</td>
+      </tr>
+      <tr>
+        <td><span class="pill red">Excluded</span><br/><strong>Low-LTV local</strong></td>
+        <td>Restaurants, retail shops, generalist services — anything with avg ticket &lt; 200 TND.</td>
+        <td>Math doesn't support a premium retainer. Will churn and damage your case-study slots.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="muted"><strong>Shared trait:</strong> high customer LTV. That's what justifies premium pricing. You're not selling video — you're selling <em>more revenue per ad / per square meter / per chair</em>.</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- 2 — OFFER -->
+<!-- ============================================================ -->
+<section class="page">
+  <h2>2 · Productized offer (4 SKUs)</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Identity Sprint</th>
+        <th>Content OS</th>
+        <th>Performance Partner</th>
+        <th>Ad Creative Pack <span class="pill amber">e-com</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Price</strong></td>
+        <td>1 800 TND<br/><span class="muted">one-shot</span></td>
+        <td><strong>2 500 TND/mo</strong></td>
+        <td><strong>4 500 TND/mo</strong></td>
+        <td>3 200 TND/mo</td>
+      </tr>
+      <tr>
+        <td><strong>Min commitment</strong></td>
+        <td>One-shot</td>
+        <td>3 months</td>
+        <td>3 months</td>
+        <td>2 months</td>
+      </tr>
+      <tr>
+        <td><strong>Brand system</strong></td>
+        <td>Full buildout</td>
+        <td>Full (included M1)</td>
+        <td>Full + monthly refresh</td>
+        <td>Light (creative system only)</td>
+      </tr>
+      <tr>
+        <td><strong>Deliverables / month</strong></td>
+        <td>8 short videos + brand kit</td>
+        <td>12 shorts + 2 product / UGC-style</td>
+        <td>20 shorts + 2 long-form + 1 on-location shoot</td>
+        <td>12 ad-creative variants (3 angles × 4 hooks)</td>
+      </tr>
+      <tr>
+        <td><strong>On-location production</strong></td>
+        <td>1 half-day</td>
+        <td>Quarterly half-day</td>
+        <td>Monthly half-day</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>Strategy</strong></td>
+        <td>—</td>
+        <td>Async hook / script feedback</td>
+        <td>Weekly 30-min strategy call</td>
+        <td>Bi-weekly creative scoring</td>
+      </tr>
+      <tr>
+        <td><strong>Performance review</strong></td>
+        <td>—</td>
+        <td>—</td>
+        <td>Monthly + ad performance</td>
+        <td>CTR / hook-rate scoring</td>
+      </tr>
+      <tr>
+        <td><strong>Turnaround</strong></td>
+        <td>5–7 days</td>
+        <td>3–5 days</td>
+        <td>48–72h priority</td>
+        <td>72h per batch</td>
+      </tr>
+      <tr>
+        <td><strong>Delivery hours / month</strong></td>
+        <td>~25h total</td>
+        <td>~35h</td>
+        <td>~70h</td>
+        <td>~30h</td>
+      </tr>
+      <tr>
+        <td><strong>Capacity / partner</strong></td>
+        <td>1 active sprint</td>
+        <td>2 retainers</td>
+        <td>1 retainer</td>
+        <td>2 retainers</td>
+      </tr>
+      <tr>
+        <td><strong>Outcome the client buys</strong></td>
+        <td>"I have a brand to launch with."</td>
+        <td>"I post consistently in a recognizable system."</td>
+        <td>"I have a fractional content team."</td>
+        <td>"My ads stop dying after 2 weeks."</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Two design notes that matter:</strong><br/>
+    <strong>1.</strong> The <strong>Identity Sprint</strong> exists to seed retainers, not to be a profit center. Pitch it as <em>"month-one of Content OS, paid separately"</em> — target 70%+ upgrade rate.<br/>
+    <strong>2.</strong> The <strong>Ad Creative Pack</strong> is the e-com on-ramp. Founders don't buy "branded content" — they buy <em>ads that scale</em>. Pricing it separately lets you sell to brands not ready for full Content OS.
+  </div>
+
+  <h3>On-location production: a real cost line</h3>
+  <p>Service businesses don't have raw footage to send. Build a <strong>half-day shoot template</strong>: 4 hours on-site = 30+ short clips of staff, space, procedures, testimonials → fuels one month of content. Either one partner shoots while the other backs up files in real-time, or partner with a videographer at 90–150 TND / half-day. Build it into the price; never quote it separately.</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- 3 — REVENUE -->
+<!-- ============================================================ -->
+<section class="page">
+  <h2>3 · Revenue model</h2>
+
+  <h3>Why low-ticket volume is rejected</h3>
+  <p class="muted">15 one-off video packs at 200 TND each = 3 000 TND, but it produces zero recurrence, zero leverage, and burnout in week three. It also contradicts the "system" positioning — discounting destroys credibility. We do not pursue this path.</p>
+
+  <h3>Three viable paths to 3 000+ TND MRR (high-ticket, fewer clients)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Path</th>
+        <th>Mix</th>
+        <th class="num">MRR</th>
+        <th>When</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Floor</strong> (M3 target)</td>
+        <td>2 × Content OS</td>
+        <td class="num"><strong>5 000 TND</strong></td>
+        <td>Month 3</td>
+      </tr>
+      <tr>
+        <td><strong>Realistic</strong> (M4–5)</td>
+        <td>1 Performance + 1 Content OS + 1 Ad Pack</td>
+        <td class="num"><strong>10 200 TND</strong></td>
+        <td>Month 4–5</td>
+      </tr>
+      <tr>
+        <td><strong>Stretch</strong> (M6)</td>
+        <td>2 Performance + 1 Content OS + 1 Ad Pack</td>
+        <td class="num"><strong>14 700 TND</strong></td>
+        <td>Month 6</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout dark">
+    <strong>Capacity rule:</strong> cap at <strong>4 active retainers</strong>. Past that, hire a contractor or refuse work. Premium positioning fails the moment delivery quality slips.
+  </div>
+
+  <h3>The one metric to watch</h3>
+  <p><strong>MRR (Monthly Recurring Revenue from retainers).</strong> Not followers. Not DMs sent. Not video views. Retainer count × average ticket = the only number that tells you the system is working.</p>
+  <p><strong>"Working" threshold:</strong> MRR grows ≥ 30% month-over-month for the first 4 months. If it doesn't, the bottleneck is <em>acquisition</em>, not delivery.</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- 4 — ACQUISITION -->
+<!-- ============================================================ -->
+<section class="page">
+  <h2>4 · Client acquisition system</h2>
+
+  <h3>Bullseye narrowing — pick three channels, double down on whichever produces a paying client first</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Channel</th>
+        <th>Why test it</th>
+        <th>Effort</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>IG cold DM (personalized)</td>
+        <td>Buyers are on IG, you can show portfolio inline</td>
+        <td>30 DMs/week (split between partners)</td>
+      </tr>
+      <tr>
+        <td>IG / TikTok studio account</td>
+        <td>Demonstrates the work itself = best proof</td>
+        <td>3 reels/week</td>
+      </tr>
+      <tr>
+        <td>LinkedIn (FR-speaking founders)</td>
+        <td>Cleaner buying intent, less noise than IG</td>
+        <td>2 posts/week</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="muted"><strong>Cut on day 1:</strong> SEO (too slow), Google Ads (no LTV data yet), YouTube (production cost), prospecting low-LTV local businesses.</p>
+
+  <h3>Free e-com prospecting workflow (2 hours, 60–80 qualified leads)</h3>
+  <ol>
+    <li>Open <strong>Meta Ad Library</strong> → filter Tunisia → keyword by category (cosmétique, mode, supplément, déco…)</li>
+    <li>Any brand running ads for 30+ days = has budget, has bad creative.</li>
+    <li>Add to Notion sheet → check IG follower count &gt; 5k → score by ad longevity.</li>
+    <li>Cold DM with a reference to their actual ad — generic outreach is invisible to them.</li>
+  </ol>
+
+  <h3>Service-business prospecting</h3>
+  <ul>
+    <li>Google Maps + filter by category (clinique esthétique Tunis, etc.)</li>
+    <li>Cross-reference with Instagram presence (must already post regularly)</li>
+    <li>LinkedIn search for "fondateur / directeur" of those orgs</li>
+    <li><strong>Local agency partnerships</strong> — many Tunisian agencies sell SEO/ads but outsource video. Be their video partner, not their competitor.</li>
+  </ul>
+
+  <h3>Outreach scripts (FR)</h3>
+
+  <h4>DM — E-commerce founder</h4>
+  <div class="scriptbox">Salut [Prénom], j'ai vu vos pubs sur Meta — celle de [produit spécifique] tourne depuis 6 semaines, c'est solide.
+
+Le problème que la plupart des marques tunisiennes ont à votre échelle : la créa fatigue vite (CTR qui chute, CPM qui monte) parce qu'on tourne 2-3 vidéos et on les pousse à mort.
+
+On construit des systèmes créatifs pour des marques DTC : 12 variations d'ads par mois, structurées par angle (preuve sociale, problème, démo, lifestyle), pour qu'on ait toujours une créa fraîche à pousser. Identité de marque préservée sur toutes les variations.
+
+Je peux vous envoyer un audit gratuit de vos 5 dernières pubs avec 3 angles inexploités — ça vous intéresse ?</div>
+
+  <h4>DM / LinkedIn — Premium service business</h4>
+  <div class="scriptbox">Bonjour [Prénom], j'ai vu le compte Instagram de [Cabinet/Clinique]. Vous publiez régulièrement, c'est rare dans votre secteur en Tunisie.
+
+Une observation : vos vidéos sont produites comme du contenu personnel, alors que votre clientèle attend une image qui rassure (vos confrères en France/UAE ont un standard visuel beaucoup plus haut, et ça se voit dans le taux de conversion en RDV).
+
+On construit des systèmes de contenu pour des cabinets / centres premium : identité visuelle, scripts cadrés, tournages mensuels sur place. Une vidéo doit faire prendre RDV, pas juste générer des likes.
+
+Si vous êtes ouvert, je peux vous envoyer un audit de vos 5 derniers posts avec 3 leviers concrets pour augmenter le RDV par vidéo.</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 4b — FUNNEL & RHYTHM -->
+<!-- ============================================================ -->
+<section class="page">
+  <h2>4 · Acquisition (cont.)</h2>
+
+  <h3>The audit is the real sales asset</h3>
+  <p>Each free audit is a 5-minute Loom + a 1-page mockup:</p>
+  <ul>
+    <li>Walk-through of their 5 latest videos / ads</li>
+    <li><strong>3 specific fixes</strong> (color inconsistency, hook structure, pacing)</li>
+    <li>1 mockup of how their next reel could look in a fixed system</li>
+  </ul>
+  <p class="muted">The audit is the moment they realize you think differently. Build a Loom template once; reuse forever.</p>
+
+  <h3>Weekly acquisition rhythm (combined for both partners)</h3>
+  <table>
+    <thead>
+      <tr><th>Day</th><th>Activity</th><th>Owner</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Mon</td><td>Plan: 30 prospects scouted in Notion</td><td>Partner A</td></tr>
+      <tr><td>Tue–Fri</td><td>8 DMs / day (4 each) + reply management</td><td>Both</td></tr>
+      <tr><td>Wed</td><td>1 IG reel posted (BTS / case study / fix)</td><td>Partner B</td></tr>
+      <tr><td>Fri</td><td>1 LinkedIn carousel + 1 IG reel</td><td>Partner A</td></tr>
+      <tr><td>Sat</td><td>5 audits sent to warm leads</td><td>Both</td></tr>
+      <tr><td>Sun</td><td>Weekly review: replies, calls booked, MRR delta</td><td>Both</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Funnel benchmarks &amp; failure points</h3>
+  <table>
+    <thead>
+      <tr><th>Stage</th><th>Conversion target</th><th>If below → fix</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>DM sent → reply</td><td>25%</td><td>Tighten hook line; reference specific ad / post</td></tr>
+      <tr><td>Reply → audit accepted</td><td>50%</td><td>Audit not specific enough — add named angle</td></tr>
+      <tr><td>Audit → call booked</td><td>40%</td><td>No clear CTA in the Loom</td></tr>
+      <tr><td>Call → close</td><td>30%</td><td>Pricing or proof problem (case study gap)</td></tr>
+    </tbody>
+  </table>
+  <p class="muted">30 DMs/week × these rates ≈ 0.45 closes/week ≈ 2 closes/month at steady state.<br/>
+  <em>Service businesses</em> have ~30% lower reply rates but ~30% higher close rates once on a call — plan around that.</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- 5 — DELIVERY -->
+<!-- ============================================================ -->
+<section class="page">
+  <h2>5 · Delivery system (operational workflow)</h2>
+
+  <h3>Phase 1 — Onboarding (days 1–10 of any new client)</h3>
+  <table>
+    <thead><tr><th>Day</th><th>Action</th><th>Output</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td>Discovery call (45 min)</td><td>Filled brief in Notion</td></tr>
+      <tr><td>D2</td><td>Brand audit doc</td><td>5-slide audit shared</td></tr>
+      <tr><td>D3–7</td><td>System buildout</td><td>Color palette, typo, editing style guide, 3 Premiere templates, hook bank (50 hooks)</td></tr>
+      <tr><td>D8</td><td>Approval call</td><td>Signed-off style guide</td></tr>
+      <tr><td>D9–10</td><td>First content batch shot / sourced</td><td>Production starts</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Phase 2 — Monthly recurring cycle</h3>
+  <ul>
+    <li><strong>Week 1:</strong> Content research + scripts / concepts (≈ 10h)</li>
+    <li><strong>Week 2:</strong> Batch produce 1 (50% of deliverables)</li>
+    <li><strong>Week 3:</strong> Batch produce 2 (remaining + revisions)</li>
+    <li><strong>Week 4:</strong> Final batch + monthly review call + plan next month</li>
+  </ul>
+
+  <h3>Tool stack (lean, every cost defensible)</h3>
+  <table>
+    <thead><tr><th>Layer</th><th>Tool</th><th class="num">Cost (TND/mo)</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Editing</td><td>Adobe Creative Cloud (1 shared)</td><td class="num">~80</td><td>Industry standard, defensible</td></tr>
+      <tr><td>Review</td><td>Frame.io (free tier)</td><td class="num">0</td><td>Timecoded comments → fewer revision rounds</td></tr>
+      <tr><td>Client portal</td><td>Notion</td><td class="num">0</td><td>One page per client → less back-and-forth</td></tr>
+      <tr><td>Internal PM</td><td>ClickUp (free)</td><td class="num">0</td><td>Task ownership, deadlines</td></tr>
+      <tr><td>AI voice</td><td>ElevenLabs</td><td class="num">~30</td><td>Voiceovers without recording</td></tr>
+      <tr><td>AI script / research</td><td>ChatGPT Plus (1 shared)</td><td class="num">~70</td><td>Hook ideation, research synthesis</td></tr>
+      <tr><td>Stock</td><td>Envato Elements</td><td class="num">~50</td><td>B-roll + music licensed</td></tr>
+      <tr><td>Comms</td><td>WhatsApp Business or Slack Connect</td><td class="num">0</td><td>One channel per client; no email chaos</td></tr>
+      <tr><td colspan="2"><strong>Total tooling</strong></td><td class="num"><strong>≈ 230</strong></td><td>Recoverable on first retainer</td></tr>
+    </tbody>
+  </table>
+
+  <h3>File structure (every client identical)</h3>
+  <div class="scriptbox">/Clients/[ClientName]/
+  00_Brand_System/      ← style guide, palette, templates
+  01_Source/            ← raw footage from client
+  02_Working/           ← .prproj, .aep
+  03_Renders/           ← exported drafts
+  04_Delivered/         ← final, dated MP4s
+  05_Research/          ← hooks, references, scripts
+  06_Comms/             ← call recordings, briefs</div>
+
+  <h3>Communication rules (kill scope creep before it starts)</h3>
+  <ul>
+    <li><strong>One channel per client</strong> (WhatsApp Business OR Slack Connect — pick once, stick).</li>
+    <li><strong>Async-first.</strong> Calls only at onboarding + monthly review.</li>
+    <li><strong>Templated Monday status update</strong> (3 lines: shipped / in progress / blocked).</li>
+    <li><strong>Revisions:</strong> bundled, 1 round per deliverable, 24h client window. Past that, locked.</li>
+  </ul>
+
+  <h3>Three operational moves that compound (the moat)</h3>
+  <ol>
+    <li><strong>On-location production becomes core</strong> — service businesses can't send footage; build the half-day shoot template once.</li>
+    <li><strong>UGC brief library for e-com</strong> — 10 reusable briefs (unboxing, before/after, problem-solution, testimonial, demo) you hand to the client's UGC creators. You edit; they shoot.</li>
+    <li><strong>Ad performance loop</strong> (Performance &amp; Ad Pack tiers) — read-only access to client's Meta Ads Manager → pull CTR, thumb-stop rate, hook rate weekly → next month's creative briefed <em>from data, not taste</em>. <span class="muted">No Tunisian editor does this. It's your moat.</span></li>
+  </ol>
+</section>
+
+<!-- ============================================================ -->
+<!-- 6 — POSITIONING -->
+<!-- ============================================================ -->
+<section class="page">
+  <h2>6 · Differentiation &amp; positioning</h2>
+
+  <h3>April Dunford positioning</h3>
+  <table>
+    <tbody>
+      <tr><td><strong>Competitive alternatives</strong></td><td>Freelance editors (Fiverr, Malt), in-house intern, full-service marketing agencies.</td></tr>
+      <tr><td><strong>Unique attributes</strong></td><td>Build the brand + editing system <em>before</em> producing. Operate it as a recurring retainer. Briefs driven by performance data.</td></tr>
+      <tr><td><strong>Value (so what)</strong></td><td>Every video compounds the brand instead of starting from zero. Recognizable in 2 seconds — even without face-cam.</td></tr>
+      <tr><td><strong>Who cares most</strong></td><td>Brands and service businesses producing 4+ videos/week who already feel the cost of inconsistency.</td></tr>
+      <tr><td><strong>Market category</strong></td><td><strong>Content System Studio</strong> — not "video editor", not "agency".</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Positioning statement (use verbatim in bio &amp; pitch)</h3>
+  <div class="callout">
+    <em>"We're a creative system studio for Tunisian DTC brands and premium service businesses. We design your visual system once, then produce the videos and ads that run inside it every month — built from your performance data, not from taste. We don't sell videos. We sell more revenue per dirham of ad spend or per square meter of clinic."</em>
+  </div>
+
+  <h3>Three messages to repeat across every channel</h3>
+  <table>
+    <thead><tr><th>Pillar</th><th>Proof point in content</th></tr></thead>
+    <tbody>
+      <tr><td><strong>"Vidéos qui font vendre, pas vidéos qui font des vues."</strong></td><td>Side-by-side reel: 3 random brands vs. 3 of your clients</td></tr>
+      <tr><td><strong>"Vos pubs meurent en 2 semaines parce qu'il n'y a pas de système créatif derrière."</strong></td><td>Carousel of ad-fatigue curves with vs. without a system</td></tr>
+      <tr><td><strong>"On ne crée pas du contenu — on construit la machine qui le produit."</strong></td><td>BTS reel showing the style-guide deliverable in action</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Words to ban from every channel</h3>
+  <p>Never write or say <strong>"video editing,"</strong> <strong>"montage vidéo,"</strong> or <strong>"freelance editor"</strong> in your bio, DMs, or sales calls. Those words are poison for your pricing.</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- 7 — PROFIT & INVESTMENT -->
+<!-- ============================================================ -->
+<section class="page">
+  <h2>7 · Profit &amp; investment structure</h2>
+
+  <p>Avoid 50/50. It breaks the moment one partner outworks the other. Use a <strong>contribution-weighted</strong> model from day one.</p>
+
+  <h3>Monthly waterfall</h3>
+  <div class="scriptbox">Revenue
+  − Shared costs (Adobe, AI, stock, hosting)
+  − Reinvestment bucket (sliding scale, see below)
+= Profit pool
+   → 40% Base   (split 50/50)         ← rewards partnership, sales, ops
+   → 60% Variable (split by hours)    ← rewards execution</div>
+
+  <h3>Worked example — month 4, 5 000 TND revenue</h3>
+  <table>
+    <thead><tr><th>Line</th><th class="num">Amount (TND)</th></tr></thead>
+    <tbody>
+      <tr><td>Revenue</td><td class="num">5 000</td></tr>
+      <tr><td>− Shared costs</td><td class="num">−300</td></tr>
+      <tr><td>− Reinvestment (20%)</td><td class="num">−940</td></tr>
+      <tr><td><strong>Profit pool</strong></td><td class="num"><strong>3 760</strong></td></tr>
+      <tr><td>Base 40% (split 50/50)</td><td class="num">1 504 → 752 each</td></tr>
+      <tr><td>Variable 60% (hours: A 60h, B 40h)</td><td class="num">2 256 → A 1 354, B 902</td></tr>
+      <tr><td><strong>Take-home</strong></td><td class="num"><strong>A: 2 106 / B: 1 654</strong></td></tr>
+    </tbody>
+  </table>
+  <p class="muted">Track hours in a shared Google Sheet (or Toggl). Reconcile last day of every month.</p>
+
+  <h3>Reinvestment policy (sliding scale)</h3>
+  <table>
+    <thead><tr><th>MRR (TND)</th><th class="num">Reinvest</th><th class="num">Take-home</th></tr></thead>
+    <tbody>
+      <tr><td>0 – 3 000</td><td class="num">50%</td><td class="num">50% &nbsp;<span class="muted">(recover initial tool spend)</span></td></tr>
+      <tr><td>3 000 – 6 000</td><td class="num">30%</td><td class="num">70%</td></tr>
+      <tr><td>6 000 – 10 000</td><td class="num">20%</td><td class="num">80%</td></tr>
+      <tr><td>10 000+</td><td class="num">15%</td><td class="num">85% &nbsp;<span class="muted">(fund first hire)</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>What to reinvest in (in order)</h3>
+  <ol>
+    <li>Adobe annual prepaid (~25% discount vs. monthly)</li>
+    <li>Better mic / SSDs / second monitor — for whichever partner is the bottleneck</li>
+    <li>ChatGPT Pro / Topaz Video AI / specialized tools</li>
+    <li>Paid IG account growth (only after month 4)</li>
+    <li>First contractor (junior editor) to free both partners for sales</li>
+  </ol>
+</section>
+
+<!-- ============================================================ -->
+<!-- 8 — ROADMAP -->
+<!-- ============================================================ -->
+<section class="page">
+  <h2>8 · Six-month roadmap</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 8%;">Month</th>
+        <th style="width: 22%;">Focus</th>
+        <th>Milestones</th>
+        <th class="num" style="width: 16%;">MRR target</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>M1</strong></td>
+        <td>Foundation + first proof</td>
+        <td>Niche locked. <strong>2 free spec case studies</strong> — 1 e-com brand + 1 premium service business — in exchange for results data + testimonial + footage rights. Tool stack live. Notion portal template built. 1 paid pilot at 50% off.</td>
+        <td class="num">0 paid<br/>~1 100 TND one-shot</td>
+      </tr>
+      <tr>
+        <td><strong>M2</strong></td>
+        <td>First real retainer</td>
+        <td>Daily outbound rhythm (15 DMs/day combined). Meta Ad Library scraping weekly. 5 audits sent / week. IG studio account at 20+ posts. <strong>First retainer should be e-com</strong> (faster sales cycle).</td>
+        <td class="num"><strong>2 500 TND</strong></td>
+      </tr>
+      <tr>
+        <td><strong>M3</strong></td>
+        <td>Hit the floor</td>
+        <td>Land first service-business retainer. Now you have a case study in <em>each</em> segment. Refine onboarding doc + style-guide template.</td>
+        <td class="num"><strong>5 000 TND</strong> <span class="pill green">FLOOR HIT</span></td>
+      </tr>
+      <tr>
+        <td><strong>M4</strong></td>
+        <td>Optimize delivery</td>
+        <td>Premiere template library cuts edit time 30%. Raise prices for new clients (Core → 2 700, Premium → 4 800). <strong>Decide segment focus by close rate.</strong> If e-com closes faster → double down. If service businesses close at higher ticket → double down. Don't keep both equal.</td>
+        <td class="num"><strong>7 000 TND</strong></td>
+      </tr>
+      <tr>
+        <td><strong>M5</strong></td>
+        <td>Move upmarket</td>
+        <td>First Performance Partner retainer (4 500+ TND). Partner with 1 Tunisian marketing agency (they sell ads, you do video) → recurring referral pipeline. Hire first contractor (~800 TND/mo) for Tier-1 work.</td>
+        <td class="num"><strong>9 000 TND</strong></td>
+      </tr>
+      <tr>
+        <td><strong>M6</strong></td>
+        <td>Scale decision</td>
+        <td>3–4 active retainers. Sales asset live (portfolio site + 2 case studies with real numbers). Decide: stay lean (2 partners + 1 contractor) or build a 3-person team. Sunset Ad Creative Pack if Performance Partner has won.</td>
+        <td class="num"><strong>10 000+ TND</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout dark">
+    <strong>The decision point at month 4:</strong> if both segments are converting equally, you don't have focus — you have a coin flip. Pick the one with the higher close rate <em>or</em> the higher ticket and concentrate outreach there. Generalists die in Tunisia; specialists win.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 9 — WHAT TO CUT -->
+<!-- ============================================================ -->
+<section class="page">
+  <h2>9 · What to cut — saying no is half the value</h2>
+
+  <p>Every "no" below protects the system. Each one is a real temptation that has killed early-stage studios.</p>
+
+  <table>
+    <thead>
+      <tr><th style="width: 35%;">Don't do this</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="cross"><strong>Build a website in M1–M3</strong></td>
+        <td>IG profile + Notion case studies = enough. Premature web spend is procrastination dressed as productivity.</td>
+      </tr>
+      <tr>
+        <td class="cross"><strong>Run paid ads before M5</strong></td>
+        <td>No LTV data → no defensible CAC. Spending without LTV is gambling.</td>
+      </tr>
+      <tr>
+        <td class="cross"><strong>Take one-off video gigs for cash</strong></td>
+        <td>Kills capacity for the retainer that compounds. Every transactional gig is two weeks you couldn't sell a retainer.</td>
+      </tr>
+      <tr>
+        <td class="cross"><strong>Offer standalone logo design</strong></td>
+        <td>Low margin. Dilutes positioning. Brand designers do it better.</td>
+      </tr>
+      <tr>
+        <td class="cross"><strong>Price foreign clients in TND</strong></td>
+        <td>Always EUR/USD. Your geography is a discount, not a posted price.</td>
+      </tr>
+      <tr>
+        <td class="cross"><strong>Go 50/50 profit split on day 1</strong></td>
+        <td>Bake the contribution split in <em>before</em> resentment shows up. Hours-based variable component is the safety valve.</td>
+      </tr>
+      <tr>
+        <td class="cross"><strong>Pitch "video editing" anywhere</strong></td>
+        <td>The word is poison for your pricing. Bio, DM, call — never use it.</td>
+      </tr>
+      <tr>
+        <td class="cross"><strong>Take a single low-LTV local business</strong></td>
+        <td>They'll churn, badmouth pricing, and waste a case-study slot. Disqualify on the call. No exceptions, even at full price.</td>
+      </tr>
+      <tr>
+        <td class="cross"><strong>Pitch e-com brands without referencing their actual ads</strong></td>
+        <td>Generic outreach to e-com founders is invisible. Specificity (you saw their Meta ad, you know their angle) is the entire game.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>The qualifier rule, restated</h3>
+  <div class="callout dark">
+    Before any sales call, write the answer to <strong>one question</strong>: <em>"What's this prospect's average customer worth to them?"</em> If you can't answer ≥ 1 500 TND with confidence, the call ends as a polite decline. You don't need every client. You need the <strong>right four</strong>.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 10 — ONE-PAGE EXEC SUMMARY (last page) -->
+<!-- ============================================================ -->
+<section>
+  <h2>Executive summary (one page)</h2>
+
+  <div class="grid-2">
+    <div class="card no-break">
+      <h4>The bet</h4>
+      <p><strong>Position as a "Content System Studio,"</strong> not a video editor. Build brand+editorial systems first, then produce in them as a recurring retainer. Premium ticket, fewer clients, deeper relationships.</p>
+    </div>
+    <div class="card no-break">
+      <h4>Who we sell to</h4>
+      <p><strong>Tunisian DTC e-commerce</strong> (cosmetics, fashion, supplements — running Meta ads) and <strong>premium service businesses</strong> (clinics, real estate, education). Qualifier: avg customer LTV ≥ 1 500 TND.</p>
+    </div>
+    <div class="card no-break">
+      <h4>What we sell</h4>
+      <p>4 SKUs: Identity Sprint (1 800 one-shot) · <strong>Content OS (2 500/mo)</strong> · Performance Partner (4 500/mo) · Ad Creative Pack (3 200/mo).</p>
+    </div>
+    <div class="card no-break">
+      <h4>How we get clients</h4>
+      <p>3 channels: IG cold DM (referencing their actual ads/posts), studio IG/TikTok account, LinkedIn for FR-speaking founders. Free 5-min audit Loom = the real sales asset.</p>
+    </div>
+    <div class="card no-break">
+      <h4>The metric</h4>
+      <p><strong>MRR.</strong> Threshold: ≥ 30% MoM growth for 4 months. Cap at 4 active retainers — past that, hire or refuse.</p>
+    </div>
+    <div class="card no-break">
+      <h4>The 6-month destination</h4>
+      <p><strong>10 000+ TND MRR</strong> from 3–4 retainers, 1 contractor, 1 agency referral partnership. Floor of 3 000 TND hit by month 3.</p>
+    </div>
+  </div>
+
+  <h3>The five rules that protect the system</h3>
+  <ol>
+    <li><strong>The qualifier rule</strong> — every prospect's customer must be worth ≥ 1 500 TND to them.</li>
+    <li><strong>The capacity rule</strong> — never more than 4 active retainers per 2 partners.</li>
+    <li><strong>The vocabulary rule</strong> — never say "video editing" or "montage vidéo".</li>
+    <li><strong>The retainer rule</strong> — no transactional gigs once 2 retainers are signed.</li>
+    <li><strong>The split rule</strong> — 40% base / 60% hours-variable from day 1, no exceptions.</li>
+  </ol>
+
+  <p class="muted" style="margin-top: 18pt; border-top: 0.5pt solid #ccc; padding-top: 8pt; font-size: 8.5pt;">
+    Internal strategy document · v1.0 · Built for a 2-partner studio targeting Tunisia + MENA · Output format: A4 print-ready
+  </p>
+</section>
+
+</body>
+</html>

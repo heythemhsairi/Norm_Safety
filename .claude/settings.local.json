@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p public/assets/norm)",
+      "Bash(cp \"C:/Users/elbootic.com/Desktop/Norm logos/SVG/Primary logo horizontal.svg\" public/assets/norm/normsafety-logo-horizontal.svg)",
+      "Bash(cp \"C:/Users/elbootic.com/Desktop/Norm logos/SVG/Primary logo Vertical .svg\" public/assets/norm/normsafety-logo-vertical.svg)",
+      "Bash(cp \"C:/Users/elbootic.com/Desktop/Norm logos/SVG/Logo Icon .svg\" public/assets/norm/normsafety-icon.svg)",
+      "Bash(wc -l src/components/BrandIdentity.tsx src/sections/*.tsx)",
+      "Bash(npm run:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(cp \"C:/Users/elbootic.com/Desktop/Norm logos/SVG/Primary logo Vertical.svg\" public/assets/norm/normsafety-logo-vertical.svg)",
+      "Bash(cp \"C:/Users/elbootic.com/Desktop/Norm logos/SVG/Icon Proposition 2.svg\" public/assets/norm/icon-proposition-2.svg)",
+      "Bash(cp \"C:/Users/elbootic.com/Desktop/Norm logos/SVG/Icon Proposition 3.svg\" public/assets/norm/icon-proposition-3.svg)",
+      "Bash(git restore *)"
+    ]
+  }
+}

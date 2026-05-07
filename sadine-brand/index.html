@@ -1,0 +1,1927 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sadine Tours · Brand Identity System · 2026</title>
+<meta name="description" content="Sadine Tours — premium travel brand identity system. Strategy, logo, color, type, visual language, applications." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;700&family=Cairo:wght@400;500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --purple:#4B2E83;
+  --plum:#2A124F;
+  --plum-deep:#1B0A36;
+  --gold:#F5B942;
+  --soft:#F8F6FC;
+  --lav:#D8C8F3;
+  --lav-dim:rgba(216,200,243,.55);
+  --hair:rgba(248,246,252,.12);
+  --hair-strong:rgba(248,246,252,.22);
+  --glow:rgba(123,91,206,.55);
+  --display:'Satoshi','Manrope',system-ui,sans-serif;
+  --text:'Manrope','Satoshi',system-ui,sans-serif;
+  --ar:'Alexandria','Cairo',system-ui,sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0A0418;color:var(--soft);font-family:var(--text);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+
+/* ───────────  Slide framework  ─────────── */
+.book{
+  display:flex;flex-direction:column;align-items:center;gap:32px;
+  padding:48px 24px 96px;
+  min-height:100vh;
+}
+.slide{
+  position:relative;
+  width:1440px;max-width:100%;
+  aspect-ratio:16/9;
+  background:
+    radial-gradient(120% 90% at 85% 10%, rgba(245,185,66,.08) 0%, rgba(245,185,66,0) 55%),
+    radial-gradient(80% 70% at 15% 90%, rgba(123,91,206,.35) 0%, rgba(123,91,206,0) 60%),
+    linear-gradient(135deg, var(--plum) 0%, var(--purple) 100%);
+  color:var(--soft);
+  overflow:hidden;
+  border:1px solid var(--hair);
+  border-radius:18px;
+  box-shadow:0 60px 120px -40px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.02) inset;
+}
+.slide.dark{
+  background:
+    radial-gradient(70% 60% at 80% 20%, rgba(245,185,66,.06) 0%, rgba(245,185,66,0) 60%),
+    radial-gradient(90% 70% at 20% 100%, rgba(75,46,131,.55) 0%, rgba(75,46,131,0) 60%),
+    linear-gradient(180deg, #15082B 0%, var(--plum-deep) 100%);
+}
+.slide.light{
+  background:
+    radial-gradient(70% 60% at 90% 0%, rgba(216,200,243,.55) 0%, rgba(216,200,243,0) 60%),
+    linear-gradient(180deg, var(--soft) 0%, #ECE5F8 100%);
+  color:var(--plum);
+}
+.slide.light .hair{background:rgba(42,18,79,.18)}
+
+/* slide chrome */
+.frame{position:absolute;inset:48px;display:flex;flex-direction:column}
+.eyebrow{
+  font-family:var(--display);font-weight:500;letter-spacing:.32em;
+  font-size:11px;text-transform:uppercase;color:var(--lav);
+}
+.slide.light .eyebrow{color:rgba(42,18,79,.6)}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:24px}
+.topbar .id{display:flex;gap:14px;align-items:center}
+.topbar .id .dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.botbar{display:flex;justify-content:space-between;align-items:flex-end;margin-top:auto;gap:24px}
+.botbar .pg{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav)}
+.slide.light .botbar .pg{color:rgba(42,18,79,.6)}
+.hair{height:1px;width:100%;background:var(--hair)}
+.hair.gold{background:linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);opacity:.7}
+.hair.short{width:64px}
+
+/* glow puck behind marks */
+.glow{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(closest-side, var(--glow) 0%, rgba(123,91,206,0) 70%);
+  filter:blur(20px);pointer-events:none;
+}
+
+/* utility */
+.row{display:flex;gap:32px}
+.col{display:flex;flex-direction:column;gap:24px}
+.center{display:flex;align-items:center;justify-content:center;flex-direction:column}
+.grow{flex:1}
+.mute{color:var(--lav)}
+.gold{color:var(--gold)}
+.white{color:var(--soft)}
+.cap{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.4em;text-transform:uppercase}
+.h1{font-family:var(--display);font-weight:700;font-size:88px;line-height:1.02;letter-spacing:-.02em}
+.h2{font-family:var(--display);font-weight:700;font-size:56px;line-height:1.06;letter-spacing:-.015em}
+.h3{font-family:var(--display);font-weight:500;font-size:32px;line-height:1.18;letter-spacing:-.005em}
+.h4{font-family:var(--display);font-weight:500;font-size:22px;line-height:1.25}
+.lead{font-family:var(--text);font-weight:400;font-size:18px;line-height:1.62;color:var(--lav)}
+.body{font-family:var(--text);font-weight:400;font-size:14.5px;line-height:1.7;color:var(--lav)}
+.kbd{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav)}
+
+/* page break for print */
+@media print{
+  html,body{background:#0A0418}
+  .book{gap:0;padding:0}
+  .slide{
+    page-break-after:always;break-after:page;
+    border-radius:0;border:0;box-shadow:none;
+    width:100%;height:100vh;aspect-ratio:auto;
+  }
+  @page{size:1440px 810px;margin:0}
+}
+
+/* ───────────  Slide-specific  ─────────── */
+
+/* Cover */
+.cover .frame{justify-content:space-between}
+.cover .center-mark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:32px}
+.cover .center-mark .glow-large{
+  position:absolute;width:900px;height:900px;border-radius:50%;
+  background:radial-gradient(closest-side, rgba(123,91,206,.45) 0%, rgba(123,91,206,0) 70%);
+  filter:blur(30px);
+}
+.cover .center-mark .wordmark{position:relative;width:760px}
+.cover .stamp{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 14px;border:1px solid var(--hair-strong);border-radius:999px;
+  font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  background:rgba(255,255,255,.03);backdrop-filter:blur(8px);
+}
+.cover .stamp .pulse{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+.cover .credits{display:flex;gap:48px}
+.cover .credits .c{display:flex;flex-direction:column;gap:6px}
+
+/* Index */
+.toc{display:grid;grid-template-columns:1fr 1fr;gap:24px 64px}
+.toc .row{display:flex;justify-content:space-between;border-bottom:1px solid var(--hair);padding:14px 0;align-items:baseline}
+.toc .row .num{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.3em;color:var(--lav)}
+.toc .row .name{font-family:var(--display);font-weight:500;font-size:18px}
+.toc .row .pg{font-family:var(--display);font-weight:500;font-size:12px;color:var(--lav)}
+
+/* Manifesto */
+.manifesto-quote{font-family:var(--display);font-weight:700;font-size:64px;line-height:1.08;letter-spacing:-.02em;max-width:1100px}
+.manifesto-quote .gold{font-style:normal}
+
+/* Three column blocks (positioning/mission/vision, audience) */
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;align-items:stretch}
+.card{
+  position:relative;
+  padding:28px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--hair);
+  border-radius:14px;
+  backdrop-filter:blur(10px);
+  display:flex;flex-direction:column;gap:16px;
+  min-height:280px;
+}
+.card .num{
+  font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.32em;color:var(--gold);text-transform:uppercase
+}
+.card.dark{background:rgba(0,0,0,.25)}
+.card.lav{background:var(--lav);color:var(--plum)}
+.card.lav .num{color:var(--purple)}
+
+/* Values — 6 grid */
+.six{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.six .v{padding:22px;border:1px solid var(--hair);border-radius:12px;background:rgba(255,255,255,.03);min-height:170px;display:flex;flex-direction:column;gap:10px}
+.six .v .n{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.32em;color:var(--gold);text-transform:uppercase}
+.six .v .t{font-family:var(--display);font-weight:700;font-size:24px}
+
+/* Personality + tone */
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:48px}
+.tone-list{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.tone-list .col h5{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav);margin-bottom:14px}
+.tone-list ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.tone-list li{font-family:var(--display);font-weight:500;font-size:18px;border-bottom:1px solid var(--hair);padding-bottom:8px}
+.tone-list .y li{color:var(--soft)}
+.tone-list .n li{color:rgba(248,246,252,.4);text-decoration:line-through;text-decoration-color:rgba(248,246,252,.2)}
+.sample{background:rgba(0,0,0,.28);border-left:2px solid var(--gold);padding:16px 20px;border-radius:0 10px 10px 0;font-family:var(--text);font-size:15px;line-height:1.6}
+.sample .lab{display:block;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+
+/* Logo slide */
+.logo-stage{
+  position:relative;flex:1;display:flex;align-items:center;justify-content:center;
+}
+.logo-stage .glow-l{
+  position:absolute;width:680px;height:680px;border-radius:50%;
+  background:radial-gradient(closest-side, rgba(123,91,206,.4) 0%, rgba(123,91,206,0) 70%);
+  filter:blur(30px);
+}
+.logo-stage .wm{position:relative;width:760px}
+.logo-stage .wm.small{width:520px}
+.logo-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;border-top:1px solid var(--hair);padding-top:18px}
+.logo-meta .m h6{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav);margin-bottom:6px}
+.logo-meta .m p{font-family:var(--display);font-weight:500;font-size:14px}
+
+/* Anatomy — wordmark with construction lines */
+.anatomy{position:relative;flex:1;display:flex;align-items:center;justify-content:center}
+.anatomy .wm{width:880px;position:relative;z-index:2}
+.anatomy .grid-bg{
+  position:absolute;inset:50px;border:1px dashed rgba(245,185,66,.4);border-radius:8px;
+  background-image:
+    linear-gradient(to right, rgba(245,185,66,.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(245,185,66,.08) 1px, transparent 1px);
+  background-size:48px 48px;
+}
+.anatomy .annot{position:absolute;font-family:var(--display);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.annot.a1{top:24%;left:10%}
+.annot.a2{top:24%;right:10%}
+.annot.a3{bottom:30%;left:18%}
+.annot.a4{bottom:30%;right:18%}
+.annot.a5{top:50%;left:50%;transform:translate(-50%,-50%)}
+
+/* Logo family — 6 tile grid */
+.logo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;flex:1}
+.logo-grid .tile{
+  position:relative;
+  border:1px solid var(--hair);border-radius:14px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  min-height:180px;padding:24px;gap:14px;
+}
+.logo-grid .tile.purple{background:linear-gradient(160deg, var(--plum) 0%, var(--purple) 100%)}
+.logo-grid .tile.dark{background:#0E0420}
+.logo-grid .tile.light{background:var(--soft)}
+.logo-grid .tile.lav{background:var(--lav)}
+.logo-grid .tile.gold{background:var(--gold)}
+.logo-grid .tile .l{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.5);position:absolute;top:14px;left:14px}
+.logo-grid .tile.light .l, .logo-grid .tile.lav .l, .logo-grid .tile.gold .l{color:rgba(42,18,79,.55)}
+.logo-grid .tile .wm{width:75%;max-width:320px}
+.logo-grid .tile .icon{width:80px}
+
+/* Clear space + minimum */
+.clear{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;flex:1}
+.clear .stage{position:relative;border:1px solid var(--hair);border-radius:14px;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;padding:64px}
+.clear .stage .wm{width:80%;max-width:520px;position:relative;z-index:2}
+.clear .stage .x-marks{position:absolute;inset:32px;border:1px dashed rgba(245,185,66,.5);border-radius:6px}
+.clear .stage .x-corners{position:absolute;width:32px;height:32px;border:1px solid var(--gold)}
+.clear .stage .xc1{top:32px;left:32px;border-right:0;border-bottom:0}
+.clear .stage .xc2{top:32px;right:32px;border-left:0;border-bottom:0}
+.clear .stage .xc3{bottom:32px;left:32px;border-right:0;border-top:0}
+.clear .stage .xc4{bottom:32px;right:32px;border-left:0;border-top:0}
+.clear .stage .x-label{position:absolute;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.clear .stage .x-label.t{top:8px;left:50%;transform:translateX(-50%)}
+.clear .stage .x-label.l{left:8px;top:50%;transform:translateY(-50%) rotate(-90deg)}
+.clear .min-list{display:flex;flex-direction:column;gap:18px}
+.clear .min-item{padding:18px;border:1px solid var(--hair);border-radius:12px;background:rgba(255,255,255,.03);display:flex;align-items:center;gap:18px}
+.clear .min-item .swatch{width:80px;display:flex;align-items:center;justify-content:center;flex-shrink:0;height:42px;background:rgba(0,0,0,.25);border-radius:6px}
+.clear .min-item .meta h6{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav)}
+.clear .min-item .meta p{font-family:var(--display);font-weight:500;font-size:16px;margin-top:2px}
+
+/* Misuse grid */
+.misuse{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:18px;flex:1}
+.misuse .m{
+  position:relative;border:1px solid var(--hair);border-radius:14px;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  background:rgba(0,0,0,.25);overflow:hidden;
+}
+.misuse .m .x-overlay{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(45deg, transparent 49.4%, rgba(255,68,68,.85) 49.6%, rgba(255,68,68,.85) 50.4%, transparent 50.6%),
+    linear-gradient(-45deg, transparent 49.4%, rgba(255,68,68,.85) 49.6%, rgba(255,68,68,.85) 50.4%, transparent 50.6%);
+  pointer-events:none;
+}
+.misuse .m .lab{position:absolute;top:12px;left:14px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#ff6b6b;z-index:3}
+.misuse .m .wm{width:55%;position:relative;z-index:2}
+.misuse .m.stretched .wm{transform:scaleX(1.6) scaleY(.7)}
+.misuse .m.recolor svg .cls-2{fill:#43e08e !important}
+.misuse .m.busy{background:linear-gradient(135deg,#ff6b6b 0%,#4ecdc4 50%,#ffd93d 100%)}
+.misuse .m.rotated .wm{transform:rotate(-12deg)}
+.misuse .m.outlined svg .cls-2{fill:transparent !important;stroke:#fff;stroke-width:6}
+.misuse .m.shadow{filter:drop-shadow(0 6px 0 rgba(0,0,0,.6))}
+
+/* Color palette */
+.palette{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:14px;flex:1}
+.swatch-card{
+  position:relative;
+  border-radius:18px;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:24px;
+  border:1px solid var(--hair);
+  min-height:380px;
+}
+.swatch-card .name{font-family:var(--display);font-weight:700;font-size:22px;margin-bottom:6px}
+.swatch-card .role{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;opacity:.7;margin-bottom:18px}
+.swatch-card .vals{display:flex;flex-direction:column;gap:4px;font-family:var(--display);font-weight:500;font-size:11.5px;letter-spacing:.04em}
+.swatch-card .vals .row{display:flex;justify-content:space-between;border-top:1px solid currentColor;padding-top:6px;opacity:.85}
+.swatch-card .vals .row:first-child{border-top:0;padding-top:0}
+.s-purple{background:linear-gradient(160deg,#5C3AA1 0%, #4B2E83 60%, #3A2266 100%);color:var(--soft)}
+.s-plum{background:linear-gradient(160deg, #3A1A6B 0%, #2A124F 60%, #1A0833 100%);color:var(--soft)}
+.s-gold{background:linear-gradient(160deg,#FFD06E 0%, #F5B942 60%, #D89A24 100%);color:#3D2700}
+.s-soft{background:linear-gradient(160deg,#FFFFFF 0%, #F8F6FC 60%, #ECE5F8 100%);color:var(--plum)}
+.s-lav{background:linear-gradient(160deg,#E5D8FA 0%, #D8C8F3 60%, #BFA9E6 100%);color:var(--plum)}
+
+/* Gradient slide */
+.gradients{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;flex:1}
+.grad{
+  position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--hair);
+  padding:24px;display:flex;flex-direction:column;justify-content:space-between;min-height:340px;
+}
+.grad .name{font-family:var(--display);font-weight:700;font-size:22px}
+.grad .role{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;opacity:.75;margin-top:4px}
+.grad .vals{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.04em;opacity:.85}
+.grad.g1{background:linear-gradient(135deg,#2A124F 0%, #4B2E83 100%);color:var(--soft)}
+.grad.g2{background:linear-gradient(135deg,#4B2E83 0%, #7B5BCE 100%);color:var(--soft)}
+.grad.g3{background:linear-gradient(135deg,#4B2E83 0%, #F5B942 100%);color:var(--soft)}
+
+/* Color ratios */
+.ratio-bar{display:flex;height:88px;border-radius:12px;overflow:hidden;border:1px solid var(--hair)}
+.ratio-bar .seg{display:flex;align-items:flex-end;padding:14px;font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.ratio-bar .s60{flex:60;background:var(--purple);color:var(--soft)}
+.ratio-bar .s25{flex:25;background:var(--soft);color:var(--plum)}
+.ratio-bar .s10{flex:10;background:var(--lav);color:var(--plum)}
+.ratio-bar .s5{flex:5;background:var(--gold);color:#3D2700}
+
+/* Typography */
+.type-stage{flex:1;display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:stretch}
+.type-stage .display{display:flex;flex-direction:column;justify-content:space-between}
+.specimen{
+  font-family:var(--display);font-weight:700;
+  font-size:240px;line-height:.95;letter-spacing:-.04em;
+}
+.specimen.med{font-weight:500}
+.specimen.man{font-family:var(--text);font-weight:600;font-size:200px;letter-spacing:-.03em}
+.specimen.ar{font-family:var(--ar);font-weight:700;font-size:200px;line-height:1.1;letter-spacing:0;direction:rtl;text-align:right}
+.glyph-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.glyph{
+  border:1px solid var(--hair);border-radius:8px;aspect-ratio:1;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-weight:500;font-size:32px;color:var(--soft);
+  background:rgba(0,0,0,.25);
+}
+.glyph.man{font-family:var(--text);font-weight:500}
+.glyph.ar{font-family:var(--ar);font-weight:500;font-size:36px}
+.weights{display:flex;flex-direction:column;gap:8px}
+.weights .w{font-family:var(--display);font-size:36px;border-bottom:1px solid var(--hair);padding-bottom:8px}
+.weights .w.man{font-family:var(--text)}
+.weights .w.ar{font-family:var(--ar);direction:rtl;text-align:right}
+.weights .w small{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav);float:right;margin-top:14px}
+.weights .w.man small,.weights .w.ar small{font-family:var(--display)}
+
+/* Hierarchy */
+.hier{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;flex:1}
+.hier .stack{display:flex;flex-direction:column;gap:18px}
+.hier .stack .row{display:flex;align-items:baseline;gap:24px;border-bottom:1px solid var(--hair);padding-bottom:14px}
+.hier .stack .row .lab{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav);width:170px;flex-shrink:0}
+.hier .stack .row .ex{flex:1}
+.hier-h1{font-family:var(--display);font-weight:700;font-size:64px;line-height:1;letter-spacing:-.02em}
+.hier-h2{font-family:var(--display);font-weight:700;font-size:40px;line-height:1.05;letter-spacing:-.015em}
+.hier-h3{font-family:var(--display);font-weight:500;font-size:24px}
+.hier-eyebrow{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.hier-body{font-family:var(--text);font-weight:400;font-size:15px;line-height:1.7;color:var(--lav)}
+.hier-cap{font-family:var(--text);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--lav)}
+
+/* Photography mood */
+.mood{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:14px;flex:1}
+.mood .frame-img{
+  position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--hair);
+  display:flex;align-items:flex-end;padding:18px;color:var(--soft);min-height:200px;
+}
+.mood .frame-img .lab{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;background:rgba(0,0,0,.5);padding:6px 10px;border-radius:99px;backdrop-filter:blur(6px)}
+.mood .frame-img.f1{background:
+  radial-gradient(70% 60% at 30% 30%, rgba(245,185,66,.75) 0%, transparent 60%),
+  linear-gradient(180deg, #1a0a36 0%, #5B2E70 50%, #C77B3A 100%)}
+.mood .frame-img.f2{background:
+  radial-gradient(60% 40% at 50% 80%, rgba(216,200,243,.6) 0%, transparent 60%),
+  linear-gradient(180deg, #0a0418 0%, #2A124F 60%, #4B2E83 100%)}
+.mood .frame-img.f3{background:
+  radial-gradient(50% 40% at 70% 20%, rgba(255,180,100,.6) 0%, transparent 60%),
+  linear-gradient(160deg, #2a124f 0%, #4B2E83 50%, #B07F4E 100%)}
+.mood .frame-img.f4{background:
+  linear-gradient(180deg, #1a0a36 0%, #2A124F 100%);position:relative}
+.mood .frame-img.f4::after{content:"";position:absolute;inset:30% 20%;border:1px solid var(--gold);opacity:.5}
+.mood .frame-img.f5{background:
+  radial-gradient(70% 60% at 50% 50%, rgba(248,246,252,.18) 0%, transparent 60%),
+  linear-gradient(180deg, #0E0420 0%, #1B0A36 100%)}
+.mood .frame-img.f6{background:
+  linear-gradient(120deg, #4B2E83 0%, #7B5BCE 100%)}
+.mood .frame-img.f7{background:
+  radial-gradient(80% 80% at 50% 100%, rgba(245,185,66,.7) 0%, transparent 60%),
+  linear-gradient(180deg, #0a0418 0%, #4B2E83 100%)}
+.mood .frame-img.f8{background:
+  radial-gradient(60% 40% at 30% 80%, rgba(216,200,243,.5) 0%, transparent 60%),
+  linear-gradient(180deg, #2A124F 0%, #6E4DA5 100%)}
+
+/* Iconography */
+.icon-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.icon-grid .ic{
+  aspect-ratio:1;border:1px solid var(--hair);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25);
+}
+.icon-grid .ic svg{width:42%;stroke:var(--soft);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* Social feed */
+.feed-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:8px;flex:1;aspect-ratio:1;max-height:600px}
+.feed-grid .post{
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  padding:18px;color:var(--soft);
+}
+.feed-grid .post.cinema{background:linear-gradient(180deg, #1a0a36 0%, #4B2E83 50%, #C77B3A 100%)}
+.feed-grid .post.cinema2{background:linear-gradient(120deg, #2A124F 0%, #7B5BCE 100%)}
+.feed-grid .post.cinema3{background:radial-gradient(70% 60% at 50% 100%, rgba(245,185,66,.6) 0%, transparent 60%),linear-gradient(180deg, #0a0418 0%, #2A124F 100%)}
+.feed-grid .post.quote{background:var(--purple);text-align:center}
+.feed-grid .post.quote .q{font-family:var(--display);font-weight:700;font-size:22px;line-height:1.2}
+.feed-grid .post.detail{background:#0E0420}
+.feed-grid .post.detail .ring{width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side, var(--gold) 0%, transparent 70%);filter:blur(6px)}
+.feed-grid .post .mark{position:absolute;top:10px;right:12px;width:24px}
+
+/* Stories / reels */
+.stories{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;flex:1}
+.stories .story{
+  aspect-ratio:9/16;border-radius:18px;overflow:hidden;border:1px solid var(--hair);
+  display:flex;flex-direction:column;justify-content:space-between;padding:18px;color:var(--soft);
+  position:relative;
+}
+.stories .s1{background:radial-gradient(60% 50% at 50% 30%, rgba(245,185,66,.5) 0%, transparent 60%),linear-gradient(180deg, #0a0418 0%, #4B2E83 100%)}
+.stories .s2{background:linear-gradient(180deg, #1a0a36 0%, #C77B3A 100%)}
+.stories .s3{background:var(--purple)}
+.stories .s4{background:linear-gradient(180deg, #2A124F 0%, #7B5BCE 100%)}
+.stories .story .top{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;opacity:.85}
+.stories .story .copy{font-family:var(--display);font-weight:700;font-size:24px;line-height:1.15}
+.stories .story .bot{display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-size:10px;letter-spacing:.3em;text-transform:uppercase;opacity:.85}
+.stories .story .bot .icn{width:24px}
+
+/* Mockups — boarding pass */
+.bp{display:flex;width:680px;max-width:100%;border-radius:14px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);border:1px solid var(--hair)}
+.bp .left{background:linear-gradient(160deg,#2A124F,#4B2E83);padding:30px;display:flex;flex-direction:column;justify-content:space-between;color:var(--soft);width:300px;flex-shrink:0;position:relative}
+.bp .left .icon{width:42px}
+.bp .left .dest{font-family:var(--display);font-weight:700;font-size:36px;line-height:1;letter-spacing:-.01em}
+.bp .left .code{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav)}
+.bp .perf{width:1px;background:repeating-linear-gradient(180deg, rgba(255,255,255,.4) 0px, rgba(255,255,255,.4) 6px, transparent 6px, transparent 12px)}
+.bp .right{background:var(--soft);color:var(--plum);padding:30px;flex:1;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.bp .right .field{display:flex;flex-direction:column;gap:4px}
+.bp .right .field .l{font-family:var(--display);font-weight:500;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:rgba(42,18,79,.5)}
+.bp .right .field .v{font-family:var(--display);font-weight:500;font-size:14px}
+.bp .right .gold-strip{grid-column:1/-1;height:2px;background:var(--gold);margin:6px 0}
+
+/* Mockups — business cards */
+.bc-pair{display:flex;gap:18px}
+.bc{
+  width:280px;height:170px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+  position:relative;overflow:hidden;
+}
+.bc.front{background:linear-gradient(160deg,#2A124F 0%, #4B2E83 100%);color:var(--soft);padding:22px;flex-direction:column;align-items:flex-start;justify-content:space-between}
+.bc.back{background:var(--soft);color:var(--plum);padding:22px;flex-direction:column;align-items:flex-start;justify-content:space-between}
+.bc .icn{width:32px}
+.bc .wm{width:62%}
+.bc .stack{display:flex;flex-direction:column;gap:2px}
+.bc .stack .name{font-family:var(--display);font-weight:700;font-size:14px}
+.bc .stack .role{font-family:var(--text);font-weight:400;font-size:10px;color:rgba(42,18,79,.6)}
+.bc .stack .ct{font-family:var(--text);font-weight:500;font-size:10px;margin-top:8px}
+
+/* Luggage tag */
+.tag{
+  width:200px;height:300px;border-radius:14px;
+  background:linear-gradient(160deg,#2A124F 0%, #4B2E83 100%);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  position:relative;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+  padding:30px;
+}
+.tag::before{content:"";position:absolute;top:14px;left:50%;transform:translateX(-50%);width:18px;height:6px;border-radius:99px;background:var(--gold)}
+.tag .icn{width:48px;margin-top:14px}
+.tag .lab{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav);margin-top:14px}
+.tag .num{font-family:var(--display);font-weight:700;font-size:22px;color:var(--soft);margin-top:6px}
+
+/* Pickup signage */
+.sign{
+  width:440px;aspect-ratio:3/4;border-radius:14px;
+  background:linear-gradient(160deg,#2A124F 0%, #4B2E83 100%);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:36px;color:var(--soft);
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.5);position:relative;
+}
+.sign .top{display:flex;justify-content:space-between;align-items:center}
+.sign .top .icn{width:32px}
+.sign .name{font-family:var(--display);font-weight:700;font-size:56px;line-height:1.02;letter-spacing:-.01em}
+.sign .meta{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav)}
+
+/* App + phone */
+.phone{
+  width:280px;aspect-ratio:9/19;border-radius:38px;
+  background:#0a0418;border:8px solid #15082B;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.05);
+  position:relative;overflow:hidden;
+}
+.phone .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:90px;height:24px;background:#000;border-radius:0 0 14px 14px;z-index:5}
+.phone .screen{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(80% 60% at 50% 0%, rgba(123,91,206,.5) 0%, transparent 60%),
+    linear-gradient(180deg, #2A124F 0%, #4B2E83 100%);
+  padding:48px 18px 24px;color:var(--soft);display:flex;flex-direction:column;gap:14px;
+}
+.phone .screen .top{display:flex;justify-content:space-between;font-family:var(--text);font-size:10px;color:var(--lav)}
+.phone .screen h2{font-family:var(--display);font-weight:700;font-size:22px;line-height:1.1;margin-top:16px}
+.phone .screen .pill{display:inline-flex;padding:5px 10px;border:1px solid var(--hair-strong);border-radius:99px;font-family:var(--display);font-weight:500;font-size:9px;letter-spacing:.32em;text-transform:uppercase}
+.phone .screen .card{
+  background:rgba(255,255,255,.06);border:1px solid var(--hair);border-radius:12px;padding:12px;backdrop-filter:blur(6px);
+  display:flex;flex-direction:column;gap:6px;font-family:var(--text);font-size:11px;
+}
+.phone .screen .card .row{display:flex;justify-content:space-between}
+.phone .screen .card .lab{font-family:var(--display);font-weight:500;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav)}
+.phone .screen .card .val{font-family:var(--display);font-weight:500;font-size:13px}
+.phone .screen .card.gold-row{border-color:rgba(245,185,66,.4)}
+.phone .screen .cta{margin-top:auto;background:var(--gold);color:#3D2700;text-align:center;padding:12px;border-radius:99px;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.04em}
+
+/* App icon */
+.appicon{
+  width:160px;height:160px;border-radius:36px;
+  background:linear-gradient(160deg,#2A124F 0%, #4B2E83 100%);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 20px 40px -10px rgba(0,0,0,.6), 0 0 0 1px rgba(245,185,66,.1);
+  position:relative;
+}
+.appicon::before{content:"";position:absolute;inset:0;border-radius:36px;background:radial-gradient(60% 60% at 50% 0%, rgba(123,91,206,.5) 0%, transparent 60%);pointer-events:none}
+.appicon .ic{width:55%;position:relative;z-index:2}
+
+/* Browser hero */
+.browser{
+  border-radius:14px;overflow:hidden;border:1px solid var(--hair);
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+  background:#0a0418;
+}
+.browser .bar{background:#15082B;padding:10px 16px;display:flex;align-items:center;gap:8px}
+.browser .bar .dot{width:10px;height:10px;border-radius:50%}
+.browser .bar .d1{background:#ff5f57}.browser .bar .d2{background:#febc2e}.browser .bar .d3{background:#28c840}
+.browser .bar .url{flex:1;background:#0a0418;border:1px solid var(--hair);border-radius:99px;padding:5px 14px;font-family:var(--text);font-size:11px;color:var(--lav);text-align:center}
+.browser .hero{
+  padding:48px;
+  background:
+    radial-gradient(60% 50% at 90% 30%, rgba(245,185,66,.18) 0%, transparent 60%),
+    radial-gradient(60% 50% at 10% 70%, rgba(123,91,206,.5) 0%, transparent 60%),
+    linear-gradient(180deg, #15082B 0%, #2A124F 100%);
+  min-height:300px;display:flex;flex-direction:column;justify-content:space-between;
+}
+.browser .hero .nav{display:flex;justify-content:space-between;align-items:center;color:var(--soft)}
+.browser .hero .nav .links{display:flex;gap:24px;font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--lav)}
+.browser .hero .nav .nav-mark{width:120px}
+.browser .hero h1{font-family:var(--display);font-weight:700;font-size:54px;line-height:1.05;letter-spacing:-.02em;color:var(--soft);max-width:600px;margin-top:36px}
+.browser .hero .ctas{display:flex;gap:14px;margin-top:24px;align-items:center}
+.browser .hero .cta-primary{background:var(--gold);color:#3D2700;padding:12px 22px;border-radius:99px;font-family:var(--display);font-weight:700;font-size:13px}
+.browser .hero .cta-secondary{font-family:var(--display);font-weight:500;font-size:13px;color:var(--soft);border-bottom:1px solid var(--gold);padding-bottom:2px}
+
+/* Storefront / vehicle */
+.environments{display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1}
+.env{
+  border:1px solid var(--hair);border-radius:14px;overflow:hidden;position:relative;
+  display:flex;align-items:center;justify-content:center;padding:28px;
+  background:rgba(0,0,0,.25);min-height:280px;
+}
+.env .lab{position:absolute;top:14px;left:16px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.env.storefront{
+  background:
+    radial-gradient(40% 60% at 50% 60%, rgba(123,91,206,.45) 0%, transparent 70%),
+    linear-gradient(180deg, #0a0418 0%, #15082B 100%);
+}
+.env.storefront .glass{
+  width:80%;height:75%;background:linear-gradient(180deg, rgba(216,200,243,.06) 0%, rgba(75,46,131,.25) 100%);
+  border:1px solid var(--hair-strong);border-radius:6px;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 80px rgba(123,91,206,.3) inset;
+}
+.env.storefront .glass .wm{width:55%}
+.env.vehicle{
+  background:linear-gradient(180deg, #0a0418 0%, #1B0A36 100%);
+}
+.env.vehicle .car{
+  width:90%;height:55%;background:linear-gradient(180deg, #2A124F 0%, #1B0A36 100%);
+  border-radius:90px 40px 18px 18px;
+  position:relative;display:flex;align-items:center;justify-content:flex-end;padding-right:48px;
+  box-shadow:0 20px 40px -10px rgba(0,0,0,.6);
+}
+.env.vehicle .car::before, .env.vehicle .car::after{
+  content:"";position:absolute;bottom:-22px;width:60px;height:60px;border-radius:50%;background:#0a0418;border:6px solid #15082B;
+}
+.env.vehicle .car::before{left:14%}
+.env.vehicle .car::after{right:14%}
+.env.vehicle .car .wm{width:30%}
+
+/* Uniform / pin */
+.uniform-card{
+  background:linear-gradient(160deg,#2A124F 0%, #1B0A36 100%);
+  border-radius:14px;padding:36px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;border:1px solid var(--hair);min-height:280px
+}
+.uniform-card .pin{
+  width:90px;height:90px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #FFE89A 0%, #F5B942 50%, #B07F1B 100%);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.1) inset;
+}
+.uniform-card .pin .icn{width:55%}
+.uniform-card .pin .icn svg .cls-1{fill:#3D2700 !important}
+.uniform-card .lab{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+
+/* Closing */
+.closing{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;flex:1;text-align:center}
+.closing .glow-c{position:absolute;width:760px;height:760px;border-radius:50%;background:radial-gradient(closest-side, rgba(123,91,206,.45) 0%, rgba(123,91,206,0) 70%);filter:blur(30px)}
+.closing .wm{width:520px;position:relative;z-index:2}
+.closing .sig{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--lav)}
+
+/* small responsive scaling */
+@media (max-width:1480px){
+  .slide{transform-origin:top center}
+}
+</style>
+</head>
+<body>
+
+<!-- Preload base SVG markers used inline below for variants -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="sadine-mark" viewBox="0 0 1194.87 391.01">
+      <g>
+        <path class="cls-2" d="M1190.5,251.88c-5.14,8.18-10.47,15.97-17.75,22.1-36.47,30.74-100.99,35.39-146.75,24.11-42.03-10.36-72.24-38.46-92.79-75.71l-21.06-38.18c-6.08-11.02-13.56-20.73-23.21-28.71-20.42-16.9-48.21-20.97-72.13-9.73-19.68,9.25-32.51,27.47-34.22,49.22-.07,34.47-.13,68.94-.2,103.42h-43.3c-.02-35.17-.04-70.33-.07-105.5,1.73-41.53,28.83-77.08,68.32-89.94,29.18-9.51,60.83-7.49,88.35,6.2,20.3,10.09,35.7,25.86,47.67,44.89l22.2,41.22c17.49,33.7,38.33,65.25,76.59,76.74-27.6-17.67-42.62-45.6-41.1-78.21,1.42-30.33,16.5-58.46,41.96-75.49,25.89-17.31,58.12-21.69,87.75-12.46,32.38,10.09,55.23,36.24,62.01,69.32,2.62,12.78,2.24,25.32,1.72,38.42l-150.23-.02c4.27,26.54,26.32,45.74,53.62,47.22,23.53,1.28,44.88-9.35,57.14-30.28l35.47,21.39ZM1151.84,181.92c-3.34-26.23-24.25-43.91-49.75-45.14-28.42-1.38-52.78,17.29-57.94,45.21l107.69-.07Z"/>
+        <path class="cls-2" d="M187.7,282.99c-39.5,28.19-101.98,25.03-145.3,4.56-16.91-8.49-31.09-19.82-42.4-34.85l31.08-32.56c24.94,29.38,62.09,43.72,99.77,39.16,9.19-1.6,17.26-4.15,24.74-9.63,13.89-10.19,19.06-29.16,10.67-44.54-15.66-28.72-87.07-28.56-129.69-63.65-17.93-14.77-27.51-36.14-27.17-59.44.28-18.75,6.11-36.31,18.81-50.11C60.16-2.76,119.41-7.22,162.59,9.13c20.66,7.93,38.15,20.46,52.1,37.86l-34.18,30.51c-18.56-20.93-43.6-32.64-70.93-32.99-24.25-.18-48.54,10.78-49.95,35.06-1.56,26.8,25.32,37.12,49.53,45.41l45.7,15.64c14.75,5.05,28.05,12.52,39.67,22.64,17.17,14.95,25.96,35.37,25.37,58.09-.65,24.99-11.78,47.07-32.21,61.64Z"/>
+        <path class="cls-2" d="M489.35,294c-33.12-15.02-53.52-46.3-57.33-81.62-3.4-31.51,7.59-61.86,29.83-83.25,35.61-34.27,94.43-38.65,131.53-2.51l-.04-82.94,43.55.02-.06,166.4c-1.88,32-17.28,59.72-44.44,76.7-30.5,19.06-69.49,22.42-103.04,7.21ZM588.41,228.73c7.14-15.09,8.14-31.58,3.17-46.89-7.79-24-29.18-39.97-53.38-41.24-25.02-1.31-47.83,12.56-58.06,35.91-7.96,18.17-6.74,38.87,2.94,56.15,11.1,19.81,31.65,31.06,53.65,30.28,21.99-.79,41.78-13.3,51.67-34.21Z"/>
+        <path class="cls-2" d="M236.13,240.66c.58-22.19,12.57-40.37,32.35-49.19,11.27-5.02,23.3-8.38,36.03-8.39l67.6-.05c.79-20.48-12.38-37.85-32.52-41.44-14.56-3.51-29.27-2.01-43.42,2.8-9.73,4.03-17.85,10.09-25.15,18.41l-26.27-26.31c10.48-14.06,23.81-23.02,39.9-28.75,38.41-12.22,92.37-7.95,116,26.89,8.64,12.74,13.65,27.6,13.69,43.43l.37,121.39c-14.2,0-28.4.01-42.6.02v-22.9c-32.75,25.83-70.78,35.31-97.75,22.98-17.64-8.06-27.43-22.38-27.43-22.38-3.76-5.5-11.27-18.6-10.8-36.49ZM342.6,263.05c4.19-1.75,10.66-4.98,16.82-11.69,12.83-14,12.87-31.64,12.7-36.68-19.54.01-39.07.02-58.61.03-6.81,0-13.64,1.71-19.66,4.09-9.35,4.76-14.68,12.88-14.47,22.81.21,9.73,5.76,17.5,15.35,22.1,14.97,5.99,32.14,5.93,47.87-.66Z"/>
+        <path class="cls-2" d="M708.8,298.39c-14.51,0-29.03.01-43.54.02.03-65.68.06-131.37.09-197.05h43.6c-.05,65.68-.1,131.35-.15,197.03Z"/>
+        <path class="cls-1" d="M666.91,91.59c7.04-3.59,13.5-6.7,19.6-11.11,3.64-2.76,6.97-5.67,9.54-9.29,1.42-2.19,1.84-4.53,1.32-6.65-.19-.75-.79-2.71-3.52-4.82-6.95-5.37-27.8-11.89-29.57-12.44-11.33-4.34-16.28-17.33-14.84-29.65,8.98,7.71,17.11,12.23,22.74,14.9,12.03,5.7,27.46,9.96,36.61,19.58,1.54,1.62,3.59,4.15,4.53,7.78,1.08,4.15.51,8.67-1.78,12.75-7.47,13.29-29.07,20.22-44.62,18.96Z"/>
+        <path class="cls-1" d="M689.77,61.44c.31.1,3.47,1.14,4.25,4.05.26.98.17,1.86.04,2.46l-19.33-2.5c-7.78-1.01-13.53-6.85-14.28-14.89,9.78,3.63,19.55,7.26,29.33,10.88Z"/>
+        <path class="cls-1" d="M711.81,38.99c-1.54,2.47-2.42,5.24-3.05,8.36-3.89-3.33-7.85-5.76-12.45-7.61,4.85-9.48,13.9-14.34,23.17-9,1.32.76,3.2.87,4.55,2.39-5.09-.11-9.33,1.73-12.22,5.87Z"/>
+        <g>
+          <path class="cls-2" d="M369.57,370.22l-143.02.02c-.77-1.99-.92-4.45-.71-7.29l143.53-.06.19,7.33Z"/>
+          <path class="cls-2" d="M969.11,370.22l-143.43.03c-.37-2.39-.42-4.68-.14-7.32l143.58-.03v7.32Z"/>
+          <g>
+            <path class="cls-2" d="M677.65,391.01l-10.12-15.26-9.3-.14.29,15.27-10.57-.05.11-47.34,24.38.23c7.87.07,14.2,5.56,15.15,11.97,1.16,7.8-1.65,14.82-9.8,18.07l11.19,17.04-11.34.21ZM671.28,366.45c3.11-.02,6.17-3.86,6.36-6.26.23-2.88-1.83-7.29-5-7.37l-14.4-.33.08,14.05,12.95-.09Z"/>
+            <path class="cls-2" d="M552.08,349.82c7.23,7.76,8.33,18.37,4.08,27.52-3.82,8.23-12.82,13.55-22.83,13.67-14.38.17-25.42-10.19-25.78-23.62-.38-13.88,10.07-24.97,24.61-25.26,7.26-.14,14.61,1.99,19.92,7.69ZM526.01,380.37c7.7,3.85,16.25.74,20.11-5.76,3.62-6.11,2.73-14.33-2.69-19.51-4.96-4.74-13.42-5.68-19.63-1.06-4.53,3.37-6.09,8.84-5.73,14.53.27,4.16,2.93,9.31,7.93,11.81Z"/>
+            <path class="cls-2" d="M614.19,343.1l10.18-.27-.36,32.08c-.13,11.2-11.6,16.33-21.51,16.09-11.67-.28-20.38-7.57-20.28-19.51l.25-28.65,10.3.2.26,30.77c.05,5.35,5.9,7.86,9.9,8.07,4.29.23,11.02-2.26,11.06-7.75l.2-31.04Z"/>
+            <path class="cls-2" d="M742.18,389.15c-10.32,3.83-21.26,1.57-29.63-5.22l6-7.65c5.17,5.48,13.65,7.24,19.38,4.88,1.35-.56,3.16-3.33,3-4.51-.2-1.37-2.63-3.55-3.98-4.01l-17.29-5.87c-4.95-1.68-5.81-8.07-4.97-12.89.72-4.15,4.1-8.8,9.08-10.3,9.11-2.76,18.52-1.17,25.68,4.26l-5.3,7.64c-8.16-6.27-18.53-5.89-19.59-.41-.27,1.38,1.71,4.35,3.15,4.79l13.2,3.94c6.14,1.83,9.74,6.29,9.89,11.8.16,5.61-2.24,11.2-8.61,13.57Z"/>
+            <polygon class="cls-2" points="468.94 390.91 458.94 391.01 458.95 352.82 444.13 352.67 444.24 343.86 483.94 343.74 483.97 352.82 468.92 352.8 468.94 390.91"/>
+          </g>
+        </g>
+      </g>
+    </symbol>
+    <symbol id="sadine-icon" viewBox="0 0 74.83 74.1">
+      <g>
+        <path class="cls-1" d="M17.72,73.96c7.04-3.59,13.5-6.7,19.6-11.11,3.64-2.76,6.97-5.67,9.54-9.29,1.42-2.19,1.84-4.53,1.32-6.65-.19-.75-.79-2.71-3.52-4.82-6.95-5.37-27.8-11.89-29.57-12.44C3.75,25.31-1.2,12.32.24,0c8.98,7.71,17.11,12.23,22.74,14.9,12.03,5.7,27.46,9.96,36.61,19.58,1.54,1.62,3.59,4.15,4.53,7.78,1.08,4.15.51,8.67-1.78,12.75-7.47,13.29-29.07,20.22-44.62,18.96Z"/>
+        <path class="cls-1" d="M40.57,43.81c.31.1,3.47,1.14,4.25,4.05.26.98.17,1.86.04,2.46l-19.33-2.5c-7.78-1.01-13.53-6.85-14.28-14.89,9.78,3.63,19.55,7.26,29.33,10.88Z"/>
+        <path class="cls-1" d="M62.61,21.36c-1.54,2.47-2.42,5.24-3.05,8.36-3.89-3.33-7.85-5.76-12.45-7.61,4.85-9.48,13.9-14.34,23.17-9,1.32.76,3.2.87,4.55,2.39-5.09-.11-9.33,1.73-12.22,5.87Z"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<style>
+  /* default fills for the symbols */
+  use.mark{}
+  .mark-default .cls-1{fill:#F5B942}
+  .mark-default .cls-2{fill:#F8F6FC}
+  .mark-on-light .cls-1{fill:#F5B942}
+  .mark-on-light .cls-2{fill:#2A124F}
+  .mark-mono-white .cls-1{fill:#F8F6FC}
+  .mark-mono-white .cls-2{fill:#F8F6FC}
+  .mark-mono-purple .cls-1{fill:#4B2E83}
+  .mark-mono-purple .cls-2{fill:#4B2E83}
+  .mark-mono-plum .cls-1{fill:#2A124F}
+  .mark-mono-plum .cls-2{fill:#2A124F}
+  .mark-gold-on-purple .cls-1{fill:#F5B942}
+  .mark-gold-on-purple .cls-2{fill:#F8F6FC}
+
+  /* icon variants */
+  .icon-gold .cls-1{fill:#F5B942}
+  .icon-white .cls-1{fill:#F8F6FC}
+  .icon-purple .cls-1{fill:#4B2E83}
+  .icon-plum .cls-1{fill:#2A124F}
+</style>
+
+<div class="book">
+
+<!-- ─────────── 01 · COVER ─────────── -->
+<section class="slide cover dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Sadine Tours · Brand Identity System</span></div>
+      <span class="cap mute">Edition 2026.01</span>
+    </div>
+
+    <div class="center-mark">
+      <div class="glow-large"></div>
+      <span class="stamp"><span class="pulse"></span>Volume I — Identity</span>
+      <svg class="wordmark mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+      <p class="lead" style="max-width:600px;text-align:center;font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--lav);font-family:var(--display);font-weight:500">
+        Premium · Cinematic · Organized · Modern
+      </p>
+    </div>
+
+    <div class="botbar">
+      <div class="credits">
+        <div class="c"><span class="cap mute">Document</span><span class="kbd white">Brand Book / v1.0</span></div>
+        <div class="c"><span class="cap mute">Audience</span><span class="kbd white">Internal · Partners</span></div>
+        <div class="c"><span class="cap mute">Issued</span><span class="kbd white">Tunis · 2026</span></div>
+      </div>
+      <span class="pg">001 / 026</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 02 · INDEX ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Index</span></div>
+      <span class="cap mute">Sadine Tours · 2026</span>
+    </div>
+
+    <div style="margin-top:32px;display:flex;flex-direction:column;gap:18px">
+      <h2 class="h1">Inside this volume.</h2>
+      <p class="lead" style="max-width:780px">A complete identity system: strategy, mark, color, type, visual language, and the applications that turn the brand from idea into experience.</p>
+    </div>
+
+    <div class="toc" style="margin-top:48px">
+      <div class="row"><span class="num">01</span><span class="name">Cover</span><span class="pg">001</span></div>
+      <div class="row"><span class="num">14</span><span class="name">Color Ratios &amp; Pairings</span><span class="pg">014</span></div>
+      <div class="row"><span class="num">02</span><span class="name">Index</span><span class="pg">002</span></div>
+      <div class="row"><span class="num">15</span><span class="name">Typography — Satoshi</span><span class="pg">015</span></div>
+      <div class="row"><span class="num">03</span><span class="name">Manifesto</span><span class="pg">003</span></div>
+      <div class="row"><span class="num">16</span><span class="name">Typography — Manrope</span><span class="pg">016</span></div>
+      <div class="row"><span class="num">04</span><span class="name">Positioning · Mission · Vision</span><span class="pg">004</span></div>
+      <div class="row"><span class="num">17</span><span class="name">Typography — Arabic</span><span class="pg">017</span></div>
+      <div class="row"><span class="num">05</span><span class="name">Brand Values</span><span class="pg">005</span></div>
+      <div class="row"><span class="num">18</span><span class="name">Type Hierarchy</span><span class="pg">018</span></div>
+      <div class="row"><span class="num">06</span><span class="name">Personality &amp; Tone of Voice</span><span class="pg">006</span></div>
+      <div class="row"><span class="num">19</span><span class="name">Photography Direction</span><span class="pg">019</span></div>
+      <div class="row"><span class="num">07</span><span class="name">Audience Archetypes</span><span class="pg">007</span></div>
+      <div class="row"><span class="num">20</span><span class="name">Iconography &amp; Motion</span><span class="pg">020</span></div>
+      <div class="row"><span class="num">08</span><span class="name">Logo — Primary</span><span class="pg">008</span></div>
+      <div class="row"><span class="num">21</span><span class="name">Social Media Feed</span><span class="pg">021</span></div>
+      <div class="row"><span class="num">09</span><span class="name">Logo — Anatomy</span><span class="pg">009</span></div>
+      <div class="row"><span class="num">22</span><span class="name">Stories &amp; Reels</span><span class="pg">022</span></div>
+      <div class="row"><span class="num">10</span><span class="name">Logo — Family &amp; Variants</span><span class="pg">010</span></div>
+      <div class="row"><span class="num">23</span><span class="name">Stationery &amp; Travel Touchpoints</span><span class="pg">023</span></div>
+      <div class="row"><span class="num">11</span><span class="name">Clear Space &amp; Minimum Sizes</span><span class="pg">011</span></div>
+      <div class="row"><span class="num">24</span><span class="name">Environmental &amp; Vehicle</span><span class="pg">024</span></div>
+      <div class="row"><span class="num">12</span><span class="name">Incorrect Usage</span><span class="pg">012</span></div>
+      <div class="row"><span class="num">25</span><span class="name">Digital — App &amp; Website</span><span class="pg">025</span></div>
+      <div class="row"><span class="num">13</span><span class="name">Color System</span><span class="pg">013</span></div>
+      <div class="row"><span class="num">26</span><span class="name">Closing</span><span class="pg">026</span></div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours</span><span class="pg">002 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 03 · MANIFESTO ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Manifesto</span></div>
+      <span class="cap mute">003</span>
+    </div>
+
+    <div style="flex:1;display:flex;align-items:center">
+      <div style="max-width:1180px">
+        <div class="hair gold short" style="margin-bottom:32px"></div>
+        <p class="manifesto-quote">
+          Sadine Tours organizes premium travel for people who refuse to choose between
+          <span class="gold">elegance</span> and
+          <span class="gold">ease</span>.
+        </p>
+        <p class="lead" style="margin-top:36px;max-width:880px;font-size:18px">
+          We are not the cheapest agency. We are not the loudest. We are the agency that organizes — and the organization itself is the luxury. Every detail is handled before you ask. Every surface is designed. Nothing rushes. Nothing is forgotten.
+        </p>
+        <p class="lead" style="margin-top:24px;max-width:880px;font-size:18px;color:var(--soft)">
+          The functional promise is travel without friction. The emotional promise is the feeling of arriving without effort. That feeling is the north star of this entire system.
+        </p>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · The Brand</span><span class="pg">003 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 04 · POSITIONING / MISSION / VISION ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Positioning · Mission · Vision</span></div>
+      <span class="cap mute">004</span>
+    </div>
+
+    <div style="margin-top:24px">
+      <h2 class="h2">Where we stand. Why we exist. Where we go.</h2>
+    </div>
+
+    <div class="three" style="margin-top:48px;flex:1">
+      <div class="card">
+        <span class="num">01 · Positioning</span>
+        <h3 class="h3">A digital-first travel house — not a package shop.</h3>
+        <p class="body">For modern Tunisian and Maghreb travelers who want a curated, organized, premium journey, Sadine Tours designs and orchestrates every fragment of the trip with the precision of a luxury airline and the warmth of a private host.</p>
+        <p class="body" style="border-top:1px solid var(--hair);padding-top:14px;color:var(--soft)"><em>We sell calm, taste, and time saved.</em></p>
+      </div>
+
+      <div class="card">
+        <span class="num">02 · Mission</span>
+        <h3 class="h3">Make organized, premium travel a default — not a privilege.</h3>
+        <p class="body">Take every fragment of the journey — visa, flight, transfer, hotel, restaurant, guide, return — and present it as a single, smooth, beautifully designed experience.</p>
+        <p class="body" style="border-top:1px solid var(--hair);padding-top:14px;color:var(--soft)"><em>From boarding pass to last sunset — handled.</em></p>
+      </div>
+
+      <div class="card">
+        <span class="num">03 · Vision · 2030</span>
+        <h3 class="h3">The most trusted modern travel brand in the Maghreb.</h3>
+        <p class="body">The first name a new generation of professionals, couples, and families thinks of when they decide to leave home well — across Tunisia, Algeria, Morocco, Libya, and the diaspora.</p>
+        <p class="body" style="border-top:1px solid var(--hair);padding-top:14px;color:var(--soft)"><em>Not biggest. Most trusted.</em></p>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Strategy</span><span class="pg">004 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 05 · VALUES ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Brand Values</span></div>
+      <span class="cap mute">005</span>
+    </div>
+
+    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
+      <h2 class="h2">Six values that govern every decision.</h2>
+      <p class="lead" style="max-width:340px">If a piece of work breaks one of these, it does not ship. There are no exceptions.</p>
+    </div>
+
+    <div class="six" style="margin-top:42px;flex:1">
+      <div class="v"><span class="n">01 · Precision</span><span class="t">A flight time is a flight time.</span><span class="body">Nothing is "approximate." Confirmations are confirmations.</span></div>
+      <div class="v"><span class="n">02 · Elegance</span><span class="t">Quiet. Considered. Edited.</span><span class="body">Loud is a sign of effort; we don't want effort to show.</span></div>
+      <div class="v"><span class="n">03 · Warmth</span><span class="t">Premium, never cold.</span><span class="body">There is always a human voice underneath the system.</span></div>
+      <div class="v"><span class="n">04 · Curation</span><span class="t">We don't sell every destination.</span><span class="body">We sell the ones we have personally vetted.</span></div>
+      <div class="v"><span class="n">05 · Modernity</span><span class="t">Digital-first, not paper-first.</span><span class="body">Booking, communication, follow-up — app-native by default.</span></div>
+      <div class="v"><span class="n">06 · Discretion</span><span class="t">What we know, we hold quietly.</span><span class="body">Preferences, allergies, anniversaries — used invisibly.</span></div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Values</span><span class="pg">005 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 06 · PERSONALITY & TONE ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Personality &amp; Tone of Voice</span></div>
+      <span class="cap mute">006</span>
+    </div>
+
+    <div style="margin-top:24px">
+      <h2 class="h2">If the brand were a person.</h2>
+    </div>
+
+    <div class="split" style="margin-top:40px;flex:1">
+      <div class="col">
+        <div class="card" style="min-height:auto">
+          <span class="num">Persona</span>
+          <p class="lead" style="color:var(--soft);font-size:18px">Late thirties. Bilingual — French, Arabic, fluent English. Trained somewhere precise — hotel school in Lausanne, an airline in Doha, a private concierge in Paris.</p>
+          <p class="body">Wears one good watch, not three. Doesn't seem busy even when they are. Notices things — the temperature of the car, the light at check-in, whether you've eaten. <span class="white">A host. Not a salesman.</span></p>
+        </div>
+
+        <div class="sample">
+          <span class="lab">Sample · Onboarding email</span>
+          Welcome, Mr. Ben Aïcha. Your journey begins on Tuesday. Everything below is yours to keep — itinerary, contacts, and the small things we've already arranged.
+        </div>
+
+        <div class="sample">
+          <span class="lab">Sample · Delay handling</span>
+          Your flight is delayed by two hours. We've already moved your transfer and notified the hotel. You don't need to do anything.
+        </div>
+      </div>
+
+      <div class="col">
+        <span class="cap mute">Voice principles</span>
+        <div class="tone-list">
+          <div class="col y">
+            <h5>We are</h5>
+            <ul>
+              <li>Warm</li>
+              <li>Confident</li>
+              <li>Specific</li>
+              <li>Brief</li>
+              <li>Bilingual</li>
+              <li>Refined</li>
+            </ul>
+          </div>
+          <div class="col n">
+            <h5>We are not</h5>
+            <ul>
+              <li>Casual</li>
+              <li>Loud</li>
+              <li>Generic</li>
+              <li>Brusque</li>
+              <li>Mixed-up</li>
+              <li>Stiff</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" style="min-height:auto;margin-top:8px">
+          <span class="num">Writing rules</span>
+          <p class="body" style="color:var(--soft);font-size:13.5px">Short sentences. Specific nouns. No exclamation marks outside captions. No emojis in customer service. Honor the language the client wrote in. Never apologize for price — state it once, with confidence.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Voice</span><span class="pg">006 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 07 · AUDIENCE ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Audience Archetypes</span></div>
+      <span class="cap mute">007</span>
+    </div>
+
+    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
+      <h2 class="h2">Three archetypes. One brand.</h2>
+      <p class="lead" style="max-width:340px">They overlap. The brand serves all three at once — premium, hosted, organized — and never compromises on one to please another.</p>
+    </div>
+
+    <div class="three" style="margin-top:42px;flex:1">
+      <div class="card">
+        <span class="num">Primary</span>
+        <h3 class="h3">The Quiet Professional</h3>
+        <p class="body"><strong style="color:var(--soft)">32–48</strong>, urban, senior professional, entrepreneur, doctor, executive. Travels 4–8 times a year — half business, half leisure.</p>
+        <p class="body">Values <span class="gold">time over price</span>. Pays for invisible labor. Books on phone. Reads in French and Arabic. Expects English to work.</p>
+        <p class="body" style="border-top:1px solid var(--hair);padding-top:14px;color:var(--soft);font-style:italic">"I just don't have time to organize this."</p>
+      </div>
+
+      <div class="card">
+        <span class="num">Secondary</span>
+        <h3 class="h3">The Modern Couple</h3>
+        <p class="body"><strong style="color:var(--soft)">28–40</strong>, dual income, no children or one young child. Honeymoons, anniversaries, "we both need a break" weekends.</p>
+        <p class="body">Highly visual — cares how the trip <span class="gold">looks</span>, but in a refined way. Wants taste, not influencer-bait.</p>
+        <p class="body" style="border-top:1px solid var(--hair);padding-top:14px;color:var(--soft);font-style:italic">"I want it to feel like a movie."</p>
+      </div>
+
+      <div class="card">
+        <span class="num">Tertiary</span>
+        <h3 class="h3">The Considered Family</h3>
+        <p class="body"><strong style="color:var(--soft)">38–55</strong>, two to three children. Will not compromise on safety, hygiene, or the children's experience.</p>
+        <p class="body">Wants the <span class="gold">adults' trip preserved</span> — real hotels, real food, real culture, with kids accommodated rather than catered to.</p>
+        <p class="body" style="border-top:1px solid var(--hair);padding-top:14px;color:var(--soft);font-style:italic">"A real trip the kids can also enjoy."</p>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Audience</span><span class="pg">007 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 08 · LOGO PRIMARY ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Logo · Primary Lockup</span></div>
+      <span class="cap mute">008</span>
+    </div>
+
+    <div style="margin-top:24px">
+      <h2 class="h2">The mark.</h2>
+      <p class="lead" style="max-width:660px;margin-top:10px">A typography-led wordmark. The dot of the <em>i</em> is replaced with a small bird — drawn as a single gesture and reading, on second look, as an abstract <em>S</em>.</p>
+    </div>
+
+    <div class="logo-stage">
+      <div class="glow-l"></div>
+      <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+    </div>
+
+    <div class="logo-meta">
+      <div class="m"><h6>Construction</h6><p>Custom-finished rounded geometric sans</p></div>
+      <div class="m"><h6>Signature</h6><p>n + e joined by a single elegant arc</p></div>
+      <div class="m"><h6>Hidden monogram</h6><p>The bird above the i reads as an abstract S</p></div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Logo</span><span class="pg">008 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 09 · ANATOMY ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Logo · Anatomy &amp; Construction</span></div>
+      <span class="cap mute">009</span>
+    </div>
+
+    <div style="margin-top:24px">
+      <h2 class="h2">Everything inside the wordmark is intentional.</h2>
+    </div>
+
+    <div class="anatomy" style="margin-top:24px">
+      <div class="grid-bg"></div>
+      <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+      <span class="annot a1">A · Bird gesture (S monogram)</span>
+      <span class="annot a2">B · Open counter — letting light in</span>
+      <span class="annot a3">D · n+e arc — brand signature</span>
+      <span class="annot a4">E · Tracked TOURS — airline rule</span>
+      <span class="annot a5" style="color:var(--soft)">C · 48px construction grid</span>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Anatomy</span><span class="pg">009 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 10 · LOGO FAMILY ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Logo · Family &amp; Variants</span></div>
+      <span class="cap mute">010</span>
+    </div>
+
+    <div style="margin-top:24px">
+      <h2 class="h2">Six approved variants.</h2>
+      <p class="lead" style="max-width:680px;margin-top:8px">Always pick the variant whose contrast is highest against its background. Never invent a new one.</p>
+    </div>
+
+    <div class="logo-grid" style="margin-top:32px">
+      <div class="tile purple">
+        <span class="l">A · Primary on Purple</span>
+        <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+      </div>
+      <div class="tile dark">
+        <span class="l">B · Primary on Dark</span>
+        <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+      </div>
+      <div class="tile light">
+        <span class="l">C · Primary on Light</span>
+        <svg class="wm mark-on-light" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+      </div>
+      <div class="tile dark">
+        <span class="l">D · Mono White</span>
+        <svg class="wm mark-mono-white" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+      </div>
+      <div class="tile light">
+        <span class="l">E · Mono Plum</span>
+        <svg class="wm mark-mono-plum" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+      </div>
+      <div class="tile purple">
+        <span class="l">F · Icon Only — Bird</span>
+        <svg class="icon icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Variants</span><span class="pg">010 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 11 · CLEAR SPACE + MIN SIZE ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Logo · Clear Space &amp; Minimum Size</span></div>
+      <span class="cap mute">011</span>
+    </div>
+
+    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
+      <h2 class="h2">A safety zone equal to <span class="gold">x</span>.</h2>
+      <p class="lead" style="max-width:380px"><span class="gold">x</span> = the height of the bird icon. No element may enter the zone — text, photography, fold lines, frames.</p>
+    </div>
+
+    <div class="clear" style="margin-top:32px">
+      <div class="stage">
+        <div class="x-marks"></div>
+        <span class="x-corners xc1"></span><span class="x-corners xc2"></span>
+        <span class="x-corners xc3"></span><span class="x-corners xc4"></span>
+        <span class="x-label t">x — clear space</span>
+        <span class="x-label l">x — clear space</span>
+        <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+      </div>
+
+      <div class="min-list">
+        <div class="card" style="min-height:auto;padding:18px">
+          <span class="num">Minimum size · Digital</span>
+          <div style="display:flex;gap:18px;align-items:center;margin-top:6px">
+            <div class="min-item" style="flex:1;border:0;background:transparent;padding:0">
+              <div class="swatch" style="background:rgba(0,0,0,.25)"><svg style="width:60px" class="mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg></div>
+              <div class="meta"><h6>Full lockup</h6><p>96 px wide</p></div>
+            </div>
+            <div class="min-item" style="flex:1;border:0;background:transparent;padding:0">
+              <div class="swatch"><svg style="width:18px" class="icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
+              <div class="meta"><h6>Icon</h6><p>24 px wide</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="min-height:auto;padding:18px">
+          <span class="num">Minimum size · Print</span>
+          <div style="display:flex;gap:18px;align-items:center;margin-top:6px">
+            <div class="min-item" style="flex:1;border:0;background:transparent;padding:0">
+              <div class="swatch"><svg style="width:60px" class="mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg></div>
+              <div class="meta"><h6>Full lockup</h6><p>25 mm wide</p></div>
+            </div>
+            <div class="min-item" style="flex:1;border:0;background:transparent;padding:0">
+              <div class="swatch"><svg style="width:18px" class="icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
+              <div class="meta"><h6>Icon</h6><p>8 mm wide</p></div>
+            </div>
+          </div>
+        </div>
+
+        <p class="body" style="font-size:13px">Below these sizes, the bird's gesture loses its line; the mark loses its meaning.</p>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Clear Space</span><span class="pg">011 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 12 · MISUSE ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Logo · Incorrect Usage</span></div>
+      <span class="cap mute">012</span>
+    </div>
+
+    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
+      <h2 class="h2">Six things never to do.</h2>
+      <p class="lead" style="max-width:340px;color:#ff8a8a">Each of these breaks the mark. None of them are stylistic preferences — they are rules.</p>
+    </div>
+
+    <div class="misuse" style="margin-top:32px">
+      <div class="m stretched">
+        <span class="lab">01 · Do not stretch</span>
+        <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+        <span class="x-overlay"></span>
+      </div>
+      <div class="m recolor">
+        <span class="lab">02 · Do not recolor</span>
+        <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+        <span class="x-overlay"></span>
+      </div>
+      <div class="m busy">
+        <span class="lab">03 · Do not place on busy bg</span>
+        <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+        <span class="x-overlay"></span>
+      </div>
+      <div class="m rotated">
+        <span class="lab">04 · Do not rotate</span>
+        <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+        <span class="x-overlay"></span>
+      </div>
+      <div class="m outlined">
+        <span class="lab">05 · Do not outline</span>
+        <svg class="wm" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+        <span class="x-overlay"></span>
+      </div>
+      <div class="m shadow">
+        <span class="lab">06 · Do not add drop-shadow</span>
+        <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+        <span class="x-overlay"></span>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Misuse</span><span class="pg">012 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 13 · COLOR PALETTE ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Color · Primary Palette</span></div>
+      <span class="cap mute">013</span>
+    </div>
+
+    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
+      <h2 class="h2">Five colors. One mood.</h2>
+      <p class="lead" style="max-width:380px">Purple is the dominant. Gold is the accent — used as punctuation, never as a paragraph.</p>
+    </div>
+
+    <div class="palette" style="margin-top:36px">
+      <div class="swatch-card s-purple">
+        <span class="role">Primary</span>
+        <h3 class="name">Sadine Purple</h3>
+        <div class="vals">
+          <div class="row"><span>HEX</span><span>#4B2E83</span></div>
+          <div class="row"><span>RGB</span><span>75 · 46 · 131</span></div>
+          <div class="row"><span>CMYK</span><span>43 · 65 · 0 · 49</span></div>
+          <div class="row"><span>Use</span><span>Backgrounds · Hero</span></div>
+        </div>
+      </div>
+      <div class="swatch-card s-plum">
+        <span class="role">Depth</span>
+        <h3 class="name">Midnight Plum</h3>
+        <div class="vals">
+          <div class="row"><span>HEX</span><span>#2A124F</span></div>
+          <div class="row"><span>RGB</span><span>42 · 18 · 79</span></div>
+          <div class="row"><span>Use</span><span>Gradients · Cinema</span></div>
+        </div>
+      </div>
+      <div class="swatch-card s-gold">
+        <span class="role">Accent</span>
+        <h3 class="name">Sadine Gold</h3>
+        <div class="vals">
+          <div class="row"><span>HEX</span><span>#F5B942</span></div>
+          <div class="row"><span>RGB</span><span>245 · 185 · 66</span></div>
+          <div class="row"><span>Use</span><span>Bird · CTAs · Foil</span></div>
+        </div>
+      </div>
+      <div class="swatch-card s-soft">
+        <span class="role">Surface</span>
+        <h3 class="name">Soft White</h3>
+        <div class="vals">
+          <div class="row"><span>HEX</span><span>#F8F6FC</span></div>
+          <div class="row"><span>RGB</span><span>248 · 246 · 252</span></div>
+          <div class="row"><span>Use</span><span>Type · Light surfaces</span></div>
+        </div>
+      </div>
+      <div class="swatch-card s-lav">
+        <span class="role">Tint</span>
+        <h3 class="name">Light Lavender</h3>
+        <div class="vals">
+          <div class="row"><span>HEX</span><span>#D8C8F3</span></div>
+          <div class="row"><span>RGB</span><span>216 · 200 · 243</span></div>
+          <div class="row"><span>Use</span><span>Cards · Soft tints</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Color</span><span class="pg">013 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 14 · GRADIENTS + RATIOS ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Color · Gradients &amp; Ratios</span></div>
+      <span class="cap mute">014</span>
+    </div>
+
+    <div style="margin-top:24px">
+      <h2 class="h2">Three gradients. Three jobs.</h2>
+    </div>
+
+    <div class="gradients" style="margin-top:32px">
+      <div class="grad g1">
+        <div>
+          <h3 class="name">Depth</h3>
+          <p class="role">Heroes · Brand book · Editorial</p>
+        </div>
+        <div class="vals">#2A124F → #4B2E83</div>
+      </div>
+      <div class="grad g2">
+        <div>
+          <h3 class="name">Glow</h3>
+          <p class="role">UI lighting · Social accents · Motion</p>
+        </div>
+        <div class="vals">#4B2E83 → #7B5BCE</div>
+      </div>
+      <div class="grad g3">
+        <div>
+          <h3 class="name">Luxury</h3>
+          <p class="role">Premium moments only — invites, mailers</p>
+        </div>
+        <div class="vals">#4B2E83 → #F5B942</div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px">
+      <span class="cap mute">Recommended usage ratio</span>
+      <div class="ratio-bar" style="margin-top:14px">
+        <div class="seg s60">60% · Purple / Plum</div>
+        <div class="seg s25">25% · Soft White</div>
+        <div class="seg s10">10% · Lavender</div>
+        <div class="seg s5">5% · Gold</div>
+      </div>
+      <p class="body" style="margin-top:14px;font-size:13px;max-width:780px">If more than one piece of gold is visible in a single composition without a deliberate reason, remove one.</p>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Gradients</span><span class="pg">014 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 15 · TYPOGRAPHY · SATOSHI ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Typography · Display</span></div>
+      <span class="cap mute">015</span>
+    </div>
+
+    <div style="margin-top:24px">
+      <h3 class="cap gold">Display Typeface</h3>
+      <h2 class="h1" style="margin-top:8px">Satoshi.</h2>
+      <p class="lead" style="max-width:660px;margin-top:8px">Modern, rounded, geometric. Strong readability at scale, elegant at small sizes. The brand's voice in letters.</p>
+    </div>
+
+    <div class="type-stage" style="margin-top:24px">
+      <div class="display">
+        <div class="specimen">Aa</div>
+        <div class="glyph-row">
+          <div class="glyph">A</div>
+          <div class="glyph">B</div>
+          <div class="glyph">C</div>
+          <div class="glyph">G</div>
+          <div class="glyph">M</div>
+          <div class="glyph">S</div>
+          <div class="glyph">e</div>
+          <div class="glyph">g</div>
+          <div class="glyph">n</div>
+          <div class="glyph">r</div>
+          <div class="glyph">&amp;</div>
+          <div class="glyph">@</div>
+        </div>
+      </div>
+      <div class="weights">
+        <span class="cap mute">Weights in use</span>
+        <div class="w" style="font-weight:700">Bold · 700 <small>Display</small></div>
+        <div class="w" style="font-weight:500">Medium · 500 <small>Headlines</small></div>
+        <div class="w" style="font-weight:400">Regular · 400 <small>Captions</small></div>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px">
+          <span class="cap mute">Foundry</span>
+          <span class="kbd white">Indian Type Foundry · Fontshare</span>
+          <span class="cap mute" style="margin-top:8px">License</span>
+          <span class="kbd white">Free for commercial use</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Type</span><span class="pg">015 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 16 · TYPOGRAPHY · MANROPE ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Typography · Text &amp; UI</span></div>
+      <span class="cap mute">016</span>
+    </div>
+
+    <div style="margin-top:24px">
+      <h3 class="cap gold">Text Typeface</h3>
+      <h2 class="h1" style="margin-top:8px;font-family:var(--text);font-weight:700">Manrope.</h2>
+      <p class="lead" style="max-width:660px;margin-top:8px">Clean, modern, minimal. Made for screens. Pairs with Satoshi without competing.</p>
+    </div>
+
+    <div class="type-stage" style="margin-top:24px">
+      <div class="display">
+        <div class="specimen man">Aa</div>
+        <div class="glyph-row">
+          <div class="glyph man">A</div>
+          <div class="glyph man">B</div>
+          <div class="glyph man">D</div>
+          <div class="glyph man">G</div>
+          <div class="glyph man">N</div>
+          <div class="glyph man">R</div>
+          <div class="glyph man">a</div>
+          <div class="glyph man">e</div>
+          <div class="glyph man">g</div>
+          <div class="glyph man">o</div>
+          <div class="glyph man">t</div>
+          <div class="glyph man">y</div>
+        </div>
+      </div>
+      <div class="weights">
+        <span class="cap mute">Weights in use</span>
+        <div class="w man" style="font-weight:600">SemiBold · 600 <small>UI labels</small></div>
+        <div class="w man" style="font-weight:500">Medium · 500 <small>Captions</small></div>
+        <div class="w man" style="font-weight:400">Regular · 400 <small>Body</small></div>
+        <div style="margin-top:14px">
+          <span class="cap mute">Roles</span>
+          <p class="body" style="margin-top:6px;font-size:13.5px">Paragraphs · UI · Web body · Caption · Form labels · Table data</p>
+          <span class="cap mute" style="margin-top:14px;display:block">Pairing rule</span>
+          <p class="body" style="margin-top:6px;font-size:13.5px">Never mix Satoshi and Manrope inside a single sentence.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Type</span><span class="pg">016 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 17 · TYPOGRAPHY · ARABIC ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Typography · Arabic</span></div>
+      <span class="cap mute">017</span>
+    </div>
+
+    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
+      <div>
+        <h3 class="cap gold">Arabic Display</h3>
+        <h2 class="h1" style="margin-top:8px;font-family:var(--ar);font-weight:700;direction:rtl;text-align:right">الإسكندرية</h2>
+        <p class="lead" style="max-width:660px;margin-top:8px">Alexandria — modern, elegant, highly readable. The Arabic counterpart to Satoshi.</p>
+      </div>
+      <div style="text-align:right">
+        <span class="cap mute">UI fallback</span>
+        <h3 class="h3" style="margin-top:6px;font-family:var(--ar);font-weight:500">Cairo</h3>
+        <p class="body" style="font-size:13px">Smaller UI text · highly readable</p>
+      </div>
+    </div>
+
+    <div class="type-stage" style="margin-top:24px">
+      <div class="display">
+        <div class="specimen ar">سادين</div>
+        <div class="glyph-row">
+          <div class="glyph ar">س</div>
+          <div class="glyph ar">ا</div>
+          <div class="glyph ar">د</div>
+          <div class="glyph ar">ي</div>
+          <div class="glyph ar">ن</div>
+          <div class="glyph ar">ة</div>
+          <div class="glyph ar">ر</div>
+          <div class="glyph ar">ح</div>
+          <div class="glyph ar">ل</div>
+          <div class="glyph ar">ة</div>
+          <div class="glyph ar">٠</div>
+          <div class="glyph ar">٥</div>
+        </div>
+      </div>
+      <div class="weights">
+        <span class="cap mute">Weights — Alexandria</span>
+        <div class="w ar" style="font-weight:700">عريض · 700</div>
+        <div class="w ar" style="font-weight:500">متوسط · 500</div>
+        <div class="w ar" style="font-weight:400">عادي · 400</div>
+        <div style="margin-top:14px">
+          <span class="cap mute">Pairing rule</span>
+          <p class="body" style="margin-top:6px;font-size:13.5px">Latin and Arabic are paired vertically — Arabic above or below Latin, never inline mid-sentence.</p>
+        </div>
+        <div style="margin-top:8px">
+          <span class="cap mute">Sample headline · AR</span>
+          <p style="margin-top:8px;font-family:var(--ar);font-weight:700;font-size:30px;direction:rtl;text-align:right;line-height:1.2">خمسة أيام في إسطنبول. <br/>كل شيء جاهز.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Arabic Type</span><span class="pg">017 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 18 · HIERARCHY ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Type · Hierarchy</span></div>
+      <span class="cap mute">018</span>
+    </div>
+
+    <div style="margin-top:24px">
+      <h2 class="h2">Premium reads slow.</h2>
+      <p class="lead" style="max-width:680px;margin-top:8px">Generous line-height. Generous tracking on labels. Tight tracking on display. One typeface per piece of content.</p>
+    </div>
+
+    <div class="hier" style="margin-top:36px">
+      <div class="stack">
+        <div class="row">
+          <span class="lab">Eyebrow · 12 / +.32em</span>
+          <span class="ex hier-eyebrow">Boutique destination · Volume IV</span>
+        </div>
+        <div class="row">
+          <span class="lab">H1 · Display · 88 / 96</span>
+          <span class="ex hier-h1">Five days in Istanbul.</span>
+        </div>
+        <div class="row">
+          <span class="lab">H2 · Section · 56 / 64</span>
+          <span class="ex hier-h2">The journey is already arranged.</span>
+        </div>
+        <div class="row">
+          <span class="lab">H3 · Subhead · 32 / 40</span>
+          <span class="ex hier-h3">From boarding pass to last sunset — handled.</span>
+        </div>
+        <div class="row">
+          <span class="lab">Body · 15 / 24</span>
+          <span class="ex hier-body">Sadine Tours organizes premium travel for people who refuse to choose between elegance and ease. Every detail is handled before you ask. Nothing rushes. Nothing is forgotten.</span>
+        </div>
+        <div class="row">
+          <span class="lab">Caption · 11 / .16em</span>
+          <span class="ex hier-cap">Photography · Bosphorus, blue hour</span>
+        </div>
+      </div>
+
+      <div class="col" style="gap:16px">
+        <div class="card" style="min-height:auto">
+          <span class="num">Spacing rules</span>
+          <p class="body">Line-height ≥ 1.6 in body. Tracking +12% on labels, −2% on display. Section padding 96 px on desktop.</p>
+        </div>
+        <div class="card" style="min-height:auto">
+          <span class="num">Italic policy</span>
+          <p class="body">Never on display. Allowed in body, sparingly. Used to mark sample lines, quotes, or short emphasis.</p>
+        </div>
+        <div class="card" style="min-height:auto">
+          <span class="num">Numerals</span>
+          <p class="body">Tabular figures for tables and prices. Proportional figures for headlines and editorial.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Hierarchy</span><span class="pg">018 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 19 · PHOTOGRAPHY ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Visual Language · Photography</span></div>
+      <span class="cap mute">019</span>
+    </div>
+
+    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
+      <h2 class="h2">The moment of arrival.</h2>
+      <p class="lead" style="max-width:380px">Cinematic. Patient. Edited. We shoot the <em>quiet</em> seconds — wing tip, marble lobby, balcony coffee, hotel doorway at dusk.</p>
+    </div>
+
+    <div class="mood" style="margin-top:32px">
+      <div class="frame-img f1"><span class="lab">Sunset · golden hour</span></div>
+      <div class="frame-img f2"><span class="lab">Cabin window · blue hour</span></div>
+      <div class="frame-img f3"><span class="lab">Marble lobby · warm</span></div>
+      <div class="frame-img f4"><span class="lab">Doorway · low light</span></div>
+      <div class="frame-img f5"><span class="lab">Suitcase · negative space</span></div>
+      <div class="frame-img f6"><span class="lab">Tarmac · dawn</span></div>
+      <div class="frame-img f7"><span class="lab">Hands · watch</span></div>
+      <div class="frame-img f8"><span class="lab">Approach · wing tip</span></div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Photography</span><span class="pg">019 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 20 · ICONOGRAPHY + MOTION ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Iconography &amp; Motion</span></div>
+      <span class="cap mute">020</span>
+    </div>
+
+    <div style="margin-top:24px">
+      <h2 class="h2">Quiet shapes. Slow motion.</h2>
+    </div>
+
+    <div class="split" style="margin-top:32px;flex:1;grid-template-columns:1.3fr 1fr">
+      <div class="col">
+        <span class="cap mute">Icon system — 24 × 24, 1.5px stroke, rounded joins</span>
+        <div class="icon-grid">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 18h18M5 14l7-9 7 9M9 14v4M15 14v4"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M8 6V4M16 6V4"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9a1 1 0 01-1 1h-5v-7h-4v7H5a1 1 0 01-1-1z"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 5l7 7-7 7"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M21 11l-9-7-9 7v9a1 1 0 001 1h6v-7h4v7h6a1 1 0 001-1z"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="11" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 8h18l-2 11H5L3 8zM8 8V5a4 4 0 018 0v3"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21s7-7 7-12a7 7 0 00-14 0c0 5 7 12 7 12z"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17.5 6.5 21 8 13.5 3 9l6.5-.5z"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M2 12c2-4 6-7 10-7s8 3 10 7c-2 4-6 7-10 7s-8-3-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2v6M12 22v-2M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M16 12h6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12c0-5 4-9 9-9s9 4 9 9M7 12h10M9 12c0-3 1-5 3-5s3 2 3 5"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12l8.73-5.04M12 22V12"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h12"/></svg></div>
+        </div>
+
+        <div class="card" style="min-height:auto">
+          <span class="num">Texture</span>
+          <p class="body">Subtle film grain on hero photography. Soft glow blooms behind isolated UI elements. Glassmorphism — blurred translucent purple — for floating cards on dark.</p>
+        </div>
+      </div>
+
+      <div class="col">
+        <span class="cap mute">Motion direction</span>
+        <div class="card" style="min-height:auto">
+          <span class="num">Easing &amp; duration</span>
+          <p class="body" style="font-family:'Courier New',monospace;font-size:13px;color:var(--soft)">cubic-bezier(0.22, 1, 0.36, 1)</p>
+          <p class="body">600–900 ms hero. 200–300 ms UI. No abrupt cuts.</p>
+        </div>
+        <div class="card" style="min-height:auto">
+          <span class="num">Camera language</span>
+          <p class="body">Dolly. Slow pan. Subtle parallax. <span style="color:var(--soft)">Never</span> punch-zooms or shakes.</p>
+        </div>
+        <div class="card" style="min-height:auto">
+          <span class="num">Signature gesture</span>
+          <p class="body">A soft purple halo travels across the screen on each section change — like a runway light passing.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Visual Language</span><span class="pg">020 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 21 · SOCIAL FEED ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Social Media · Feed System</span></div>
+      <span class="cap mute">021</span>
+    </div>
+
+    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
+      <h2 class="h2">Image · Idea · Detail.</h2>
+      <p class="lead" style="max-width:340px">Each row of three is structured the same way — a cinematic hero, a typographic phrase, a close-up detail. The grid scans like an editorial spread.</p>
+    </div>
+
+    <div class="row" style="margin-top:32px;flex:1;align-items:stretch">
+      <div class="feed-grid">
+        <div class="post cinema"><svg class="mark icon-gold" style="width:28px;position:absolute;top:10px;right:12px" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
+        <div class="post quote"><span class="q">Five days<br/>in Istanbul.</span></div>
+        <div class="post detail"><div class="ring"></div></div>
+        <div class="post cinema2"><svg class="mark icon-gold" style="width:28px;position:absolute;top:10px;right:12px" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
+        <div class="post quote" style="background:var(--plum)"><span class="q gold">The trip<br/>is ready.</span></div>
+        <div class="post cinema3"><svg class="mark icon-gold" style="width:28px;position:absolute;top:10px;right:12px" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
+        <div class="post detail"><div class="ring" style="background:radial-gradient(closest-side, var(--lav) 0%, transparent 70%)"></div></div>
+        <div class="post cinema"><svg class="mark icon-gold" style="width:28px;position:absolute;top:10px;right:12px" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
+        <div class="post quote"><span class="q">Plan with us.</span></div>
+      </div>
+
+      <div class="col grow" style="gap:18px">
+        <div class="card" style="min-height:auto">
+          <span class="num">Post types</span>
+          <p class="body"><strong style="color:var(--soft)">Cinematic Hero</strong> — full-bleed photo, single line of caption, gold bird upper-right.</p>
+          <p class="body"><strong style="color:var(--soft)">Quote Card</strong> — purple background, white Satoshi quote (3–7 words), bird bottom-center.</p>
+          <p class="body"><strong style="color:var(--soft)">Detail</strong> — close-up: a watch, a key, a coffee, a wing tip.</p>
+          <p class="body"><strong style="color:var(--soft)">Boarding Pass</strong> — fake ticket as a teaser for a destination drop.</p>
+        </div>
+        <div class="card" style="min-height:auto">
+          <span class="num">CTA system</span>
+          <p class="body">Use one per touchpoint:</p>
+          <p class="body" style="color:var(--soft)">Plan with us. · Book quietly. · Leave the details to Sadine. · The trip is ready.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Social Feed</span><span class="pg">021 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 22 · STORIES & REELS ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Social · Stories &amp; Reels</span></div>
+      <span class="cap mute">022</span>
+    </div>
+
+    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
+      <h2 class="h2">Vertical, slow, with one idea per frame.</h2>
+      <p class="lead" style="max-width:380px">Open on motion. Hook in the first 1.2 s. Close on the bird, held on Sadine Purple for 0.6 s.</p>
+    </div>
+
+    <div class="stories" style="margin-top:32px">
+      <div class="story s1">
+        <span class="top">Story · 01 / 04</span>
+        <span class="copy">A weekend in<br/>Marrakech.</span>
+        <div class="bot"><span>Plan with us</span><svg class="mark icn icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
+      </div>
+      <div class="story s2">
+        <span class="top">Reel · cinematic</span>
+        <span class="copy">From boarding pass<br/>to last sunset.</span>
+        <div class="bot"><span>Sadine</span><svg class="mark icn icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
+      </div>
+      <div class="story s3">
+        <span class="top">Quote</span>
+        <span class="copy gold">The trip<br/>is ready.</span>
+        <div class="bot"><span>—</span><svg class="mark icn icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
+      </div>
+      <div class="story s4">
+        <span class="top">Itinerary teaser</span>
+        <span class="copy">Tunis → Istanbul<br/>12 → 17 May.</span>
+        <div class="bot"><span>Confirmed</span><svg class="mark icn icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Stories</span><span class="pg">022 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 23 · STATIONERY & TRAVEL TOUCHPOINTS ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Applications · Stationery &amp; Travel</span></div>
+      <span class="cap mute">023</span>
+    </div>
+
+    <div style="margin-top:24px">
+      <h2 class="h2">The artifacts of a journey.</h2>
+      <p class="lead" style="max-width:660px;margin-top:8px">Each touchpoint is a small object — designed once, repeated across every client. The boarding pass is the brand's signature artifact.</p>
+    </div>
+
+    <div style="margin-top:32px;flex:1;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center">
+      <div class="center" style="gap:24px">
+        <span class="cap gold">Boarding pass · 100 × 210 mm</span>
+        <div class="bp">
+          <div class="left">
+            <svg class="icon icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
+            <div>
+              <p class="code">Departure</p>
+              <p class="dest">Istanbul</p>
+            </div>
+            <p class="code">Sadine · IST · 22:40</p>
+          </div>
+          <div class="perf"></div>
+          <div class="right">
+            <div class="field"><span class="l">Passenger</span><span class="v">Mr. A. Ben Aïcha</span></div>
+            <div class="field"><span class="l">Class</span><span class="v">Suite · 02A</span></div>
+            <div class="field"><span class="l">From</span><span class="v">Tunis · TUN</span></div>
+            <div class="field"><span class="l">To</span><span class="v">Istanbul · IST</span></div>
+            <div class="gold-strip"></div>
+            <div class="field"><span class="l">Date</span><span class="v">12 May · 19:30</span></div>
+            <div class="field"><span class="l">Reference</span><span class="v">SDN · 1042</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="center" style="gap:24px">
+        <span class="cap gold">Business cards · 85 × 55 mm</span>
+        <div class="bc-pair">
+          <div class="bc front">
+            <svg class="icon icon-gold icn" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
+            <svg class="wm mark-mono-white" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+          </div>
+          <div class="bc back">
+            <svg class="wm mark-mono-plum" viewBox="0 0 1194.87 391.01" style="width:50%"><use href="#sadine-mark"/></svg>
+            <div class="stack">
+              <span class="name">Aïcha Bouzid</span>
+              <span class="role">Travel Designer</span>
+              <span class="ct">aicha@sadine.tours · +216 70 000 000</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:24px;align-items:center;margin-top:16px">
+          <div class="tag">
+            <svg class="icon icon-gold icn" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
+            <span class="lab">Sadine · Luggage</span>
+            <span class="num">SDN · 1042</span>
+          </div>
+          <div class="sign">
+            <div class="top">
+              <span class="meta">Tunis Airport · Pickup</span>
+              <svg class="icon icon-gold icn" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
+            </div>
+            <span class="name">Mr. Ben Aïcha</span>
+            <span class="meta">Sadine Tours · Suite 02A</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Stationery &amp; Travel</span><span class="pg">023 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 24 · ENVIRONMENTAL ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Applications · Environmental, Vehicle &amp; Uniform</span></div>
+      <span class="cap mute">024</span>
+    </div>
+
+    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
+      <h2 class="h2">Discretion, in three dimensions.</h2>
+      <p class="lead" style="max-width:340px">No phone numbers on the vehicle. No window posters on the storefront. The brand earns attention by withholding it.</p>
+    </div>
+
+    <div class="environments" style="margin-top:32px">
+      <div class="env storefront">
+        <span class="lab">A · Flagship · Tunis</span>
+        <div class="glass">
+          <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+        </div>
+      </div>
+      <div class="env vehicle">
+        <span class="lab">B · Vehicle · Matte Plum</span>
+        <div class="car">
+          <svg class="wm mark-mono-white" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px">
+      <div class="uniform-card">
+        <span class="lab">C · Lapel pin</span>
+        <div class="pin">
+          <svg class="icon icn" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
+        </div>
+        <p class="body" style="text-align:center;font-size:13px;max-width:260px">Worn on a Midnight-Plum blazer. Replaces the name tag.</p>
+      </div>
+      <div class="card" style="min-height:auto;justify-content:center">
+        <span class="num">Environmental rules</span>
+        <p class="body"><strong style="color:var(--soft)">Storefront</strong> — floor-to-ceiling glass, interior in Midnight Plum, single backlit wordmark above the desk, gold accent line at counter height.</p>
+        <p class="body"><strong style="color:var(--soft)">Vehicle</strong> — matte Midnight Plum, gloss-on-matte wordmark, gold bird front fender. No URL, no phone — discretion is the point.</p>
+        <p class="body"><strong style="color:var(--soft)">Uniform</strong> — Midnight Plum blazer, Soft White shirt, gold lapel pin, embossed leather pocket band in lieu of name tag.</p>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Environmental</span><span class="pg">024 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 25 · DIGITAL — APP & WEBSITE ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Applications · Digital — App &amp; Website</span></div>
+      <span class="cap mute">025</span>
+    </div>
+
+    <div style="margin-top:24px">
+      <h2 class="h2">A digital house, not a digital shop.</h2>
+      <p class="lead" style="max-width:740px;margin-top:8px">One question per screen. Keyboard-friendly. A persistent <em>Talk to a human</em> link at the top — discretion is part of the product.</p>
+    </div>
+
+    <div class="row" style="margin-top:24px;flex:1;align-items:stretch;gap:32px">
+      <div class="col" style="flex:1.6;gap:18px">
+        <span class="cap mute">Website · Hero</span>
+        <div class="browser">
+          <div class="bar">
+            <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>
+            <span class="url">sadine.tours / journeys</span>
+          </div>
+          <div class="hero">
+            <div class="nav">
+              <svg class="nav-mark mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+              <div class="links"><span>Destinations</span><span>The Method</span><span>Stories</span><span>Concierge</span></div>
+              <span class="cap gold">FR · AR · EN</span>
+            </div>
+            <h1>Five days in Istanbul. <br/>The trip is already ready.</h1>
+            <div class="ctas">
+              <span class="cta-primary">Plan with us →</span>
+              <span class="cta-secondary">View destinations</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="min-height:auto">
+          <span class="num">Website architecture</span>
+          <p class="body"><span style="color:var(--soft)">Hero</span> · 8-second cinematic video, single line, single CTA.</p>
+          <p class="body"><span style="color:var(--soft)">The Promise</span> · three pillars — Plan · Travel · Return.</p>
+          <p class="body"><span style="color:var(--soft)">Featured Destinations</span> · six tiles, soft hover lift.</p>
+          <p class="body"><span style="color:var(--soft)">The Sadine Method</span> · Discover → Design → Depart → Decompress.</p>
+          <p class="body"><span style="color:var(--soft)">Stories</span> · editorial blog cards (real client journeys).</p>
+          <p class="body"><span style="color:var(--soft)">Concierge</span> · a single conversational form.</p>
+        </div>
+      </div>
+
+      <div class="col" style="flex:1;align-items:center;gap:24px">
+        <span class="cap mute" style="align-self:flex-start">App · Booking flow</span>
+        <div class="phone">
+          <span class="notch"></span>
+          <div class="screen">
+            <div class="top"><span>22:40</span><span>···</span></div>
+            <span class="pill">Concierge · step 03 / 05</span>
+            <h2>When would you like to leave?</h2>
+            <div class="card">
+              <span class="lab">Departure</span>
+              <span class="val">12 May · 19:30</span>
+            </div>
+            <div class="card gold-row">
+              <span class="lab">Return</span>
+              <span class="val">17 May · 14:10</span>
+            </div>
+            <div class="card">
+              <div class="row"><span class="lab">Class</span><span class="val">Suite · 02A</span></div>
+            </div>
+            <div class="cta">Continue →</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:18px;align-items:center;justify-content:center;width:100%">
+          <div class="appicon">
+            <svg class="ic icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
+          </div>
+          <div class="col" style="gap:6px">
+            <span class="cap mute">App icon</span>
+            <span class="kbd white">160 × 160 · radius 36</span>
+            <span class="cap mute" style="margin-top:8px">Favicon</span>
+            <span class="kbd white">Bird only</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Digital</span><span class="pg">025 / 026</span></div>
+  </div>
+</section>
+
+<!-- ─────────── 26 · CLOSING ─────────── -->
+<section class="slide cover dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Closing</span></div>
+      <span class="cap mute">Edition 2026.01</span>
+    </div>
+
+    <div class="closing">
+      <div class="glow-c"></div>
+      <span class="sig">Welcome to</span>
+      <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
+      <p class="lead" style="max-width:780px;text-align:center;font-size:18px;color:var(--soft);margin-top:8px">
+        A new piece of work is on-brand if all five answers are yes:
+      </p>
+      <ol style="list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;max-width:1180px;width:100%;margin-top:8px;position:relative;z-index:2">
+        <li class="card" style="min-height:auto;padding:18px"><span class="num">01</span><span class="body" style="color:var(--soft);font-size:13px">Could this exist on the homepage of a luxury airline?</span></li>
+        <li class="card" style="min-height:auto;padding:18px"><span class="num">02</span><span class="body" style="color:var(--soft);font-size:13px">Is the gold doing one job and only one?</span></li>
+        <li class="card" style="min-height:auto;padding:18px"><span class="num">03</span><span class="body" style="color:var(--soft);font-size:13px">Could a competitor make this exact piece tomorrow?</span></li>
+        <li class="card" style="min-height:auto;padding:18px"><span class="num">04</span><span class="body" style="color:var(--soft);font-size:13px">Does the calm survive when the volume goes up?</span></li>
+        <li class="card" style="min-height:auto;padding:18px"><span class="num">05</span><span class="body" style="color:var(--soft);font-size:13px">Would the Quiet Professional show this to a friend?</span></li>
+      </ol>
+    </div>
+
+    <div class="botbar">
+      <span class="pg">Sadine Tours · Brand Identity System · Edition 2026.01</span>
+      <span class="pg">026 / 026</span>
+    </div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

@@ -61,7 +61,11 @@ a{color:inherit}
   display:flex;flex-direction:column;align-items:center;gap:40px;
   padding:48px 24px 96px;
   min-height:100vh;
+  counter-reset:page 0;
 }
+.slide{counter-increment:page}
+.pgnum::after{content:counter(page, decimal-leading-zero);font-variant-numeric:tabular-nums}
+.pgnum.total::after{content:counter(page, decimal-leading-zero) " / 038";font-variant-numeric:tabular-nums}
 .slide{
   position:relative;
   width:1440px;max-width:100%;
@@ -195,13 +199,23 @@ a{color:inherit}
 .cover .credits{display:flex;gap:48px}
 .cover .credits .c{display:flex;flex-direction:column;gap:6px}
 
-/* Index */
-.toc{display:grid;grid-template-columns:1fr 1fr;gap:0 80px}
-.toc .row{display:flex;justify-content:space-between;border-bottom:1px solid var(--hair);padding:14px 0;align-items:baseline;gap:24px}
-.toc .row:first-child,.toc .row:nth-child(2){border-top:1px solid var(--hair)}
-.toc .row .num{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.3em;color:var(--lav);min-width:32px}
-.toc .row .name{font-family:var(--display);font-weight:500;font-size:17px;flex:1}
-.toc .row .pg{font-family:var(--display);font-weight:500;font-size:11px;color:var(--lav);letter-spacing:.16em}
+/* Index — grouped TOC across 3 columns */
+.toc-grouped{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;flex:1;align-content:start}
+.toc-col{display:flex;flex-direction:column;gap:32px}
+.toc-section{display:flex;flex-direction:column}
+.toc-section-head{
+  font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:12px;
+  padding-bottom:10px;border-bottom:1px solid rgba(245,185,66,.35);
+}
+.toc-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  border-bottom:1px solid var(--hair);padding:9px 0;gap:18px;
+}
+.toc-row:last-child{border-bottom:0}
+.toc-row .num{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.3em;color:var(--lav);min-width:24px}
+.toc-row .name{font-family:var(--display);font-weight:500;font-size:14px;flex:1;line-height:1.3}
+.toc-row .pg{font-family:var(--display);font-weight:500;font-size:10px;color:var(--lav);letter-spacing:.16em}
 
 /* Manifesto */
 .manifesto-quote{font-family:var(--display);font-weight:700;font-size:60px;line-height:1.08;letter-spacing:-.022em;max-width:1100px}
@@ -758,7 +772,7 @@ a{color:inherit}
         <div class="c"><span class="cap mute">Audience</span><span class="kbd white">Internal · Partners</span></div>
         <div class="c"><span class="cap mute">Issued</span><span class="kbd white">Tunis · 2026</span></div>
       </div>
-      <span class="pg">001 / 026</span>
+      <span class="pg pgnum total"></span>
     </div>
   </div>
 </section>
@@ -776,36 +790,74 @@ a{color:inherit}
       <p class="lead" style="max-width:780px">A complete identity system: strategy, mark, color, type, visual language, and the applications that turn the brand from idea into experience.</p>
     </div>
 
-    <div class="toc" style="margin-top:48px">
-      <div class="row"><span class="num">01</span><span class="name">Cover</span><span class="pg">001</span></div>
-      <div class="row"><span class="num">14</span><span class="name">Color Ratios &amp; Pairings</span><span class="pg">014</span></div>
-      <div class="row"><span class="num">02</span><span class="name">Index</span><span class="pg">002</span></div>
-      <div class="row"><span class="num">15</span><span class="name">Typography — Satoshi</span><span class="pg">015</span></div>
-      <div class="row"><span class="num">03</span><span class="name">Manifesto</span><span class="pg">003</span></div>
-      <div class="row"><span class="num">16</span><span class="name">Typography — Manrope</span><span class="pg">016</span></div>
-      <div class="row"><span class="num">04</span><span class="name">Positioning · Mission · Vision</span><span class="pg">004</span></div>
-      <div class="row"><span class="num">17</span><span class="name">Typography — Arabic</span><span class="pg">017</span></div>
-      <div class="row"><span class="num">05</span><span class="name">Brand Values</span><span class="pg">005</span></div>
-      <div class="row"><span class="num">18</span><span class="name">Type Hierarchy</span><span class="pg">018</span></div>
-      <div class="row"><span class="num">06</span><span class="name">Personality &amp; Tone of Voice</span><span class="pg">006</span></div>
-      <div class="row"><span class="num">19</span><span class="name">Photography Direction</span><span class="pg">019</span></div>
-      <div class="row"><span class="num">07</span><span class="name">Audience Archetypes</span><span class="pg">007</span></div>
-      <div class="row"><span class="num">20</span><span class="name">Iconography &amp; Motion</span><span class="pg">020</span></div>
-      <div class="row"><span class="num">08</span><span class="name">Logo — Primary</span><span class="pg">008</span></div>
-      <div class="row"><span class="num">21</span><span class="name">Social Media Feed</span><span class="pg">021</span></div>
-      <div class="row"><span class="num">09</span><span class="name">Logo — Anatomy</span><span class="pg">009</span></div>
-      <div class="row"><span class="num">22</span><span class="name">Stories &amp; Reels</span><span class="pg">022</span></div>
-      <div class="row"><span class="num">10</span><span class="name">Logo — Family &amp; Variants</span><span class="pg">010</span></div>
-      <div class="row"><span class="num">23</span><span class="name">Stationery &amp; Travel Touchpoints</span><span class="pg">023</span></div>
-      <div class="row"><span class="num">11</span><span class="name">Clear Space &amp; Minimum Sizes</span><span class="pg">011</span></div>
-      <div class="row"><span class="num">24</span><span class="name">Environmental &amp; Vehicle</span><span class="pg">024</span></div>
-      <div class="row"><span class="num">12</span><span class="name">Incorrect Usage</span><span class="pg">012</span></div>
-      <div class="row"><span class="num">25</span><span class="name">Digital — App &amp; Website</span><span class="pg">025</span></div>
-      <div class="row"><span class="num">13</span><span class="name">Color System</span><span class="pg">013</span></div>
-      <div class="row"><span class="num">26</span><span class="name">Closing</span><span class="pg">026</span></div>
+    <div class="toc-grouped" style="margin-top:36px">
+      <div class="toc-col">
+        <div class="toc-section">
+          <span class="toc-section-head">Volume I · Strategy</span>
+          <div class="toc-row"><span class="num">01</span><span class="name">Cover</span><span class="pg">001</span></div>
+          <div class="toc-row"><span class="num">02</span><span class="name">Index</span><span class="pg">002</span></div>
+          <div class="toc-row"><span class="num">03</span><span class="name">Manifesto</span><span class="pg">003</span></div>
+          <div class="toc-row"><span class="num">04</span><span class="name">Positioning</span><span class="pg">004</span></div>
+          <div class="toc-row"><span class="num">05</span><span class="name">Mission &amp; Vision</span><span class="pg">005</span></div>
+          <div class="toc-row"><span class="num">06</span><span class="name">Brand Values · I</span><span class="pg">006</span></div>
+          <div class="toc-row"><span class="num">07</span><span class="name">Brand Values · II</span><span class="pg">007</span></div>
+          <div class="toc-row"><span class="num">08</span><span class="name">Personality</span><span class="pg">008</span></div>
+          <div class="toc-row"><span class="num">09</span><span class="name">Tone of Voice</span><span class="pg">009</span></div>
+          <div class="toc-row"><span class="num">10</span><span class="name">Audience · The Quiet Professional</span><span class="pg">010</span></div>
+          <div class="toc-row"><span class="num">11</span><span class="name">Audience · The Modern Couple</span><span class="pg">011</span></div>
+          <div class="toc-row"><span class="num">12</span><span class="name">Audience · The Considered Family</span><span class="pg">012</span></div>
+          <div class="toc-row"><span class="num">13</span><span class="name">Differentiation</span><span class="pg">013</span></div>
+        </div>
+      </div>
+
+      <div class="toc-col">
+        <div class="toc-section">
+          <span class="toc-section-head">Volume II · Identity</span>
+          <div class="toc-row"><span class="num">14</span><span class="name">Logo — Primary</span><span class="pg">014</span></div>
+          <div class="toc-row"><span class="num">15</span><span class="name">Logo — Anatomy</span><span class="pg">015</span></div>
+          <div class="toc-row"><span class="num">16</span><span class="name">Lockups · Primary</span><span class="pg">016</span></div>
+          <div class="toc-row"><span class="num">17</span><span class="name">Lockups · Mono &amp; Icon</span><span class="pg">017</span></div>
+          <div class="toc-row"><span class="num">18</span><span class="name">Clear Space &amp; Min Sizes</span><span class="pg">018</span></div>
+          <div class="toc-row"><span class="num">19</span><span class="name">Misuse · I</span><span class="pg">019</span></div>
+          <div class="toc-row"><span class="num">20</span><span class="name">Misuse · II</span><span class="pg">020</span></div>
+        </div>
+        <div class="toc-section">
+          <span class="toc-section-head">Volume III · Color &amp; Type</span>
+          <div class="toc-row"><span class="num">21</span><span class="name">Color Palette</span><span class="pg">021</span></div>
+          <div class="toc-row"><span class="num">22</span><span class="name">Gradients</span><span class="pg">022</span></div>
+          <div class="toc-row"><span class="num">23</span><span class="name">Color Ratios</span><span class="pg">023</span></div>
+          <div class="toc-row"><span class="num">24</span><span class="name">Satoshi · Display</span><span class="pg">024</span></div>
+          <div class="toc-row"><span class="num">25</span><span class="name">Manrope · Text</span><span class="pg">025</span></div>
+          <div class="toc-row"><span class="num">26</span><span class="name">Alexandria · Arabic</span><span class="pg">026</span></div>
+          <div class="toc-row"><span class="num">27</span><span class="name">Hierarchy</span><span class="pg">027</span></div>
+        </div>
+      </div>
+
+      <div class="toc-col">
+        <div class="toc-section">
+          <span class="toc-section-head">Volume IV · Visual Language</span>
+          <div class="toc-row"><span class="num">28</span><span class="name">Photography · Hero</span><span class="pg">028</span></div>
+          <div class="toc-row"><span class="num">29</span><span class="name">Photography · Detail</span><span class="pg">029</span></div>
+          <div class="toc-row"><span class="num">30</span><span class="name">Iconography &amp; Motion</span><span class="pg">030</span></div>
+        </div>
+        <div class="toc-section">
+          <span class="toc-section-head">Volume V · Applications</span>
+          <div class="toc-row"><span class="num">31</span><span class="name">Social Feed</span><span class="pg">031</span></div>
+          <div class="toc-row"><span class="num">32</span><span class="name">Stories &amp; Reels</span><span class="pg">032</span></div>
+          <div class="toc-row"><span class="num">33</span><span class="name">Boarding Pass</span><span class="pg">033</span></div>
+          <div class="toc-row"><span class="num">34</span><span class="name">Business Cards</span><span class="pg">034</span></div>
+          <div class="toc-row"><span class="num">35</span><span class="name">Luggage Tag &amp; Pickup Sign</span><span class="pg">035</span></div>
+          <div class="toc-row"><span class="num">36</span><span class="name">Environmental &amp; Vehicle</span><span class="pg">036</span></div>
+          <div class="toc-row"><span class="num">37</span><span class="name">Digital — Web &amp; App</span><span class="pg">037</span></div>
+        </div>
+        <div class="toc-section">
+          <span class="toc-section-head">Volume VI · Closing</span>
+          <div class="toc-row"><span class="num">38</span><span class="name">Standard &amp; Sign-off</span><span class="pg">038</span></div>
+        </div>
+      </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours</span><span class="pg">002 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -814,7 +866,7 @@ a{color:inherit}
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Manifesto</span></div>
-      <span class="cap mute">003</span>
+      <span class="cap mute pgnum"></span>
     </div>
 
     <div style="flex:1;display:flex;align-items:center">
@@ -834,184 +886,330 @@ a{color:inherit}
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · The Brand</span><span class="pg">003 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · The Brand</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
-<!-- ─────────── 04 · POSITIONING / MISSION / VISION ─────────── -->
+<!-- ─────────── 04 · POSITIONING ─────────── -->
 <section class="slide">
   <div class="frame">
     <div class="topbar">
-      <div class="id"><span class="dot"></span><span class="cap mute">Positioning · Mission · Vision</span></div>
-      <span class="cap mute">004</span>
+      <div class="id"><span class="dot"></span><span class="cap mute">Positioning</span></div>
+      <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="margin-top:24px">
-      <h2 class="h2">Where we stand. Why we exist. Where we go.</h2>
-    </div>
-
-    <div class="three" style="margin-top:48px;flex:1">
-      <div class="card">
-        <span class="num">01 · Positioning</span>
-        <h3 class="h3">A digital-first travel house — not a package shop.</h3>
-        <p class="body">For modern Tunisian and Maghreb travelers who want a curated, organized, premium journey, Sadine Tours designs and orchestrates every fragment of the trip with the precision of a luxury airline and the warmth of a private host.</p>
-        <p class="body" style="border-top:1px solid var(--hair);padding-top:14px;color:var(--soft)"><em>We sell calm, taste, and time saved.</em></p>
+    <div style="margin-top:32px;display:grid;grid-template-columns:1.3fr 1fr;gap:64px;flex:1;align-items:center">
+      <div>
+        <span class="cap gold" style="margin-bottom:18px;display:block">01 · Where we stand</span>
+        <h2 class="h1" style="margin-bottom:32px">A digital-first travel house — not a package shop.</h2>
+        <p class="lead" style="max-width:560px;font-size:18px">For modern Tunisian and Maghreb travelers who want a curated, organized, premium journey, Sadine Tours designs and orchestrates every fragment of the trip with the precision of a luxury airline and the warmth of a private host.</p>
+        <p class="h3" style="margin-top:32px;color:var(--soft);font-style:italic;max-width:520px">We sell calm, taste, and time saved.</p>
       </div>
-
-      <div class="card">
-        <span class="num">02 · Mission</span>
-        <h3 class="h3">Make organized, premium travel a default — not a privilege.</h3>
-        <p class="body">Take every fragment of the journey — visa, flight, transfer, hotel, restaurant, guide, return — and present it as a single, smooth, beautifully designed experience.</p>
-        <p class="body" style="border-top:1px solid var(--hair);padding-top:14px;color:var(--soft)"><em>From boarding pass to last sunset — handled.</em></p>
-      </div>
-
-      <div class="card">
-        <span class="num">03 · Vision · 2030</span>
-        <h3 class="h3">The most trusted modern travel brand in the Maghreb.</h3>
-        <p class="body">The first name a new generation of professionals, couples, and families thinks of when they decide to leave home well — across Tunisia, Algeria, Morocco, Libya, and the diaspora.</p>
-        <p class="body" style="border-top:1px solid var(--hair);padding-top:14px;color:var(--soft)"><em>Not biggest. Most trusted.</em></p>
+      <div class="card" style="background:rgba(0,0,0,.28);min-height:auto">
+        <span class="num">Category exit</span>
+        <p class="body" style="font-size:14.5px;color:var(--soft)">The Tunisian agency category competes on one axis — who can quote the cheapest package fastest. Same WhatsApp PDFs, same green-and-white logos, same crowded photography.</p>
+        <div class="hair" style="margin:6px 0"></div>
+        <span class="num">Our axis</span>
+        <p class="body" style="font-size:14.5px;color:var(--soft)">Not cheapest. Not loudest. The agency that <em>organizes</em> — and the organization itself is the luxury. Closer to a private travel concierge than a discount intermediary.</p>
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Strategy</span><span class="pg">004 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Strategy</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
-<!-- ─────────── 05 · VALUES ─────────── -->
+<!-- ─────────── 05 · MISSION & VISION ─────────── -->
 <section class="slide dark">
   <div class="frame">
     <div class="topbar">
-      <div class="id"><span class="dot"></span><span class="cap mute">Brand Values</span></div>
-      <span class="cap mute">005</span>
+      <div class="id"><span class="dot"></span><span class="cap mute">Mission &amp; Vision</span></div>
+      <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
-      <h2 class="h2">Six values that govern every decision.</h2>
-      <p class="lead" style="max-width:340px">If a piece of work breaks one of these, it does not ship. There are no exceptions.</p>
+    <div style="margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;flex:1;align-items:stretch">
+      <div class="card" style="justify-content:center;min-height:auto;padding:48px">
+        <span class="num">02 · Mission</span>
+        <h2 class="h2" style="margin:14px 0 22px">Make organized, premium travel a default — not a privilege.</h2>
+        <p class="lead" style="font-size:16px">Take every fragment of the journey — visa, flight, transfer, hotel, restaurant, guide, return — and present it as a single, smooth, beautifully designed experience.</p>
+        <div class="hair gold short" style="margin:22px 0 6px"></div>
+        <p class="h4" style="color:var(--soft);font-style:italic">From boarding pass to last sunset — handled.</p>
+      </div>
+      <div class="card" style="justify-content:center;min-height:auto;padding:48px">
+        <span class="num">03 · Vision · 2030</span>
+        <h2 class="h2" style="margin:14px 0 22px">The most trusted modern travel brand in the Maghreb.</h2>
+        <p class="lead" style="font-size:16px">The first name a new generation of professionals, couples, and families thinks of when they decide to leave home well — across Tunisia, Algeria, Morocco, Libya, and the diaspora.</p>
+        <div class="hair gold short" style="margin:22px 0 6px"></div>
+        <p class="h4" style="color:var(--soft);font-style:italic">Not biggest. Most trusted.</p>
+      </div>
     </div>
 
-    <div class="six" style="margin-top:42px;flex:1">
-      <div class="v"><span class="n">01 · Precision</span><span class="t">A flight time is a flight time.</span><span class="body">Nothing is "approximate." Confirmations are confirmations.</span></div>
-      <div class="v"><span class="n">02 · Elegance</span><span class="t">Quiet. Considered. Edited.</span><span class="body">Loud is a sign of effort; we don't want effort to show.</span></div>
-      <div class="v"><span class="n">03 · Warmth</span><span class="t">Premium, never cold.</span><span class="body">There is always a human voice underneath the system.</span></div>
-      <div class="v"><span class="n">04 · Curation</span><span class="t">We don't sell every destination.</span><span class="body">We sell the ones we have personally vetted.</span></div>
-      <div class="v"><span class="n">05 · Modernity</span><span class="t">Digital-first, not paper-first.</span><span class="body">Booking, communication, follow-up — app-native by default.</span></div>
-      <div class="v"><span class="n">06 · Discretion</span><span class="t">What we know, we hold quietly.</span><span class="body">Preferences, allergies, anniversaries — used invisibly.</span></div>
-    </div>
-
-    <div class="botbar"><span class="pg">Sadine Tours · Values</span><span class="pg">005 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Strategy</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
-<!-- ─────────── 06 · PERSONALITY & TONE ─────────── -->
+<!-- ─────────── 06 · BRAND VALUES · I ─────────── -->
 <section class="slide">
   <div class="frame">
     <div class="topbar">
-      <div class="id"><span class="dot"></span><span class="cap mute">Personality &amp; Tone of Voice</span></div>
-      <span class="cap mute">006</span>
+      <div class="id"><span class="dot"></span><span class="cap mute">Brand Values · I / II</span></div>
+      <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="margin-top:24px">
-      <h2 class="h2">If the brand were a person.</h2>
+    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h1">Six values<br/>that govern<br/>every decision.</h2>
+      <p class="lead" style="max-width:380px">If a piece of work breaks one of these, it does not ship. There are no exceptions. The first three are below.</p>
     </div>
 
-    <div class="split" style="margin-top:40px;flex:1">
-      <div class="col">
-        <div class="card" style="min-height:auto">
-          <span class="num">Persona</span>
-          <p class="lead" style="color:var(--soft);font-size:18px">Late thirties. Bilingual — French, Arabic, fluent English. Trained somewhere precise — hotel school in Lausanne, an airline in Doha, a private concierge in Paris.</p>
-          <p class="body">Wears one good watch, not three. Doesn't seem busy even when they are. Notices things — the temperature of the car, the light at check-in, whether you've eaten. <span class="white">A host. Not a salesman.</span></p>
-        </div>
+    <div class="six" style="grid-template-columns:repeat(3,1fr);margin-top:40px;flex:1">
+      <div class="v" style="padding:36px;justify-content:center;min-height:auto"><span class="n">01 · Precision</span><span class="t" style="font-size:28px;margin:8px 0">A flight time is a flight time.</span><span class="body" style="font-size:14px">Nothing is "approximate." Confirmations are confirmations. The flight is at 19:30, not "around 19:30."</span></div>
+      <div class="v" style="padding:36px;justify-content:center;min-height:auto"><span class="n">02 · Elegance</span><span class="t" style="font-size:28px;margin:8px 0">Quiet. Considered. Edited.</span><span class="body" style="font-size:14px">Loud is a sign of effort; we don't want effort to show. The brand whispers.</span></div>
+      <div class="v" style="padding:36px;justify-content:center;min-height:auto"><span class="n">03 · Warmth</span><span class="t" style="font-size:28px;margin:8px 0">Premium, never cold.</span><span class="body" style="font-size:14px">There is always a human voice underneath the system. Hosted, not transactional.</span></div>
+    </div>
 
+    <div class="botbar"><span class="pg">Sadine Tours · Values · I</span><span class="pg pgnum total"></span></div>
+  </div>
+</section>
+
+<!-- ─────────── 07 · BRAND VALUES · II ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Brand Values · II / II</span></div>
+      <span class="cap mute pgnum"></span>
+    </div>
+
+    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h1">Three more —<br/>and the rule<br/>is unchanged.</h2>
+      <p class="lead" style="max-width:380px">Curation, modernity, discretion. Together with the first three, they form a six-rule contract — for every campaign, every email, every storefront.</p>
+    </div>
+
+    <div class="six" style="grid-template-columns:repeat(3,1fr);margin-top:40px;flex:1">
+      <div class="v" style="padding:36px;justify-content:center;min-height:auto"><span class="n">04 · Curation</span><span class="t" style="font-size:28px;margin:8px 0">We don't sell every destination.</span><span class="body" style="font-size:14px">We sell the ones we have personally vetted. The catalog is short on purpose.</span></div>
+      <div class="v" style="padding:36px;justify-content:center;min-height:auto"><span class="n">05 · Modernity</span><span class="t" style="font-size:28px;margin:8px 0">Digital-first, not paper-first.</span><span class="body" style="font-size:14px">Booking, communication, follow-up — app-native by default. Paper is for ceremony.</span></div>
+      <div class="v" style="padding:36px;justify-content:center;min-height:auto"><span class="n">06 · Discretion</span><span class="t" style="font-size:28px;margin:8px 0">What we know, we hold quietly.</span><span class="body" style="font-size:14px">Preferences, allergies, anniversaries — used invisibly. Discretion is part of the product.</span></div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Values · II</span><span class="pg pgnum total"></span></div>
+  </div>
+</section>
+
+<!-- ─────────── 08 · PERSONALITY ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Personality</span></div>
+      <span class="cap mute pgnum"></span>
+    </div>
+
+    <div style="margin-top:32px;display:grid;grid-template-columns:1.2fr 1fr;gap:64px;flex:1;align-items:center">
+      <div>
+        <span class="cap gold" style="margin-bottom:16px;display:block">If the brand were a person</span>
+        <h2 class="h1" style="margin-bottom:28px;max-width:600px">A host.<br/><span style="color:var(--lav)">Not a salesman.</span></h2>
+        <p class="lead" style="max-width:520px;font-size:18px">Late thirties. Bilingual — French, Arabic, fluent English. Trained somewhere precise: hotel school in Lausanne, an airline in Doha, a private concierge in Paris.</p>
+        <p class="lead" style="max-width:520px;font-size:18px;margin-top:18px;color:var(--soft)">Wears one good watch, not three. Doesn't seem busy even when they are. Notices things — the temperature of the car, the light at check-in, whether you've eaten.</p>
+      </div>
+
+      <div class="col" style="gap:18px">
+        <span class="cap mute">Three lines they would write</span>
         <div class="sample">
-          <span class="lab">Sample · Onboarding email</span>
+          <span class="lab">Onboarding email · opening line</span>
           Welcome, Mr. Ben Aïcha. Your journey begins on Tuesday. Everything below is yours to keep — itinerary, contacts, and the small things we've already arranged.
         </div>
-
         <div class="sample">
-          <span class="lab">Sample · Delay handling</span>
+          <span class="lab">Delay handling · plain reassurance</span>
           Your flight is delayed by two hours. We've already moved your transfer and notified the hotel. You don't need to do anything.
         </div>
-      </div>
-
-      <div class="col">
-        <span class="cap mute">Voice principles</span>
-        <div class="tone-list">
-          <div class="col y">
-            <h5>We are</h5>
-            <ul>
-              <li>Warm</li>
-              <li>Confident</li>
-              <li>Specific</li>
-              <li>Brief</li>
-              <li>Bilingual</li>
-              <li>Refined</li>
-            </ul>
-          </div>
-          <div class="col n">
-            <h5>We are not</h5>
-            <ul>
-              <li>Casual</li>
-              <li>Loud</li>
-              <li>Generic</li>
-              <li>Brusque</li>
-              <li>Mixed-up</li>
-              <li>Stiff</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card" style="min-height:auto;margin-top:8px">
-          <span class="num">Writing rules</span>
-          <p class="body" style="color:var(--soft);font-size:13.5px">Short sentences. Specific nouns. No exclamation marks outside captions. No emojis in customer service. Honor the language the client wrote in. Never apologize for price — state it once, with confidence.</p>
+        <div class="sample">
+          <span class="lab">Booking confirmation · subject line</span>
+          Confirmed · Istanbul · 12 → 17 May
         </div>
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Voice</span><span class="pg">006 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Personality</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
-<!-- ─────────── 07 · AUDIENCE ─────────── -->
+<!-- ─────────── 09 · TONE OF VOICE ─────────── -->
 <section class="slide dark">
   <div class="frame">
     <div class="topbar">
-      <div class="id"><span class="dot"></span><span class="cap mute">Audience Archetypes</span></div>
-      <span class="cap mute">007</span>
+      <div class="id"><span class="dot"></span><span class="cap mute">Tone of Voice</span></div>
+      <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
-      <h2 class="h2">Three archetypes. One brand.</h2>
-      <p class="lead" style="max-width:340px">They overlap. The brand serves all three at once — premium, hosted, organized — and never compromises on one to please another.</p>
+    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h1">We are.<br/>We are not.</h2>
+      <p class="lead" style="max-width:380px">Six words on each side. They form the contract every email, caption, and conversation must honor.</p>
     </div>
 
-    <div class="three" style="margin-top:42px;flex:1">
-      <div class="card">
-        <span class="num">Primary</span>
-        <h3 class="h3">The Quiet Professional</h3>
-        <p class="body"><strong style="color:var(--soft)">32–48</strong>, urban, senior professional, entrepreneur, doctor, executive. Travels 4–8 times a year — half business, half leisure.</p>
-        <p class="body">Values <span class="gold">time over price</span>. Pays for invisible labor. Books on phone. Reads in French and Arabic. Expects English to work.</p>
-        <p class="body" style="border-top:1px solid var(--hair);padding-top:14px;color:var(--soft);font-style:italic">"I just don't have time to organize this."</p>
+    <div style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;flex:1;align-items:start">
+      <div class="tone-list" style="grid-template-columns:1fr 1fr;grid-column:span 2">
+        <div class="col y" style="gap:0">
+          <h5>We are</h5>
+          <ul>
+            <li>Warm</li>
+            <li>Confident</li>
+            <li>Specific</li>
+            <li>Brief</li>
+            <li>Bilingual</li>
+            <li>Refined</li>
+          </ul>
+        </div>
+        <div class="col n" style="gap:0">
+          <h5>We are not</h5>
+          <ul>
+            <li>Casual</li>
+            <li>Loud</li>
+            <li>Generic</li>
+            <li>Brusque</li>
+            <li>Mixed-up</li>
+            <li>Stiff</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="card">
-        <span class="num">Secondary</span>
-        <h3 class="h3">The Modern Couple</h3>
-        <p class="body"><strong style="color:var(--soft)">28–40</strong>, dual income, no children or one young child. Honeymoons, anniversaries, "we both need a break" weekends.</p>
-        <p class="body">Highly visual — cares how the trip <span class="gold">looks</span>, but in a refined way. Wants taste, not influencer-bait.</p>
-        <p class="body" style="border-top:1px solid var(--hair);padding-top:14px;color:var(--soft);font-style:italic">"I want it to feel like a movie."</p>
-      </div>
-
-      <div class="card">
-        <span class="num">Tertiary</span>
-        <h3 class="h3">The Considered Family</h3>
-        <p class="body"><strong style="color:var(--soft)">38–55</strong>, two to three children. Will not compromise on safety, hygiene, or the children's experience.</p>
-        <p class="body">Wants the <span class="gold">adults' trip preserved</span> — real hotels, real food, real culture, with kids accommodated rather than catered to.</p>
-        <p class="body" style="border-top:1px solid var(--hair);padding-top:14px;color:var(--soft);font-style:italic">"A real trip the kids can also enjoy."</p>
+      <div class="col" style="gap:18px">
+        <div class="card" style="min-height:auto">
+          <span class="num">Writing rules</span>
+          <p class="body" style="color:var(--soft);font-size:14px">Short sentences. Specific nouns. No exclamation marks outside captions. No emojis in customer service. Honor the language the client wrote in. Never apologize for price — state it once, with confidence.</p>
+        </div>
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Audience</span><span class="pg">007 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Voice</span><span class="pg pgnum total"></span></div>
+  </div>
+</section>
+
+<!-- ─────────── 10 · AUDIENCE · QUIET PROFESSIONAL ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Audience · I / III · Primary</span></div>
+      <span class="cap mute pgnum"></span>
+    </div>
+
+    <div style="margin-top:32px;display:grid;grid-template-columns:1.1fr 1fr;gap:72px;flex:1;align-items:center">
+      <div>
+        <span class="cap gold" style="margin-bottom:16px;display:block">Primary archetype · 01 / 03</span>
+        <h2 class="h1" style="margin-bottom:28px">The Quiet<br/>Professional.</h2>
+        <p class="lead" style="max-width:520px;font-size:18px">32–48 years old. Urban — Tunis, Sfax, Sousse, Casablanca, Algiers. Senior professional, entrepreneur, doctor, executive.</p>
+        <p class="lead" style="max-width:520px;font-size:18px;margin-top:14px;color:var(--soft)">Travels 4–8 times a year, half business, half leisure. Values <span class="gold">time over price</span>. Pays for invisible labor.</p>
+      </div>
+      <div class="col" style="gap:18px">
+        <div class="card" style="background:rgba(0,0,0,.28);min-height:auto;padding:36px">
+          <span class="num">Trigger phrase</span>
+          <p class="h3" style="font-style:italic;color:var(--soft);font-weight:500;line-height:1.3">"I just don't have time to organize this."</p>
+        </div>
+        <div class="card" style="min-height:auto;padding:28px;gap:12px">
+          <span class="num">How they read</span>
+          <p class="body">Books on phone. Reads in French and Arabic. Expects English to work. Replies in the language they wrote in. Trusts brands that look as careful as they are.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Audience · Primary</span><span class="pg pgnum total"></span></div>
+  </div>
+</section>
+
+<!-- ─────────── 11 · AUDIENCE · MODERN COUPLE ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Audience · II / III · Secondary</span></div>
+      <span class="cap mute pgnum"></span>
+    </div>
+
+    <div style="margin-top:32px;display:grid;grid-template-columns:1.1fr 1fr;gap:72px;flex:1;align-items:center">
+      <div>
+        <span class="cap gold" style="margin-bottom:16px;display:block">Secondary archetype · 02 / 03</span>
+        <h2 class="h1" style="margin-bottom:28px">The Modern<br/>Couple.</h2>
+        <p class="lead" style="max-width:520px;font-size:18px">28–40 years old. Dual income. No children, or one young child. Honeymoons, anniversaries, "we both need a break" weekends.</p>
+        <p class="lead" style="max-width:520px;font-size:18px;margin-top:14px;color:var(--soft)">Highly visual — cares how the trip <span class="gold">looks</span>, but in a refined way. Wants taste, not influencer-bait.</p>
+      </div>
+      <div class="col" style="gap:18px">
+        <div class="card" style="background:rgba(0,0,0,.28);min-height:auto;padding:36px">
+          <span class="num">Trigger phrase</span>
+          <p class="h3" style="font-style:italic;color:var(--soft);font-weight:500;line-height:1.3">"I want it to feel like a movie."</p>
+        </div>
+        <div class="card" style="min-height:auto;padding:28px;gap:12px">
+          <span class="num">How they buy</span>
+          <p class="body">Discovers via Instagram saves and friends. Compares two or three options, then decides over dinner. Will pay 30% more for a brand that gets the photography right.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Audience · Secondary</span><span class="pg pgnum total"></span></div>
+  </div>
+</section>
+
+<!-- ─────────── 12 · AUDIENCE · CONSIDERED FAMILY ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Audience · III / III · Tertiary</span></div>
+      <span class="cap mute pgnum"></span>
+    </div>
+
+    <div style="margin-top:32px;display:grid;grid-template-columns:1.1fr 1fr;gap:72px;flex:1;align-items:center">
+      <div>
+        <span class="cap gold" style="margin-bottom:16px;display:block">Tertiary archetype · 03 / 03</span>
+        <h2 class="h1" style="margin-bottom:28px">The Considered<br/>Family.</h2>
+        <p class="lead" style="max-width:520px;font-size:18px">38–55 years old. Two to three children. Will not compromise on safety, hygiene, or the children's experience.</p>
+        <p class="lead" style="max-width:520px;font-size:18px;margin-top:14px;color:var(--soft)">Wants the <span class="gold">adults' trip preserved</span> — real hotels, real food, real culture, with kids accommodated rather than catered to.</p>
+      </div>
+      <div class="col" style="gap:18px">
+        <div class="card" style="background:rgba(0,0,0,.28);min-height:auto;padding:36px">
+          <span class="num">Trigger phrase</span>
+          <p class="h3" style="font-style:italic;color:var(--soft);font-weight:500;line-height:1.3">"A real trip the kids can also enjoy."</p>
+        </div>
+        <div class="card" style="min-height:auto;padding:28px;gap:12px">
+          <span class="num">What they need from us</span>
+          <p class="body">Pre-arranged everything: car seats waiting, kids' menus pre-confirmed, hotel rooms pre-checked for adjoining doors. The parents should never have to ask.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Audience · Tertiary</span><span class="pg pgnum total"></span></div>
+  </div>
+</section>
+
+<!-- ─────────── 13 · DIFFERENTIATION ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Differentiation</span></div>
+      <span class="cap mute pgnum"></span>
+    </div>
+
+    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h1">The defensible<br/>space is the<br/>last row.</h2>
+      <p class="lead" style="max-width:380px">Across seven dimensions, the only one of three competitors that owns a brand is us. Pricing isn't the moat — taste and care are.</p>
+    </div>
+
+    <div class="card" style="margin-top:36px;flex:1;min-height:auto;padding:0;background:rgba(0,0,0,.28);overflow:hidden">
+      <table style="width:100%;border-collapse:collapse;font-family:var(--display);font-size:13px">
+        <thead>
+          <tr style="background:rgba(0,0,0,.35)">
+            <th style="text-align:left;padding:18px 22px;font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav)">Dimension</th>
+            <th style="text-align:left;padding:18px 22px;font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav)">Old-school agency</th>
+            <th style="text-align:left;padding:18px 22px;font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav)">Online aggregator</th>
+            <th style="text-align:left;padding:18px 22px;font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)">Sadine Tours</th>
+          </tr>
+        </thead>
+        <tbody style="color:var(--soft)">
+          <tr style="border-top:1px solid var(--hair)"><td style="padding:14px 22px;color:var(--lav)">Channel</td><td style="padding:14px 22px">Walk-in shop</td><td style="padding:14px 22px">Web booking engine</td><td style="padding:14px 22px;color:var(--gold)">Concierge + app + boutique</td></tr>
+          <tr style="border-top:1px solid var(--hair)"><td style="padding:14px 22px;color:var(--lav)">Tone</td><td style="padding:14px 22px">Transactional</td><td style="padding:14px 22px">Algorithmic</td><td style="padding:14px 22px;color:var(--gold)">Hosted</td></tr>
+          <tr style="border-top:1px solid var(--hair)"><td style="padding:14px 22px;color:var(--lav)">Aesthetic</td><td style="padding:14px 22px">Crowded</td><td style="padding:14px 22px">Clinical</td><td style="padding:14px 22px;color:var(--gold)">Cinematic</td></tr>
+          <tr style="border-top:1px solid var(--hair)"><td style="padding:14px 22px;color:var(--lav)">Pricing</td><td style="padding:14px 22px">Lowest</td><td style="padding:14px 22px">Variable</td><td style="padding:14px 22px;color:var(--gold)">Transparent premium</td></tr>
+          <tr style="border-top:1px solid var(--hair)"><td style="padding:14px 22px;color:var(--lav)">After booking</td><td style="padding:14px 22px">Silent</td><td style="padding:14px 22px">Email blasts</td><td style="padding:14px 22px;color:var(--gold)">Designed follow-up</td></tr>
+          <tr style="border-top:1px solid var(--hair)"><td style="padding:14px 22px;color:var(--lav)">Failure handling</td><td style="padding:14px 22px">"Call airline"</td><td style="padding:14px 22px">Self-service portal</td><td style="padding:14px 22px;color:var(--gold)">Already moved</td></tr>
+          <tr style="border-top:1px solid var(--hair)"><td style="padding:14px 22px;color:var(--lav)">Brand asset</td><td style="padding:14px 22px">Logo on a pen</td><td style="padding:14px 22px">None</td><td style="padding:14px 22px;color:var(--gold)">A complete identity</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Differentiation</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -1020,7 +1218,7 @@ a{color:inherit}
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Logo · Primary Lockup</span></div>
-      <span class="cap mute">008</span>
+      <span class="cap mute pgnum"></span>
     </div>
 
     <div style="margin-top:24px">
@@ -1039,7 +1237,7 @@ a{color:inherit}
       <div class="m"><h6>Hidden monogram</h6><p>The bird above the i reads as an abstract S</p></div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Logo</span><span class="pg">008 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Logo</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -1048,7 +1246,7 @@ a{color:inherit}
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Logo · Anatomy &amp; Construction</span></div>
-      <span class="cap mute">009</span>
+      <span class="cap mute pgnum"></span>
     </div>
 
     <div style="margin-top:24px">
@@ -1065,51 +1263,71 @@ a{color:inherit}
       <span class="annot a5" style="color:var(--soft)">C · 48px construction grid</span>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Anatomy</span><span class="pg">009 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Anatomy</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
-<!-- ─────────── 10 · LOGO FAMILY ─────────── -->
+<!-- ─────────── 16 · LOCKUPS · PRIMARY ─────────── -->
 <section class="slide dark">
   <div class="frame">
     <div class="topbar">
-      <div class="id"><span class="dot"></span><span class="cap mute">Logo · Family &amp; Variants</span></div>
-      <span class="cap mute">010</span>
+      <div class="id"><span class="dot"></span><span class="cap mute">Lockups · Primary · I / II</span></div>
+      <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="margin-top:24px">
-      <h2 class="h2">Six approved variants.</h2>
-      <p class="lead" style="max-width:680px;margin-top:8px">Always pick the variant whose contrast is highest against its background. Never invent a new one.</p>
+    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h1">Three primary<br/>backgrounds.</h2>
+      <p class="lead" style="max-width:380px">The full-color mark — white wordmark, gold bird — sits on three approved backgrounds. Always pick the one with the highest contrast against the surrounding context.</p>
     </div>
 
-    <div class="logo-grid" style="margin-top:32px">
-      <div class="tile purple">
+    <div class="logo-grid" style="grid-template-columns:repeat(3,1fr);margin-top:40px;flex:1">
+      <div class="tile purple" style="min-height:auto;padding:48px">
         <span class="l">A · Primary on Purple</span>
         <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
       </div>
-      <div class="tile dark">
+      <div class="tile dark" style="min-height:auto;padding:48px">
         <span class="l">B · Primary on Dark</span>
         <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
       </div>
-      <div class="tile light">
+      <div class="tile light" style="min-height:auto;padding:48px">
         <span class="l">C · Primary on Light</span>
         <svg class="wm mark-on-light" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
       </div>
-      <div class="tile dark">
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Lockups · Primary</span><span class="pg pgnum total"></span></div>
+  </div>
+</section>
+
+<!-- ─────────── 17 · LOCKUPS · MONO & ICON ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Lockups · Mono &amp; Icon · II / II</span></div>
+      <span class="cap mute pgnum"></span>
+    </div>
+
+    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h1">Single-color &amp;<br/>icon-only.</h2>
+      <p class="lead" style="max-width:380px">Use the mono variants for engraving, embossing, foil stamping, and any context where one color is required. The bird-only icon is for app icons, favicons, lapel pins, and embroidery.</p>
+    </div>
+
+    <div class="logo-grid" style="grid-template-columns:repeat(3,1fr);margin-top:40px;flex:1">
+      <div class="tile dark" style="min-height:auto;padding:48px">
         <span class="l">D · Mono White</span>
         <svg class="wm mark-mono-white" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
       </div>
-      <div class="tile light">
+      <div class="tile light" style="min-height:auto;padding:48px">
         <span class="l">E · Mono Plum</span>
         <svg class="wm mark-mono-plum" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
       </div>
-      <div class="tile purple">
+      <div class="tile purple" style="min-height:auto;padding:48px">
         <span class="l">F · Icon Only — Bird</span>
         <svg class="icon icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Variants</span><span class="pg">010 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Lockups · Mono &amp; Icon</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -1118,7 +1336,7 @@ a{color:inherit}
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Logo · Clear Space &amp; Minimum Size</span></div>
-      <span class="cap mute">011</span>
+      <span class="cap mute pgnum"></span>
     </div>
 
     <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
@@ -1169,57 +1387,77 @@ a{color:inherit}
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Clear Space</span><span class="pg">011 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Clear Space</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
-<!-- ─────────── 12 · MISUSE ─────────── -->
+<!-- ─────────── 19 · MISUSE · I ─────────── -->
 <section class="slide dark">
   <div class="frame">
     <div class="topbar">
-      <div class="id"><span class="dot"></span><span class="cap mute">Logo · Incorrect Usage</span></div>
-      <span class="cap mute">012</span>
+      <div class="id"><span class="dot"></span><span class="cap mute">Misuse · I / II</span></div>
+      <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
-      <h2 class="h2">Six things never to do.</h2>
-      <p class="lead" style="max-width:340px;color:#ff8a8a">Each of these breaks the mark. None of them are stylistic preferences — they are rules.</p>
+    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h1">Three things —<br/>never to do.</h2>
+      <p class="lead" style="max-width:380px;color:#ff8a8a">Each of these breaks the mark. None of them are stylistic preferences. They are rules.</p>
     </div>
 
-    <div class="misuse" style="margin-top:32px">
-      <div class="m stretched">
+    <div class="misuse" style="grid-template-columns:repeat(3,1fr);grid-template-rows:1fr;margin-top:40px;flex:1">
+      <div class="m stretched" style="padding:48px">
         <span class="lab">01 · Do not stretch</span>
         <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
         <span class="x-overlay"></span>
       </div>
-      <div class="m recolor">
+      <div class="m recolor" style="padding:48px">
         <span class="lab">02 · Do not recolor</span>
         <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
         <span class="x-overlay"></span>
       </div>
-      <div class="m busy">
+      <div class="m busy" style="padding:48px">
         <span class="lab">03 · Do not place on busy bg</span>
         <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
         <span class="x-overlay"></span>
       </div>
-      <div class="m rotated">
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Misuse · I</span><span class="pg pgnum total"></span></div>
+  </div>
+</section>
+
+<!-- ─────────── 20 · MISUSE · II ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Misuse · II / II</span></div>
+      <span class="cap mute pgnum"></span>
+    </div>
+
+    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h1">Three more —<br/>also forbidden.</h2>
+      <p class="lead" style="max-width:380px;color:#ff8a8a">Rotation, outlines, and drop-shadows. The mark exists in one orientation, one weight system, one finish. Resist all three temptations.</p>
+    </div>
+
+    <div class="misuse" style="grid-template-columns:repeat(3,1fr);grid-template-rows:1fr;margin-top:40px;flex:1">
+      <div class="m rotated" style="padding:48px">
         <span class="lab">04 · Do not rotate</span>
         <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
         <span class="x-overlay"></span>
       </div>
-      <div class="m outlined">
+      <div class="m outlined" style="padding:48px">
         <span class="lab">05 · Do not outline</span>
         <svg class="wm" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
         <span class="x-overlay"></span>
       </div>
-      <div class="m shadow">
+      <div class="m shadow" style="padding:48px">
         <span class="lab">06 · Do not add drop-shadow</span>
         <svg class="wm mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
         <span class="x-overlay"></span>
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Misuse</span><span class="pg">012 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Misuse · II</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -1228,7 +1466,7 @@ a{color:inherit}
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Color · Primary Palette</span></div>
-      <span class="cap mute">013</span>
+      <span class="cap mute pgnum"></span>
     </div>
 
     <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
@@ -1285,58 +1523,102 @@ a{color:inherit}
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Color</span><span class="pg">013 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Color</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
-<!-- ─────────── 14 · GRADIENTS + RATIOS ─────────── -->
+<!-- ─────────── 22 · GRADIENTS ─────────── -->
 <section class="slide dark">
   <div class="frame">
     <div class="topbar">
-      <div class="id"><span class="dot"></span><span class="cap mute">Color · Gradients &amp; Ratios</span></div>
-      <span class="cap mute">014</span>
+      <div class="id"><span class="dot"></span><span class="cap mute">Color · Gradients</span></div>
+      <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="margin-top:24px">
-      <h2 class="h2">Three gradients. Three jobs.</h2>
+    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h1">Three gradients.<br/>Three jobs.</h2>
+      <p class="lead" style="max-width:420px">Depth lives behind hero photography. Glow gives motion to digital surfaces. Luxury is reserved for invitations, mailers, and milestone moments — never daily UI.</p>
     </div>
 
-    <div class="gradients" style="margin-top:32px">
-      <div class="grad g1">
+    <div class="gradients" style="grid-template-columns:1fr 1fr 1fr;margin-top:48px;flex:1">
+      <div class="grad g1" style="min-height:auto;padding:40px">
         <div>
-          <h3 class="name">Depth</h3>
-          <p class="role">Heroes · Brand book · Editorial</p>
+          <span class="role">Depth · 01 / 03</span>
+          <h3 class="name" style="margin-top:6px;font-size:32px">Depth</h3>
         </div>
-        <div class="vals">#2A124F → #4B2E83</div>
-      </div>
-      <div class="grad g2">
         <div>
-          <h3 class="name">Glow</h3>
-          <p class="role">UI lighting · Social accents · Motion</p>
+          <p class="role" style="margin-bottom:8px;opacity:.85">Heroes · Brand book · Editorial</p>
+          <div class="vals" style="font-size:13px">#2A124F → #4B2E83</div>
         </div>
-        <div class="vals">#4B2E83 → #7B5BCE</div>
       </div>
-      <div class="grad g3">
+      <div class="grad g2" style="min-height:auto;padding:40px">
         <div>
-          <h3 class="name">Luxury</h3>
-          <p class="role">Premium moments only — invites, mailers</p>
+          <span class="role">Glow · 02 / 03</span>
+          <h3 class="name" style="margin-top:6px;font-size:32px">Glow</h3>
         </div>
-        <div class="vals">#4B2E83 → #F5B942</div>
+        <div>
+          <p class="role" style="margin-bottom:8px;opacity:.85">UI lighting · Social · Motion</p>
+          <div class="vals" style="font-size:13px">#4B2E83 → #7B5BCE</div>
+        </div>
+      </div>
+      <div class="grad g3" style="min-height:auto;padding:40px">
+        <div>
+          <span class="role">Luxury · 03 / 03</span>
+          <h3 class="name" style="margin-top:6px;font-size:32px">Luxury</h3>
+        </div>
+        <div>
+          <p class="role" style="margin-bottom:8px;opacity:.85">Invites · Mailers · Milestones</p>
+          <div class="vals" style="font-size:13px">#4B2E83 → #F5B942</div>
+        </div>
       </div>
     </div>
 
-    <div style="margin-top:36px">
-      <span class="cap mute">Recommended usage ratio</span>
-      <div class="ratio-bar" style="margin-top:14px">
-        <div class="seg s60">60% · Purple / Plum</div>
-        <div class="seg s25">25% · Soft White</div>
-        <div class="seg s10">10% · Lavender</div>
-        <div class="seg s5">5% · Gold</div>
-      </div>
-      <p class="body" style="margin-top:14px;font-size:13px;max-width:780px">If more than one piece of gold is visible in a single composition without a deliberate reason, remove one.</p>
+    <div class="botbar"><span class="pg">Sadine Tours · Gradients</span><span class="pg pgnum total"></span></div>
+  </div>
+</section>
+
+<!-- ─────────── 23 · COLOR RATIOS ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Color · Usage Ratio</span></div>
+      <span class="cap mute pgnum"></span>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Gradients</span><span class="pg">014 / 026</span></div>
+    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h1">Sixty-twenty-five<br/>ten-five.</h2>
+      <p class="lead" style="max-width:380px">Purple dominates. White breathes. Lavender softens. Gold punctuates. Keep this proportion in every layout, every campaign, every storefront.</p>
+    </div>
+
+    <div style="margin-top:48px;flex:1;display:flex;flex-direction:column;gap:32px">
+      <div class="ratio-bar" style="height:120px">
+        <div class="seg s60" style="font-size:13px;letter-spacing:.2em;padding:24px">60% · Purple / Plum</div>
+        <div class="seg s25" style="font-size:13px;letter-spacing:.2em;padding:24px">25% · Soft White</div>
+        <div class="seg s10" style="font-size:13px;letter-spacing:.2em;padding:24px">10% · Lavender</div>
+        <div class="seg s5" style="font-size:11px;letter-spacing:.16em;padding:24px 14px">5% · Gold</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
+        <div class="card" style="min-height:auto;padding:28px">
+          <span class="num">60% · Purple</span>
+          <p class="body" style="font-size:13.5px">Backgrounds, hero surfaces, product chrome. The brand's center of gravity.</p>
+        </div>
+        <div class="card" style="min-height:auto;padding:28px">
+          <span class="num">25% · Soft White</span>
+          <p class="body" style="font-size:13.5px">Typography, breathing space, light surfaces. The room the brand stands in.</p>
+        </div>
+        <div class="card" style="min-height:auto;padding:28px">
+          <span class="num">10% · Lavender</span>
+          <p class="body" style="font-size:13.5px">Cards, secondary surfaces, soft tints. Lifts dark slabs without breaking them.</p>
+        </div>
+        <div class="card" style="min-height:auto;padding:28px;border-color:rgba(245,185,66,.4)">
+          <span class="num" style="color:var(--gold)">5% · Gold</span>
+          <p class="body" style="font-size:13.5px"><span style="color:var(--soft)">A punctuation mark, not a paragraph.</span> If two pieces of gold appear in one layout, remove one.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Color Ratios</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -1345,7 +1627,7 @@ a{color:inherit}
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Typography · Display</span></div>
-      <span class="cap mute">015</span>
+      <span class="cap mute pgnum"></span>
     </div>
 
     <div style="margin-top:24px">
@@ -1386,7 +1668,7 @@ a{color:inherit}
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Type</span><span class="pg">015 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Type</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -1395,7 +1677,7 @@ a{color:inherit}
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Typography · Text &amp; UI</span></div>
-      <span class="cap mute">016</span>
+      <span class="cap mute pgnum"></span>
     </div>
 
     <div style="margin-top:24px">
@@ -1436,7 +1718,7 @@ a{color:inherit}
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Type</span><span class="pg">016 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Type</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -1445,7 +1727,7 @@ a{color:inherit}
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Typography · Arabic</span></div>
-      <span class="cap mute">017</span>
+      <span class="cap mute pgnum"></span>
     </div>
 
     <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
@@ -1495,7 +1777,7 @@ a{color:inherit}
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Arabic Type</span><span class="pg">017 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Arabic Type</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -1504,7 +1786,7 @@ a{color:inherit}
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Type · Hierarchy</span></div>
-      <span class="cap mute">018</span>
+      <span class="cap mute pgnum"></span>
     </div>
 
     <div style="margin-top:24px">
@@ -1556,35 +1838,55 @@ a{color:inherit}
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Hierarchy</span><span class="pg">018 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Hierarchy</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
-<!-- ─────────── 19 · PHOTOGRAPHY ─────────── -->
+<!-- ─────────── 28 · PHOTOGRAPHY · HERO ─────────── -->
 <section class="slide">
   <div class="frame">
     <div class="topbar">
-      <div class="id"><span class="dot"></span><span class="cap mute">Visual Language · Photography</span></div>
-      <span class="cap mute">019</span>
+      <div class="id"><span class="dot"></span><span class="cap mute">Photography · Hero · I / II</span></div>
+      <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
-      <h2 class="h2">The moment of arrival.</h2>
-      <p class="lead" style="max-width:380px">Cinematic. Patient. Edited. We shoot the <em>quiet</em> seconds — wing tip, marble lobby, balcony coffee, hotel doorway at dusk.</p>
+    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h1">The moment<br/>of arrival.</h2>
+      <p class="lead" style="max-width:380px">Cinematic. Patient. Edited. We shoot the quiet seconds — when the light turns, when the door opens, when the first coffee lands.</p>
     </div>
 
-    <div class="mood" style="margin-top:32px">
-      <div class="frame-img f1"><span class="lab">Sunset · golden hour</span></div>
-      <div class="frame-img f2"><span class="lab">Cabin window · blue hour</span></div>
-      <div class="frame-img f3"><span class="lab">Marble lobby · warm</span></div>
-      <div class="frame-img f4"><span class="lab">Doorway · low light</span></div>
-      <div class="frame-img f5"><span class="lab">Suitcase · negative space</span></div>
-      <div class="frame-img f6"><span class="lab">Tarmac · dawn</span></div>
-      <div class="frame-img f7"><span class="lab">Hands · watch</span></div>
-      <div class="frame-img f8"><span class="lab">Approach · wing tip</span></div>
+    <div class="mood" style="grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:18px;margin-top:40px;flex:1">
+      <div class="frame-img f1" style="min-height:auto"><span class="lab">01 · Sunset · golden hour</span></div>
+      <div class="frame-img f2" style="min-height:auto"><span class="lab">02 · Cabin window · blue hour</span></div>
+      <div class="frame-img f3" style="min-height:auto"><span class="lab">03 · Marble lobby · warm</span></div>
+      <div class="frame-img f4" style="min-height:auto"><span class="lab">04 · Doorway · low light</span></div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Photography</span><span class="pg">019 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Photography · Hero</span><span class="pg pgnum total"></span></div>
+  </div>
+</section>
+
+<!-- ─────────── 29 · PHOTOGRAPHY · DETAIL ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Photography · Detail · II / II</span></div>
+      <span class="cap mute pgnum"></span>
+    </div>
+
+    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h1">The objects<br/>that travel<br/>with you.</h2>
+      <p class="lead" style="max-width:380px">A suitcase in a marble lobby. The tarmac at dawn. Hands fastening a watch. A wing tip at approach. Detail photography is the quiet half of the campaign — the texture, not the headline.</p>
+    </div>
+
+    <div class="mood" style="grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:18px;margin-top:40px;flex:1">
+      <div class="frame-img f5" style="min-height:auto"><span class="lab">05 · Suitcase · negative space</span></div>
+      <div class="frame-img f6" style="min-height:auto"><span class="lab">06 · Tarmac · dawn</span></div>
+      <div class="frame-img f7" style="min-height:auto"><span class="lab">07 · Hands · watch</span></div>
+      <div class="frame-img f8" style="min-height:auto"><span class="lab">08 · Approach · wing tip</span></div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Photography · Detail</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -1593,7 +1895,7 @@ a{color:inherit}
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Iconography &amp; Motion</span></div>
-      <span class="cap mute">020</span>
+      <span class="cap mute pgnum"></span>
     </div>
 
     <div style="margin-top:24px">
@@ -1646,7 +1948,7 @@ a{color:inherit}
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Visual Language</span><span class="pg">020 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Visual Language</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -1655,7 +1957,7 @@ a{color:inherit}
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Social Media · Feed System</span></div>
-      <span class="cap mute">021</span>
+      <span class="cap mute pgnum"></span>
     </div>
 
     <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
@@ -1692,7 +1994,7 @@ a{color:inherit}
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Social Feed</span><span class="pg">021 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Social Feed</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -1701,7 +2003,7 @@ a{color:inherit}
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Social · Stories &amp; Reels</span></div>
-      <span class="cap mute">022</span>
+      <span class="cap mute pgnum"></span>
     </div>
 
     <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
@@ -1732,27 +2034,29 @@ a{color:inherit}
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Stories</span><span class="pg">022 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Stories</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
-<!-- ─────────── 23 · STATIONERY & TRAVEL TOUCHPOINTS ─────────── -->
-<section class="slide">
+<!-- ─────────── 33 · BOARDING PASS · HERO ─────────── -->
+<section class="slide dark">
   <div class="frame">
     <div class="topbar">
-      <div class="id"><span class="dot"></span><span class="cap mute">Applications · Stationery &amp; Travel</span></div>
-      <span class="cap mute">023</span>
+      <div class="id"><span class="dot"></span><span class="cap mute">Applications · Boarding Pass</span></div>
+      <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="margin-top:24px">
-      <h2 class="h2">The artifacts of a journey.</h2>
-      <p class="lead" style="max-width:660px;margin-top:8px">Each touchpoint is a small object — designed once, repeated across every client. The boarding pass is the brand's signature artifact.</p>
-    </div>
+    <div style="margin-top:32px;display:grid;grid-template-columns:1fr 1.3fr;gap:64px;flex:1;align-items:center">
+      <div>
+        <span class="cap gold" style="margin-bottom:16px;display:block">Signature artifact · 100 × 210 mm</span>
+        <h2 class="h1" style="margin-bottom:28px">The boarding<br/>pass.</h2>
+        <p class="lead" style="max-width:480px;font-size:17px">Two panels, perforated. Left in Sadine Purple — destination, departure, gate. Right in Soft White — passenger details, itinerary block, reference number. Folded into a custom envelope, sealed in wax.</p>
+        <div class="hair" style="margin:28px 0 18px;width:48px;background:var(--gold)"></div>
+        <p class="body" style="font-size:13.5px;max-width:420px">Of every artifact in the system, this is the one the client will keep. Treat it accordingly.</p>
+      </div>
 
-    <div style="margin-top:32px;flex:1;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center">
-      <div class="center" style="gap:24px">
-        <span class="cap gold">Boarding pass · 100 × 210 mm</span>
-        <div class="bp">
+      <div class="center">
+        <div class="bp" style="width:760px;max-width:100%;transform:rotate(-1.2deg)">
           <div class="left">
             <svg class="icon icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
             <div>
@@ -1773,43 +2077,89 @@ a{color:inherit}
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="center" style="gap:24px">
-        <span class="cap gold">Business cards · 85 × 55 mm</span>
-        <div class="bc-pair">
-          <div class="bc front">
-            <svg class="icon icon-gold icn" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
+    <div class="botbar"><span class="pg">Sadine Tours · Boarding Pass</span><span class="pg pgnum total"></span></div>
+  </div>
+</section>
+
+<!-- ─────────── 34 · BUSINESS CARDS · HERO ─────────── -->
+<section class="slide">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Applications · Business Cards</span></div>
+      <span class="cap mute pgnum"></span>
+    </div>
+
+    <div style="margin-top:32px;display:grid;grid-template-columns:1fr 1.4fr;gap:64px;flex:1;align-items:center">
+      <div>
+        <span class="cap gold" style="margin-bottom:16px;display:block">Stationery · 85 × 55 mm · 600 gsm</span>
+        <h2 class="h1" style="margin-bottom:28px">Embossed.<br/>Foiled.<br/>Restrained.</h2>
+        <p class="lead" style="max-width:480px;font-size:17px">Front: Sadine Purple cover, the wordmark blind-embossed (no ink), only the bird in gold foil. Reverse: Soft White, name in Satoshi Medium 10 pt, role and contact in Manrope.</p>
+        <div class="hair" style="margin:28px 0 18px;width:48px;background:var(--gold)"></div>
+        <p class="body" style="font-size:13.5px;max-width:420px">600 gsm cotton stock. The card has weight in the hand — that's deliberate.</p>
+      </div>
+
+      <div class="center" style="gap:36px">
+        <div class="bc-pair" style="gap:32px;transform:rotate(-1deg)">
+          <div class="bc front" style="width:340px;height:210px;padding:32px">
+            <svg class="icon icon-gold icn" viewBox="0 0 74.83 74.1" style="width:38px"><use href="#sadine-icon"/></svg>
             <svg class="wm mark-mono-white" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
           </div>
-          <div class="bc back">
+          <div class="bc back" style="width:340px;height:210px;padding:32px">
             <svg class="wm mark-mono-plum" viewBox="0 0 1194.87 391.01" style="width:50%"><use href="#sadine-mark"/></svg>
             <div class="stack">
-              <span class="name">Aïcha Bouzid</span>
-              <span class="role">Travel Designer</span>
-              <span class="ct">aicha@sadine.tours · +216 70 000 000</span>
+              <span class="name" style="font-size:15px">Aïcha Bouzid</span>
+              <span class="role" style="font-size:11px">Travel Designer</span>
+              <span class="ct" style="font-size:11px">aicha@sadine.tours · +216 70 000 000</span>
             </div>
           </div>
         </div>
-
-        <div style="display:flex;gap:24px;align-items:center;margin-top:16px">
-          <div class="tag">
-            <svg class="icon icon-gold icn" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
-            <span class="lab">Sadine · Luggage</span>
-            <span class="num">SDN · 1042</span>
-          </div>
-          <div class="sign">
-            <div class="top">
-              <span class="meta">Tunis Airport · Pickup</span>
-              <svg class="icon icon-gold icn" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
-            </div>
-            <span class="name">Mr. Ben Aïcha</span>
-            <span class="meta">Sadine Tours · Suite 02A</span>
-          </div>
-        </div>
+        <span class="cap mute">Front (purple, blind emboss + gold foil) · Reverse (soft white, Manrope)</span>
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Stationery &amp; Travel</span><span class="pg">023 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Business Cards</span><span class="pg pgnum total"></span></div>
+  </div>
+</section>
+
+<!-- ─────────── 35 · LUGGAGE TAG & PICKUP SIGNAGE ─────────── -->
+<section class="slide dark">
+  <div class="frame">
+    <div class="topbar">
+      <div class="id"><span class="dot"></span><span class="cap mute">Applications · Luggage Tag &amp; Pickup Sign</span></div>
+      <span class="cap mute pgnum"></span>
+    </div>
+
+    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h1">The objects you<br/>see at the airport.</h2>
+      <p class="lead" style="max-width:380px">A leather-strapped luggage tag travelling alongside the suitcase. A leather-portfolio pickup sign waiting in arrivals. Both wordless from a distance, instantly recognized up close.</p>
+    </div>
+
+    <div style="margin-top:48px;flex:1;display:grid;grid-template-columns:1fr 1.6fr;gap:64px;align-items:center">
+      <div class="center" style="gap:24px">
+        <div class="tag" style="width:240px;height:360px;transform:rotate(-3deg)">
+          <svg class="icon icon-gold icn" viewBox="0 0 74.83 74.1" style="width:54px"><use href="#sadine-icon"/></svg>
+          <span class="lab">Sadine · Luggage</span>
+          <span class="num">SDN · 1042</span>
+        </div>
+        <span class="cap mute">Luggage tag · 60 × 110 mm</span>
+      </div>
+
+      <div class="center" style="gap:24px">
+        <div class="sign" style="width:520px;transform:rotate(1.2deg)">
+          <div class="top">
+            <span class="meta">Tunis Airport · Pickup</span>
+            <svg class="icon icon-gold icn" viewBox="0 0 74.83 74.1" style="width:36px"><use href="#sadine-icon"/></svg>
+          </div>
+          <span class="name">Mr. Ben Aïcha</span>
+          <span class="meta">Sadine Tours · Suite 02A · 22:40</span>
+        </div>
+        <span class="cap mute">Pickup signage · A3 · held in leather portfolio</span>
+      </div>
+    </div>
+
+    <div class="botbar"><span class="pg">Sadine Tours · Travel Touchpoints</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -1818,7 +2168,7 @@ a{color:inherit}
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Applications · Environmental, Vehicle &amp; Uniform</span></div>
-      <span class="cap mute">024</span>
+      <span class="cap mute pgnum"></span>
     </div>
 
     <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
@@ -1857,7 +2207,7 @@ a{color:inherit}
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Environmental</span><span class="pg">024 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Environmental</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -1866,7 +2216,7 @@ a{color:inherit}
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Applications · Digital — App &amp; Website</span></div>
-      <span class="cap mute">025</span>
+      <span class="cap mute pgnum"></span>
     </div>
 
     <div style="margin-top:24px">
@@ -1944,7 +2294,7 @@ a{color:inherit}
       </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Digital</span><span class="pg">025 / 026</span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Digital</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 
@@ -1974,7 +2324,7 @@ a{color:inherit}
 
     <div class="botbar">
       <span class="pg">Sadine Tours · Brand Identity System · Edition 2026.01</span>
-      <span class="pg">026 / 026</span>
+      <span class="pg pgnum total"></span>
     </div>
   </div>
 </section>

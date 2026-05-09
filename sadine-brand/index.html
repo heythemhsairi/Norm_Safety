@@ -681,9 +681,156 @@ a{color:inherit}
 .closing .wm{width:520px;position:relative;z-index:2}
 .closing .sig{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--lav)}
 
-/* small responsive scaling */
-@media (max-width:1480px){
-  .slide{transform-origin:top center}
+/* ─────────── Reactive scaling — fits any viewport ─────────── */
+:root{--scale:1}
+
+.book{overflow-x:hidden;width:100%}
+html,body{overflow-x:hidden}
+
+.slide{
+  transform-origin:top center;
+  transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1), border-color .9s;
+  will-change:transform,opacity;
+}
+
+@media (max-width:1488px){
+  .slide{
+    transform:scale(var(--scale));
+    margin-bottom:calc(810px * (var(--scale) - 1));
+  }
+}
+
+/* ─────────── Entrance reveal ─────────── */
+.slide.reveal-init{
+  opacity:0;
+  transform:scale(var(--scale)) translateY(48px);
+}
+.slide.reveal-init.in-view{
+  opacity:1;
+  transform:scale(var(--scale)) translateY(0);
+}
+
+/* ─────────── Subtle motion on cards ─────────── */
+.card,.six .v,.swatch-card,.grad,.frame-img,.logo-grid .tile,.min-item,.toc-row,.feed-grid .post,.stories .story,.icon-grid .ic,.glyph,.env,.uniform-card{
+  transition:transform .55s cubic-bezier(.22,1,.36,1), border-color .55s, box-shadow .55s, background-color .55s;
+}
+.card:hover,.six .v:hover,.swatch-card:hover,.grad:hover,.frame-img:hover,.logo-grid .tile:hover,.feed-grid .post:hover,.stories .story:hover,.env:hover,.uniform-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(245,185,66,.32);
+  box-shadow:0 16px 40px -16px rgba(0,0,0,.6), 0 0 0 1px rgba(245,185,66,.06) inset;
+}
+.icon-grid .ic:hover{
+  transform:translateY(-2px);
+  border-color:rgba(245,185,66,.4);
+  background:rgba(245,185,66,.04);
+}
+.glyph:hover{
+  transform:translateY(-2px) scale(1.02);
+  border-color:rgba(245,185,66,.32);
+}
+.toc-row:hover{
+  background:rgba(245,185,66,.04);
+  border-color:rgba(245,185,66,.32);
+}
+.toc-row:hover .name{color:var(--gold)}
+.toc-row .name{transition:color .35s}
+.misuse .m:hover{transform:none} /* misuse tiles intentionally static */
+
+/* ─────────── Glow pucks: gentle pulse ─────────── */
+@keyframes sadine-pulse{
+  0%,100%{opacity:.85;filter:blur(30px)}
+  50%{opacity:1;filter:blur(38px)}
+}
+.cover .center-mark .glow-large,
+.logo-stage .glow-l,
+.closing .glow-c{
+  animation:sadine-pulse 7s ease-in-out infinite;
+}
+
+/* ─────────── The signature halo: a slow runway-light sweep ─────────── */
+@keyframes sadine-sweep{
+  0%{transform:translateX(-100%);opacity:0}
+  10%{opacity:.55}
+  50%{opacity:.85}
+  90%{opacity:.45}
+  100%{transform:translateX(100%);opacity:0}
+}
+.slide.in-view::before{
+  content:"";position:absolute;top:0;bottom:0;width:60%;
+  background:linear-gradient(90deg, transparent 0%, rgba(123,91,206,.15) 35%, rgba(245,185,66,.08) 50%, rgba(123,91,206,.15) 65%, transparent 100%);
+  pointer-events:none;mix-blend-mode:screen;z-index:1;
+  animation:sadine-sweep 1.4s cubic-bezier(.22,1,.36,1) .15s both;
+}
+.slide.light.in-view::before{mix-blend-mode:multiply;opacity:.5}
+
+/* ─────────── Floating progress bar + slide indicator ─────────── */
+.nav-progress{
+  position:fixed;top:0;left:0;height:2px;width:0;
+  background:linear-gradient(90deg, var(--purple) 0%, #7B5BCE 50%, var(--gold) 100%);
+  z-index:1000;transition:width .12s linear;box-shadow:0 0 14px rgba(123,91,206,.6);
+}
+.slide-indicator{
+  position:fixed;bottom:28px;right:28px;
+  background:rgba(15,5,33,.78);backdrop-filter:blur(14px);
+  border:1px solid var(--hair-strong);border-radius:99px;
+  padding:11px 18px 11px 14px;display:flex;align-items:center;gap:10px;
+  font-family:var(--display);font-weight:500;font-size:11px;
+  letter-spacing:.32em;color:var(--soft);text-transform:uppercase;
+  z-index:999;font-variant-numeric:tabular-nums;
+  box-shadow:0 12px 32px -8px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.04) inset;
+  transition:opacity .4s, transform .4s cubic-bezier(.22,1,.36,1);
+}
+.slide-indicator .dot{
+  width:7px;height:7px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 12px var(--gold);
+  animation:sadine-pulse-dot 2.4s ease-in-out infinite;
+}
+.slide-indicator .sep{opacity:.4}
+.slide-indicator .tot{color:var(--lav)}
+@keyframes sadine-pulse-dot{
+  0%,100%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.35);opacity:.7}
+}
+
+/* Top scroll-arrow nudge for the cover */
+.scroll-cue{
+  position:absolute;bottom:84px;left:50%;transform:translateX(-50%);
+  font-family:var(--display);font-weight:500;font-size:10px;
+  letter-spacing:.4em;text-transform:uppercase;color:var(--lav);
+  display:flex;flex-direction:column;align-items:center;gap:8px;z-index:3;
+  pointer-events:none;
+}
+.scroll-cue::after{
+  content:"";display:block;width:1px;height:32px;
+  background:linear-gradient(180deg, var(--gold) 0%, transparent 100%);
+  animation:sadine-cue 2.2s ease-in-out infinite;
+  transform-origin:top center;
+}
+@keyframes sadine-cue{
+  0%,100%{transform:scaleY(.4);opacity:.5}
+  50%{transform:scaleY(1);opacity:1}
+}
+
+/* ─────────── Reduced-motion respect ─────────── */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+  .slide.reveal-init{opacity:1;transform:scale(var(--scale))}
+  .slide.in-view::before{display:none}
+}
+
+/* ─────────── Print: kill all dynamics ─────────── */
+@media print{
+  .nav-progress,.slide-indicator,.scroll-cue{display:none !important}
+  .slide.reveal-init{opacity:1 !important;transform:none !important}
+  .slide.in-view::before{display:none !important}
+  .cover .center-mark .glow-large,.logo-stage .glow-l,.closing .glow-c{animation:none !important}
+  @media (max-width:1488px){
+    .slide{transform:none !important;margin-bottom:0 !important}
+  }
 }
 </style>
 </head>
@@ -2330,5 +2477,136 @@ a{color:inherit}
 </section>
 
 </div>
+
+<script>
+(function(){
+  'use strict';
+
+  const root = document.documentElement;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  if (!slides.length) return;
+
+  /* ───────── 1 · Reactive scale: fit slides to any viewport ───────── */
+  const SLIDE_W = 1440;
+  const H_GUTTER = 48; /* matches .book left+right padding */
+
+  function applyScale(){
+    const w = window.innerWidth;
+    const target = SLIDE_W + H_GUTTER;
+    const s = w >= target ? 1 : Math.max(0.18, (w - 24) / SLIDE_W);
+    root.style.setProperty('--scale', s.toFixed(4));
+  }
+
+  let raf;
+  function schedule(fn){
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(fn);
+  }
+
+  applyScale();
+  window.addEventListener('resize', () => schedule(applyScale), { passive: true });
+  window.addEventListener('orientationchange', applyScale);
+
+  /* ───────── 2 · Scroll-reveal entrance ───────── */
+  if ('IntersectionObserver' in window && !reduceMotion){
+    slides.forEach(s => s.classList.add('reveal-init'));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting){
+          e.target.classList.add('in-view');
+          /* one-shot — keep .in-view to allow CSS transitions to run, but stop observing */
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    slides.forEach(s => io.observe(s));
+  } else {
+    slides.forEach(s => s.classList.add('in-view'));
+  }
+
+  /* ───────── 3 · Floating progress bar + slide indicator ───────── */
+  const progress = document.createElement('div');
+  progress.className = 'nav-progress';
+  progress.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(progress);
+
+  const totalStr = String(slides.length).padStart(3, '0');
+  const indicator = document.createElement('div');
+  indicator.className = 'slide-indicator';
+  indicator.setAttribute('aria-hidden', 'true');
+  indicator.innerHTML =
+    '<span class="dot"></span>' +
+    '<span class="cur">001</span>' +
+    '<span class="sep">/</span>' +
+    '<span class="tot">' + totalStr + '</span>';
+  document.body.appendChild(indicator);
+  const indCur = indicator.querySelector('.cur');
+
+  let lastCurrent = 1;
+  function tick(){
+    const sy = window.scrollY;
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docH > 0 ? Math.min(100, Math.max(0, (sy / docH) * 100)) : 0;
+    progress.style.width = pct.toFixed(2) + '%';
+
+    /* Find the slide whose visual center is closest to the viewport mid */
+    const mid = sy + window.innerHeight / 2;
+    let best = 1, bestDist = Infinity;
+    for (let i = 0; i < slides.length; i++){
+      const r = slides[i].getBoundingClientRect();
+      const top = r.top + sy;
+      const bot = top + r.height;
+      const c = (top + bot) / 2;
+      const d = Math.abs(c - mid);
+      if (d < bestDist){ bestDist = d; best = i + 1; }
+    }
+    if (best !== lastCurrent){
+      indCur.textContent = String(best).padStart(3, '0');
+      lastCurrent = best;
+    }
+  }
+
+  tick();
+  window.addEventListener('scroll', () => schedule(tick), { passive: true });
+  window.addEventListener('resize', () => schedule(tick), { passive: true });
+
+  /* ───────── 4 · Cover scroll cue ───────── */
+  const cover = document.querySelector('.slide.cover');
+  if (cover && !document.querySelector('.scroll-cue')){
+    const cue = document.createElement('div');
+    cue.className = 'scroll-cue';
+    cue.textContent = 'Scroll';
+    cover.appendChild(cue);
+  }
+
+  /* ───────── 5 · Keyboard navigation: Page Up / Down jump slide-by-slide ───────── */
+  function scrollToSlide(idx){
+    const target = slides[Math.max(0, Math.min(slides.length - 1, idx))];
+    if (target) target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  }
+  window.addEventListener('keydown', (e) => {
+    if (e.target.matches('input, textarea, select')) return;
+    if (e.key === 'PageDown' || e.key === 'ArrowDown' && e.shiftKey){
+      e.preventDefault();
+      scrollToSlide(lastCurrent);
+    } else if (e.key === 'PageUp' || e.key === 'ArrowUp' && e.shiftKey){
+      e.preventDefault();
+      scrollToSlide(lastCurrent - 2);
+    } else if (e.key === 'Home'){
+      e.preventDefault();
+      scrollToSlide(0);
+    } else if (e.key === 'End'){
+      e.preventDefault();
+      scrollToSlide(slides.length - 1);
+    }
+  });
+
+  /* ───────── 6 · Click slide indicator to jump back to top ───────── */
+  indicator.style.cursor = 'pointer';
+  indicator.addEventListener('click', () => scrollToSlide(0));
+})();
+</script>
+
 </body>
 </html>

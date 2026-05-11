@@ -889,6 +889,25 @@ html,body{overflow-x:hidden}
   box-shadow:0 12px 32px -8px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.04) inset;
   transition:opacity .4s, transform .4s cubic-bezier(.22,1,.36,1);
 }
+.lang-pill{
+  position:fixed;bottom:28px;right:200px;
+  background:rgba(15,5,33,.78);backdrop-filter:blur(14px);
+  border:1px solid var(--hair-strong);border-radius:99px;
+  padding:9px 14px;display:flex;align-items:center;gap:6px;
+  font-family:var(--display);font-weight:500;font-size:11px;
+  letter-spacing:.32em;text-transform:uppercase;
+  z-index:999;
+  box-shadow:0 12px 32px -8px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.04) inset;
+}
+.lang-pill .lang-btn{
+  padding:3px 8px;color:rgba(248,246,252,.55);background:transparent;border:0;
+  font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer;
+  transition:color .3s;
+}
+.lang-pill .lang-btn:hover{color:var(--soft)}
+.lang-pill .lang-btn[aria-pressed="true"]{color:var(--gold)}
+.lang-pill .lang-sep{opacity:.35;color:var(--soft)}
+@media print{ .lang-pill{display:none !important} }
 .slide-indicator .dot{
   width:7px;height:7px;border-radius:50%;background:var(--gold);
   box-shadow:0 0 12px var(--gold);
@@ -2791,6 +2810,7 @@ html,body{overflow-x:hidden}
 
 </div>
 
+<script src="assets/i18n.js"></script>
 <script>
 (function(){
   'use strict';
@@ -2800,17 +2820,57 @@ html,body{overflow-x:hidden}
   const slides = Array.from(document.querySelectorAll('.slide'));
   if (!slides.length) return;
 
-  /* ───────── 0 · Language picker (EN / FR) ───────── */
+  /* ───────── 0 · Language system (EN / FR) ───────── */
   const LANG_KEY = 'sadine-lang';
-  const langButtons = Array.from(document.querySelectorAll('.lang-btn'));
+  const I18N = (window.SADINE_I18N && window.SADINE_I18N.fr) || {};
+  const originalText = new WeakMap();
+  const SKIP_TAG = /^(SCRIPT|STYLE|CODE|NOSCRIPT|SVG|PATH|USE|DEFS|SYMBOL)$/;
+
+  function isLangManaged(node){
+    /* Skip text inside .lang-en / .lang-fr containers — those are handled by CSS */
+    let el = node.parentNode;
+    while (el && el !== document.body){
+      if (el.classList && (el.classList.contains('lang-en') || el.classList.contains('lang-fr'))) return true;
+      el = el.parentNode;
+    }
+    return false;
+  }
+
+  function translateDOM(lang){
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(n){
+        const p = n.parentNode;
+        if (!p || SKIP_TAG.test(p.nodeName)) return NodeFilter.FILTER_REJECT;
+        if (!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if (isLangManaged(n)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    let node;
+    while ((node = walker.nextNode())){
+      if (!originalText.has(node)) originalText.set(node, node.nodeValue);
+      const orig = originalText.get(node);
+      const trimmed = orig.trim();
+      if (lang === 'fr' && I18N[trimmed]){
+        const lead = orig.match(/^\s*/)[0];
+        const tail = orig.match(/\s*$/)[0];
+        node.nodeValue = lead + I18N[trimmed] + tail;
+      } else {
+        node.nodeValue = orig;
+      }
+    }
+  }
+
+  const langButtons = () => Array.from(document.querySelectorAll('.lang-btn'));
 
   function setLang(lang){
     if (lang !== 'en' && lang !== 'fr') lang = 'en';
     document.body.setAttribute('data-lang', lang);
     document.documentElement.lang = lang;
-    langButtons.forEach(b => {
+    langButtons().forEach(b => {
       b.setAttribute('aria-pressed', b.getAttribute('data-set-lang') === lang ? 'true' : 'false');
     });
+    translateDOM(lang);
     try { localStorage.setItem(LANG_KEY, lang); } catch(_) {}
   }
 
@@ -2821,10 +2881,11 @@ html,body{overflow-x:hidden}
     if (saved === 'en' || saved === 'fr') initial = saved;
     else if ((navigator.language || '').toLowerCase().startsWith('fr')) initial = 'fr';
   } catch(_) {}
-  setLang(initial);
 
-  langButtons.forEach(b => {
-    b.addEventListener('click', () => setLang(b.getAttribute('data-set-lang')));
+  /* Wire static (cover-topbar) buttons */
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('.lang-btn');
+    if (b) setLang(b.getAttribute('data-set-lang'));
   });
 
   /* ───────── 1 · Reactive scale: fit slides to any viewport ───────── */
@@ -2865,7 +2926,7 @@ html,body{overflow-x:hidden}
     slides.forEach(s => s.classList.add('in-view'));
   }
 
-  /* ───────── 3 · Floating progress bar + slide indicator ───────── */
+  /* ───────── 3 · Floating progress bar + slide indicator + language pill ───────── */
   const progress = document.createElement('div');
   progress.className = 'nav-progress';
   progress.setAttribute('aria-hidden', 'true');
@@ -2882,6 +2943,19 @@ html,body{overflow-x:hidden}
     '<span class="tot">' + totalStr + '</span>';
   document.body.appendChild(indicator);
   const indCur = indicator.querySelector('.cur');
+
+  /* Floating language pill — always reachable, mirrors the cover picker */
+  const langPill = document.createElement('div');
+  langPill.className = 'lang-pill';
+  langPill.setAttribute('aria-label', 'Language');
+  langPill.innerHTML =
+    '<button type="button" class="lang-btn" data-set-lang="en">EN</button>' +
+    '<span class="lang-sep">·</span>' +
+    '<button type="button" class="lang-btn" data-set-lang="fr">FR</button>';
+  document.body.appendChild(langPill);
+
+  /* Apply the initial language NOW that all buttons exist in the DOM */
+  setLang(initial);
 
   let lastCurrent = 1;
   function tick(){

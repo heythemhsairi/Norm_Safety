@@ -543,44 +543,36 @@ body[data-lang="fr"] .lang-fr{display:inline}
 .weights .w small{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav);float:right;margin-top:14px}
 .weights .w.man small,.weights .w.ar small{font-family:var(--display)}
 
-/* Differentiation table — compact editorial layout that fits the safe area */
+/* Differentiation table — fills the whole frame area below the title
+   block by using flex layout for the rows (so they stretch instead of
+   sizing to content), and an explicit column grid that keeps numbers
+   tidy. */
 .diff-table-card{
-  margin-top:24px;flex:1;min-height:auto;padding:0;
+  margin-top:24px;flex:1;min-height:0;padding:0;
   background:rgba(0,0,0,.28);overflow:hidden;
-  display:flex;
+  display:flex;flex-direction:column;
 }
-.diff-table{
-  width:100%;border-collapse:collapse;
-  font-family:var(--display);
-  table-layout:fixed;
+.diff-row{
+  display:grid;grid-template-columns:18% 22% 22% 38%;
+  align-items:center;
+  padding:0 22px;
+  border-top:1px solid var(--hair);
+  flex:1;            /* rows split available height equally */
+  min-height:0;
 }
-.diff-table th,
-.diff-table td{
-  text-align:left;padding:12px 22px;
-  font-size:13px;line-height:1.35;
-  vertical-align:middle;
+.diff-row:first-child{border-top:0;background:rgba(0,0,0,.35);flex:0 0 56px}
+.diff-row .cell{
+  font-family:var(--display);font-weight:400;
+  font-size:13.5px;line-height:1.35;
+  color:var(--soft);
 }
-.diff-table thead tr{background:rgba(0,0,0,.35)}
-.diff-table th{
+.diff-row.head .cell{
   font-weight:500;font-size:10px;letter-spacing:.32em;
   text-transform:uppercase;color:var(--lav);
-  padding:14px 22px;
 }
-.diff-table th.th-gold{color:var(--gold)}
-.diff-table tbody td{color:var(--soft)}
-.diff-table tbody tr{border-top:1px solid var(--hair)}
-.diff-table .td-dim{color:var(--lav)}
-.diff-table .td-gold{color:var(--gold)}
-/* First column narrower than the other three so the gold-emphasised
-   Sadine column gets the breathing room it deserves */
-.diff-table th:first-child,
-.diff-table td:first-child{width:18%}
-.diff-table th:nth-child(2),
-.diff-table td:nth-child(2),
-.diff-table th:nth-child(3),
-.diff-table td:nth-child(3){width:22%}
-.diff-table th:last-child,
-.diff-table td:last-child{width:38%}
+.diff-row.head .cell.gold{color:var(--gold)}
+.diff-row .cell.dim{color:var(--lav)}
+.diff-row .cell.gold{color:var(--gold)}
 
 /* ─────────── Creative type pages: anatomy / magazine / arabic-hero ─────────── */
 
@@ -1884,25 +1876,19 @@ html,body{overflow-x:hidden}
     </div>
 
     <div class="card diff-table-card">
-      <table class="diff-table">
-        <thead>
-          <tr>
-            <th>Dimension</th>
-            <th>Old-school agency</th>
-            <th>Online aggregator</th>
-            <th class="th-gold">Sadine Tours</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td class="td-dim">Channel</td><td>Walk-in shop</td><td>Web booking engine</td><td class="td-gold">Concierge + app + boutique</td></tr>
-          <tr><td class="td-dim">Tone</td><td>Transactional</td><td>Algorithmic</td><td class="td-gold">Hosted</td></tr>
-          <tr><td class="td-dim">Aesthetic</td><td>Crowded</td><td>Clinical</td><td class="td-gold">Cinematic</td></tr>
-          <tr><td class="td-dim">Pricing</td><td>Lowest</td><td>Variable</td><td class="td-gold">Transparent premium</td></tr>
-          <tr><td class="td-dim">After booking</td><td>Silent</td><td>Email blasts</td><td class="td-gold">Designed follow-up</td></tr>
-          <tr><td class="td-dim">Failure handling</td><td>"Call airline"</td><td>Self-service portal</td><td class="td-gold">Already moved</td></tr>
-          <tr><td class="td-dim">Brand asset</td><td>Logo on a pen</td><td>None</td><td class="td-gold">A complete identity</td></tr>
-        </tbody>
-      </table>
+      <div class="diff-row head">
+        <span class="cell">Dimension</span>
+        <span class="cell">Old-school agency</span>
+        <span class="cell">Online aggregator</span>
+        <span class="cell gold">Sadine Tours</span>
+      </div>
+      <div class="diff-row"><span class="cell dim">Channel</span><span class="cell">Walk-in shop</span><span class="cell">Web booking engine</span><span class="cell gold">Concierge + app + boutique</span></div>
+      <div class="diff-row"><span class="cell dim">Tone</span><span class="cell">Transactional</span><span class="cell">Algorithmic</span><span class="cell gold">Hosted</span></div>
+      <div class="diff-row"><span class="cell dim">Aesthetic</span><span class="cell">Crowded</span><span class="cell">Clinical</span><span class="cell gold">Cinematic</span></div>
+      <div class="diff-row"><span class="cell dim">Pricing</span><span class="cell">Lowest</span><span class="cell">Variable</span><span class="cell gold">Transparent premium</span></div>
+      <div class="diff-row"><span class="cell dim">After booking</span><span class="cell">Silent</span><span class="cell">Email blasts</span><span class="cell gold">Designed follow-up</span></div>
+      <div class="diff-row"><span class="cell dim">Failure handling</span><span class="cell">"Call airline"</span><span class="cell">Self-service portal</span><span class="cell gold">Already moved</span></div>
+      <div class="diff-row"><span class="cell dim">Brand asset</span><span class="cell">Logo on a pen</span><span class="cell">None</span><span class="cell gold">A complete identity</span></div>
     </div>
 
     <div class="botbar"><span class="pg">Sadine Tours · Differentiation</span><span class="pg pgnum total"></span></div>

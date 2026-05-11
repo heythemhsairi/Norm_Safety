@@ -51,10 +51,13 @@
   --rhythm-tight:24px;     /* tighter siblings */
 }
 
-/* Zain Mob — Arabic display typeface, self-hosted (variable weights 400 / 600 / 800) */
-@font-face{font-family:'Zain Mob';font-weight:400;font-style:normal;font-display:swap;src:url('assets/fonts/zain-mob-400.ttf') format('truetype-variations'),url('assets/fonts/zain-mob-400.ttf') format('truetype')}
-@font-face{font-family:'Zain Mob';font-weight:600;font-style:normal;font-display:swap;src:url('assets/fonts/zain-mob-600.ttf') format('truetype-variations'),url('assets/fonts/zain-mob-600.ttf') format('truetype')}
-@font-face{font-family:'Zain Mob';font-weight:800;font-style:normal;font-display:swap;src:url('assets/fonts/zain-mob-800.ttf') format('truetype-variations'),url('assets/fonts/zain-mob-800.ttf') format('truetype')}
+/* Zain Mob — Arabic display typeface, self-hosted (3 weights: 400 / 600 / 800).
+   format('truetype') alone is the safest hint for static TTF files across
+   every browser; format('truetype-variations') is for VF axes, which the
+   user's files don't expose. */
+@font-face{font-family:'Zain Mob';font-weight:400;font-style:normal;font-display:swap;src:url('assets/fonts/zain-mob-400.ttf') format('truetype')}
+@font-face{font-family:'Zain Mob';font-weight:600;font-style:normal;font-display:swap;src:url('assets/fonts/zain-mob-600.ttf') format('truetype')}
+@font-face{font-family:'Zain Mob';font-weight:800;font-style:normal;font-display:swap;src:url('assets/fonts/zain-mob-800.ttf') format('truetype')}
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -669,70 +672,65 @@ body[data-lang="fr"] .lang-fr{display:inline}
   color:rgba(42,18,79,.55);text-align:center;
 }
 
-/* ZAIN MOB — Arabic hero word */
-.type-arabic{
-  flex:1;min-height:0;position:relative;
-  display:grid;grid-template-columns:1.6fr 1fr;grid-template-rows:1fr auto;gap:0 48px;
-  margin-top:20px;border-top:1px solid var(--hair);padding-top:18px;
+/* ZAIN MOB — centered Arabic hero poster (clean, symmetric, breathable) */
+.ar-strip{
+  margin-top:24px;display:flex;justify-content:space-between;align-items:baseline;
+  border-bottom:1px solid var(--hair);padding-bottom:18px;
 }
-.ar-ghost{
-  position:absolute;bottom:-40px;left:-10%;right:0;
-  font-family:var(--ar);font-weight:800;font-size:560px;line-height:.85;
-  color:rgba(248,246,252,.04);
-  pointer-events:none;direction:rtl;text-align:right;z-index:0;
-  white-space:nowrap;overflow:hidden;
+.ar-stage{
+  flex:1;min-height:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:18px 0;
 }
-.ar-hero{
-  position:relative;z-index:2;
-  display:flex;flex-direction:column;justify-content:center;align-items:flex-end;
-  text-align:right;
+.ar-stage-eyebrow{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:var(--display);font-weight:500;font-size:11px;
+  letter-spacing:.4em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:18px;
 }
-.ar-eyebrow{
-  display:inline-flex;align-items:center;gap:12px;
-  font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);
-}
-.ar-eyebrow .dash{display:inline-block;width:36px;height:1px;background:var(--gold)}
+.ar-stage-eyebrow .dash{display:inline-block;width:36px;height:1px;background:var(--gold)}
 .ar-word{
   font-family:var(--ar);font-weight:800;
-  font-size:340px;line-height:.95;color:var(--soft);
-  margin-top:14px;
-  text-shadow:0 0 60px rgba(123,91,206,.25);
+  font-size:280px;line-height:.95;color:var(--soft);
+  direction:rtl;
+  text-shadow:0 0 80px rgba(123,91,206,.22);
+  margin:0;
 }
 .ar-latin{
-  font-family:var(--display);font-weight:500;font-size:22px;letter-spacing:.06em;
-  color:var(--lav);margin-top:6px;
+  font-family:var(--display);font-weight:500;
+  font-size:18px;letter-spacing:.42em;text-transform:uppercase;
+  color:var(--lav);margin-top:18px;
 }
 
-.ar-meta{
-  position:relative;z-index:2;
-  display:flex;flex-direction:column;justify-content:space-between;gap:22px;
-  border-left:1px solid var(--hair);padding-left:32px;
-  min-height:0;
+.ar-foot{
+  display:grid;grid-template-columns:repeat(3,auto) 1fr;gap:36px;align-items:center;
+  border-top:1px solid var(--hair);padding-top:22px;
 }
-.ar-weights{
-  display:flex;flex-direction:column;gap:12px;
-  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
-  padding:18px 0;
+.ar-wcell{
+  display:flex;align-items:baseline;gap:16px;
 }
-.ar-weights .aw{
-  display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:18px;
+.ar-wspec{
+  font-family:var(--ar);font-size:60px;line-height:1;color:var(--soft);
+  direction:rtl;
 }
-.ar-weights .aw .wspec{font-size:46px;color:var(--soft);justify-self:start}
-.ar-foundry{
-  display:flex;flex-direction:column;gap:4px;
-  font-family:var(--text);font-size:11px;color:var(--lav);line-height:1.5;
+.ar-wmeta{display:flex;flex-direction:column;gap:2px}
+.ar-wmeta strong{
+  font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--lav);
 }
-
-.ar-alphabet{
-  grid-column:1 / -1;
-  display:flex;flex-direction:column;gap:8px;
-  border-top:1px solid var(--hair);margin-top:18px;padding-top:18px;
-  position:relative;z-index:2;
+.ar-wmeta span{
+  font-family:var(--display);font-weight:500;font-size:11px;
+  color:rgba(216,200,243,.55);font-variant-numeric:tabular-nums;
 }
-.ar-alphabet span{
-  font-family:var(--ar);font-weight:500;font-size:32px;line-height:1.3;
-  color:rgba(248,246,252,.85);direction:rtl;text-align:right;
+.ar-rule{
+  padding-left:24px;border-left:1px solid var(--hair);
+  max-width:280px;
 }
+.ar-rule p{
+  font-family:var(--display);font-weight:500;font-size:12.5px;line-height:1.55;
+  color:var(--soft);margin:0;
+}
+.ar-rule p strong{color:var(--gold);font-weight:600}
 
 /* Hierarchy */
 .hier{display:grid;grid-template-columns:1.4fr 1fr;gap:56px;flex:1}
@@ -2388,46 +2386,36 @@ html,body{overflow-x:hidden}
       <span class="cap mute pgnum"></span>
     </div>
 
-    <!-- Hero Arabic word as art: massive سادين dominates the slide, supporting meta sits to the side. -->
-    <div class="type-arabic">
-      <!-- Background ghost word — a second very-low-opacity "سادين" peeks behind for depth -->
-      <span class="ar-ghost" aria-hidden="true">سادين</span>
+    <!-- Eyebrow strip with credits, like the other type pages -->
+    <div class="ar-strip">
+      <span class="cap gold" style="letter-spacing:.42em">Arabic · Zain Mob</span>
+      <span class="cap mute" style="letter-spacing:.42em">Mostafa El Abasiry · Self-hosted · Open license</span>
+    </div>
 
-      <!-- Hero word + Latin transliteration -->
-      <div class="ar-hero" dir="rtl">
-        <span class="ar-eyebrow" style="direction:ltr"><span class="dash"></span>Arabic · III / IV</span>
-        <h1 class="ar-word">سادين</h1>
-        <p class="ar-latin" style="direction:ltr">Sadine · سادين</p>
+    <!-- Hero stage: centered massive سادين word -->
+    <div class="ar-stage">
+      <span class="ar-stage-eyebrow"><span class="dash"></span>The brand's Arabic voice<span class="dash"></span></span>
+      <h1 class="ar-word">سادين</h1>
+      <p class="ar-latin">Sadine</p>
+    </div>
+
+    <!-- Bottom band: 3 weight specimens (one per column) + pairing rule -->
+    <div class="ar-foot">
+      <div class="ar-wcell">
+        <span class="ar-wspec" style="font-weight:800">أب</span>
+        <div class="ar-wmeta"><strong>Bold · عريض</strong><span>800</span></div>
       </div>
-
-      <!-- Right side panel · meta + weights + pairing -->
-      <aside class="ar-meta">
-        <div>
-          <span class="cap gold" style="letter-spacing:.42em">Zain Mob</span>
-          <p style="font-family:var(--display);font-weight:500;font-size:14px;line-height:1.55;color:var(--lav);margin-top:10px;max-width:300px">A modern Arabic display face — strong vertical stems, generous counters, swash-ready. The brand's Arabic voice.</p>
-        </div>
-
-        <div class="ar-weights">
-          <div class="aw"><span class="wspec ar" style="font-weight:800">أب</span><span class="wlab">Bold · عريض · 800</span></div>
-          <div class="aw"><span class="wspec ar" style="font-weight:600">أب</span><span class="wlab">SemiBold · متوسط · 600</span></div>
-          <div class="aw"><span class="wspec ar" style="font-weight:400">أب</span><span class="wlab">Regular · عادي · 400</span></div>
-        </div>
-
-        <div>
-          <span class="cap mute" style="font-size:10px;letter-spacing:.32em">Pairing rule</span>
-          <p style="font-family:var(--display);font-weight:500;font-size:13px;line-height:1.6;color:var(--soft);margin-top:6px">Pair Zain Mob and Satoshi <strong>vertically</strong> — Arabic above or below Latin, never inline. Cairo remains the UI fallback below 14 px.</p>
-        </div>
-
-        <div class="ar-foundry">
-          <span>Foundry · Mostafa El Abasiry</span>
-          <span>License · Open · self-hosted</span>
-        </div>
-      </aside>
-
-      <!-- Bottom alphabet specimen -->
-      <div class="ar-alphabet" dir="rtl">
-        <span>ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي ء ة ى</span>
-        <span style="direction:ltr;text-align:right;font-variant-numeric:tabular-nums">٠ ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩</span>
+      <div class="ar-wcell">
+        <span class="ar-wspec" style="font-weight:600">أب</span>
+        <div class="ar-wmeta"><strong>SemiBold · متوسط</strong><span>600</span></div>
+      </div>
+      <div class="ar-wcell">
+        <span class="ar-wspec" style="font-weight:400">أب</span>
+        <div class="ar-wmeta"><strong>Regular · عادي</strong><span>400</span></div>
+      </div>
+      <div class="ar-rule">
+        <span class="cap mute" style="font-size:10px;letter-spacing:.32em;display:block;margin-bottom:6px">Pairing rule</span>
+        <p>Pair Zain Mob and Satoshi <strong>vertically</strong> — Arabic above or below Latin, never inline.</p>
       </div>
     </div>
 

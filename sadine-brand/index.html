@@ -272,6 +272,38 @@ a{color:inherit}
 .cover-hero .credits .c .cap{color:rgba(248,246,252,.65)}
 .cover-hero .credits .c .kbd{color:var(--soft)}
 
+/* ─────────── Language system ─────────── */
+.lang-fr{display:none}
+body[data-lang="fr"] .lang-en{display:none}
+body[data-lang="fr"] .lang-fr{display:inline}
+
+/* Language picker — sits in the cover topbar right slot */
+.lang-picker{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--display);font-weight:500;
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+}
+.lang-picker .lang-sep{opacity:.35;color:var(--soft)}
+.lang-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;border:0;padding:4px 0;
+  color:rgba(248,246,252,.55);
+  font:inherit;letter-spacing:inherit;text-transform:inherit;
+  cursor:pointer;transition:color .3s;
+  text-shadow:0 1px 12px rgba(15,5,33,.6);
+}
+.lang-btn .dot{
+  width:5px;height:5px;border-radius:50%;
+  background:transparent;border:1px solid rgba(248,246,252,.4);
+  transition:background .3s,border-color .3s,box-shadow .3s;
+}
+.lang-btn:hover{color:var(--soft)}
+.lang-btn[aria-pressed="true"]{color:var(--gold)}
+.lang-btn[aria-pressed="true"] .dot{
+  background:var(--gold);border-color:var(--gold);
+  box-shadow:0 0 10px rgba(245,185,66,.6);
+}
+
 /* Index — grouped TOC across 2 columns per page (split across 2 pages) */
 .toc-grouped{display:grid;grid-template-columns:repeat(2,1fr);gap:64px;flex:1;align-content:start}
 .toc-col{display:flex;flex-direction:column;gap:32px}
@@ -980,21 +1012,31 @@ html,body{overflow-x:hidden}
 
   <div class="frame">
     <div class="topbar">
-      <div class="id"><span class="dot"></span><span class="cap mute">Sadine Tours · 2026 Edition</span></div>
-      <span class="cap mute">A complete brand system</span>
+      <div class="id"><span class="dot"></span><span class="cap mute">Sadine Tours · <span class="lang-en">2026 Edition</span><span class="lang-fr">Édition 2026</span></span></div>
+      <div class="lang-picker" role="group" aria-label="Language">
+        <button type="button" class="lang-btn" data-set-lang="en"><span class="dot"></span>English</button>
+        <span class="lang-sep">·</span>
+        <button type="button" class="lang-btn" data-set-lang="fr"><span class="dot"></span>Français</button>
+      </div>
     </div>
 
     <div class="cover-title">
-      <span class="cover-eyebrow">Volume 01 · Strategy · Identity · Guidelines</span>
+      <span class="cover-eyebrow">
+        <span class="lang-en">Volume 01 · Strategy · Identity · Guidelines</span>
+        <span class="lang-fr">Volume 01 · Stratégie · Identité · Directives</span>
+      </span>
       <h1 class="cover-h">Brand<br/>Book.</h1>
-      <span class="cover-sub">Forty-one pages · One single voice</span>
+      <span class="cover-sub">
+        <span class="lang-en">Forty-one pages · One single voice</span>
+        <span class="lang-fr">Quarante et une pages · Une seule voix</span>
+      </span>
     </div>
 
     <div class="botbar">
       <div class="credits">
-        <div class="c"><span class="cap mute">Document</span><span class="kbd white">Brand Book / v1.0</span></div>
-        <div class="c"><span class="cap mute">Audience</span><span class="kbd white">Internal · Partners</span></div>
-        <div class="c"><span class="cap mute">Issued</span><span class="kbd white">Tunis · 2026</span></div>
+        <div class="c"><span class="cap mute"><span class="lang-en">Document</span><span class="lang-fr">Document</span></span><span class="kbd white">Brand Book / v1.0</span></div>
+        <div class="c"><span class="cap mute"><span class="lang-en">Audience</span><span class="lang-fr">Public</span></span><span class="kbd white"><span class="lang-en">Internal · Partners</span><span class="lang-fr">Interne · Partenaires</span></span></div>
+        <div class="c"><span class="cap mute"><span class="lang-en">Issued</span><span class="lang-fr">Émis</span></span><span class="kbd white">Tunis · 2026</span></div>
       </div>
       <span class="cap mute" style="text-shadow:0 1px 12px rgba(15,5,33,.6)">— Areen Cubs Creative Studio</span>
     </div>
@@ -2757,6 +2799,33 @@ html,body{overflow-x:hidden}
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const slides = Array.from(document.querySelectorAll('.slide'));
   if (!slides.length) return;
+
+  /* ───────── 0 · Language picker (EN / FR) ───────── */
+  const LANG_KEY = 'sadine-lang';
+  const langButtons = Array.from(document.querySelectorAll('.lang-btn'));
+
+  function setLang(lang){
+    if (lang !== 'en' && lang !== 'fr') lang = 'en';
+    document.body.setAttribute('data-lang', lang);
+    document.documentElement.lang = lang;
+    langButtons.forEach(b => {
+      b.setAttribute('aria-pressed', b.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+    try { localStorage.setItem(LANG_KEY, lang); } catch(_) {}
+  }
+
+  /* Initial: remembered choice → browser language → english */
+  let initial = 'en';
+  try {
+    const saved = localStorage.getItem(LANG_KEY);
+    if (saved === 'en' || saved === 'fr') initial = saved;
+    else if ((navigator.language || '').toLowerCase().startsWith('fr')) initial = 'fr';
+  } catch(_) {}
+  setLang(initial);
+
+  langButtons.forEach(b => {
+    b.addEventListener('click', () => setLang(b.getAttribute('data-set-lang')));
+  });
 
   /* ───────── 1 · Reactive scale: fit slides to any viewport ───────── */
   const SLIDE_W = 1440;

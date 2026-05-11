@@ -196,11 +196,54 @@ a{color:inherit}
   display:inline-flex;align-items:center;gap:10px;
   padding:8px 14px;border:1px solid var(--hair-strong);border-radius:999px;
   font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;
-  background:rgba(255,255,255,.03);backdrop-filter:blur(8px);
+  background:rgba(255,255,255,.06);backdrop-filter:blur(10px);
+  color:var(--soft);
 }
 .cover .stamp .pulse{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
 .cover .credits{display:flex;gap:48px}
 .cover .credits .c{display:flex;flex-direction:column;gap:6px}
+
+/* Cover hero · full-bleed image variant */
+.cover-hero{
+  background:#0A0418;
+  overflow:hidden;
+  isolation:isolate;
+}
+.cover-hero .cover-img{
+  position:absolute;inset:0;z-index:0;
+  background-image:url('assets/cover-hero.jpg');
+  background-position:center center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  /* fallback while the image hasn't been saved: subtle purple sky placeholder */
+  background-color:#2A124F;
+}
+.cover-hero .cover-overlay{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(15,5,33,.62) 0%, rgba(15,5,33,0) 24%, rgba(15,5,33,0) 60%, rgba(15,5,33,.82) 100%),
+    radial-gradient(80% 60% at 50% 50%, rgba(123,91,206,0) 0%, rgba(15,5,33,.18) 100%);
+}
+.cover-hero .frame{position:absolute;z-index:2}
+.cover-hero .center-mark{z-index:3}
+.cover-hero .cover-tag{
+  max-width:640px;text-align:center;font-size:14px;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--soft);
+  font-family:var(--display);font-weight:500;
+  text-shadow:0 2px 18px rgba(15,5,33,.65);
+}
+.cover-hero .stamp{
+  background:rgba(15,5,33,.45);
+  border-color:rgba(255,255,255,.22);
+}
+.cover-hero .botbar{border-top-color:rgba(255,255,255,.18)}
+.cover-hero .botbar .pg,
+.cover-hero .topbar .cap{
+  color:rgba(248,246,252,.85);
+  text-shadow:0 1px 12px rgba(15,5,33,.6);
+}
+.cover-hero .credits .c .cap{color:rgba(248,246,252,.65)}
+.cover-hero .credits .c .kbd{color:var(--soft)}
 
 /* Index — grouped TOC across 2 columns per page (split across 2 pages) */
 .toc-grouped{display:grid;grid-template-columns:repeat(2,1fr);gap:64px;flex:1;align-content:start}
@@ -904,7 +947,10 @@ html,body{overflow-x:hidden}
 <div class="book">
 
 <!-- ─────────── 01 · COVER ─────────── -->
-<section id="s-01" class="slide cover dark">
+<section id="s-01" class="slide cover cover-hero">
+  <div class="cover-img"></div>
+  <div class="cover-overlay"></div>
+
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Sadine Tours · Brand Identity System</span></div>
@@ -912,12 +958,8 @@ html,body{overflow-x:hidden}
     </div>
 
     <div class="center-mark">
-      <div class="glow-large"></div>
       <span class="stamp"><span class="pulse"></span>Volume I — Identity</span>
-      <svg class="wordmark mark-default" viewBox="0 0 1194.87 391.01"><use href="#sadine-mark"/></svg>
-      <p class="lead" style="max-width:600px;text-align:center;font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--lav);font-family:var(--display);font-weight:500">
-        Premium · Cinematic · Organized · Modern
-      </p>
+      <p class="lead cover-tag">Premium · Cinematic · Organized · Modern</p>
     </div>
 
     <div class="botbar">

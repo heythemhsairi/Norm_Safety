@@ -750,19 +750,25 @@ body[data-lang="fr"] .lang-fr{display:inline}
   background:rgba(0,0,0,.25);min-height:280px;
 }
 .env .lab{position:absolute;top:18px;left:22px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
-/* Business cards — paired photo mockups, slight opposing angles for "two cards on a desk" feel */
+/* Business cards — vector PDFs embedded so the wordmark stays
+   pin-sharp. Each card is sized in real business-card proportions
+   (85 × 55 mm ≈ 1.545 : 1); PDFs need explicit pixel dimensions
+   since they don't auto-size like <img>. */
 .bc-pair-photo{
   display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;
-  max-width:560px;width:100%;
+  max-width:580px;width:100%;
 }
-.bc-pair-photo img{
-  width:100%;height:auto;display:block;
-  border-radius:10px;
+.bc-pair-photo embed{
+  width:100%;
+  aspect-ratio:85 / 55;
+  display:block;border:0;
+  border-radius:10px;overflow:hidden;
+  background:transparent;
   filter:drop-shadow(0 24px 40px rgba(0,0,0,.55));
   transition:transform .55s cubic-bezier(.22,1,.36,1);
 }
-.bc-pair-photo img:first-child{transform:rotate(-2.2deg) translateY(6px)}
-.bc-pair-photo img:last-child{transform:rotate(2.2deg) translateY(-6px)}
+.bc-pair-photo embed:first-child{transform:rotate(-2.2deg) translateY(6px)}
+.bc-pair-photo embed:last-child{transform:rotate(2.2deg) translateY(-6px)}
 
 /* Boarding-pass photo — drop-in mockup image, slight rotation for "found on a desk" feel */
 .bp-photo{
@@ -2593,10 +2599,9 @@ html,body{overflow-x:hidden}
 
       <div class="center" style="gap:28px">
         <div class="bc-pair-photo">
-          <img src="assets/business-card-front.png" alt="Sadine business card · front" />
-          <img src="assets/business-card-back.png"  alt="Sadine business card · reverse" />
+          <embed src="assets/business-card-front.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" type="application/pdf" title="Sadine business card · front" />
+          <embed src="assets/business-card-back.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"  type="application/pdf" title="Sadine business card · reverse" />
         </div>
-        <span class="cap mute">Front (purple, blind emboss + gold foil) · Reverse (soft white, Manrope)</span>
       </div>
     </div>
 

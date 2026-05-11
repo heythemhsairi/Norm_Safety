@@ -604,17 +604,14 @@ body[data-lang="fr"] .lang-fr{display:inline}
   display:flex;flex-direction:column;justify-content:space-between;padding:24px;color:var(--soft);
   position:relative;
 }
-/* Stories — full-bleed photo / video with a darker gradient overlay for text legibility */
-.stories .story{background-color:#15082B;background-size:cover;background-position:center}
-.stories .story::before{
-  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
-  background:linear-gradient(180deg, rgba(15,5,33,.55) 0%, rgba(15,5,33,0) 25%, rgba(15,5,33,0) 55%, rgba(15,5,33,.78) 100%);
-}
-.stories .story > *{position:relative;z-index:2}
+/* Stories — clean full-bleed photo / video (overlays removed; the
+   provided assets already carry copy + logo, so we let them speak
+   for themselves) */
+.stories .story{background-color:#15082B;background-size:cover;background-position:center;padding:0}
 .stories .s1{background-image:url('assets/social-marrakech.png')}
 .stories .s2{background:#0a0418}
 .stories .s2 .reel-video{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
 }
 .stories .s3{background-image:url('assets/social-omrah.jpg')}
 .stories .s4{background-image:url('assets/social-itinerary.jpg')}
@@ -2496,27 +2493,12 @@ html,body{overflow-x:hidden}
     </div>
 
     <div class="stories" style="margin-top:32px">
-      <div class="story s1">
-        <span class="top">Story · 01 / 04</span>
-        <span class="copy">A weekend in<br/>Marrakech.</span>
-        <div class="bot"><span>Plan with us</span><svg class="mark icn icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
-      </div>
+      <div class="story s1"></div>
       <div class="story s2">
         <video class="reel-video" src="assets/social-reel.mp4" autoplay muted loop playsinline preload="metadata"></video>
-        <span class="top">Reel · cinematic</span>
-        <span class="copy">From boarding pass<br/>to last sunset.</span>
-        <div class="bot"><span>Sadine</span><svg class="mark icn icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
       </div>
-      <div class="story s3">
-        <span class="top">Story · Pilgrimage</span>
-        <span class="copy">Omrah ·<br/>2026 season.</span>
-        <div class="bot"><span>Book with us</span><svg class="mark icn icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
-      </div>
-      <div class="story s4">
-        <span class="top">Itinerary teaser</span>
-        <span class="copy">Tunis → Istanbul<br/>12 → 17 May.</span>
-        <div class="bot"><span>Confirmed</span><svg class="mark icn icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
-      </div>
+      <div class="story s3"></div>
+      <div class="story s4"></div>
     </div>
 
     <div class="botbar"><span class="pg">Sadine Tours · Stories</span><span class="pg pgnum total"></span></div>

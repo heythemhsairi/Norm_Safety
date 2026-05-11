@@ -750,7 +750,7 @@ body[data-lang="fr"] .lang-fr{display:inline}
   background-position:center;
   background-repeat:no-repeat;
   padding:0;
-  min-height:340px;
+  min-height:248px;
 }
 .env.photo-airport{background-image:linear-gradient(180deg, rgba(15,5,33,0) 55%, rgba(15,5,33,.75) 100%), url('assets/app-airport.png')}
 .env.photo-vehicle{background-image:linear-gradient(180deg, rgba(15,5,33,0) 55%, rgba(15,5,33,.75) 100%), url('assets/app-vehicle.png')}
@@ -761,19 +761,23 @@ body[data-lang="fr"] .lang-fr{display:inline}
   padding:6px 12px;border-radius:99px;
   backdrop-filter:blur(8px);
   border:1px solid rgba(255,255,255,.12);
-  top:20px;left:24px;
+  top:18px;left:22px;
 }
 
 /* Uniform / pin */
 .uniform-card{
   background:linear-gradient(160deg,#2A124F 0%, #1B0A36 100%);
-  border-radius:18px;padding:40px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;border:1px solid var(--hair);min-height:280px
+  border-radius:18px;padding:24px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;border:1px solid var(--hair);min-height:180px
 }
 .uniform-card .pin-photo{
-  width:180px;height:180px;border-radius:50%;
-  object-fit:cover;object-position:center;
-  display:block;
-  box-shadow:0 18px 40px -10px rgba(0,0,0,.6), 0 0 0 1px rgba(245,185,66,.25) inset;
+  width:128px;height:128px;border-radius:50%;
+  background-color:#0F0420;
+  background-image:url('assets/app-pin.png');
+  background-size:165% auto;
+  background-position:center;
+  background-repeat:no-repeat;
+  display:block;flex-shrink:0;
+  box-shadow:0 18px 40px -10px rgba(0,0,0,.6), 0 0 0 1px rgba(245,185,66,.3) inset;
 }
 .uniform-card .lab{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
 
@@ -2641,12 +2645,12 @@ html,body{overflow-x:hidden}
       <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
+    <div style="margin-top:20px;display:flex;justify-content:space-between;align-items:flex-end">
       <h2 class="h2">Discretion, in three dimensions.</h2>
       <p class="lead" style="max-width:340px">No phone numbers on the vehicle. No window posters on the storefront. The brand earns attention by withholding it.</p>
     </div>
 
-    <div class="environments" style="margin-top:32px">
+    <div class="environments" style="margin-top:24px">
       <div class="env storefront photo-airport">
         <span class="lab">A · Airport · OOH</span>
       </div>
@@ -2655,17 +2659,17 @@ html,body{overflow-x:hidden}
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px">
+    <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:18px;margin-top:18px">
       <div class="uniform-card">
         <span class="lab">C · Lapel pin</span>
-        <img class="pin-photo" src="assets/app-pin.png" alt="Sadine gold lapel pin" />
-        <p class="body" style="text-align:center;font-size:13px;max-width:260px">Worn on a Midnight-Plum blazer. Replaces the name tag.</p>
+        <div class="pin-photo" role="img" aria-label="Sadine gold lapel pin"></div>
+        <p class="body" style="text-align:center;font-size:12px;max-width:240px;margin:0">Worn on a Midnight-Plum blazer. Replaces the name tag.</p>
       </div>
-      <div class="card" style="min-height:auto;justify-content:center">
+      <div class="card" style="min-height:auto;padding:22px 28px;justify-content:center;gap:10px">
         <span class="num">Environmental rules</span>
-        <p class="body"><strong style="color:var(--soft)">Storefront</strong> — floor-to-ceiling glass, interior in Midnight Plum, single backlit wordmark above the desk, gold accent line at counter height.</p>
-        <p class="body"><strong style="color:var(--soft)">Vehicle</strong> — matte Midnight Plum, gloss-on-matte wordmark, gold bird front fender. No URL, no phone — discretion is the point.</p>
-        <p class="body"><strong style="color:var(--soft)">Uniform</strong> — Midnight Plum blazer, Soft White shirt, gold lapel pin, embossed leather pocket band in lieu of name tag.</p>
+        <p class="body" style="font-size:13px;line-height:1.55"><strong style="color:var(--soft)">Storefront</strong> — floor-to-ceiling glass, interior in Midnight Plum, single backlit wordmark above the desk, gold accent line at counter height.</p>
+        <p class="body" style="font-size:13px;line-height:1.55"><strong style="color:var(--soft)">Vehicle</strong> — matte Midnight Plum, gloss-on-matte wordmark, gold bird front fender. No URL, no phone — discretion is the point.</p>
+        <p class="body" style="font-size:13px;line-height:1.55"><strong style="color:var(--soft)">Uniform</strong> — Midnight Plum blazer, Soft White shirt, gold lapel pin, embossed leather pocket band in lieu of name tag.</p>
       </div>
     </div>
 

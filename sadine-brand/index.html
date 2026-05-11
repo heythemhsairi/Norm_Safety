@@ -725,6 +725,7 @@ body[data-lang="fr"] .lang-fr{display:inline}
 .browser .bar .dot{width:10px;height:10px;border-radius:50%}
 .browser .bar .d1{background:#ff5f57}.browser .bar .d2{background:#febc2e}.browser .bar .d3{background:#28c840}
 .browser .bar .url{flex:1;background:#0a0418;border:1px solid var(--hair);border-radius:99px;padding:6px 16px;font-family:var(--text);font-size:11px;color:var(--lav);text-align:center}
+.browser .browser-photo{width:100%;height:auto;display:block}
 .browser .hero{
   padding:56px;
   background:
@@ -749,6 +750,20 @@ body[data-lang="fr"] .lang-fr{display:inline}
   background:rgba(0,0,0,.25);min-height:280px;
 }
 .env .lab{position:absolute;top:18px;left:22px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+/* Business cards — paired photo mockups, slight opposing angles for "two cards on a desk" feel */
+.bc-pair-photo{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;
+  max-width:560px;width:100%;
+}
+.bc-pair-photo img{
+  width:100%;height:auto;display:block;
+  border-radius:10px;
+  filter:drop-shadow(0 24px 40px rgba(0,0,0,.55));
+  transition:transform .55s cubic-bezier(.22,1,.36,1);
+}
+.bc-pair-photo img:first-child{transform:rotate(-2.2deg) translateY(6px)}
+.bc-pair-photo img:last-child{transform:rotate(2.2deg) translateY(-6px)}
+
 /* Boarding-pass photo — drop-in mockup image, slight rotation for "found on a desk" feel */
 .bp-photo{
   width:100%;
@@ -2576,20 +2591,10 @@ html,body{overflow-x:hidden}
         <p class="body" style="font-size:13.5px;max-width:420px">600 gsm cotton stock. The card has weight in the hand — that's deliberate.</p>
       </div>
 
-      <div class="center" style="gap:36px">
-        <div class="bc-pair" style="gap:32px;transform:rotate(-1deg)">
-          <div class="bc front" style="width:340px;height:210px;padding:32px">
-            <svg class="icon icon-gold icn" viewBox="0 0 74.83 74.1" style="width:38px"><use href="#sadine-icon"/></svg>
-            <svg class="wm mark-mono-white" viewBox="0 0 1180.44 377.17"><use href="#sadine-mark"/></svg>
-          </div>
-          <div class="bc back" style="width:340px;height:210px;padding:32px">
-            <svg class="wm mark-mono-plum" viewBox="0 0 1180.44 377.17" style="width:50%"><use href="#sadine-mark"/></svg>
-            <div class="stack">
-              <span class="name" style="font-size:15px">Aïcha Bouzid</span>
-              <span class="role" style="font-size:11px">Travel Designer</span>
-              <span class="ct" style="font-size:11px">aicha@sadine.tours · +216 70 000 000</span>
-            </div>
-          </div>
+      <div class="center" style="gap:28px">
+        <div class="bc-pair-photo">
+          <img src="assets/business-card-front.png" alt="Sadine business card · front" />
+          <img src="assets/business-card-back.png"  alt="Sadine business card · reverse" />
         </div>
         <span class="cap mute">Front (purple, blind emboss + gold foil) · Reverse (soft white, Manrope)</span>
       </div>
@@ -2687,18 +2692,7 @@ html,body{overflow-x:hidden}
             <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>
             <span class="url">sadine.tours / journeys</span>
           </div>
-          <div class="hero">
-            <div class="nav">
-              <svg class="nav-mark mark-default" viewBox="0 0 1180.44 377.17"><use href="#sadine-mark"/></svg>
-              <div class="links"><span>Destinations</span><span>The Method</span><span>Stories</span><span>Concierge</span></div>
-              <span class="cap gold">FR · AR · EN</span>
-            </div>
-            <h1>Five days in Istanbul. <br/>The trip is already ready.</h1>
-            <div class="ctas">
-              <span class="cta-primary">Plan with us →</span>
-              <span class="cta-secondary">View destinations</span>
-            </div>
-          </div>
+          <img class="browser-photo" src="assets/website-banner.jpg" alt="Sadine Tours website hero" />
         </div>
 
         <div class="card" style="min-height:auto">

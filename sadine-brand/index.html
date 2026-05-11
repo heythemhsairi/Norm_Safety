@@ -25,7 +25,7 @@
   --glow:rgba(123,91,206,.55);
   --display:'Satoshi','Manrope',system-ui,sans-serif;
   --text:'Manrope','Satoshi',system-ui,sans-serif;
-  --ar:'Alexandria','Cairo',system-ui,sans-serif;
+  --ar:'Zain Mob','Alexandria','Cairo',system-ui,sans-serif;
 
   /* 8pt spacing scale */
   --s-1:4px;
@@ -50,6 +50,11 @@
   --rhythm-block:32px;     /* between headline block and content grid */
   --rhythm-tight:24px;     /* tighter siblings */
 }
+
+/* Zain Mob — Arabic display typeface, self-hosted (variable weights 400 / 600 / 800) */
+@font-face{font-family:'Zain Mob';font-weight:400;font-style:normal;font-display:swap;src:url('assets/fonts/zain-mob-400.ttf') format('truetype-variations'),url('assets/fonts/zain-mob-400.ttf') format('truetype')}
+@font-face{font-family:'Zain Mob';font-weight:600;font-style:normal;font-display:swap;src:url('assets/fonts/zain-mob-600.ttf') format('truetype-variations'),url('assets/fonts/zain-mob-600.ttf') format('truetype')}
+@font-face{font-family:'Zain Mob';font-weight:800;font-style:normal;font-display:swap;src:url('assets/fonts/zain-mob-800.ttf') format('truetype-variations'),url('assets/fonts/zain-mob-800.ttf') format('truetype')}
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -534,6 +539,200 @@ body[data-lang="fr"] .lang-fr{display:inline}
 .weights .w.ar{font-family:var(--ar);direction:rtl;text-align:right}
 .weights .w small{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav);float:right;margin-top:14px}
 .weights .w.man small,.weights .w.ar small{font-family:var(--display)}
+
+/* ─────────── Creative type pages: anatomy / magazine / arabic-hero ─────────── */
+
+/* SATOSHI — anatomy specimen with callouts */
+.type-anatomy{
+  flex:1;min-height:0;margin-top:20px;
+  display:grid;grid-template-columns:1.35fr 1fr;gap:48px;align-items:stretch;
+  border-top:1px solid var(--hair);padding-top:24px;
+}
+.anat-letter{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  border-right:1px solid var(--hair);padding-right:36px;
+  min-height:0;
+}
+.anat-glyph{
+  font-family:var(--display);font-weight:700;
+  font-size:520px;line-height:.78;letter-spacing:-.06em;color:var(--soft);
+  text-shadow:0 0 60px rgba(123,91,206,.15);
+  position:relative;z-index:2;
+}
+/* Horizontal guide lines (baseline / x-height / cap-height) */
+.anat-guide{
+  position:absolute;left:0;right:36px;height:1px;
+  background:linear-gradient(90deg, transparent 0%, rgba(245,185,66,.45) 12%, rgba(245,185,66,.45) 88%, transparent 100%);
+  pointer-events:none;z-index:1;
+}
+.anat-guide::after{
+  content:attr(data-l);
+  position:absolute;right:0;top:-7px;
+  background:transparent;
+  font-family:var(--display);font-weight:500;font-size:9px;
+  letter-spacing:.32em;text-transform:uppercase;color:var(--gold);
+}
+.gl-cap{top:18%}
+.gl-x{top:46%}
+.gl-base{top:84%}
+
+/* Callout chips connected by thin gold leader lines */
+.anat-callout{
+  position:absolute;
+  font-family:var(--display);font-weight:500;font-size:10px;
+  letter-spacing:.32em;text-transform:uppercase;color:var(--gold);
+  padding:5px 10px;border:1px solid rgba(245,185,66,.45);border-radius:99px;
+  background:rgba(15,5,33,.5);backdrop-filter:blur(6px);
+  z-index:3;
+}
+.anat-callout::before{
+  content:"";position:absolute;width:1px;background:rgba(245,185,66,.55);
+  pointer-events:none;
+}
+.c-stem    {top:48%;left:8%}
+.c-stem::before    {height:14px;left:50%;top:100%}
+.c-bowl    {top:24%;left:48%}
+.c-bowl::before    {height:30px;left:50%;top:100%}
+.c-counter {top:62%;left:50%}
+.c-counter::before {height:30px;left:50%;bottom:100%}
+.c-terminal{top:78%;left:14%}
+.c-terminal::before{height:18px;left:50%;top:100%}
+
+.anat-meta{
+  display:flex;flex-direction:column;justify-content:space-between;min-height:0;
+}
+.anat-weights{
+  display:flex;flex-direction:column;gap:14px;
+  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  padding:18px 0;
+}
+.anat-weights .aw{
+  display:grid;grid-template-columns:auto auto 1fr;align-items:baseline;gap:18px;
+}
+.aw .wlab{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav)}
+.aw .wnum{font-family:var(--display);font-weight:500;font-size:11px;color:rgba(216,200,243,.55);font-variant-numeric:tabular-nums}
+.aw .wspec{font-family:var(--display);font-size:40px;line-height:1;letter-spacing:-.022em;color:var(--soft);text-align:right;justify-self:end}
+.aw .wspec.ar{font-family:var(--ar);font-size:42px}
+.anat-footnotes{
+  display:flex;flex-direction:column;gap:6px;
+}
+.anat-footnotes span{font-family:var(--text);font-size:11px;color:var(--lav);line-height:1.5}
+.anat-footnotes strong{color:var(--soft);font-weight:500}
+
+/* MANROPE — magazine spread */
+.type-magazine{
+  flex:1;min-height:0;margin-top:18px;
+  display:grid;
+  grid-template-rows:auto auto 1fr auto;
+  gap:18px;
+  border-top:1px solid rgba(42,18,79,.18);padding-top:18px;
+}
+.mag-mast{
+  display:flex;justify-content:space-between;gap:24px;
+  font-family:var(--display);font-weight:500;font-size:11px;
+  letter-spacing:.32em;text-transform:uppercase;
+  color:rgba(42,18,79,.6);
+  border-bottom:1px solid rgba(42,18,79,.18);padding-bottom:14px;
+}
+.mag-mast strong{color:var(--purple);font-weight:600}
+.mag-h1{
+  font-family:var(--text);font-weight:700;
+  font-size:120px;line-height:.92;letter-spacing:-.028em;
+  color:var(--purple);
+}
+.mag-body{
+  display:grid;grid-template-columns:1.4fr 1.4fr .9fr;gap:36px;
+  min-height:0;
+}
+.mag-col p{
+  font-family:var(--text);font-weight:400;font-size:15.5px;line-height:1.65;
+  color:rgba(42,18,79,.78);
+  margin:0 0 12px;text-align:justify;
+}
+.mag-col p:last-child{margin-bottom:0}
+.mag-side{
+  display:flex;flex-direction:column;gap:14px;
+  border-left:1px solid rgba(42,18,79,.18);padding-left:24px;
+}
+.mag-side .aw{
+  display:grid;grid-template-columns:auto 1fr;align-items:center;gap:14px;
+}
+.mag-side .aw .wspec{font-size:48px;color:var(--purple);justify-self:start}
+.mag-side .aw .wlab{color:rgba(42,18,79,.6)}
+.mag-foot{
+  border-top:1px solid rgba(42,18,79,.18);padding-top:14px;
+}
+.mag-foot p{
+  font-family:var(--text);font-weight:500;font-size:12px;
+  letter-spacing:.32em;text-transform:uppercase;
+  color:rgba(42,18,79,.55);text-align:center;
+}
+
+/* ZAIN MOB — Arabic hero word */
+.type-arabic{
+  flex:1;min-height:0;position:relative;
+  display:grid;grid-template-columns:1.6fr 1fr;grid-template-rows:1fr auto;gap:0 48px;
+  margin-top:20px;border-top:1px solid var(--hair);padding-top:18px;
+}
+.ar-ghost{
+  position:absolute;bottom:-40px;left:-10%;right:0;
+  font-family:var(--ar);font-weight:800;font-size:560px;line-height:.85;
+  color:rgba(248,246,252,.04);
+  pointer-events:none;direction:rtl;text-align:right;z-index:0;
+  white-space:nowrap;overflow:hidden;
+}
+.ar-hero{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-end;
+  text-align:right;
+}
+.ar-eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);
+}
+.ar-eyebrow .dash{display:inline-block;width:36px;height:1px;background:var(--gold)}
+.ar-word{
+  font-family:var(--ar);font-weight:800;
+  font-size:340px;line-height:.95;color:var(--soft);
+  margin-top:14px;
+  text-shadow:0 0 60px rgba(123,91,206,.25);
+}
+.ar-latin{
+  font-family:var(--display);font-weight:500;font-size:22px;letter-spacing:.06em;
+  color:var(--lav);margin-top:6px;
+}
+
+.ar-meta{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;justify-content:space-between;gap:22px;
+  border-left:1px solid var(--hair);padding-left:32px;
+  min-height:0;
+}
+.ar-weights{
+  display:flex;flex-direction:column;gap:12px;
+  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  padding:18px 0;
+}
+.ar-weights .aw{
+  display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:18px;
+}
+.ar-weights .aw .wspec{font-size:46px;color:var(--soft);justify-self:start}
+.ar-foundry{
+  display:flex;flex-direction:column;gap:4px;
+  font-family:var(--text);font-size:11px;color:var(--lav);line-height:1.5;
+}
+
+.ar-alphabet{
+  grid-column:1 / -1;
+  display:flex;flex-direction:column;gap:8px;
+  border-top:1px solid var(--hair);margin-top:18px;padding-top:18px;
+  position:relative;z-index:2;
+}
+.ar-alphabet span{
+  font-family:var(--ar);font-weight:500;font-size:32px;line-height:1.3;
+  color:rgba(248,246,252,.85);direction:rtl;text-align:right;
+}
 
 /* Hierarchy */
 .hier{display:grid;grid-template-columns:1.4fr 1fr;gap:56px;flex:1}
@@ -2091,72 +2290,43 @@ html,body{overflow-x:hidden}
       <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="flex:1;display:grid;grid-template-columns:1fr 1.05fr 1.8fr;gap:48px;padding:28px 0 8px;align-items:stretch;border-top:1px solid var(--hair);margin-top:24px">
+    <!-- Anatomy specimen: a giant cropped letterform with gold callout lines pointing to its parts. -->
+    <div class="type-anatomy">
+      <!-- Massive letter "a" on the left -->
+      <div class="anat-letter">
+        <span class="anat-glyph">a</span>
+        <!-- Gold thin guide lines (baseline / x-height / cap-height) -->
+        <span class="anat-guide gl-base"  data-l="baseline"></span>
+        <span class="anat-guide gl-x"     data-l="x-height"></span>
+        <span class="anat-guide gl-cap"   data-l="cap-height"></span>
+        <!-- Anatomy callouts -->
+        <span class="anat-callout c-stem">stem</span>
+        <span class="anat-callout c-bowl">bowl</span>
+        <span class="anat-callout c-counter">counter</span>
+        <span class="anat-callout c-terminal">terminal</span>
+      </div>
 
-      <!-- COL 1 · Aa hero + name + meta -->
-      <div style="display:flex;flex-direction:column;justify-content:space-between;padding-top:18px;border-right:1px solid var(--hair);padding-right:28px">
+      <!-- Right column · name, meta, weights, pangram -->
+      <div class="anat-meta">
         <div>
-          <div style="font-family:var(--display);font-weight:700;font-size:200px;line-height:.88;letter-spacing:-.04em;color:var(--soft)">Aa</div>
-          <div style="height:1px;width:100%;background:var(--hair);margin:24px 0"></div>
-          <h2 style="font-family:var(--display);font-weight:700;font-size:40px;line-height:1.05;letter-spacing:-.025em;color:var(--soft)">Satoshi</h2>
-          <p style="font-family:var(--text);font-weight:400;font-size:13px;line-height:1.55;color:var(--lav);margin-top:8px;max-width:240px">Typography for headlines and the wordmark.</p>
+          <span class="cap gold" style="letter-spacing:.42em">Display · I / IV</span>
+          <h2 style="font-family:var(--display);font-weight:700;font-size:120px;line-height:.88;letter-spacing:-.04em;color:var(--soft);margin-top:14px">Satoshi.</h2>
+          <p class="lead" style="margin-top:14px;max-width:380px">Modern, rounded, geometric. The wordmark's voice in letters — strong at scale, elegant at small sizes.</p>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px 12px;margin-top:24px">
-          <div>
-            <p style="font-family:var(--text);font-size:11px;color:var(--lav);line-height:1.3">Sans Serif</p>
-            <p style="font-family:var(--text);font-size:11px;color:rgba(216,200,243,.6);line-height:1.3;margin-top:2px">Geometric · Rounded</p>
-          </div>
-          <div>
-            <p style="font-family:var(--text);font-size:11px;color:var(--lav);line-height:1.3">Indian Type Foundry</p>
-            <p style="font-family:var(--text);font-size:11px;color:rgba(216,200,243,.6);line-height:1.3;margin-top:2px">Fontshare · Open license</p>
-          </div>
+
+        <!-- Weight ladder · horizontal compact -->
+        <div class="anat-weights">
+          <div class="aw"><span class="wlab">Bold</span><span class="wnum">700</span><span class="wspec" style="font-weight:700">Sadine</span></div>
+          <div class="aw"><span class="wlab">Medium</span><span class="wnum">500</span><span class="wspec" style="font-weight:500">Sadine</span></div>
+          <div class="aw"><span class="wlab">Regular</span><span class="wnum">400</span><span class="wspec" style="font-weight:400">Sadine</span></div>
+        </div>
+
+        <div class="anat-footnotes">
+          <span><strong>Foundry</strong> · Indian Type Foundry</span>
+          <span><strong>License</strong> · Fontshare · Open</span>
+          <span><strong>Pangram</strong> · "Five days in Istanbul. The trip is ready."</span>
         </div>
       </div>
-
-      <!-- COL 2 · Weight ladder -->
-      <div style="display:flex;flex-direction:column;gap:24px;padding-top:18px;border-right:1px solid var(--hair);padding-right:28px">
-        <div style="display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;padding-bottom:18px;border-bottom:1px solid var(--hair)">
-          <div>
-            <p style="font-family:var(--text);font-size:12px;color:var(--lav);letter-spacing:.04em">Bold</p>
-            <p style="font-family:var(--text);font-size:12px;color:rgba(216,200,243,.55);letter-spacing:.04em">700</p>
-          </div>
-          <div style="font-family:var(--display);font-weight:700;font-size:60px;line-height:1;letter-spacing:-.025em;color:var(--soft)">Aa</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;padding-bottom:18px;border-bottom:1px solid var(--hair)">
-          <div>
-            <p style="font-family:var(--text);font-size:12px;color:var(--lav);letter-spacing:.04em">Medium</p>
-            <p style="font-family:var(--text);font-size:12px;color:rgba(216,200,243,.55);letter-spacing:.04em">500</p>
-          </div>
-          <div style="font-family:var(--display);font-weight:500;font-size:60px;line-height:1;letter-spacing:-.02em;color:var(--soft)">Aa</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;padding-bottom:18px;border-bottom:1px solid var(--hair)">
-          <div>
-            <p style="font-family:var(--text);font-size:12px;color:var(--lav);letter-spacing:.04em">Regular</p>
-            <p style="font-family:var(--text);font-size:12px;color:rgba(216,200,243,.55);letter-spacing:.04em">400</p>
-          </div>
-          <div style="font-family:var(--display);font-weight:400;font-size:60px;line-height:1;letter-spacing:-.015em;color:var(--soft)">Aa</div>
-        </div>
-        <div style="margin-top:auto">
-          <p style="font-family:var(--text);font-size:11px;color:var(--lav);line-height:1.5">Three weights — used at headline scale only. Never below 22 px in production.</p>
-        </div>
-      </div>
-
-      <!-- COL 3 · Real headline + body + alphabet -->
-      <div style="display:flex;flex-direction:column;justify-content:space-between;padding-top:18px">
-        <div>
-          <h1 style="font-family:var(--display);font-weight:700;font-size:62px;line-height:1.02;letter-spacing:-.025em;color:var(--soft);margin-bottom:24px">Five days in Istanbul. The trip is ready.</h1>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
-            <p style="font-family:var(--text);font-size:14px;line-height:1.65;color:var(--lav);text-align:justify">Sadine Tours organizes premium travel for people who refuse to choose between elegance and ease. Every detail is handled before you ask. Nothing rushes.</p>
-            <p style="font-family:var(--text);font-size:14px;line-height:1.65;color:var(--lav);text-align:justify">From boarding pass to last sunset — handled with the precision of a luxury airline and the warmth of a private host. Nothing is forgotten.</p>
-          </div>
-        </div>
-        <div style="margin-top:32px">
-          <p style="font-family:var(--display);font-weight:500;font-size:24px;line-height:1.4;letter-spacing:-.01em;color:rgba(248,246,252,.85)">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
-          <p style="font-family:var(--display);font-weight:500;font-size:24px;line-height:1.4;letter-spacing:-.01em;color:rgba(248,246,252,.85)">abcdefghijklmnopqrstuvwxyz</p>
-          <p style="font-family:var(--display);font-weight:500;font-size:24px;line-height:1.4;letter-spacing:-.01em;color:rgba(248,246,252,.85)">0123456789 &amp; @ ! ? . , ; : ( ) — €</p>
-        </div>
-      </div>
-
     </div>
 
     <div class="botbar"><span class="pg">Sadine Tours · Display · Satoshi</span><span class="pg pgnum total"></span></div>
@@ -2171,72 +2341,39 @@ html,body{overflow-x:hidden}
       <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="flex:1;display:grid;grid-template-columns:1fr 1.05fr 1.8fr;gap:48px;padding:28px 0 8px;align-items:stretch;border-top:1px solid rgba(42,18,79,.18);margin-top:24px">
-
-      <!-- COL 1 · Aa hero + name + meta -->
-      <div style="display:flex;flex-direction:column;justify-content:space-between;padding-top:18px;border-right:1px solid rgba(42,18,79,.18);padding-right:28px">
-        <div>
-          <div style="font-family:var(--text);font-weight:700;font-size:200px;line-height:.88;letter-spacing:-.03em;color:var(--purple)">Aa</div>
-          <div style="height:1px;width:100%;background:rgba(42,18,79,.18);margin:24px 0"></div>
-          <h2 style="font-family:var(--text);font-weight:700;font-size:40px;line-height:1.05;letter-spacing:-.02em;color:var(--purple)">Manrope</h2>
-          <p style="font-family:var(--text);font-weight:400;font-size:13px;line-height:1.55;color:rgba(42,18,79,.65);margin-top:8px;max-width:240px">Typography for paragraphs, UI, and reading at every scale.</p>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px 12px;margin-top:24px">
-          <div>
-            <p style="font-family:var(--text);font-size:11px;color:rgba(42,18,79,.65);line-height:1.3">Sans Serif</p>
-            <p style="font-family:var(--text);font-size:11px;color:rgba(42,18,79,.45);line-height:1.3;margin-top:2px">Grotesk · Modern</p>
-          </div>
-          <div>
-            <p style="font-family:var(--text);font-size:11px;color:rgba(42,18,79,.65);line-height:1.3">Mikhail Sharanda</p>
-            <p style="font-family:var(--text);font-size:11px;color:rgba(42,18,79,.45);line-height:1.3;margin-top:2px">Google Fonts · OFL</p>
-          </div>
-        </div>
+    <!-- Magazine spread: massive editorial headline across the top, real body type in two columns, masthead in the gutter. -->
+    <div class="type-magazine">
+      <!-- Top eyebrow strip with date + foundry, like a magazine masthead -->
+      <div class="mag-mast">
+        <span><strong>Manrope</strong> · Mikhail Sharanda</span>
+        <span>Grotesk · Modern · Google Fonts OFL</span>
+        <span>Weights · SemiBold 600 / Medium 500 / Regular 400</span>
       </div>
 
-      <!-- COL 2 · Weight ladder -->
-      <div style="display:flex;flex-direction:column;gap:24px;padding-top:18px;border-right:1px solid rgba(42,18,79,.18);padding-right:28px">
-        <div style="display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;padding-bottom:18px;border-bottom:1px solid rgba(42,18,79,.18)">
-          <div>
-            <p style="font-family:var(--text);font-size:12px;color:rgba(42,18,79,.7);letter-spacing:.04em">SemiBold</p>
-            <p style="font-family:var(--text);font-size:12px;color:rgba(42,18,79,.45);letter-spacing:.04em">600</p>
-          </div>
-          <div style="font-family:var(--text);font-weight:600;font-size:60px;line-height:1;letter-spacing:-.022em;color:var(--purple)">Aa</div>
+      <!-- Hero headline taking over the spread -->
+      <h1 class="mag-h1">Welcome,<br/>Mr. Ben Aïcha.</h1>
+
+      <!-- Two-column body + sidebar weights -->
+      <div class="mag-body">
+        <div class="mag-col">
+          <p>Your journey begins on Tuesday. Everything below is yours to keep — itinerary, contacts, and the small things we've already arranged. A car will collect you at 19:00 from your door.</p>
+          <p>Dinner is held for 21:00 at <em>Karaköy Lokantası</em>. The suite key has already been activated, and the concierge has your preferences on file.</p>
         </div>
-        <div style="display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;padding-bottom:18px;border-bottom:1px solid rgba(42,18,79,.18)">
-          <div>
-            <p style="font-family:var(--text);font-size:12px;color:rgba(42,18,79,.7);letter-spacing:.04em">Medium</p>
-            <p style="font-family:var(--text);font-size:12px;color:rgba(42,18,79,.45);letter-spacing:.04em">500</p>
-          </div>
-          <div style="font-family:var(--text);font-weight:500;font-size:60px;line-height:1;letter-spacing:-.018em;color:var(--purple)">Aa</div>
+        <div class="mag-col">
+          <p>Manrope is the brand's reading voice. Generous interletter spacing, balanced counters, and a soft humanist warmth — it carries long-form copy without fatigue.</p>
+          <p>Use it for paragraphs, UI, lists, forms, captions and metadata. Pair vertically with Satoshi; never mix the two inside a single sentence.</p>
         </div>
-        <div style="display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;padding-bottom:18px;border-bottom:1px solid rgba(42,18,79,.18)">
-          <div>
-            <p style="font-family:var(--text);font-size:12px;color:rgba(42,18,79,.7);letter-spacing:.04em">Regular</p>
-            <p style="font-family:var(--text);font-size:12px;color:rgba(42,18,79,.45);letter-spacing:.04em">400</p>
-          </div>
-          <div style="font-family:var(--text);font-weight:400;font-size:60px;line-height:1;letter-spacing:-.012em;color:var(--purple)">Aa</div>
-        </div>
-        <div style="margin-top:auto">
-          <p style="font-family:var(--text);font-size:11px;color:rgba(42,18,79,.6);line-height:1.5">Three weights — paragraphs and UI. Never mix with Satoshi in the same sentence.</p>
-        </div>
+        <aside class="mag-side">
+          <div class="aw"><span class="wspec" style="font-weight:600;font-family:var(--text)">Aa</span><span class="wlab">SemiBold 600</span></div>
+          <div class="aw"><span class="wspec" style="font-weight:500;font-family:var(--text)">Aa</span><span class="wlab">Medium 500</span></div>
+          <div class="aw"><span class="wspec" style="font-weight:400;font-family:var(--text)">Aa</span><span class="wlab">Regular 400</span></div>
+        </aside>
       </div>
 
-      <!-- COL 3 · Real headline + body + alphabet -->
-      <div style="display:flex;flex-direction:column;justify-content:space-between;padding-top:18px">
-        <div>
-          <h1 style="font-family:var(--text);font-weight:700;font-size:54px;line-height:1.05;letter-spacing:-.022em;color:var(--purple);margin-bottom:24px">Welcome, Mr. Ben Aïcha. Your journey begins on Tuesday.</h1>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
-            <p style="font-family:var(--text);font-size:14px;line-height:1.65;color:rgba(42,18,79,.78);text-align:justify">Everything below is yours to keep — itinerary, contacts, and the small things we've already arranged. A car will collect you at 19:00 from your door.</p>
-            <p style="font-family:var(--text);font-size:14px;line-height:1.65;color:rgba(42,18,79,.78);text-align:justify">Dinner is held for 21:00 at <em>Karaköy Lokantası</em>. The suite key has already been activated, and the concierge has your preferences on file.</p>
-          </div>
-        </div>
-        <div style="margin-top:32px">
-          <p style="font-family:var(--text);font-weight:500;font-size:24px;line-height:1.4;letter-spacing:-.005em;color:rgba(42,18,79,.85)">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
-          <p style="font-family:var(--text);font-weight:500;font-size:24px;line-height:1.4;letter-spacing:-.005em;color:rgba(42,18,79,.85)">abcdefghijklmnopqrstuvwxyz</p>
-          <p style="font-family:var(--text);font-weight:500;font-size:24px;line-height:1.4;letter-spacing:-.005em;color:rgba(42,18,79,.85)">0123456789 &amp; @ ! ? . , ; : ( ) — €</p>
-        </div>
+      <!-- Tracked alphabet at the foot -->
+      <div class="mag-foot">
+        <p>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z &nbsp;·&nbsp; a b c d e f g h i j k l m n o p q r s t u v w x y z &nbsp;·&nbsp; 0 1 2 3 4 5 6 7 8 9</p>
       </div>
-
     </div>
 
     <div class="botbar"><span class="pg">Sadine Tours · Text · Manrope</span><span class="pg pgnum total"></span></div>
@@ -2251,73 +2388,50 @@ html,body{overflow-x:hidden}
       <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="flex:1;display:grid;grid-template-columns:1.8fr 1.05fr 1fr;gap:48px;padding:28px 0 8px;align-items:stretch;border-top:1px solid var(--hair);margin-top:24px;direction:rtl">
+    <!-- Hero Arabic word as art: massive سادين dominates the slide, supporting meta sits to the side. -->
+    <div class="type-arabic">
+      <!-- Background ghost word — a second very-low-opacity "سادين" peeks behind for depth -->
+      <span class="ar-ghost" aria-hidden="true">سادين</span>
 
-      <!-- COL 3 (RTL right-most = visually first to ar reader) · Aa hero + name + meta -->
-      <div style="display:flex;flex-direction:column;justify-content:space-between;padding-top:18px;border-left:1px solid var(--hair);padding-left:28px;direction:rtl;text-align:right">
+      <!-- Hero word + Latin transliteration -->
+      <div class="ar-hero" dir="rtl">
+        <span class="ar-eyebrow" style="direction:ltr"><span class="dash"></span>Arabic · III / IV</span>
+        <h1 class="ar-word">سادين</h1>
+        <p class="ar-latin" style="direction:ltr">Sadine · سادين</p>
+      </div>
+
+      <!-- Right side panel · meta + weights + pairing -->
+      <aside class="ar-meta">
         <div>
-          <div style="font-family:var(--ar);font-weight:700;font-size:200px;line-height:.88;letter-spacing:0;color:var(--soft)">أب</div>
-          <div style="height:1px;width:100%;background:var(--hair);margin:24px 0"></div>
-          <h2 style="font-family:var(--ar);font-weight:700;font-size:40px;line-height:1.1;color:var(--soft)">الإسكندرية</h2>
-          <p style="font-family:var(--display);font-weight:500;font-size:22px;color:var(--lav);margin-top:6px;direction:ltr;text-align:right">Alexandria</p>
-          <p style="font-family:var(--ar);font-weight:400;font-size:13px;line-height:1.6;color:var(--lav);margin-top:10px;max-width:240px">خط للعناوين والنصوص الطويلة. النظير العربي لخط ساتوشي.</p>
+          <span class="cap gold" style="letter-spacing:.42em">Zain Mob</span>
+          <p style="font-family:var(--display);font-weight:500;font-size:14px;line-height:1.55;color:var(--lav);margin-top:10px;max-width:300px">A modern Arabic display face — strong vertical stems, generous counters, swash-ready. The brand's Arabic voice.</p>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px 12px;margin-top:24px">
-          <div>
-            <p style="font-family:var(--text);font-size:11px;color:var(--lav);line-height:1.3;direction:ltr;text-align:right">Sans Serif</p>
-            <p style="font-family:var(--text);font-size:11px;color:rgba(216,200,243,.6);line-height:1.3;margin-top:2px;direction:ltr;text-align:right">Arabic Display</p>
-          </div>
-          <div>
-            <p style="font-family:var(--text);font-size:11px;color:var(--lav);line-height:1.3;direction:ltr;text-align:right">TypeTogether</p>
-            <p style="font-family:var(--text);font-size:11px;color:rgba(216,200,243,.6);line-height:1.3;margin-top:2px;direction:ltr;text-align:right">Google Fonts · OFL</p>
-          </div>
-        </div>
-      </div>
 
-      <!-- COL 2 · Weight ladder -->
-      <div style="display:flex;flex-direction:column;gap:24px;padding-top:18px;border-left:1px solid var(--hair);padding-left:28px;direction:rtl">
-        <div style="display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;padding-bottom:18px;border-bottom:1px solid var(--hair)">
-          <div style="font-family:var(--ar);font-weight:700;font-size:60px;line-height:1;color:var(--soft)">أب</div>
-          <div style="text-align:left;direction:ltr">
-            <p style="font-family:var(--text);font-size:12px;color:var(--lav);letter-spacing:.04em">Bold · عريض</p>
-            <p style="font-family:var(--text);font-size:12px;color:rgba(216,200,243,.55)">700</p>
-          </div>
+        <div class="ar-weights">
+          <div class="aw"><span class="wspec ar" style="font-weight:800">أب</span><span class="wlab">Bold · عريض · 800</span></div>
+          <div class="aw"><span class="wspec ar" style="font-weight:600">أب</span><span class="wlab">SemiBold · متوسط · 600</span></div>
+          <div class="aw"><span class="wspec ar" style="font-weight:400">أب</span><span class="wlab">Regular · عادي · 400</span></div>
         </div>
-        <div style="display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;padding-bottom:18px;border-bottom:1px solid var(--hair)">
-          <div style="font-family:var(--ar);font-weight:500;font-size:60px;line-height:1;color:var(--soft)">أب</div>
-          <div style="text-align:left;direction:ltr">
-            <p style="font-family:var(--text);font-size:12px;color:var(--lav);letter-spacing:.04em">Medium · متوسط</p>
-            <p style="font-family:var(--text);font-size:12px;color:rgba(216,200,243,.55)">500</p>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;padding-bottom:18px;border-bottom:1px solid var(--hair)">
-          <div style="font-family:var(--ar);font-weight:400;font-size:60px;line-height:1;color:var(--soft)">أب</div>
-          <div style="text-align:left;direction:ltr">
-            <p style="font-family:var(--text);font-size:12px;color:var(--lav);letter-spacing:.04em">Regular · عادي</p>
-            <p style="font-family:var(--text);font-size:12px;color:rgba(216,200,243,.55)">400</p>
-          </div>
-        </div>
-        <div style="margin-top:auto;direction:ltr;text-align:right">
-          <p style="font-family:var(--text);font-size:11px;color:var(--lav);line-height:1.5">Cairo is the UI fallback below 14 px. Pair Arabic and Latin vertically — never inline.</p>
-        </div>
-      </div>
 
-      <!-- COL 1 (RTL left-most = visually last) · Real headline + body + alphabet -->
-      <div style="display:flex;flex-direction:column;justify-content:space-between;padding-top:18px;direction:rtl;text-align:right">
         <div>
-          <h1 style="font-family:var(--ar);font-weight:700;font-size:54px;line-height:1.15;color:var(--soft);margin-bottom:24px">خمسة أيام في إسطنبول. كل شيء جاهز.</h1>
-          <p style="font-family:var(--ar);font-size:15px;line-height:1.85;color:var(--lav);text-align:justify">سادين تورز ترتّب رحلات سفر فاخرة لمن يرفضون الاختيار بين الأناقة والسهولة. كل تفصيلٍ مدبّر قبل أن تطلبه. لا شيء على عجل. لا شيء منسي.</p>
+          <span class="cap mute" style="font-size:10px;letter-spacing:.32em">Pairing rule</span>
+          <p style="font-family:var(--display);font-weight:500;font-size:13px;line-height:1.6;color:var(--soft);margin-top:6px">Pair Zain Mob and Satoshi <strong>vertically</strong> — Arabic above or below Latin, never inline. Cairo remains the UI fallback below 14 px.</p>
         </div>
-        <div style="margin-top:32px;direction:rtl">
-          <p style="font-family:var(--ar);font-weight:500;font-size:30px;line-height:1.5;color:rgba(248,246,252,.85)">ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ</p>
-          <p style="font-family:var(--ar);font-weight:500;font-size:30px;line-height:1.5;color:rgba(248,246,252,.85)">ف ق ك ل م ن ه و ي ء ة ى</p>
-          <p style="font-family:var(--ar);font-weight:500;font-size:30px;line-height:1.5;color:rgba(248,246,252,.85);direction:ltr;text-align:right">٠ ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩</p>
-        </div>
-      </div>
 
+        <div class="ar-foundry">
+          <span>Foundry · Mostafa El Abasiry</span>
+          <span>License · Open · self-hosted</span>
+        </div>
+      </aside>
+
+      <!-- Bottom alphabet specimen -->
+      <div class="ar-alphabet" dir="rtl">
+        <span>ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي ء ة ى</span>
+        <span style="direction:ltr;text-align:right;font-variant-numeric:tabular-nums">٠ ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩</span>
+      </div>
     </div>
 
-    <div class="botbar"><span class="pg">Sadine Tours · Arabic · Alexandria</span><span class="pg pgnum total"></span></div>
+    <div class="botbar"><span class="pg">Sadine Tours · Arabic · Zain Mob</span><span class="pg pgnum total"></span></div>
   </div>
 </section>
 

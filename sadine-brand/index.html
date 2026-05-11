@@ -604,10 +604,20 @@ body[data-lang="fr"] .lang-fr{display:inline}
   display:flex;flex-direction:column;justify-content:space-between;padding:24px;color:var(--soft);
   position:relative;
 }
-.stories .s1{background:radial-gradient(60% 50% at 50% 30%, rgba(245,185,66,.5) 0%, transparent 60%),linear-gradient(180deg, #0a0418 0%, #4B2E83 100%)}
-.stories .s2{background:linear-gradient(180deg, #1a0a36 0%, #C77B3A 100%)}
-.stories .s3{background:var(--purple)}
-.stories .s4{background:linear-gradient(180deg, #2A124F 0%, #7B5BCE 100%)}
+/* Stories — full-bleed photo / video with a darker gradient overlay for text legibility */
+.stories .story{background-color:#15082B;background-size:cover;background-position:center}
+.stories .story::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg, rgba(15,5,33,.55) 0%, rgba(15,5,33,0) 25%, rgba(15,5,33,0) 55%, rgba(15,5,33,.78) 100%);
+}
+.stories .story > *{position:relative;z-index:2}
+.stories .s1{background-image:url('assets/social-marrakech.png')}
+.stories .s2{background:#0a0418}
+.stories .s2 .reel-video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+}
+.stories .s3{background-image:url('assets/social-omrah.jpg')}
+.stories .s4{background-image:url('assets/social-itinerary.jpg')}
 .stories .story .top{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;opacity:.85}
 .stories .story .copy{font-family:var(--display);font-weight:700;font-size:24px;line-height:1.15}
 .stories .story .bot{display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-size:10px;letter-spacing:.3em;text-transform:uppercase;opacity:.85}
@@ -2492,14 +2502,15 @@ html,body{overflow-x:hidden}
         <div class="bot"><span>Plan with us</span><svg class="mark icn icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
       </div>
       <div class="story s2">
+        <video class="reel-video" src="assets/social-reel.mp4" autoplay muted loop playsinline preload="metadata"></video>
         <span class="top">Reel · cinematic</span>
         <span class="copy">From boarding pass<br/>to last sunset.</span>
         <div class="bot"><span>Sadine</span><svg class="mark icn icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
       </div>
       <div class="story s3">
-        <span class="top">Quote</span>
-        <span class="copy gold">The trip<br/>is ready.</span>
-        <div class="bot"><span>—</span><svg class="mark icn icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
+        <span class="top">Story · Pilgrimage</span>
+        <span class="copy">Omrah ·<br/>2026 season.</span>
+        <div class="bot"><span>Book with us</span><svg class="mark icn icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg></div>
       </div>
       <div class="story s4">
         <span class="top">Itinerary teaser</span>

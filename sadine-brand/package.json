@@ -1,0 +1,17 @@
+{
+  "name": "sadine-brand",
+  "version": "1.0.0",
+  "description": "A complete brand book for Sadine Tours: a Tunisian travel agency repositioning into a premium, digital-first travel house.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@napi-rs/canvas": "^1.0.0",
+    "pdfjs-dist": "^5.7.284"
+  }
+}

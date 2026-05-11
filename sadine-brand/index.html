@@ -742,46 +742,39 @@ body[data-lang="fr"] .lang-fr{display:inline}
   background:rgba(0,0,0,.25);min-height:280px;
 }
 .env .lab{position:absolute;top:18px;left:22px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
-.env.storefront{
-  background:
-    radial-gradient(40% 60% at 50% 60%, rgba(123,91,206,.45) 0%, transparent 70%),
-    linear-gradient(180deg, #0a0418 0%, #15082B 100%);
+/* Photographic env panels — full-bleed background image + bottom fade for label legibility */
+.env.photo-airport,
+.env.photo-vehicle{
+  background-color:#15082B;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  padding:0;
+  min-height:340px;
 }
-.env.storefront .glass{
-  width:80%;height:75%;background:linear-gradient(180deg, rgba(216,200,243,.06) 0%, rgba(75,46,131,.25) 100%);
-  border:1px solid var(--hair-strong);border-radius:6px;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 0 80px rgba(123,91,206,.3) inset;
+.env.photo-airport{background-image:linear-gradient(180deg, rgba(15,5,33,0) 55%, rgba(15,5,33,.75) 100%), url('assets/app-airport.jpg')}
+.env.photo-vehicle{background-image:linear-gradient(180deg, rgba(15,5,33,0) 55%, rgba(15,5,33,.75) 100%), url('assets/app-vehicle.jpg')}
+.env.photo-airport .lab,
+.env.photo-vehicle .lab{
+  text-shadow:0 1px 12px rgba(15,5,33,.7);
+  background:rgba(15,5,33,.55);
+  padding:6px 12px;border-radius:99px;
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.12);
+  top:20px;left:24px;
 }
-.env.storefront .glass .wm{width:55%}
-.env.vehicle{
-  background:linear-gradient(180deg, #0a0418 0%, #1B0A36 100%);
-}
-.env.vehicle .car{
-  width:90%;height:55%;background:linear-gradient(180deg, #2A124F 0%, #1B0A36 100%);
-  border-radius:90px 40px 18px 18px;
-  position:relative;display:flex;align-items:center;justify-content:flex-end;padding-right:48px;
-  box-shadow:0 20px 40px -10px rgba(0,0,0,.6);
-}
-.env.vehicle .car::before, .env.vehicle .car::after{
-  content:"";position:absolute;bottom:-22px;width:60px;height:60px;border-radius:50%;background:#0a0418;border:6px solid #15082B;
-}
-.env.vehicle .car::before{left:14%}
-.env.vehicle .car::after{right:14%}
-.env.vehicle .car .wm{width:30%}
 
 /* Uniform / pin */
 .uniform-card{
   background:linear-gradient(160deg,#2A124F 0%, #1B0A36 100%);
   border-radius:18px;padding:40px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;border:1px solid var(--hair);min-height:280px
 }
-.uniform-card .pin{
-  width:90px;height:90px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%, #FFE89A 0%, #F5B942 50%, #B07F1B 100%);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 10px 30px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.1) inset;
+.uniform-card .pin-photo{
+  width:180px;height:180px;border-radius:50%;
+  object-fit:cover;object-position:center;
+  display:block;
+  box-shadow:0 18px 40px -10px rgba(0,0,0,.6), 0 0 0 1px rgba(245,185,66,.25) inset;
 }
-.uniform-card .pin .icn{width:55%}
-.uniform-card .pin .icn svg .cls-1{fill:#3D2700 !important}
 .uniform-card .lab{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
 
 /* Closing */
@@ -2654,26 +2647,18 @@ html,body{overflow-x:hidden}
     </div>
 
     <div class="environments" style="margin-top:32px">
-      <div class="env storefront">
-        <span class="lab">A · Flagship · Tunis</span>
-        <div class="glass">
-          <svg class="wm mark-default" viewBox="0 0 1180.44 377.17"><use href="#sadine-mark"/></svg>
-        </div>
+      <div class="env storefront photo-airport">
+        <span class="lab">A · Airport · OOH</span>
       </div>
-      <div class="env vehicle">
+      <div class="env vehicle photo-vehicle">
         <span class="lab">B · Vehicle · Matte Plum</span>
-        <div class="car">
-          <svg class="wm mark-mono-white" viewBox="0 0 1180.44 377.17"><use href="#sadine-mark"/></svg>
-        </div>
       </div>
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px">
       <div class="uniform-card">
         <span class="lab">C · Lapel pin</span>
-        <div class="pin">
-          <svg class="icon icn" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
-        </div>
+        <img class="pin-photo" src="assets/app-pin.jpg" alt="Sadine gold lapel pin" />
         <p class="body" style="text-align:center;font-size:13px;max-width:260px">Worn on a Midnight-Plum blazer. Replaces the name tag.</p>
       </div>
       <div class="card" style="min-height:auto;justify-content:center">

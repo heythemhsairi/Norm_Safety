@@ -684,7 +684,19 @@ body[data-lang="fr"] .lang-fr{display:inline}
 .sign .name{font-family:var(--display);font-weight:700;font-size:56px;line-height:1.02;letter-spacing:-.01em}
 .sign .meta{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav)}
 
-/* App + phone */
+/* App phone photo — transparent PNG renders directly with a soft
+   purple glow + plum-deep drop-shadow to lift it off the slide */
+.phone-photo{
+  width:auto;
+  max-width:100%;
+  max-height:560px;
+  display:block;
+  filter:
+    drop-shadow(0 0 40px rgba(123,91,206,.35))
+    drop-shadow(0 28px 48px rgba(0,0,0,.55));
+}
+
+/* App + phone (legacy CSS mockup; kept for any other reference) */
 .phone{
   width:280px;aspect-ratio:9/19;border-radius:38px;
   background:#0a0418;border:8px solid #15082B;
@@ -2705,26 +2717,7 @@ html,body{overflow-x:hidden}
 
       <div class="col" style="flex:1;align-items:center;gap:24px">
         <span class="cap mute" style="align-self:flex-start">App · Booking flow</span>
-        <div class="phone">
-          <span class="notch"></span>
-          <div class="screen">
-            <div class="top"><span>22:40</span><span>···</span></div>
-            <span class="pill">Concierge · step 03 / 05</span>
-            <h2>When would you like to leave?</h2>
-            <div class="card">
-              <span class="lab">Departure</span>
-              <span class="val">12 May · 19:30</span>
-            </div>
-            <div class="card gold-row">
-              <span class="lab">Return</span>
-              <span class="val">17 May · 14:10</span>
-            </div>
-            <div class="card">
-              <div class="row"><span class="lab">Class</span><span class="val">Suite · 02A</span></div>
-            </div>
-            <div class="cta">Continue →</div>
-          </div>
-        </div>
+        <img class="phone-photo" src="assets/app-phone.png" alt="Sadine Tours mobile app · concierge step 3 of 5" />
 
         <div style="display:flex;gap:18px;align-items:center;justify-content:center;width:100%">
           <div class="appicon">

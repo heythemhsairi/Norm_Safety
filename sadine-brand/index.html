@@ -749,6 +749,17 @@ body[data-lang="fr"] .lang-fr{display:inline}
   background:rgba(0,0,0,.25);min-height:280px;
 }
 .env .lab{position:absolute;top:18px;left:22px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+/* Boarding-pass photo — drop-in mockup image, slight rotation for "found on a desk" feel */
+.bp-photo{
+  width:100%;
+  max-width:760px;
+  height:auto;
+  display:block;
+  border-radius:14px;
+  transform:rotate(-1.2deg);
+  filter:drop-shadow(0 30px 60px rgba(0,0,0,.55));
+}
+
 /* Full-slide photographic background (luggage + pickup sign) — image carries the layout */
 .slide.slide-bg-luggage{
   background:
@@ -2535,26 +2546,7 @@ html,body{overflow-x:hidden}
       </div>
 
       <div class="center">
-        <div class="bp" style="width:760px;max-width:100%;transform:rotate(-1.2deg)">
-          <div class="left">
-            <svg class="icon icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
-            <div>
-              <p class="code">Departure</p>
-              <p class="dest">Istanbul</p>
-            </div>
-            <p class="code">Sadine · IST · 22:40</p>
-          </div>
-          <div class="perf"></div>
-          <div class="right">
-            <div class="field"><span class="l">Passenger</span><span class="v">Mr. A. Ben Aïcha</span></div>
-            <div class="field"><span class="l">Class</span><span class="v">Suite · 02A</span></div>
-            <div class="field"><span class="l">From</span><span class="v">Tunis · TUN</span></div>
-            <div class="field"><span class="l">To</span><span class="v">Istanbul · IST</span></div>
-            <div class="gold-strip"></div>
-            <div class="field"><span class="l">Date</span><span class="v">12 May · 19:30</span></div>
-            <div class="field"><span class="l">Reference</span><span class="v">SDN · 1042</span></div>
-          </div>
-        </div>
+        <img class="bp-photo" src="assets/boarding.png" alt="Sadine Tours boarding pass mockup" />
       </div>
     </div>
 

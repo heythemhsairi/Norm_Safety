@@ -689,11 +689,11 @@ body[data-lang="fr"] .lang-fr{display:inline}
 .phone-photo{
   width:auto;
   max-width:100%;
-  max-height:560px;
+  max-height:380px;
   display:block;
   filter:
     drop-shadow(0 0 40px rgba(123,91,206,.35))
-    drop-shadow(0 28px 48px rgba(0,0,0,.55));
+    drop-shadow(0 22px 36px rgba(0,0,0,.55));
 }
 
 /* App + phone (legacy CSS mockup; kept for any other reference) */
@@ -745,7 +745,22 @@ body[data-lang="fr"] .lang-fr{display:inline}
 .browser .bar .dot{width:10px;height:10px;border-radius:50%}
 .browser .bar .d1{background:#ff5f57}.browser .bar .d2{background:#febc2e}.browser .bar .d3{background:#28c840}
 .browser .bar .url{flex:1;background:#0a0418;border:1px solid var(--hair);border-radius:99px;padding:6px 16px;font-family:var(--text);font-size:11px;color:var(--lav);text-align:center}
-.browser .browser-photo{width:100%;height:auto;display:block}
+.browser .browser-photo{width:100%;height:auto;display:block;max-height:300px;object-fit:cover;object-position:top center}
+
+/* Digital slide — two-column grid sized so both columns fit the
+   remaining frame height without overflowing past the footer */
+.digital-grid{
+  margin-top:16px;flex:1;min-height:0;
+  display:grid;grid-template-columns:1.55fr 1fr;gap:28px;align-items:start;
+}
+.digital-col{min-height:0}
+.appicon-row{
+  display:flex;gap:14px;align-items:center;justify-content:center;width:100%;
+  padding:14px 18px;border:1px solid var(--hair);border-radius:14px;
+  background:rgba(255,255,255,.03);
+}
+.appicon-row .appicon{width:72px;height:72px;border-radius:18px;box-shadow:0 10px 24px -8px rgba(0,0,0,.5)}
+.appicon-row .appicon .ic{width:54%}
 .browser .hero{
   padding:56px;
   background:
@@ -2688,13 +2703,13 @@ html,body{overflow-x:hidden}
       <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="margin-top:24px">
+    <div style="margin-top:20px">
       <h2 class="h2">A digital house, not a digital shop.</h2>
-      <p class="lead" style="max-width:740px;margin-top:8px">One question per screen. Keyboard-friendly. A persistent <em>Talk to a human</em> link at the top — discretion is part of the product.</p>
+      <p class="lead" style="max-width:740px;margin-top:6px;font-size:15px">One question per screen. Keyboard-friendly. A persistent <em>Talk to a human</em> link at the top — discretion is part of the product.</p>
     </div>
 
-    <div class="row" style="margin-top:24px;flex:1;align-items:stretch;gap:32px">
-      <div class="col" style="flex:1.6;gap:18px">
+    <div class="digital-grid">
+      <div class="col digital-col" style="gap:14px">
         <span class="cap mute">Website · Hero</span>
         <div class="browser">
           <div class="bar">
@@ -2704,30 +2719,32 @@ html,body{overflow-x:hidden}
           <img class="browser-photo" src="assets/website-banner.jpg" alt="Sadine Tours website hero" />
         </div>
 
-        <div class="card" style="min-height:auto">
+        <div class="card" style="min-height:auto;padding:18px 22px;gap:6px">
           <span class="num">Website architecture</span>
-          <p class="body"><span style="color:var(--soft)">Hero</span> · 8-second cinematic video, single line, single CTA.</p>
-          <p class="body"><span style="color:var(--soft)">The Promise</span> · three pillars — Plan · Travel · Return.</p>
-          <p class="body"><span style="color:var(--soft)">Featured Destinations</span> · six tiles, soft hover lift.</p>
-          <p class="body"><span style="color:var(--soft)">The Sadine Method</span> · Discover → Design → Depart → Decompress.</p>
-          <p class="body"><span style="color:var(--soft)">Stories</span> · editorial blog cards (real client journeys).</p>
-          <p class="body"><span style="color:var(--soft)">Concierge</span> · a single conversational form.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;margin-top:4px">
+            <p class="body" style="font-size:12px;line-height:1.45;margin:0"><span style="color:var(--soft)">Hero</span> · 8-sec cinematic video, single CTA.</p>
+            <p class="body" style="font-size:12px;line-height:1.45;margin:0"><span style="color:var(--soft)">The Promise</span> · Plan · Travel · Return.</p>
+            <p class="body" style="font-size:12px;line-height:1.45;margin:0"><span style="color:var(--soft)">Destinations</span> · six tiles, hover lift.</p>
+            <p class="body" style="font-size:12px;line-height:1.45;margin:0"><span style="color:var(--soft)">The Method</span> · Discover → Decompress.</p>
+            <p class="body" style="font-size:12px;line-height:1.45;margin:0"><span style="color:var(--soft)">Stories</span> · editorial blog cards.</p>
+            <p class="body" style="font-size:12px;line-height:1.45;margin:0"><span style="color:var(--soft)">Concierge</span> · one conversational form.</p>
+          </div>
         </div>
       </div>
 
-      <div class="col" style="flex:1;align-items:center;gap:24px">
+      <div class="col digital-col" style="align-items:center;gap:18px">
         <span class="cap mute" style="align-self:flex-start">App · Booking flow</span>
         <img class="phone-photo" src="assets/app-phone.png" alt="Sadine Tours mobile app · concierge step 3 of 5" />
 
-        <div style="display:flex;gap:18px;align-items:center;justify-content:center;width:100%">
+        <div class="appicon-row">
           <div class="appicon">
             <svg class="ic icon-gold" viewBox="0 0 74.83 74.1"><use href="#sadine-icon"/></svg>
           </div>
-          <div class="col" style="gap:6px">
-            <span class="cap mute">App icon</span>
-            <span class="kbd white">160 × 160 · radius 36</span>
-            <span class="cap mute" style="margin-top:8px">Favicon</span>
-            <span class="kbd white">Bird only</span>
+          <div class="col" style="gap:4px">
+            <span class="cap mute" style="font-size:9px">App icon</span>
+            <span class="kbd white" style="font-size:10px">160 × 160 · r 36</span>
+            <span class="cap mute" style="font-size:9px;margin-top:4px">Favicon</span>
+            <span class="kbd white" style="font-size:10px">Bird only</span>
           </div>
         </div>
       </div>

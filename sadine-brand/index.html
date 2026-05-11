@@ -760,11 +760,15 @@ body[data-lang="fr"] .lang-fr{display:inline}
   filter:drop-shadow(0 30px 60px rgba(0,0,0,.55));
 }
 
-/* Luggage tag + pickup sign photo — sits centered with a soft shadow */
+/* Luggage tag + pickup sign photo — sits centered, scales to fit
+   the remaining frame height without overflowing the slide.
+   The flex parent has min-height:0 + overflow:hidden so the image's
+   max-height:100% actually constrains correctly. */
 .luggage-photo{
   max-width:100%;
   max-height:100%;
   width:auto;height:auto;
+  object-fit:contain;
   display:block;
   border-radius:14px;
   filter:drop-shadow(0 30px 60px rgba(0,0,0,.55));
@@ -2600,12 +2604,12 @@ html,body{overflow-x:hidden}
       <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
-      <h2 class="h1">The objects you<br/>see at the airport.</h2>
+    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h2">The objects you<br/>see at the airport.</h2>
       <p class="lead" style="max-width:380px">A leather-strapped luggage tag travelling alongside the suitcase. A leather-portfolio pickup sign waiting in arrivals. Both wordless from a distance, instantly recognized up close.</p>
     </div>
 
-    <div style="margin-top:32px;flex:1;display:flex;align-items:center;justify-content:center">
+    <div style="margin-top:24px;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden">
       <img class="luggage-photo" src="assets/app-luggage-pickup.jpg" alt="Sadine Tours luggage tag and pickup sign" />
     </div>
 

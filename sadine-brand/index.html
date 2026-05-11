@@ -455,11 +455,11 @@ body[data-lang="fr"] .lang-fr{display:inline}
 .misuse .m .lab{position:absolute;top:16px;left:18px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#ff6b6b;z-index:3}
 .misuse .m .wm{width:55%;position:relative;z-index:2}
 .misuse .m.stretched .wm{transform:scaleX(1.6) scaleY(.7)}
-.misuse .m.recolor svg .cls-2{fill:#43e08e !important}
 .misuse .m.busy{background:linear-gradient(135deg,#ff6b6b 0%,#4ecdc4 50%,#ffd93d 100%)}
 .misuse .m.rotated .wm{transform:rotate(-12deg)}
-.misuse .m.outlined svg .cls-2{fill:transparent !important;stroke:#fff;stroke-width:6}
 .misuse .m.shadow{filter:drop-shadow(0 6px 0 rgba(0,0,0,.6))}
+/* .recolor and .outlined now load dedicated SVG assets directly (assets/logo-misuse-*.svg)
+   so no CSS color hack is needed — the bad colors / stroke are baked into those files. */
 
 /* Color palette */
 .palette{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:16px;flex:1}
@@ -1781,7 +1781,7 @@ html,body{overflow-x:hidden}
       </div>
       <div class="m recolor" style="padding:48px">
         <span class="lab">02 · Do not recolor</span>
-        <svg class="wm mark-default" viewBox="0 0 1180.44 377.17"><use href="#sadine-mark"/></svg>
+        <img class="wm" src="assets/logo-misuse-recolor.svg" alt="" />
         <span class="x-overlay"></span>
       </div>
       <div class="m busy" style="padding:48px">
@@ -1816,7 +1816,7 @@ html,body{overflow-x:hidden}
       </div>
       <div class="m outlined" style="padding:48px">
         <span class="lab">05 · Do not outline</span>
-        <svg class="wm" viewBox="0 0 1180.44 377.17"><use href="#sadine-mark"/></svg>
+        <img class="wm" src="assets/logo-misuse-outline.svg" alt="" />
         <span class="x-overlay"></span>
       </div>
       <div class="m shadow" style="padding:48px">

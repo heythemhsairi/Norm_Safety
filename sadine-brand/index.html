@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;700&family=Cairo:wght@400;500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;700&family=Cairo:wght@400;500;700&family=Italianno&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <style>
 :root{
@@ -234,7 +234,7 @@ a{color:inherit}
   align-self:center;
   display:flex;flex-direction:column;align-items:center;
   text-align:center;
-  max-width:1100px;
+  width:100%;
   gap:22px;
 }
 .cover-hero .cover-eyebrow{
@@ -251,10 +251,23 @@ a{color:inherit}
 }
 .cover-hero .cover-h{
   font-family:var(--display);font-weight:700;
-  font-size:218px;line-height:.86;letter-spacing:-.045em;
+  font-size:196px;line-height:1;letter-spacing:-.04em;
   color:var(--soft);
   text-shadow:0 8px 48px rgba(15,5,33,.55), 0 1px 2px rgba(15,5,33,.6);
   margin:0;
+  white-space:nowrap;
+  display:flex;align-items:baseline;gap:.12em;justify-content:center;
+}
+.cover-hero .cover-h .script{
+  font-family:'Italianno', 'Sacramento', cursive;
+  font-weight:400;font-style:normal;
+  font-size:1.55em;
+  letter-spacing:.002em;
+  line-height:1;
+  color:var(--gold);
+  text-shadow:0 6px 28px rgba(245,185,66,.18), 0 1px 2px rgba(15,5,33,.7);
+  /* nudge the script baseline up slightly so its descender doesn't drop the title's bottom edge */
+  transform:translateY(.06em);
 }
 .cover-hero .cover-sub{
   font-family:var(--display);font-weight:500;font-size:14px;
@@ -987,7 +1000,7 @@ html,body{overflow-x:hidden}
 
     <div class="cover-title">
       <span class="cover-eyebrow">Volume 01 · Strategy · Identity · Guidelines</span>
-      <h1 class="cover-h">Brand<br/>Book.</h1>
+      <h1 class="cover-h">Brand <span class="script">Book.</span></h1>
       <span class="cover-sub">Forty-one pages · One single voice</span>
     </div>
 

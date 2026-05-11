@@ -437,6 +437,12 @@ body[data-lang="fr"] .lang-fr{display:inline}
 .clear{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;flex:1}
 .clear .stage{position:relative;border:1px solid var(--hair);border-radius:16px;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;padding:72px}
 .clear .stage .wm{width:80%;max-width:520px;position:relative;z-index:2}
+.clear .stage .clear-space-svg{
+  max-width:100%;max-height:100%;
+  width:auto;height:auto;
+  display:block;object-fit:contain;
+  position:relative;z-index:2;
+}
 .clear .stage .x-marks{position:absolute;inset:36px;border:1px dashed rgba(245,185,66,.5);border-radius:8px}
 .clear .stage .x-corners{position:absolute;width:32px;height:32px;border:1px solid var(--gold)}
 .clear .stage .xc1{top:36px;left:36px;border-right:0;border-bottom:0}
@@ -2003,12 +2009,7 @@ html,body{overflow-x:hidden}
 
     <div class="clear" style="margin-top:32px">
       <div class="stage">
-        <div class="x-marks"></div>
-        <span class="x-corners xc1"></span><span class="x-corners xc2"></span>
-        <span class="x-corners xc3"></span><span class="x-corners xc4"></span>
-        <span class="x-label t">x — clear space</span>
-        <span class="x-label l">x — clear space</span>
-        <svg class="wm mark-default" viewBox="0 0 1180.44 377.17"><use href="#sadine-mark"/></svg>
+        <img class="clear-space-svg" src="assets/clear-space.svg" alt="Sadine wordmark with clear-space x-zone diagram" />
       </div>
 
       <div class="min-list">

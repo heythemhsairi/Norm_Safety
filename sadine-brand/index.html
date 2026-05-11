@@ -768,10 +768,9 @@ body[data-lang="fr"] .lang-fr{display:inline}
   filter:drop-shadow(0 24px 40px rgba(0,0,0,.55));
   transition:transform .55s cubic-bezier(.22,1,.36,1);
 }
-.bc-pair-photo .bc-card embed{
-  display:block;border:0;background:transparent;
-  width:100%;height:112%;            /* overshoot by 12% so the PDF
-                                        viewer's status strip is hidden */
+.bc-pair-photo .bc-card .pdf-canvas{
+  display:block;width:100%;height:100%;
+  background:transparent;
 }
 .bc-pair-photo .bc-card:first-child{transform:rotate(-2.2deg) translateY(6px)}
 .bc-pair-photo .bc-card:last-child {transform:rotate(2.2deg)  translateY(-6px)}
@@ -2606,10 +2605,10 @@ html,body{overflow-x:hidden}
       <div class="center" style="gap:28px">
         <div class="bc-pair-photo">
           <div class="bc-card">
-            <embed src="assets/business-card-front.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" type="application/pdf" title="Sadine business card · front" />
+            <canvas class="pdf-canvas" data-pdf="assets/business-card-front.pdf" aria-label="Sadine business card · front"></canvas>
           </div>
           <div class="bc-card">
-            <embed src="assets/business-card-back.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"  type="application/pdf" title="Sadine business card · reverse" />
+            <canvas class="pdf-canvas" data-pdf="assets/business-card-back.pdf"  aria-label="Sadine business card · reverse"></canvas>
           </div>
         </div>
       </div>
@@ -3004,6 +3003,43 @@ html,body{overflow-x:hidden}
   /* ───────── 6 · Click slide indicator to jump back to top ───────── */
   indicator.style.cursor = 'pointer';
   indicator.addEventListener('click', () => scrollToSlide(0));
+
+  /* ───────── 7 · Render any .pdf-canvas elements via PDF.js (no browser chrome) ───────── */
+  const pdfCanvases = document.querySelectorAll('canvas.pdf-canvas[data-pdf]');
+  if (pdfCanvases.length){
+    const PDFJS_VER = '4.6.82';
+    const s = document.createElement('script');
+    s.src = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${PDFJS_VER}/legacy/build/pdf.min.mjs`;
+    s.type = 'module';
+    s.onload = () => {/* module loads via dynamic import below */};
+    /* Use dynamic import so we can grab the namespace */
+    (async () => {
+      try{
+        const pdfjs = await import(`https://cdn.jsdelivr.net/npm/pdfjs-dist@${PDFJS_VER}/legacy/build/pdf.min.mjs`);
+        pdfjs.GlobalWorkerOptions.workerSrc =
+          `https://cdn.jsdelivr.net/npm/pdfjs-dist@${PDFJS_VER}/legacy/build/pdf.worker.min.mjs`;
+        const dpr = Math.max(window.devicePixelRatio || 1, 2);
+        for (const canvas of pdfCanvases){
+          const url = canvas.getAttribute('data-pdf');
+          try{
+            const doc = await pdfjs.getDocument({ url, useSystemFonts:true }).promise;
+            const page = await doc.getPage(1);
+            const cssRect = canvas.getBoundingClientRect();
+            /* If canvas hasn't rendered (display:none / 0 size), wait & retry later */
+            const targetCssWidth = cssRect.width || canvas.parentElement.clientWidth || 280;
+            const viewport0 = page.getViewport({ scale: 1 });
+            const scale = (targetCssWidth * dpr) / viewport0.width;
+            const viewport = page.getViewport({ scale });
+            canvas.width  = Math.ceil(viewport.width);
+            canvas.height = Math.ceil(viewport.height);
+            canvas.style.aspectRatio = `${viewport0.width} / ${viewport0.height}`;
+            const ctx = canvas.getContext('2d');
+            await page.render({ canvasContext: ctx, viewport }).promise;
+          } catch(err){ console.warn('PDF render failed for', url, err); }
+        }
+      } catch(err){ console.warn('PDF.js load failed', err); }
+    })();
+  }
 })();
 </script>
 

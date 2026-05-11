@@ -749,6 +749,18 @@ body[data-lang="fr"] .lang-fr{display:inline}
   background:rgba(0,0,0,.25);min-height:280px;
 }
 .env .lab{position:absolute;top:18px;left:22px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+/* Full-slide photographic background (luggage + pickup sign) — image carries the layout */
+.slide.slide-bg-luggage{
+  background:
+    linear-gradient(180deg, rgba(15,5,33,.45) 0%, rgba(15,5,33,0) 14%, rgba(15,5,33,0) 84%, rgba(15,5,33,.7) 100%),
+    url('assets/app-luggage-pickup.jpg') center/cover no-repeat,
+    #15082B !important;
+}
+.slide.slide-bg-luggage .topbar .cap,
+.slide.slide-bg-luggage .botbar .pg{
+  text-shadow:0 1px 12px rgba(15,5,33,.7);
+}
+
 /* Photographic env panels — full-bleed background image + bottom fade for label legibility */
 .env.photo-airport,
 .env.photo-vehicle{
@@ -2591,39 +2603,11 @@ html,body{overflow-x:hidden}
 </section>
 
 <!-- ─────────── 35 · LUGGAGE TAG & PICKUP SIGNAGE ─────────── -->
-<section id="s-38" class="slide dark">
+<section id="s-38" class="slide dark slide-bg-luggage">
   <div class="frame">
     <div class="topbar">
       <div class="id"><span class="dot"></span><span class="cap mute">Applications · Luggage Tag &amp; Pickup Sign</span></div>
       <span class="cap mute pgnum"></span>
-    </div>
-
-    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
-      <h2 class="h1">The objects you<br/>see at the airport.</h2>
-      <p class="lead" style="max-width:380px">A leather-strapped luggage tag travelling alongside the suitcase. A leather-portfolio pickup sign waiting in arrivals. Both wordless from a distance, instantly recognized up close.</p>
-    </div>
-
-    <div style="margin-top:48px;flex:1;display:grid;grid-template-columns:1fr 1.6fr;gap:64px;align-items:center">
-      <div class="center" style="gap:24px">
-        <div class="tag" style="width:240px;height:360px;transform:rotate(-3deg)">
-          <svg class="icon icon-gold icn" viewBox="0 0 74.83 74.1" style="width:54px"><use href="#sadine-icon"/></svg>
-          <span class="lab">Sadine · Luggage</span>
-          <span class="num">SDN · 1042</span>
-        </div>
-        <span class="cap mute">Luggage tag · 60 × 110 mm</span>
-      </div>
-
-      <div class="center" style="gap:24px">
-        <div class="sign" style="width:520px;transform:rotate(1.2deg)">
-          <div class="top">
-            <span class="meta">Tunis Airport · Pickup</span>
-            <svg class="icon icon-gold icn" viewBox="0 0 74.83 74.1" style="width:36px"><use href="#sadine-icon"/></svg>
-          </div>
-          <span class="name">Mr. Ben Aïcha</span>
-          <span class="meta">Sadine Tours · Suite 02A · 22:40</span>
-        </div>
-        <span class="cap mute">Pickup signage · A3 · held in leather portfolio</span>
-      </div>
     </div>
 
     <div class="botbar"><span class="pg">Sadine Tours · Travel Touchpoints</span><span class="pg pgnum total"></span></div>

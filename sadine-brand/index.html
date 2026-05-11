@@ -543,6 +543,45 @@ body[data-lang="fr"] .lang-fr{display:inline}
 .weights .w small{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav);float:right;margin-top:14px}
 .weights .w.man small,.weights .w.ar small{font-family:var(--display)}
 
+/* Differentiation table — compact editorial layout that fits the safe area */
+.diff-table-card{
+  margin-top:24px;flex:1;min-height:auto;padding:0;
+  background:rgba(0,0,0,.28);overflow:hidden;
+  display:flex;
+}
+.diff-table{
+  width:100%;border-collapse:collapse;
+  font-family:var(--display);
+  table-layout:fixed;
+}
+.diff-table th,
+.diff-table td{
+  text-align:left;padding:12px 22px;
+  font-size:13px;line-height:1.35;
+  vertical-align:middle;
+}
+.diff-table thead tr{background:rgba(0,0,0,.35)}
+.diff-table th{
+  font-weight:500;font-size:10px;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--lav);
+  padding:14px 22px;
+}
+.diff-table th.th-gold{color:var(--gold)}
+.diff-table tbody td{color:var(--soft)}
+.diff-table tbody tr{border-top:1px solid var(--hair)}
+.diff-table .td-dim{color:var(--lav)}
+.diff-table .td-gold{color:var(--gold)}
+/* First column narrower than the other three so the gold-emphasised
+   Sadine column gets the breathing room it deserves */
+.diff-table th:first-child,
+.diff-table td:first-child{width:18%}
+.diff-table th:nth-child(2),
+.diff-table td:nth-child(2),
+.diff-table th:nth-child(3),
+.diff-table td:nth-child(3){width:22%}
+.diff-table th:last-child,
+.diff-table td:last-child{width:38%}
+
 /* ─────────── Creative type pages: anatomy / magazine / arabic-hero ─────────── */
 
 /* SATOSHI — anatomy specimen with callouts */
@@ -1840,29 +1879,29 @@ html,body{overflow-x:hidden}
       <span class="cap mute pgnum"></span>
     </div>
 
-    <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
-      <h2 class="h1">The defensible<br/>space is the<br/>last row.</h2>
-      <p class="lead" style="max-width:380px">Across seven dimensions, the only one of three competitors that owns a brand is us. Pricing isn't the moat — taste and care are.</p>
+    <div style="margin-top:20px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px">
+      <h2 class="h2">The defensible space is the last row.</h2>
+      <p class="lead" style="max-width:360px;font-size:14.5px">Across seven dimensions, the only one of three competitors that owns a brand is us. Pricing isn't the moat — taste and care are.</p>
     </div>
 
-    <div class="card" style="margin-top:36px;flex:1;min-height:auto;padding:0;background:rgba(0,0,0,.28);overflow:hidden">
-      <table style="width:100%;border-collapse:collapse;font-family:var(--display);font-size:13px">
+    <div class="card diff-table-card">
+      <table class="diff-table">
         <thead>
-          <tr style="background:rgba(0,0,0,.35)">
-            <th style="text-align:left;padding:18px 22px;font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav)">Dimension</th>
-            <th style="text-align:left;padding:18px 22px;font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav)">Old-school agency</th>
-            <th style="text-align:left;padding:18px 22px;font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--lav)">Online aggregator</th>
-            <th style="text-align:left;padding:18px 22px;font-weight:500;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)">Sadine Tours</th>
+          <tr>
+            <th>Dimension</th>
+            <th>Old-school agency</th>
+            <th>Online aggregator</th>
+            <th class="th-gold">Sadine Tours</th>
           </tr>
         </thead>
-        <tbody style="color:var(--soft)">
-          <tr style="border-top:1px solid var(--hair)"><td style="padding:14px 22px;color:var(--lav)">Channel</td><td style="padding:14px 22px">Walk-in shop</td><td style="padding:14px 22px">Web booking engine</td><td style="padding:14px 22px;color:var(--gold)">Concierge + app + boutique</td></tr>
-          <tr style="border-top:1px solid var(--hair)"><td style="padding:14px 22px;color:var(--lav)">Tone</td><td style="padding:14px 22px">Transactional</td><td style="padding:14px 22px">Algorithmic</td><td style="padding:14px 22px;color:var(--gold)">Hosted</td></tr>
-          <tr style="border-top:1px solid var(--hair)"><td style="padding:14px 22px;color:var(--lav)">Aesthetic</td><td style="padding:14px 22px">Crowded</td><td style="padding:14px 22px">Clinical</td><td style="padding:14px 22px;color:var(--gold)">Cinematic</td></tr>
-          <tr style="border-top:1px solid var(--hair)"><td style="padding:14px 22px;color:var(--lav)">Pricing</td><td style="padding:14px 22px">Lowest</td><td style="padding:14px 22px">Variable</td><td style="padding:14px 22px;color:var(--gold)">Transparent premium</td></tr>
-          <tr style="border-top:1px solid var(--hair)"><td style="padding:14px 22px;color:var(--lav)">After booking</td><td style="padding:14px 22px">Silent</td><td style="padding:14px 22px">Email blasts</td><td style="padding:14px 22px;color:var(--gold)">Designed follow-up</td></tr>
-          <tr style="border-top:1px solid var(--hair)"><td style="padding:14px 22px;color:var(--lav)">Failure handling</td><td style="padding:14px 22px">"Call airline"</td><td style="padding:14px 22px">Self-service portal</td><td style="padding:14px 22px;color:var(--gold)">Already moved</td></tr>
-          <tr style="border-top:1px solid var(--hair)"><td style="padding:14px 22px;color:var(--lav)">Brand asset</td><td style="padding:14px 22px">Logo on a pen</td><td style="padding:14px 22px">None</td><td style="padding:14px 22px;color:var(--gold)">A complete identity</td></tr>
+        <tbody>
+          <tr><td class="td-dim">Channel</td><td>Walk-in shop</td><td>Web booking engine</td><td class="td-gold">Concierge + app + boutique</td></tr>
+          <tr><td class="td-dim">Tone</td><td>Transactional</td><td>Algorithmic</td><td class="td-gold">Hosted</td></tr>
+          <tr><td class="td-dim">Aesthetic</td><td>Crowded</td><td>Clinical</td><td class="td-gold">Cinematic</td></tr>
+          <tr><td class="td-dim">Pricing</td><td>Lowest</td><td>Variable</td><td class="td-gold">Transparent premium</td></tr>
+          <tr><td class="td-dim">After booking</td><td>Silent</td><td>Email blasts</td><td class="td-gold">Designed follow-up</td></tr>
+          <tr><td class="td-dim">Failure handling</td><td>"Call airline"</td><td>Self-service portal</td><td class="td-gold">Already moved</td></tr>
+          <tr><td class="td-dim">Brand asset</td><td>Logo on a pen</td><td>None</td><td class="td-gold">A complete identity</td></tr>
         </tbody>
       </table>
     </div>
@@ -2981,35 +3020,19 @@ html,body{overflow-x:hidden}
     slides.forEach(s => s.classList.add('in-view'));
   }
 
-  /* ───────── 3 · Floating progress bar + slide indicator + language pill ───────── */
+  /* ───────── 3 · Floating progress bar ───────── */
   const progress = document.createElement('div');
   progress.className = 'nav-progress';
   progress.setAttribute('aria-hidden', 'true');
   document.body.appendChild(progress);
 
-  const totalStr = String(slides.length).padStart(3, '0');
-  const indicator = document.createElement('div');
-  indicator.className = 'slide-indicator';
-  indicator.setAttribute('aria-hidden', 'true');
-  indicator.innerHTML =
-    '<span class="dot"></span>' +
-    '<span class="cur">001</span>' +
-    '<span class="sep">/</span>' +
-    '<span class="tot">' + totalStr + '</span>';
-  document.body.appendChild(indicator);
-  const indCur = indicator.querySelector('.cur');
+  /* (Removed: the bottom-right slide-indicator chip and the EN/FR pill —
+     they were appearing on every slide. The cover's EN/FR picker in the
+     topbar is the single source of language switching now.) */
+  const indicator = { querySelector(){ return { textContent:'' } } }; // no-op stub
+  const indCur = { textContent:'' };
 
-  /* Floating language pill — always reachable, mirrors the cover picker */
-  const langPill = document.createElement('div');
-  langPill.className = 'lang-pill';
-  langPill.setAttribute('aria-label', 'Language');
-  langPill.innerHTML =
-    '<button type="button" class="lang-btn" data-set-lang="en">EN</button>' +
-    '<span class="lang-sep">·</span>' +
-    '<button type="button" class="lang-btn" data-set-lang="fr">FR</button>';
-  document.body.appendChild(langPill);
-
-  /* Apply the initial language NOW that all buttons exist in the DOM */
+  /* Apply the initial language NOW that the cover buttons exist in the DOM */
   setLang(initial);
 
   let lastCurrent = 1;
@@ -3071,9 +3094,7 @@ html,body{overflow-x:hidden}
     }
   });
 
-  /* ───────── 6 · Click slide indicator to jump back to top ───────── */
-  indicator.style.cursor = 'pointer';
-  indicator.addEventListener('click', () => scrollToSlide(0));
+  /* ───────── 6 · (Removed: click slide indicator to jump back to top) ───────── */
 
   /* ───────── 7 · Render any .pdf-canvas elements via PDF.js (no browser chrome) ───────── */
   const pdfCanvases = document.querySelectorAll('canvas.pdf-canvas[data-pdf]');
